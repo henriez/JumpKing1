@@ -27,12 +27,6 @@ void ControladorDeEventos::atualizar() {
 		case SDLK_d:
 			transform->velocidade.x = 0;
 			break;
-		case SDLK_s:
-			transform->velocidade.y = 0;
-			break;
-		case SDLK_w:
-			transform->velocidade.y = 0;
-			break;
 		default:
 			break;
 		}
@@ -46,12 +40,9 @@ void ControladorDeEventos::atualizar() {
 		case SDLK_d:
 			transform->velocidade.x = 1;
 			break;
-		case SDLK_s:
-			transform->velocidade.y = 1;
-			break;
-		case SDLK_w:
-			transform->velocidade.y = -1;
-			break;
+		//case SDLK_SPACE:
+		//	transform->velocidade.y = -3;
+			//break;
 		default:
 			break;
 		}
