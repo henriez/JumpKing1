@@ -1,0 +1,61 @@
+#include "ControladorDeEventos.h"
+#include "Jogador.h"
+#include "../../Jogo/Jogo.h"
+#include "../../../Gerenciador/GerenciadorDeCamera.h"
+
+ControladorDeEventos::ControladorDeEventos() {
+	jogador = nullptr;
+	transform = nullptr;
+}
+
+ControladorDeEventos::~ControladorDeEventos() {
+
+}
+
+void ControladorDeEventos::setJogador(Jogador* pl) {
+	jogador = pl;
+	transform = jogador->getComponente<ComponenteTransform>();
+}
+
+void ControladorDeEventos::atualizar() {	
+
+	if (Jogo::evento.type == SDL_KEYUP) {
+		switch (Jogo::evento.key.keysym.sym) {
+		case SDLK_a:
+			transform->velocidade.x = 0;
+			break;
+		case SDLK_d:
+			transform->velocidade.x = 0;
+			break;
+		case SDLK_s:
+			transform->velocidade.y = 0;
+			break;
+		case SDLK_w:
+			transform->velocidade.y = 0;
+			break;
+		default:
+			break;
+		}
+	}
+
+	if (Jogo::evento.type == SDL_KEYDOWN) {
+		switch (Jogo::evento.key.keysym.sym) {
+		case SDLK_a:
+			transform->velocidade.x = -1;
+			break;
+		case SDLK_d:
+			transform->velocidade.x = 1;
+			break;
+		case SDLK_s:
+			transform->velocidade.y = 1;
+			break;
+		case SDLK_w:
+			transform->velocidade.y = -1;
+			break;
+		default:
+			break;
+		}
+	}
+
+	GerenciadorDeCamera::AtualizaJogador();
+}

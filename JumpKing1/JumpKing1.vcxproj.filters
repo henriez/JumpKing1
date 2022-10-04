@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Jogo\Jogo.cpp">
+      <Filter>Jogo</Filter>
+    </ClCompile>
+    <ClCompile Include="Jogo\HUD\HUD.cpp">
+      <Filter>Jogo\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="Jogo\Fase\Fase.cpp">
+      <Filter>Jogo\Fase</Filter>
+    </ClCompile>
+    <ClCompile Include="Jogo\Fase\Mapa\Mapa.cpp">
+      <Filter>Jogo\Fase\Mapa</Filter>
+    </ClCompile>
+    <ClCompile Include="Jogo\Fase\Mapa\TileMap\Tile.cpp">
+      <Filter>Jogo\Fase\Mapa\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Jogo\Fase\Mapa\TileMap\TileMap.cpp">
+      <Filter>Jogo\Fase\Mapa\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Componentes\Vector2D\Vector2D.cpp">
+      <Filter>ECS\Componentes\Vector2D</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\ListaDeEntidades\ListaDeEntidades.cpp">
+      <Filter>ECS\Entidade\ListaDeEntidades</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.cpp">
+      <Filter>ECS\Entidade\Personagem\Inimigo\Chefe</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo1\InimigoTipo1.cpp">
+      <Filter>ECS\Entidade\Personagem\Inimigo\InimigoTipo1</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo2\InimigoTipo2.cpp">
+      <Filter>ECS\Entidade\Personagem\Inimigo\InimigoTipo2</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3\InimigoTipo3.cpp">
+      <Filter>ECS\Entidade\Personagem\Inimigo\InimigoTipo3</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\Personagem\Jogador\ControladorDeEventos.cpp">
+      <Filter>ECS\Entidade\Personagem\Jogador</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\Personagem\Jogador\Jogador.cpp">
+      <Filter>ECS\Entidade\Personagem\Jogador</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\Projetil\Projetil.cpp">
+      <Filter>ECS\Entidade\Projétil</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Gerenciador\GerenciadorDeCamera.cpp">
+      <Filter>ECS\Gerenciador</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Gerenciador\GerenciadorDeTexturas.cpp">
+      <Filter>ECS\Gerenciador</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ECS">
+      <UniqueIdentifier>{c0fd2635-ec96-4ee2-916a-fd3fb45d66e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo">
+      <UniqueIdentifier>{8df8b5b4-f164-4cd1-a611-1a73ea7d0ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\HUD">
+      <UniqueIdentifier>{c43691ab-01e2-497b-babe-43be62043893}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\Fase">
+      <UniqueIdentifier>{fdfd6c84-7ccc-441c-bdf4-7f82d7857f23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\Fase\Mapa">
+      <UniqueIdentifier>{b2d70ca4-c0d5-480a-ac55-41d0c7da9c82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\Fase\Mapa\TileMap">
+      <UniqueIdentifier>{eca8c06e-50c4-4f5e-864e-fe85f18e8762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Componentes">
+      <UniqueIdentifier>{3b8e018f-9765-4c3d-9369-1220fbd303de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Componentes\ListaDeComponentes">
+      <UniqueIdentifier>{1966edea-71ec-48d1-8da8-6d180b6a1c94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Componentes\SubComponentes">
+      <UniqueIdentifier>{133b8ddb-be8a-4d80-a51d-7943eb8b304f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Componentes\Vector2D">
+      <UniqueIdentifier>{b50adb19-8317-4a50-b487-4990bb09a938}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade">
+      <UniqueIdentifier>{76b43d52-3a2c-409e-96f2-e5596d3e7c43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\ListaDeEntidades">
+      <UniqueIdentifier>{fc90d8db-06ee-4aa7-b6cf-3cdf089f88e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Personagem">
+      <UniqueIdentifier>{a733b35b-13b6-4c83-8218-12d60a811f44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Personagem\Inimigo">
+      <UniqueIdentifier>{c4062c37-c8b8-4f41-aae5-d44e89ee92a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Personagem\Inimigo\Chefe">
+      <UniqueIdentifier>{bc8c93d8-5821-4005-88ff-f5998fdcff61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo1">
+      <UniqueIdentifier>{a0bf0055-cbff-4858-a30d-2b7ee2a46484}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo2">
+      <UniqueIdentifier>{f0492d3b-c54e-4206-953d-6684044cc226}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3">
+      <UniqueIdentifier>{3338673c-e0a0-4e25-8905-5cf7d62fa89e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Personagem\Jogador">
+      <UniqueIdentifier>{8a72a03b-1f08-400b-9ab8-52379ab0fa5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Projétil">
+      <UniqueIdentifier>{39efc323-f8ed-48e9-a9c5-dac49a9da678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Gerenciador">
+      <UniqueIdentifier>{9d441728-caa0-4c4a-98f3-13c02a3c5db1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Jogo\Jogo.h">
+      <Filter>Jogo</Filter>
+    </ClInclude>
+    <ClInclude Include="Jogo\HUD\HUD.h">
+      <Filter>Jogo\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="Jogo\Fase\Fase.h">
+      <Filter>Jogo\Fase</Filter>
+    </ClInclude>
+    <ClInclude Include="Jogo\Fase\Mapa\Mapa.h">
+      <Filter>Jogo\Fase\Mapa</Filter>
+    </ClInclude>
+    <ClInclude Include="Jogo\Fase\Mapa\TileMap\Tile.h">
+      <Filter>Jogo\Fase\Mapa\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Jogo\Fase\Mapa\TileMap\TileMap.h">
+      <Filter>Jogo\Fase\Mapa\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Componentes\Componente.h">
+      <Filter>ECS\Componentes</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Componentes\ListaDeComponentes\ListaDeComponentes.h">
+      <Filter>ECS\Componentes\ListaDeComponentes</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteAudio.h">
+      <Filter>ECS\Componentes\SubComponentes</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteColisao.h">
+      <Filter>ECS\Componentes\SubComponentes</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteSaude.h">
+      <Filter>ECS\Componentes\SubComponentes</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteSprite.h">
+      <Filter>ECS\Componentes\SubComponentes</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteTransform.h">
+      <Filter>ECS\Componentes\SubComponentes</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Componentes\Vector2D\Vector2D.h">
+      <Filter>ECS\Componentes\Vector2D</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Entidade.h">
+      <Filter>ECS\Entidade</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\ListaDeEntidades\ListaDeEntidades.h">
+      <Filter>ECS\Entidade\ListaDeEntidades</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Personagem\Personagem.h">
+      <Filter>ECS\Entidade\Personagem</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Inimigo.h">
+      <Filter>ECS\Entidade\Personagem\Inimigo</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.h">
+      <Filter>ECS\Entidade\Personagem\Inimigo\Chefe</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo1\InimigoTipo1.h">
+      <Filter>ECS\Entidade\Personagem\Inimigo\InimigoTipo1</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo2\InimigoTipo2.h">
+      <Filter>ECS\Entidade\Personagem\Inimigo\InimigoTipo2</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3\inimigoTipo3.h">
+      <Filter>ECS\Entidade\Personagem\Inimigo\InimigoTipo3</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Personagem\Jogador\ControladorDeEventos.h">
+      <Filter>ECS\Entidade\Personagem\Jogador</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Personagem\Jogador\Jogador.h">
+      <Filter>ECS\Entidade\Personagem\Jogador</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Projetil\Projetil.h">
+      <Filter>ECS\Entidade\Projétil</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Gerenciador\GerenciadorDeCamera.h">
+      <Filter>ECS\Gerenciador</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Gerenciador\GerenciadorDeTexturas.h">
+      <Filter>ECS\Gerenciador</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
