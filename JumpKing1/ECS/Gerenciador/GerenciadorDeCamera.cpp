@@ -45,5 +45,5 @@ void GerenciadorDeCamera::AtualizaJogador() {
 		transform->posicao.y < dimMapa.y - Mapa::camera.h / 2.0)
 		Mapa::camera.y += transform->velocidade.y;
 
-	transform->velocidade.y += 0.005; // simula gravidade
+	//transform->velocidade.y += 0.005; // simula gravidade - //causando erro
 }
