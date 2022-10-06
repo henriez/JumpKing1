@@ -18,7 +18,8 @@ public:
 	static int tamanhoTile();
 	static Vector2D getDimensoes();
 
-	static SDL_Rect camera;
+	static Vector2D camera;
+	static Vector2D dimensoesCamera;
 
 private:
 	SDL_Texture* backgroundTex; //background

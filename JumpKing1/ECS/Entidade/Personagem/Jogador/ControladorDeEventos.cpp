@@ -40,9 +40,9 @@ void ControladorDeEventos::atualizar() {
 		case SDLK_d:
 			transform->velocidade.x = 1;
 			break;
-		//case SDLK_SPACE:
-		//	transform->velocidade.y = -3;
-			//break;
+		case SDLK_SPACE:
+			transform->velocidade.y = -2;
+			break;
 		default:
 			break;
 		}
