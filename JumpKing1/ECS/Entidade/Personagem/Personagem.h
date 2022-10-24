@@ -1,13 +1,9 @@
 #pragma once
 #include "../Entidade.h"
 
-class Jogo;
-
 class Personagem : public Entidade {
 public:
-	Personagem() {
-		jogo = nullptr;
-	}
+	Personagem() {}
 	~Personagem() {}
 
 	virtual void atualizar() = 0;

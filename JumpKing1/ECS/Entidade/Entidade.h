@@ -6,11 +6,8 @@ class Jogo;
 class Entidade {
 protected:
 	ListaDeComponentes componentes;
-	Jogo* jogo;
 public:
-	Entidade() {
-		jogo = nullptr;
-	}
+	Entidade() {}
 	~Entidade() {}
 
 	virtual void render() = 0;
@@ -22,7 +19,5 @@ public:
 	template<typename T> T* getComponente() {
 		return componentes.getComponente<T>();
 	}
-
-	void setJogo(Jogo* jg) { jogo = jg; }
 
 };
