@@ -1,5 +1,6 @@
 #include "ListaDeEntidades.h"
 
+
 ListaDeEntidades::ListaDeEntidades() {}
 
 ListaDeEntidades::~ListaDeEntidades() {

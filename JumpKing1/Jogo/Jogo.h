@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include "../ECS/Entidade/ListaDeEntidades/ListaDeEntidades.h"
 #include "../ECS/Componentes/Vector2D/Vector2D.h"
+#include "../Menu/Menu.h"
 
 class Fase;
 
@@ -17,6 +18,8 @@ public:
 	void analisaEventos();
 	bool executando();
 
+	void menu();
+
 	static SDL_Renderer* renderer;
 	static SDL_Event evento;
 	static Vector2D getDimensoesJanela();
@@ -26,6 +29,7 @@ private:
 	static SDL_Window* janela;
 	bool rodando;
 	static Vector2D dimensoesJanela;
+	Menu mMenu;
 
 	Fase* fase;
 };

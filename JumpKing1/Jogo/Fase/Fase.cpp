@@ -13,15 +13,10 @@ Fase::~Fase() {
 void Fase::inicializar(Jogo* jg) {
 	jogo = jg;
 	Jogador* jogador = new Jogador;
-	jogador->setJogo(jogo);
 	InimigoTipo1* en1 = new InimigoTipo1;
-	en1->setJogo(jogo);
 	InimigoTipo2* en2 = new InimigoTipo2;
-	en2->setJogo(jogo);
 	InimigoTipo3* en3 = new InimigoTipo3;
-	en3->setJogo(jogo);
 	Chefe* boss = new Chefe;
-	boss->setJogo(jogo);
 
 	listaEntidades.addEntidade(jogador);
 	listaEntidades.addEntidade(en1);

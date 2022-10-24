@@ -143,16 +143,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ECS\Componentes\Vector2D\intVector2D.cpp" />
     <ClCompile Include="ECS\Componentes\Vector2D\Vector2D.cpp" />
     <ClCompile Include="ECS\Entidade\ListaDeEntidades\ListaDeEntidades.cpp" />
+    <ClCompile Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.cpp" />
+    <ClCompile Include="ECS\Entidade\Obstaculo\Obstaculo2\Obstaculo2.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo1\InimigoTipo1.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo2\InimigoTipo2.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3\InimigoTipo3.cpp" />
+    <ClCompile Include="ECS\Entidade\Personagem\Jogador2\ControladorDeEventos2.cpp" />
+    <ClCompile Include="ECS\Entidade\Personagem\Jogador2\Jogador2.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Jogador\ControladorDeEventos.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Jogador\Jogador.cpp" />
     <ClCompile Include="ECS\Entidade\Projetil\Projetil.cpp" />
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeCamera.cpp" />
+    <ClCompile Include="ECS\Gerenciador\GerenciadorDeColisao.cpp" />
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeTexturas.cpp" />
     <ClCompile Include="Jogo\Fase\Fase.cpp" />
     <ClCompile Include="Jogo\Fase\Mapa\Mapa.cpp" />
@@ -161,6 +167,13 @@
     <ClCompile Include="Jogo\HUD\HUD.cpp" />
     <ClCompile Include="Jogo\Jogo.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu\Botao\Botao.cpp" />
+    <ClCompile Include="Menu\LeaderboardMenu\LeaderboardMenu.cpp" />
+    <ClCompile Include="Menu\LevelMenu\LevelMenu.cpp" />
+    <ClCompile Include="Menu\MainMenu\MainMenu.cpp" />
+    <ClCompile Include="Menu\Menu.cpp" />
+    <ClCompile Include="Menu\PauseMenu\PauseMenu.cpp" />
+    <ClCompile Include="Menu\SettingsMenu\SettingsMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ECS\Componentes\Componente.h" />
@@ -170,19 +183,26 @@
     <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteSaude.h" />
     <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteSprite.h" />
     <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteTransform.h" />
+    <ClInclude Include="ECS\Componentes\Vector2D\intVector2D.h" />
     <ClInclude Include="ECS\Componentes\Vector2D\Vector2D.h" />
     <ClInclude Include="ECS\Entidade\Entidade.h" />
     <ClInclude Include="ECS\Entidade\ListaDeEntidades\ListaDeEntidades.h" />
+    <ClInclude Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.h" />
+    <ClInclude Include="ECS\Entidade\Obstaculo\Obstaculo.h" />
+    <ClInclude Include="ECS\Entidade\Obstaculo\Obstaculo2\Obstaculo2.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Inimigo.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo1\InimigoTipo1.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo2\InimigoTipo2.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3\inimigoTipo3.h" />
+    <ClInclude Include="ECS\Entidade\Personagem\Jogador2\ControladorDeEventos2.h" />
+    <ClInclude Include="ECS\Entidade\Personagem\Jogador2\Jogador2.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Jogador\ControladorDeEventos.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Jogador\Jogador.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Personagem.h" />
     <ClInclude Include="ECS\Entidade\Projetil\Projetil.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeCamera.h" />
+    <ClInclude Include="ECS\Gerenciador\GerenciadorDeColisao.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeTexturas.h" />
     <ClInclude Include="Jogo\Fase\Fase.h" />
     <ClInclude Include="Jogo\Fase\Mapa\Mapa.h" />
@@ -190,6 +210,13 @@
     <ClInclude Include="Jogo\Fase\Mapa\TileMap\TileMap.h" />
     <ClInclude Include="Jogo\HUD\HUD.h" />
     <ClInclude Include="Jogo\Jogo.h" />
+    <ClInclude Include="Menu\Botao\Botao.h" />
+    <ClInclude Include="Menu\LeaderboardMenu\LeaderboardMenu.h" />
+    <ClInclude Include="Menu\LevelMenu\LevelMenu.h" />
+    <ClInclude Include="Menu\MainMenu\MainMenu.h" />
+    <ClInclude Include="Menu\Menu.h" />
+    <ClInclude Include="Menu\PauseMenu\PauseMenu.h" />
+    <ClInclude Include="Menu\SettingsMenu\SettingsMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

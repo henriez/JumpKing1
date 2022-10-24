@@ -4,7 +4,6 @@
 #include "../../../Gerenciador/GerenciadorDeCamera.h"
 
 ControladorDeEventos::ControladorDeEventos() {
-	jogador = nullptr;
 	transform = nullptr;
 }
 
@@ -12,9 +11,8 @@ ControladorDeEventos::~ControladorDeEventos() {
 
 }
 
-void ControladorDeEventos::setJogador(Jogador* pl) {
-	jogador = pl;
-	transform = jogador->getComponente<ComponenteTransform>();
+void ControladorDeEventos::setTransform(Jogador* jg) {
+	transform = jg->getComponente<ComponenteTransform>();
 }
 
 void ControladorDeEventos::atualizar() {	
@@ -40,9 +38,9 @@ void ControladorDeEventos::atualizar() {
 		case SDLK_d:
 			transform->velocidade.x = 1;
 			break;
-		//case SDLK_SPACE:
-		//	transform->velocidade.y = -3;
-			//break;
+		case SDLK_SPACE:
+			transform->velocidade.y = -2;
+			break;
 		default:
 			break;
 		}
