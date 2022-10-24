@@ -5,7 +5,7 @@
 
 Jogador::Jogador() {
 	inicializar();
-	controladorEventos.setJogador(this);
+	controladorEventos.setTransform(this);
 	GerenciadorDeCamera::setJogador(this);
 }
 

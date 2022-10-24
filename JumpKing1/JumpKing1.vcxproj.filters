@@ -62,6 +62,36 @@
     <ClCompile Include="Menu\Botao\Botao.cpp">
       <Filter>Menu\Botao</Filter>
     </ClCompile>
+    <ClCompile Include="Menu\LeaderboardMenu\LeaderboardMenu.cpp">
+      <Filter>Menu\LeaderboardMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu\LevelMenu\LevelMenu.cpp">
+      <Filter>Menu\LevelMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu\MainMenu\MainMenu.cpp">
+      <Filter>Menu\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu\PauseMenu\PauseMenu.cpp">
+      <Filter>Menu\PauseMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu\SettingsMenu\SettingsMenu.cpp">
+      <Filter>Menu\SettingsMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\Personagem\Jogador2\ControladorDeEventos2.cpp">
+      <Filter>ECS\Entidade\Personagem\Jogador2</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\Personagem\Jogador2\Jogador2.cpp">
+      <Filter>ECS\Entidade\Personagem\Jogador2</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.cpp">
+      <Filter>ECS\Entidade\Obstaculo\Espinhos</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\Obstaculo\Obstaculo2\Obstaculo2.cpp">
+      <Filter>ECS\Entidade\Obstaculo\Obstaculo2</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Gerenciador\GerenciadorDeColisao.cpp">
+      <Filter>ECS\Gerenciador</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ECS">
@@ -115,9 +145,6 @@
     <Filter Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo2">
       <UniqueIdentifier>{f0492d3b-c54e-4206-953d-6684044cc226}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3">
-      <UniqueIdentifier>{3338673c-e0a0-4e25-8905-5cf7d62fa89e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ECS\Entidade\Personagem\Jogador">
       <UniqueIdentifier>{8a72a03b-1f08-400b-9ab8-52379ab0fa5d}</UniqueIdentifier>
     </Filter>
@@ -132,6 +159,36 @@
     </Filter>
     <Filter Include="Menu\Botao">
       <UniqueIdentifier>{0316bb5b-30ec-4815-b7fb-5c14f3d5fe33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3">
+      <UniqueIdentifier>{3338673c-e0a0-4e25-8905-5cf7d62fa89e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\LeaderboardMenu">
+      <UniqueIdentifier>{e0a21f87-9694-4ada-ab01-2db5af543147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\LevelMenu">
+      <UniqueIdentifier>{3a322575-7943-458f-97e0-ab7aef14c01d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\MainMenu">
+      <UniqueIdentifier>{e4eff23a-ce6e-46f8-9606-d0ca778f10a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\PauseMenu">
+      <UniqueIdentifier>{7fed91cc-91f7-4df7-b342-ac4b9972a0b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\SettingsMenu">
+      <UniqueIdentifier>{8be5a70b-0eb6-4363-985b-1c92bf1f4e94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Personagem\Jogador2">
+      <UniqueIdentifier>{a76cc736-8791-465f-8c38-77f7283e90d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Obstaculo">
+      <UniqueIdentifier>{be14e524-b1da-4ed8-86fc-a9f330c60df3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Obstaculo\Espinhos">
+      <UniqueIdentifier>{f44782bd-0eeb-4612-836b-5a6533cf72ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Obstaculo\Obstaculo2">
+      <UniqueIdentifier>{e0b00532-f24d-4949-aa33-3708323cc4ae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +281,39 @@
     </ClInclude>
     <ClInclude Include="Menu\Botao\Botao.h">
       <Filter>Menu\Botao</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu\LeaderboardMenu\LeaderboardMenu.h">
+      <Filter>Menu\LeaderboardMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu\LevelMenu\LevelMenu.h">
+      <Filter>Menu\LevelMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu\MainMenu\MainMenu.h">
+      <Filter>Menu\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu\PauseMenu\PauseMenu.h">
+      <Filter>Menu\PauseMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu\SettingsMenu\SettingsMenu.h">
+      <Filter>Menu\SettingsMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Personagem\Jogador2\ControladorDeEventos2.h">
+      <Filter>ECS\Entidade\Personagem\Jogador2</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Personagem\Jogador2\Jogador2.h">
+      <Filter>ECS\Entidade\Personagem\Jogador2</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Obstaculo\Obstaculo.h">
+      <Filter>ECS\Entidade\Obstaculo</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.h">
+      <Filter>ECS\Entidade\Obstaculo\Espinhos</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Obstaculo\Obstaculo2\Obstaculo2.h">
+      <Filter>ECS\Entidade\Obstaculo\Obstaculo2</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Gerenciador\GerenciadorDeColisao.h">
+      <Filter>ECS\Gerenciador</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

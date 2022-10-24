@@ -10,8 +10,7 @@ public:
 	~ControladorDeEventos();
 
 	void atualizar();
-	void setJogador(Jogador* pl);
+	void setTransform(Jogador* pl);
 private:
-	Jogador* jogador;
 	ComponenteTransform* transform;
 };

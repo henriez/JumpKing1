@@ -29,7 +29,6 @@ private:
 	static SDL_Window* janela;
 	bool rodando;
 	static Vector2D dimensoesJanela;
-	StartButton stButton;
 	Menu mMenu;
 
 	Fase* fase;

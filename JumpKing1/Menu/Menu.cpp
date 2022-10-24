@@ -6,16 +6,14 @@ Menu::Menu() {
 Menu::~Menu() {}
 
 void Menu::init() {
-	SDL_Color white;
-	white.r = white.g = white.b = 255;
-	start.set(100, 100, 324, 156, white, white, white, "StartButton test.\n");
+	start.set(100, 100, 324, 156, "StartButton test.\n");
 	start.setTex("Assets/button.png");
-	settings.set(100, 300, 324, 156, white, white, white, "StartButton test.\n");
+	settings.set(100, 300, 324, 156, "StartButton test.\n");
 	settings.setTex("Assets/button.png");
-	quit.set(100, 500, 324, 156, white, white, white, "StartButton test.\n");
+	quit.set(100, 500, 324, 156, "StartButton test.\n");
 	quit.setTex("Assets/quit.png");
 
-	resume.set(500, 300, 324, 156, white, white, white, "StartButton test.\n");
+	resume.set(500, 300, 324, 156, "StartButton test.\n");
 	resume.setTex("Assets/quit.png");
 
 	//inicializar demais botoes

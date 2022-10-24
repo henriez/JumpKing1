@@ -4,7 +4,6 @@
 #include "../../../Gerenciador/GerenciadorDeCamera.h"
 
 ControladorDeEventos::ControladorDeEventos() {
-	jogador = nullptr;
 	transform = nullptr;
 }
 
@@ -12,9 +11,8 @@ ControladorDeEventos::~ControladorDeEventos() {
 
 }
 
-void ControladorDeEventos::setJogador(Jogador* pl) {
-	jogador = pl;
-	transform = jogador->getComponente<ComponenteTransform>();
+void ControladorDeEventos::setTransform(Jogador* jg) {
+	transform = jg->getComponente<ComponenteTransform>();
 }
 
 void ControladorDeEventos::atualizar() {	

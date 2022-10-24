@@ -9,10 +9,10 @@
 
 class Menu {
 private:
-	SettingsButton settings;
-	StartButton start;
-	StartButton resume;
-	QuitButton quit;
+	Button settings;
+	Button start;
+	Button resume;
+	Button quit;
 public:
 	Menu();
 	~Menu();

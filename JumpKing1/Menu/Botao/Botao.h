@@ -12,13 +12,8 @@
 class Button {
 private:
 protected:
-	SDL_Color idleColor;
-	SDL_Color hoverColor;
-	SDL_Color clickColor;
 
 	SDL_Texture* texture;
-
-	std::string buttonText;
 
 	bool isHovering;
 	bool isClicked;
@@ -28,44 +23,13 @@ public:
 	Button();
 	~Button();
 
-	void set(int xpos, int ypos, int width, int height, SDL_Color idle, SDL_Color hover, SDL_Color click, std::string text);
+	void set(int xpos, int ypos, int width, int height, std::string text);
 	void setTex(const char* path);
 
 	virtual void handleEvents();
 	void render();
 	intVector2D getMousePos();
-	void setButtonText(std::string text);
-	virtual void onClick();
+	void onClick();
 	bool click() { return isClicked; }
 };
 
-//classes derivadas de botao
-
-class StartButton : public Button{
-public:
-	StartButton() :
-		Button() {
-	}
-
-	// overrie de button
-	void handleEvents();
-	void onClick();
-};
-
-class SettingsButton : public Button {
-public:
-	SettingsButton() :	Button() {}
-
-	// overrie de button
-	void handleEvents();
-	void onClick();
-};
-
-class QuitButton : public Button {
-public:
-	QuitButton() :	Button() {}
-
-	// overrie de button
-	void handleEvents();
-	void onClick();
-};
