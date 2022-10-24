@@ -1,4 +1,3 @@
-#include "GerenciadorDeTexturas.h"
 #include "../../Jogo/Jogo.h"
 #include <SDL_image.h>
 #include <iostream>

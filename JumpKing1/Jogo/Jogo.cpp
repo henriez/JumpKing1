@@ -40,7 +40,41 @@ void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela,
 	dimensoesJanela.x = largJanela;
 	dimensoesJanela.y = alturaJanela;
 
-	fase->inicializar(this);
+	mMenu.init();
+	menu();
+}
+
+void Jogo::menu() {
+
+	// algum loop while enquanto nao houver nenhum clique
+	int click = mMenu.click();
+	
+	while (click == 0) {
+		SDL_RenderClear(renderer);
+		analisaEventos();
+		mMenu.update();
+		mMenu.render();
+		SDL_RenderPresent(renderer);
+		click = mMenu.click();
+	}
+
+	switch (click) { //apos algum clique
+	case BUTTON_START:
+		fase->inicializar(this);
+		break;
+	case BUTTON_RESUME:
+		fase->atualizar();
+		break;
+	case BUTTON_SETTINGS:
+		//SETTINGS
+		break;
+	case BUTTON_QUIT:
+		rodando = false;
+		break;
+	default:
+		break;
+	}
+
 }
 
 void Jogo::atualizar() {
@@ -66,8 +100,9 @@ void Jogo::analisaEventos() {
 		rodando = false;
 
 	else if (evento.type == SDL_KEYDOWN)
-		if (evento.key.keysym.sym == SDLK_ESCAPE)
-			rodando = false;
+		if (evento.key.keysym.sym == SDLK_ESCAPE) //pause
+			menu();
+												  //rodando = false;
 }
 
 bool Jogo::executando() {

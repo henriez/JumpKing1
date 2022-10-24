@@ -53,6 +53,15 @@
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeTexturas.cpp">
       <Filter>ECS\Gerenciador</Filter>
     </ClCompile>
+    <ClCompile Include="Menu\Menu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Componentes\Vector2D\intVector2D.cpp">
+      <Filter>ECS\Componentes\Vector2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu\Botao\Botao.cpp">
+      <Filter>Menu\Botao</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ECS">
@@ -117,6 +126,12 @@
     </Filter>
     <Filter Include="ECS\Gerenciador">
       <UniqueIdentifier>{9d441728-caa0-4c4a-98f3-13c02a3c5db1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{a366b527-e8e0-4709-83b8-2883fb3ab629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Botao">
+      <UniqueIdentifier>{0316bb5b-30ec-4815-b7fb-5c14f3d5fe33}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +215,15 @@
     </ClInclude>
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeTexturas.h">
       <Filter>ECS\Gerenciador</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu\Menu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Componentes\Vector2D\intVector2D.h">
+      <Filter>ECS\Componentes\Vector2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu\Botao\Botao.h">
+      <Filter>Menu\Botao</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
