@@ -18,11 +18,12 @@ void Fase::inicializar(Jogo* jg) {
 	InimigoTipo3* en3 = new InimigoTipo3;
 	Chefe* boss = new Chefe;
 
-	listaEntidades.addEntidade(jogador);
-	listaEntidades.addEntidade(en1);
-	listaEntidades.addEntidade(en2);
-	listaEntidades.addEntidade(en3);
-	listaEntidades.addEntidade(boss);
+
+	listaEntidades.addEntidade(static_cast<Entidade*>(jogador));
+	listaEntidades.addEntidade(static_cast<Entidade*>(en1));
+	listaEntidades.addEntidade(static_cast<Entidade*>(en2));
+	listaEntidades.addEntidade(static_cast<Entidade*>(en3));
+	listaEntidades.addEntidade(static_cast<Entidade*>(boss));
 
 	mapa->inicializar(jogo);
 }
