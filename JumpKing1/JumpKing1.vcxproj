@@ -171,7 +171,6 @@
     <ClCompile Include="Menu\LeaderboardMenu\LeaderboardMenu.cpp" />
     <ClCompile Include="Menu\LevelMenu\LevelMenu.cpp" />
     <ClCompile Include="Menu\MainMenu\MainMenu.cpp" />
-    <ClCompile Include="Menu\Menu.cpp" />
     <ClCompile Include="Menu\PauseMenu\PauseMenu.cpp" />
     <ClCompile Include="Menu\SettingsMenu\SettingsMenu.cpp" />
   </ItemGroup>

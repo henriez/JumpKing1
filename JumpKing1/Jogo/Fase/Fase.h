@@ -11,6 +11,7 @@ public:
 	void inicializar(Jogo* jg);
 	void atualizar();
 	void render();
+	void clear();
 private:
 	ListaDeEntidades listaEntidades;
 	const char* arquivoSave;

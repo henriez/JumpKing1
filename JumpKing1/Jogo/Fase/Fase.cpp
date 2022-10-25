@@ -2,15 +2,15 @@
 
 Fase::Fase() {
 	arquivoSave = nullptr;
-	mapa = new Mapa;
 	jogo = nullptr;
 }
 
 Fase::~Fase() {
-	delete mapa;
+	clear();
 }
 
 void Fase::inicializar(Jogo* jg) {
+	mapa = new Mapa;
 	jogo = jg;
 	Jogador* jogador = new Jogador;
 	InimigoTipo1* en1 = new InimigoTipo1;
@@ -35,4 +35,11 @@ void Fase::atualizar() {
 void Fase::render() {
 	mapa->render();
 	listaEntidades.render();
+}
+
+void Fase::clear() {
+
+	listaEntidades.clear();
+	mapa->clear();
+	delete mapa;
 }

@@ -1,1 +1,34 @@
 #include "SettingsMenu.h"
+
+SettingsMenu::SettingsMenu() {
+	background = nullptr;
+}
+
+SettingsMenu::~SettingsMenu() {
+	SDL_DestroyTexture(background);
+}
+
+void SettingsMenu::init() {
+	quit.set(100, 500, 324, 156);
+	quit.setTex("Assets/Buttons/quit.png");;
+
+	background = GerenciadorDeTexturas::CarregaTextura("Assets/Buttons/menu.png");
+}
+
+void SettingsMenu::reset() {
+	quit.reset();
+}
+
+int SettingsMenu::update() {
+	quit.handleEvents();
+	if (quit.click()) return BUTTON_QUIT;
+
+	return NO_BUTTON_CLICKED; //nenhum botao foi clicado
+}
+
+void SettingsMenu::render() {
+	SDL_Rect fonte = { 0,0,1280,720 };
+	SDL_Rect destino = { 0,0,1920,1080 }; //receber dados da janela
+	GerenciadorDeTexturas::Desenhe(background, fonte, destino);
+	quit.render();
+}

@@ -18,7 +18,7 @@ Mapa::Mapa() {
 }
 
 Mapa::~Mapa() {
-	SDL_DestroyTexture(backgroundTex);
+	clear();
 }
 
 void Mapa::inicializar(Jogo* jg) {
@@ -54,4 +54,9 @@ int Mapa::tamanhoTile() {
 
 Vector2D Mapa::getDimensoes() {
 	return nTiles*tamanhoDoTile;
+}
+
+void Mapa::clear() {
+	if(backgroundTex != NULL)
+		SDL_DestroyTexture(backgroundTex);
 }

@@ -9,6 +9,14 @@
 #include "../../ECS/Componentes/Vector2D/intVector2D.h"
 #include "../../ECS/Gerenciador/GerenciadorDeTexturas.h"
 
+#define BUTTON_QUIT 1
+#define BUTTON_START 2
+#define BUTTON_SETTINGS 3
+#define BUTTON_RESUME 4
+#define BUTTON_LEADERBOARD 5
+
+#define NO_BUTTON_CLICKED 6
+
 class Button {
 private:
 protected:
@@ -23,13 +31,14 @@ public:
 	Button();
 	~Button();
 
-	void set(int xpos, int ypos, int width, int height, std::string text);
+	void set(int xpos, int ypos, int width, int height);
 	void setTex(const char* path);
+
+	void reset();
 
 	virtual void handleEvents();
 	void render();
 	intVector2D getMousePos();
-	void onClick();
-	bool click() { return isClicked; }
+	bool click();
 };
 

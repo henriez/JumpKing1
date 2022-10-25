@@ -20,6 +20,7 @@ public:
 
 	static Vector2D camera;
 	static Vector2D dimensoesCamera;
+	void clear();
 
 private:
 	SDL_Texture* backgroundTex; //background

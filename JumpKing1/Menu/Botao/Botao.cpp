@@ -12,7 +12,7 @@ Button::Button() {
 	texture = nullptr;
 }
 
-void Button::set(int xpos, int ypos, int width, int height, std::string text) {
+void Button::set(int xpos, int ypos, int width, int height) {
 	pos.x = xpos;
 	pos.y = ypos;
 	pos.w = width;
@@ -41,7 +41,6 @@ void Button::handleEvents() {
 		if (Jogo::evento.type == SDL_MOUSEBUTTONDOWN) {
 			if (Jogo::evento.button.button == SDL_BUTTON_LEFT) {
 				isClicked = true;
-				onClick(); //chama função de clique
 			}
 		}
 		else isClicked = false;
@@ -62,6 +61,10 @@ intVector2D Button::getMousePos() {
 	return v;
 }
 
-void Button::onClick() {
-	std::cout << "Button Clicked!\n";
+bool Button::click() {
+	return isClicked;
+}
+
+void Button::reset() {
+	isClicked = isHovering = false;
 }

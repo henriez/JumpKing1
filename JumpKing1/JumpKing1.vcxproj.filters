@@ -53,29 +53,26 @@
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeTexturas.cpp">
       <Filter>ECS\Gerenciador</Filter>
     </ClCompile>
-    <ClCompile Include="Menu\Menu.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="ECS\Componentes\Vector2D\intVector2D.cpp">
       <Filter>ECS\Componentes\Vector2D</Filter>
     </ClCompile>
     <ClCompile Include="Menu\Botao\Botao.cpp">
-      <Filter>Menu\Botao</Filter>
+      <Filter>Jogo\Menu\Botao</Filter>
     </ClCompile>
     <ClCompile Include="Menu\LeaderboardMenu\LeaderboardMenu.cpp">
-      <Filter>Menu\LeaderboardMenu</Filter>
+      <Filter>Jogo\Menu\LeaderboardMenu</Filter>
     </ClCompile>
     <ClCompile Include="Menu\LevelMenu\LevelMenu.cpp">
-      <Filter>Menu\LevelMenu</Filter>
+      <Filter>Jogo\Menu\LevelMenu</Filter>
     </ClCompile>
     <ClCompile Include="Menu\MainMenu\MainMenu.cpp">
-      <Filter>Menu\MainMenu</Filter>
+      <Filter>Jogo\Menu\MainMenu</Filter>
     </ClCompile>
     <ClCompile Include="Menu\PauseMenu\PauseMenu.cpp">
-      <Filter>Menu\PauseMenu</Filter>
+      <Filter>Jogo\Menu\PauseMenu</Filter>
     </ClCompile>
     <ClCompile Include="Menu\SettingsMenu\SettingsMenu.cpp">
-      <Filter>Menu\SettingsMenu</Filter>
+      <Filter>Jogo\Menu\SettingsMenu</Filter>
     </ClCompile>
     <ClCompile Include="ECS\Entidade\Personagem\Jogador2\ControladorDeEventos2.cpp">
       <Filter>ECS\Entidade\Personagem\Jogador2</Filter>
@@ -154,29 +151,8 @@
     <Filter Include="ECS\Gerenciador">
       <UniqueIdentifier>{9d441728-caa0-4c4a-98f3-13c02a3c5db1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Menu">
-      <UniqueIdentifier>{a366b527-e8e0-4709-83b8-2883fb3ab629}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Menu\Botao">
-      <UniqueIdentifier>{0316bb5b-30ec-4815-b7fb-5c14f3d5fe33}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3">
       <UniqueIdentifier>{3338673c-e0a0-4e25-8905-5cf7d62fa89e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Menu\LeaderboardMenu">
-      <UniqueIdentifier>{e0a21f87-9694-4ada-ab01-2db5af543147}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Menu\LevelMenu">
-      <UniqueIdentifier>{3a322575-7943-458f-97e0-ab7aef14c01d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Menu\MainMenu">
-      <UniqueIdentifier>{e4eff23a-ce6e-46f8-9606-d0ca778f10a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Menu\PauseMenu">
-      <UniqueIdentifier>{7fed91cc-91f7-4df7-b342-ac4b9972a0b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Menu\SettingsMenu">
-      <UniqueIdentifier>{8be5a70b-0eb6-4363-985b-1c92bf1f4e94}</UniqueIdentifier>
     </Filter>
     <Filter Include="ECS\Entidade\Personagem\Jogador2">
       <UniqueIdentifier>{a76cc736-8791-465f-8c38-77f7283e90d7}</UniqueIdentifier>
@@ -189,6 +165,27 @@
     </Filter>
     <Filter Include="ECS\Entidade\Obstaculo\Obstaculo2">
       <UniqueIdentifier>{e0b00532-f24d-4949-aa33-3708323cc4ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\Menu">
+      <UniqueIdentifier>{a366b527-e8e0-4709-83b8-2883fb3ab629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\Menu\Botao">
+      <UniqueIdentifier>{0316bb5b-30ec-4815-b7fb-5c14f3d5fe33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\Menu\LeaderboardMenu">
+      <UniqueIdentifier>{e0a21f87-9694-4ada-ab01-2db5af543147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\Menu\LevelMenu">
+      <UniqueIdentifier>{3a322575-7943-458f-97e0-ab7aef14c01d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\Menu\MainMenu">
+      <UniqueIdentifier>{e4eff23a-ce6e-46f8-9606-d0ca778f10a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\Menu\PauseMenu">
+      <UniqueIdentifier>{7fed91cc-91f7-4df7-b342-ac4b9972a0b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\Menu\SettingsMenu">
+      <UniqueIdentifier>{8be5a70b-0eb6-4363-985b-1c92bf1f4e94}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -274,28 +271,28 @@
       <Filter>ECS\Gerenciador</Filter>
     </ClInclude>
     <ClInclude Include="Menu\Menu.h">
-      <Filter>Menu</Filter>
+      <Filter>Jogo\Menu</Filter>
     </ClInclude>
     <ClInclude Include="ECS\Componentes\Vector2D\intVector2D.h">
       <Filter>ECS\Componentes\Vector2D</Filter>
     </ClInclude>
     <ClInclude Include="Menu\Botao\Botao.h">
-      <Filter>Menu\Botao</Filter>
+      <Filter>Jogo\Menu\Botao</Filter>
     </ClInclude>
     <ClInclude Include="Menu\LeaderboardMenu\LeaderboardMenu.h">
-      <Filter>Menu\LeaderboardMenu</Filter>
+      <Filter>Jogo\Menu\LeaderboardMenu</Filter>
     </ClInclude>
     <ClInclude Include="Menu\LevelMenu\LevelMenu.h">
-      <Filter>Menu\LevelMenu</Filter>
+      <Filter>Jogo\Menu\LevelMenu</Filter>
     </ClInclude>
     <ClInclude Include="Menu\MainMenu\MainMenu.h">
-      <Filter>Menu\MainMenu</Filter>
+      <Filter>Jogo\Menu\MainMenu</Filter>
     </ClInclude>
     <ClInclude Include="Menu\PauseMenu\PauseMenu.h">
-      <Filter>Menu\PauseMenu</Filter>
+      <Filter>Jogo\Menu\PauseMenu</Filter>
     </ClInclude>
     <ClInclude Include="Menu\SettingsMenu\SettingsMenu.h">
-      <Filter>Menu\SettingsMenu</Filter>
+      <Filter>Jogo\Menu\SettingsMenu</Filter>
     </ClInclude>
     <ClInclude Include="ECS\Entidade\Personagem\Jogador2\ControladorDeEventos2.h">
       <Filter>ECS\Entidade\Personagem\Jogador2</Filter>

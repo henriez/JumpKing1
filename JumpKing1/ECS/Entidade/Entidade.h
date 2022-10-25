@@ -8,7 +8,7 @@ protected:
 	ListaDeComponentes componentes;
 public:
 	Entidade() {}
-	~Entidade() {}
+	virtual ~Entidade() {}
 
 	virtual void render() = 0;
 	virtual void atualizar() = 0;

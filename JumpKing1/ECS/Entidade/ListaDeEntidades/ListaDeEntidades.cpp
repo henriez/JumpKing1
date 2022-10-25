@@ -4,9 +4,7 @@
 ListaDeEntidades::ListaDeEntidades() {}
 
 ListaDeEntidades::~ListaDeEntidades() {
-	for (auto& e : listaEntidades)
-		if (e != NULL)
-			delete e;
+	clear();
 }
 
 void ListaDeEntidades::atualizar() {
@@ -23,3 +21,8 @@ void ListaDeEntidades::render() {
 		e->render();
 }
 
+void ListaDeEntidades::clear() {
+	for (auto& e : listaEntidades)
+		if (e != NULL)
+			delete e;
+}

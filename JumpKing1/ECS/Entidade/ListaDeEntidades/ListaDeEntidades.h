@@ -15,6 +15,7 @@ public:
 	void atualizar();
 	void addEntidade(Entidade* en);
 	void render();
+	void clear();
 private:
 	std::vector<Entidade*> listaEntidades;
 

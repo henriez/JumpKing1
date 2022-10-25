@@ -18,7 +18,11 @@ public:
 	void analisaEventos();
 	bool executando();
 
-	void menu();
+	void mainMenu();
+	void pauseMenu();
+	void settingsMenu();
+	void leaderboardMenu();
+	void levelMenu();
 
 	static SDL_Renderer* renderer;
 	static SDL_Event evento;
@@ -29,7 +33,8 @@ private:
 	static SDL_Window* janela;
 	bool rodando;
 	static Vector2D dimensoesJanela;
-	Menu mMenu;
+	
+	Menu menu;
 
 	Fase* fase;
 };

@@ -4,7 +4,8 @@
 
 SDL_Texture* GerenciadorDeTexturas::CarregaTextura(const char* fileName){
 	SDL_Texture* tex = IMG_LoadTexture(Jogo::renderer, fileName);
-	std::cout << SDL_GetError() << std::endl;
+	if (tex == NULL)
+		std::cout << SDL_GetError() << std::endl;
 
 	return tex;
 }
