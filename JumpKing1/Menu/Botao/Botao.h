@@ -19,14 +19,14 @@
 
 class Button {
 private:
-protected:
-
+	SDL_Rect pos;
 	SDL_Texture* texture;
 
 	bool isHovering;
 	bool isClicked;
+
+	intVector2D getMousePos();
 public:
-	SDL_Rect pos;
 
 	Button();
 	~Button();
@@ -38,7 +38,7 @@ public:
 
 	virtual void handleEvents();
 	void render();
-	intVector2D getMousePos();
+	
 	bool click();
 };
 
