@@ -12,7 +12,6 @@ int Mapa::tamanhoDoTile;
 
 Mapa::Mapa() {
 	backgroundTex = nullptr;
-	jogo = nullptr;
 	camera.x = camera.y = 0;
 	tamanhoDoTile = 32;
 }
@@ -21,8 +20,7 @@ Mapa::~Mapa() {
 	clear();
 }
 
-void Mapa::inicializar(Jogo* jg) {
-	jogo = jg;
+void Mapa::inicializar() {
 	backgroundTex = GerenciadorDeTexturas::CarregaTextura("Assets/TileMap/mapa1background.png");
 
 	SDL_DisplayMode dm;
@@ -57,6 +55,5 @@ Vector2D Mapa::getDimensoes() {
 }
 
 void Mapa::clear() {
-	if(backgroundTex != NULL)
-		SDL_DestroyTexture(backgroundTex);
+	SDL_DestroyTexture(backgroundTex);
 }

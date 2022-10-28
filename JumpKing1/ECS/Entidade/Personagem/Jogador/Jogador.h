@@ -13,4 +13,6 @@ private:
 	void inicializar();
 	ControladorDeEventos controladorEventos;
 	friend class GerenciadorDeCamera;
+
+	int speed;
 };

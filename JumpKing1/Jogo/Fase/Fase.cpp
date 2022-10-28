@@ -1,18 +1,22 @@
 #include "Fase.h"
+#include "../../ECS/Gerenciador/GerenciadorDeCamera.h"
 
 Fase::Fase() {
 	arquivoSave = nullptr;
-	jogo = nullptr;
+	mapa = nullptr;
 }
 
 Fase::~Fase() {
 	clear();
+	if (mapa != nullptr) {
+		delete mapa;
+	}
 }
 
-void Fase::inicializar(Jogo* jg) {
+void Fase::inicializar() {
 	mapa = new Mapa;
-	jogo = jg;
 	Jogador* jogador = new Jogador;
+	GerenciadorDeCamera::setJogador(jogador);
 	InimigoTipo1* en1 = new InimigoTipo1;
 	InimigoTipo2* en2 = new InimigoTipo2;
 	InimigoTipo3* en3 = new InimigoTipo3;
@@ -25,12 +29,13 @@ void Fase::inicializar(Jogo* jg) {
 	listaEntidades.addEntidade(static_cast<Entidade*>(en3));
 	listaEntidades.addEntidade(static_cast<Entidade*>(boss));
 
-	mapa->inicializar(jogo);
+	mapa->inicializar();
 }
 
 void Fase::atualizar() {
 	listaEntidades.atualizar();
-	mapa->atualizar();
+	if (mapa != nullptr)
+		mapa->atualizar();
 }
 
 void Fase::render() {
@@ -41,6 +46,4 @@ void Fase::render() {
 void Fase::clear() {
 
 	listaEntidades.clear();
-	mapa->clear();
-	delete mapa;
 }

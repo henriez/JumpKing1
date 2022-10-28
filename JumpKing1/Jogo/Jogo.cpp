@@ -2,9 +2,10 @@
 #include <iostream>
 #include "Fase/Fase.h"
 
+#define FPS 60
+
 SDL_Renderer* Jogo::renderer;
 SDL_Event Jogo::evento;
-SDL_Window* Jogo::janela;
 Vector2D Jogo::dimensoesJanela;
 
 Jogo::Jogo(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia) {
@@ -14,6 +15,7 @@ Jogo::Jogo(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCh
 }
 
 Jogo::~Jogo() {
+	fase->clear();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(janela);
 	SDL_Quit();
@@ -96,7 +98,6 @@ void Jogo::pauseMenu() {
 
 	switch (click) { //apos algum clique
 	case BUTTON_RESUME:
-		//fase->inicializar(this);
 		atualizar();
 		break;
 	case BUTTON_QUIT:
@@ -174,7 +175,7 @@ void Jogo::levelMenu() {
 
 	switch (click) { //apos algum clique
 	case BUTTON_START:
-		fase->inicializar(this);
+		fase->inicializar();
 		atualizar();
 		break;
 	case BUTTON_QUIT:
@@ -187,11 +188,19 @@ void Jogo::levelMenu() {
 }
 
 void Jogo::atualizar() {
+	Uint32 ticks0 = SDL_GetTicks();
+	Uint32 finalTicks;
+	Uint32 framedelay = 1000 / FPS;
 	analisaEventos();
 
+	if (!rodando) return;
 	fase->atualizar();
 
 	render();
+
+	finalTicks = SDL_GetTicks();
+	if (finalTicks - ticks0 < framedelay)
+		SDL_Delay(framedelay - (finalTicks - ticks0));
 }
 
 void Jogo::render() {

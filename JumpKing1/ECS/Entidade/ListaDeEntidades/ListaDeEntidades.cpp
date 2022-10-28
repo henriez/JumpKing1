@@ -9,6 +9,7 @@ ListaDeEntidades::~ListaDeEntidades() {
 
 void ListaDeEntidades::atualizar() {
 	for (auto& e : listaEntidades)
+		if (e != nullptr)
 		e->atualizar();
 }
 
@@ -23,6 +24,9 @@ void ListaDeEntidades::render() {
 
 void ListaDeEntidades::clear() {
 	for (auto& e : listaEntidades)
-		if (e != NULL)
+		if (e != NULL) {
 			delete e;
+			e = NULL;
+		}
+	listaEntidades.clear();
 }

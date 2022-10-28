@@ -30,7 +30,7 @@ public:
 
 private:
 	void inicializar(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia);
-	static SDL_Window* janela;
+	SDL_Window* janela;
 	bool rodando;
 	static Vector2D dimensoesJanela;
 	

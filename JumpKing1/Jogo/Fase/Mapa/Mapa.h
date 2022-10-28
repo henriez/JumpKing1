@@ -11,7 +11,7 @@ class Mapa {
 public:
 	Mapa();
 	~Mapa();
-	void inicializar(Jogo* jg);
+	void inicializar();
 
 	void atualizar();
 	void render();
@@ -24,7 +24,6 @@ public:
 
 private:
 	SDL_Texture* backgroundTex; //background
-	Jogo* jogo;
 	static Vector2D nTiles;
 	static int tamanhoDoTile;
 	TileMap tileMap;

@@ -8,7 +8,7 @@ public:
 	Fase();
 	~Fase();
 
-	void inicializar(Jogo* jg);
+	void inicializar();
 	void atualizar();
 	void render();
 	void clear();
@@ -16,5 +16,4 @@ private:
 	ListaDeEntidades listaEntidades;
 	const char* arquivoSave;
 	Mapa* mapa;
-	Jogo* jogo;
 };

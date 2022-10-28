@@ -12,8 +12,7 @@ GerenciadorDeCamera::GerenciadorDeCamera() {
 GerenciadorDeCamera::~GerenciadorDeCamera() {}
 
 void GerenciadorDeCamera::setJogador(Jogador* jg) {
-	if (jogador == nullptr)
-		jogador = jg;
+	jogador = jg;
 }
 
 void GerenciadorDeCamera::Atualiza() {
@@ -41,15 +40,14 @@ void GerenciadorDeCamera::AtualizaJogador() {
 	}
 
 
-
-	transform->posicao.x += transform->velocidade.x;
-	transform->posicao.y += transform->velocidade.y;
+	transform->posicao.x += transform->velocidade.x*jogador->speed;
+	transform->posicao.y += transform->velocidade.y*jogador->speed;
 
 	if (transform->posicao.x + Mapa::tamanhoTile()/2.0 > Mapa::dimensoesCamera.x / 2.0 &&
 		transform->posicao.x < dimMapa.x - Mapa::dimensoesCamera.x / 2.0)
-		Mapa::camera.x += transform->velocidade.x;
+		Mapa::camera.x += transform->velocidade.x * jogador->speed;
 	if (transform->posicao.y + Mapa::tamanhoTile()/2.0 > Mapa::dimensoesCamera.y / 2.0 &&
 		transform->posicao.y < dimMapa.y - Mapa::dimensoesCamera.y/ 2.0)
-		Mapa::camera.y += transform->velocidade.y; // cast para int mata camera - trocar para vector2D
+		Mapa::camera.y += transform->velocidade.y * jogador->speed; // cast para int mata camera - trocar para vector2D
 
 }
