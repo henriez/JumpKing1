@@ -33,10 +33,10 @@ void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela,
 		alturaJanela = dm.h;
 	}
 	janela = SDL_CreateWindow("Jump King", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, largJanela, alturaJanela, NULL);
-	if (janela) { std::cout << "Janela Criada!\n"; }
+	if (!janela) { std::cout << "Failed Creating Window! Error:" << SDL_GetError(); }
 
 	renderer = SDL_CreateRenderer(janela, -1, 0);
-	if (renderer) { std::cout << "Renderer Criado!\n"; }
+	if (!renderer) { std::cout << "Failed Creating Renderer! Error:" << SDL_GetError(); }
 
 	dimensoesJanela.x = largJanela;
 	dimensoesJanela.y = alturaJanela;

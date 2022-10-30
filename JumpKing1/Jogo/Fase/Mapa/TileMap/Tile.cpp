@@ -7,9 +7,9 @@
 #include <SDL.h>
 
 SDL_Texture* Tile::tileset;
+SDL_Texture* Tile::tilesetHitbox;
 
 Tile::Tile() {
-	componentes.addComponente<ComponenteColisao>();
 	fonte = { 0,0,32,32 };
 	destino = { 0,0,32,32 };}
 
@@ -24,8 +24,17 @@ void Tile::render() {
 	GerenciadorDeTexturas::Desenhe(Tile::tileset, fonte, tempDest);
 }
 
-void Tile::setTex(const char* path) {
+void Tile::renderHitbox() {
+	SDL_Rect tempDest = { 0,0,32,32 };
+
+	tempDest.x = destino.x - Mapa::camera.x;
+	tempDest.y = destino.y - Mapa::camera.y;
+	GerenciadorDeTexturas::Desenhe(Tile::tilesetHitbox, fonte, tempDest);
+}
+
+void Tile::setTex(const char* path, const char* hitboxPath) {
 	tileset = GerenciadorDeTexturas::CarregaTextura(path);
+	tilesetHitbox = GerenciadorDeTexturas::CarregaTextura(hitboxPath);
 }
 
 void Tile::setPosition(int x, int y, int srcX, int srcY) {
@@ -33,5 +42,4 @@ void Tile::setPosition(int x, int y, int srcX, int srcY) {
 	destino.y = y;
 	fonte.x = srcX;
 	fonte.y = srcY;
-	//componentes.getComponente<ComponenteColisao>().set
 }

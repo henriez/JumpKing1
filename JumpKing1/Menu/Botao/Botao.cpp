@@ -22,8 +22,7 @@ void Button::set(int xpos, int ypos, int width, int height) {
 
 void Button::setTex(const char* path) {
 	texture = GerenciadorDeTexturas::CarregaTextura(path);
-	if (texture) std::cout << "button loaded!\n";
-	else std::cout << IMG_GetError();
+	if (!texture) std::cout << "button failed loading! Error:" << IMG_GetError();
 }
 
 Button::~Button() {

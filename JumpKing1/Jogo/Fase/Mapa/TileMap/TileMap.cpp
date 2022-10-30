@@ -8,8 +8,10 @@
 const char* mapa1_camada1 = "Assets/TileMap/mapa1_camada_tiles_1.csv";
 const char* mapa1_camada2 = "Assets/TileMap/mapa1_camada_tiles_2.csv";
 const char* mapa1_camada_espinhos = "Assets/TileMap/mapa1_camada_espinhos.csv";
+const char* mapa1_camada_colisao = "Assets/TileMap/mapa1_camada_colisao.csv";
 
 const char* tiles_png = "Assets/TileMap/Tiles.png";
+const char* hitbox_png = "Assets/TileMap/hitboxes colisao.png";
 const int largura = 11;
 const int altura = 12;
 const int tamanhoTile = 32;
@@ -19,10 +21,12 @@ TileMap::TileMap() {
 	nTiles.y = 200;
 	algarismos[0] = algarismos[1] = algarismos[2] = 0;
 
-	Tile::setTex(tiles_png);
+	Tile::setTex(tiles_png, hitbox_png);
 }
 
-TileMap::~TileMap() {}
+TileMap::~TileMap() {
+	clear();
+}
 
 void TileMap::inicializa() {
 	char c = 0;
@@ -36,20 +40,30 @@ void TileMap::inicializa() {
 		for (int j = 0; j < nTiles.x; j++) {
 			algarismos[0] = algarismos[1] = algarismos[2] = alg = 0;
 			mapFile.get(c);
+
 			if (c == '-') {
-				mapFile.get(c);
-				mapFile.get(c);
+				mapFile.ignore();
+				mapFile.ignore();
 				continue;
 			}
-			while (c != ',') {
-				algarismos[alg++] = atoi(&c);
-				mapFile.get(c);
+			if (j == nTiles.x - 1)
+				while (c != '\n') {
+					algarismos[alg++] = atoi(&c);
+					mapFile.get(c);
+				}
+			else {
+				while (c != ',') {
+					algarismos[alg++] = atoi(&c);
+					mapFile.get(c);
+				}
 			}
 			// ao final do loop alg será 2 3 (depende do n de algarismos do id)
 			if (alg == 3)
 				id = algarismos[0] * 100 + algarismos[1] * 10 + algarismos[2];
 			else if (alg == 2)
 				id = algarismos[0] * 10 + algarismos[1];
+			else //alg == 1
+				id = algarismos[0];
 
 			srcY = (id / largura) * tamanhoTile;
 			srcX = (id % largura) * tamanhoTile;
@@ -63,26 +77,34 @@ void TileMap::inicializa() {
 
 
 	mapFile.open(mapa1_camada2);
-
 	for (int i = 0; i < nTiles.y; i++) {
 		for (int j = 0; j < nTiles.x; j++) {
 			algarismos[0] = algarismos[1] = algarismos[2] = alg = 0;
 			mapFile.get(c);
 
 			if (c == '-') {
-				mapFile.get(c);
-				mapFile.get(c);
+				mapFile.ignore();
+				mapFile.ignore();
 				continue;
 			}
-			while (c != ',') {
-				algarismos[alg++] = atoi(&c);
-				mapFile.get(c);
+			if (j == nTiles.x - 1)
+				while (c != '\n') {
+					algarismos[alg++] = atoi(&c);
+					mapFile.get(c);
+				}
+			else {
+				while (c != ',') {
+					algarismos[alg++] = atoi(&c);
+					mapFile.get(c);
+				}
 			}
 			// ao final do loop alg será 2 3 (depende do n de algarismos do id)
 			if (alg == 3)
 				id = algarismos[0] * 100 + algarismos[1] * 10 + algarismos[2];
-			else if(alg == 2)
+			else if (alg == 2)
 				id = algarismos[0] * 10 + algarismos[1];
+			else //alg == 1
+				id = algarismos[0];
 
 			srcY = (id / largura) * tamanhoTile;
 			srcX = (id % largura) * tamanhoTile;
@@ -92,7 +114,6 @@ void TileMap::inicializa() {
 			camada2.push_back(tile);
 		}
 	}
-
 	mapFile.close();
 
 
@@ -101,20 +122,30 @@ void TileMap::inicializa() {
 		for (int j = 0; j < nTiles.x; j++) {
 			algarismos[0] = algarismos[1] = algarismos[2] = alg = 0;
 			mapFile.get(c);
+
 			if (c == '-') {
-				mapFile.get(c);
-				mapFile.get(c);
+				mapFile.ignore();
+				mapFile.ignore();
 				continue;
 			}
-			while (c != ',') {
-				algarismos[alg++] = atoi(&c);
-				mapFile.get(c);
+			if (j == nTiles.x - 1)
+				while (c != '\n') {
+					algarismos[alg++] = atoi(&c);
+					mapFile.get(c);
+				}
+			else {
+				while (c != ',') {
+					algarismos[alg++] = atoi(&c);
+					mapFile.get(c);
+				}
 			}
 			// ao final do loop alg será 2 3 (depende do n de algarismos do id)
 			if (alg == 3)
 				id = algarismos[0] * 100 + algarismos[1] * 10 + algarismos[2];
 			else if (alg == 2)
 				id = algarismos[0] * 10 + algarismos[1];
+			else //alg == 1
+				id = algarismos[0];
 
 			srcY = (id / largura) * tamanhoTile;
 			srcX = (id % largura) * tamanhoTile;
@@ -125,9 +156,34 @@ void TileMap::inicializa() {
 		}
 	}
 	mapFile.close();
-}
 
-void TileMap::atualiza() {}
+	mapFile.open(mapa1_camada_colisao);
+	for (int i = 0; i < nTiles.y; i++) {
+		for (int j = 0; j < nTiles.x; j++) {
+			id = 0;
+			mapFile.get(c);
+
+			if (c == '-') {
+				mapFile.ignore();
+				mapFile.ignore();
+				continue;
+			}
+			id = atoi(&c);
+			mapFile.ignore();
+
+			srcY = 0;
+			srcX = id * tamanhoTile;
+
+			Tile* tile = new Tile;
+			tile->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
+			if (id == 1)
+				hitbox_plataformas.push_back(tile);
+			else if (id == 2)
+				hitbox_espinhos.push_back(tile);
+		}
+	}
+	mapFile.close();
+}
 
 void TileMap::render() {
 	for (auto& t : camada1)
@@ -138,23 +194,35 @@ void TileMap::render() {
 
 	for (auto& t : camada_espinhos)
 		t->render();
+
+	/*for (auto& t : hitbox_plataformas)
+		t->renderHitbox();
+
+	for (auto& t : hitbox_espinhos)
+		t->renderHitbox();*/
 }
 
 void TileMap::clear() {
 	for (auto& t : camada1)
 		delete t;
-
 	camada1.clear();
 
 	for (auto& t : camada2)
 		delete t;
-
 	camada2.clear();
 
 	for (auto& t : camada_espinhos)
 		delete t;
-
 	camada_espinhos.clear();
+
+	for (auto& t : hitbox_plataformas)
+		delete t;
+	hitbox_plataformas.clear();
+
+	for (auto& t : hitbox_espinhos)
+		delete t;
+
+	hitbox_espinhos.clear();
 }
 
 Vector2D TileMap::getNTiles() {

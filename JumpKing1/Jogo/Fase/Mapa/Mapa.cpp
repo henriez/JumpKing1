@@ -36,7 +36,6 @@ void Mapa::inicializar() {
 
 void Mapa::atualizar() {
 	GerenciadorDeCamera::Atualiza();
-	tileMap.atualiza();
 }
 
 void Mapa::render() {

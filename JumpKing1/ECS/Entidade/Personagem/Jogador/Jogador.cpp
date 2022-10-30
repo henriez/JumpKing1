@@ -23,8 +23,8 @@ void Jogador::inicializar(){
 	ComponenteTransform* transform = getComponente<ComponenteTransform>();
 	transform->velocidade.x = 0;
 	transform->velocidade.y = 0;
-	transform->posicao.x = (float)(Jogo::getDimensoesJanela().x / 2.0 - Mapa::tamanhoTile() / 2.0);
-	transform->posicao.y = (float)(Jogo::getDimensoesJanela().y / 2.0 - Mapa::tamanhoTile() / 2.0);
+	transform->posicao.x = 100;
+	transform->posicao.y = 6100;
 }
 
 void Jogador::atualizar() {

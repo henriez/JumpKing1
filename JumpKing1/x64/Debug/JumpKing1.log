@@ -1,3 +1,2 @@
-﻿  GerenciadorDeCamera.cpp
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeCamera.cpp(28,34): warning C4305: '+=': truncamento de 'double' para 'float'
+﻿  TileMap.cpp
   JumpKing1.vcxproj -> C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\x64\Debug\JumpKing1.exe

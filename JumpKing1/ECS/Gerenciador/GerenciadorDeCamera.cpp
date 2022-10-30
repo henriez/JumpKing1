@@ -20,7 +20,6 @@ void GerenciadorDeCamera::Atualiza() {
 }
 
 void GerenciadorDeCamera::AtualizaJogador() {
-	//BUG APROXIMANDO DAS BORDAS DO MAPA
 
 	ComponenteTransform* transform = jogador->getComponente<ComponenteTransform>();
 	Vector2D dimMapa = Mapa::getDimensoes();
