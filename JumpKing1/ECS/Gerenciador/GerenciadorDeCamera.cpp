@@ -30,6 +30,7 @@ void GerenciadorDeCamera::AtualizaJogador() {
 	transform->posicao.x += transform->velocidade.x * jogador->speed;
 	transform->posicao.y += transform->velocidade.y * jogador->speed;
 
+
 	// Checa bordas do mapa em X
 	if (transform->posicao.x < 0 && transform->velocidade.x < 0)
 		transform->posicao.x = transform->velocidade.x = 0;
@@ -46,12 +47,20 @@ void GerenciadorDeCamera::AtualizaJogador() {
 		transform->velocidade.y = 0;
 	}
 
+	
+	// Posicao da camera centralizando o player
+	Mapa::camera.x = transform->posicao.x - Mapa::dimensoesCamera.x / 2;
+	Mapa::camera.y = transform->posicao.y - Mapa::dimensoesCamera.y / 2;
 
-	if (transform->posicao.x + Mapa::tamanhoTile()/2.0 > Mapa::dimensoesCamera.x / 2.0 &&
-		transform->posicao.x < dimMapa.x - Mapa::dimensoesCamera.x / 2.0)
-		Mapa::camera.x += transform->velocidade.x * jogador->speed;
-	if (transform->posicao.y + Mapa::tamanhoTile()/2.0 > Mapa::dimensoesCamera.y / 2.0 &&
-		transform->posicao.y < dimMapa.y - Mapa::dimensoesCamera.y/ 2.0)
-		Mapa::camera.y += transform->velocidade.y * jogador->speed; // cast para int mata camera - trocar para vector2D
+	// Checa bordas do mapa para a camera em X
+	if (Mapa::camera.x <= 0)
+		Mapa::camera.x = 0;
+	else if (Mapa::camera.x + Mapa::dimensoesCamera.x >= dimMapa.x)
+		Mapa::camera.x = dimMapa.x - Mapa::dimensoesCamera.x;
 
+	// Checa bordas do mapa para a camera em Y
+	if (Mapa::camera.y <= 0)
+		Mapa::camera.y = 0;
+	else if (Mapa::camera.y + Mapa::dimensoesCamera.y >= dimMapa.y)
+		Mapa::camera.y = dimMapa.y - Mapa::dimensoesCamera.y;
 }

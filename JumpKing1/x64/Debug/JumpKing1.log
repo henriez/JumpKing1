@@ -1,22 +1,3 @@
-﻿  LevelMenu.cpp
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(40,53): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(40,53): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(40,82): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(40,82): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
-  MainMenu.cpp
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\MainMenu\MainMenu.cpp(55,53): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\MainMenu\MainMenu.cpp(55,53): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\MainMenu\MainMenu.cpp(55,82): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\MainMenu\MainMenu.cpp(55,82): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
-  PauseMenu.cpp
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(40,53): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(40,53): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(40,82): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(40,82): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
-  SettingsMenu.cpp
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(32,53): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(32,53): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(32,82): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(32,82): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
-  Gerando Código...
+﻿  GerenciadorDeCamera.cpp
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeCamera.cpp(28,34): warning C4305: '+=': truncamento de 'double' para 'float'
   JumpKing1.vcxproj -> C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\x64\Debug\JumpKing1.exe

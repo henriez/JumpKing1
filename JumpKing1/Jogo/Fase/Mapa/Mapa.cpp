@@ -40,9 +40,9 @@ void Mapa::atualizar() {
 }
 
 void Mapa::render() {
-	SDL_Rect tela = { 0,0,(int)Jogo::getDimensoesJanela().x,(int)Jogo::getDimensoesJanela().y };
-	SDL_Rect cam = { camera.x, camera.y, dimensoesCamera.x, dimensoesCamera.y };
-	GerenciadorDeTexturas::Desenhe(backgroundTex, cam, tela);
+	SDL_Rect fonte = { camera.x, camera.y, dimensoesCamera.x,dimensoesCamera.y };
+	SDL_Rect destino = { 0, 0, dimensoesCamera.x, dimensoesCamera.y };
+	GerenciadorDeTexturas::Desenhe(backgroundTex, fonte, destino);
 
 	tileMap.render();
 }
