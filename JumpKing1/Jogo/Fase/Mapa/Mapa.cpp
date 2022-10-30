@@ -18,6 +18,7 @@ Mapa::Mapa() {
 
 Mapa::~Mapa() {
 	clear();
+
 }
 
 void Mapa::inicializar() {

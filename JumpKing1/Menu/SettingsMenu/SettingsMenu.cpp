@@ -1,4 +1,5 @@
 #include "SettingsMenu.h"
+#include "../../Jogo/Jogo.h"
 
 SettingsMenu::SettingsMenu() {
 	background = nullptr;
@@ -28,7 +29,7 @@ int SettingsMenu::update() {
 
 void SettingsMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
-	SDL_Rect destino = { 0,0,1920,1080 }; //receber dados da janela
+	SDL_Rect destino = { 0,0,Jogo::getDimensoesJanela().x,Jogo::getDimensoesJanela().y };
 	GerenciadorDeTexturas::Desenhe(background, fonte, destino);
 	quit.render();
 }

@@ -1,5 +1,6 @@
 #include "PauseMenu.h"
 #include "../../ECS/Gerenciador/GerenciadorDeTexturas.h"
+#include "../../Jogo/Jogo.h"
 
 PauseMenu::PauseMenu() {
 	background = nullptr;
@@ -36,7 +37,7 @@ int PauseMenu::update() {
 
 void PauseMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
-	SDL_Rect destino = { 0,0,1920,1080 }; //receber dados da janela
+	SDL_Rect destino = { 0,0,Jogo::getDimensoesJanela().x,Jogo::getDimensoesJanela().y };
 	GerenciadorDeTexturas::Desenhe(background, fonte, destino);
 	resume.render();
 	quit.render();

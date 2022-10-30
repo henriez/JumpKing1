@@ -7,7 +7,7 @@ Jogador::Jogador() {
 	inicializar();
 	controladorEventos.setTransform(this);
 	GerenciadorDeCamera::setJogador(this);
-	speed = 5;
+	speed = 8;
 }
 
 Jogador::~Jogador() {}

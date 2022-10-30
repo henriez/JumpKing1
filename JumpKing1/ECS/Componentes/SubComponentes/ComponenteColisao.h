@@ -10,7 +10,12 @@ public:
 	}
 	~ComponenteColisao() {}
 
-	
+	void set(int xpos, int ypos, int w, int h) {
+		colisor.x = xpos;
+		colisor.y = ypos;
+		colisor.w = w;
+		colisor.h = h;
+	}
 	void atualizar() {}
 	void render() {}
 private:

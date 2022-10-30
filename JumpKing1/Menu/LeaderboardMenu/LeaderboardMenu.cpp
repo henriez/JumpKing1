@@ -1,5 +1,6 @@
 #include "LeaderboardMenu.h"
 #include "../../ECS/Gerenciador/GerenciadorDeTexturas.h"
+#include "../../Jogo/Jogo.h"
 
 LeaderboardMenu::LeaderboardMenu() {
 	background = nullptr;
@@ -28,7 +29,7 @@ int LeaderboardMenu::update() {
 
 void LeaderboardMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
-	SDL_Rect destino = { 0,0,1920,1080 }; //receber dados da janela
+	SDL_Rect destino = { 0,0,Jogo::getDimensoesJanela().x,Jogo::getDimensoesJanela().y}; //receber dados da janela
 	GerenciadorDeTexturas::Desenhe(background, fonte, destino);
 	quit.render();
 }

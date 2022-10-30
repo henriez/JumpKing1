@@ -51,7 +51,6 @@ void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela,
 
 void Jogo::mainMenu() {
 
-	// algum loop while enquanto nao houver nenhum clique
 	menu.start.reset();
 	int click = menu.start.update();
 	
@@ -84,7 +83,6 @@ void Jogo::mainMenu() {
 
 void Jogo::pauseMenu() {
 
-	// algum loop while enquanto nao houver nenhum clique
 	menu.pause.reset();
 	int click = menu.pause.update();
 
@@ -161,7 +159,6 @@ void Jogo::leaderboardMenu() {
 
 void Jogo::levelMenu() {
 
-	// algum loop while enquanto nao houver nenhum clique
 	menu.level.reset();
 	int click = menu.level.update();
 
