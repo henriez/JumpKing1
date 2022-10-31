@@ -12,5 +12,5 @@ public:
 	void atualizar();
 	void setTransform(Jogador* pl);
 private:
-	ComponenteTransform* transform;
+	Jogador* jogador;
 };

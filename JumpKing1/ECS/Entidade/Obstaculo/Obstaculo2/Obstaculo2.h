@@ -4,5 +4,8 @@
 
 class Obstaculo2 : public Obstaculo
 {
+public:
+	Obstaculo2();
+	~Obstaculo2();
 };
 

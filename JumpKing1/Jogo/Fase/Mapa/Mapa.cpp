@@ -5,8 +5,7 @@
 #include <iostream>
 
 
-Vector2D Mapa::camera;
-Vector2D Mapa::dimensoesCamera;
+SDL_Rect Mapa::camera;
 Vector2D Mapa::nTiles;
 int Mapa::tamanhoDoTile;
 
@@ -27,8 +26,8 @@ void Mapa::inicializar() {
 	SDL_DisplayMode dm;
 
 	SDL_GetCurrentDisplayMode(0, &dm);
-	dimensoesCamera.x = dm.w;
-	dimensoesCamera.y = dm.h;
+	camera.w = dm.w;
+	camera.h = dm.h;
 
 	tileMap.inicializa(); //passar id de mapa
 	nTiles = tileMap.getNTiles();
@@ -36,12 +35,12 @@ void Mapa::inicializar() {
 
 void Mapa::atualizar() {
 	GerenciadorDeCamera::Atualiza();
+	tileMap.atualiza();
 }
 
-void Mapa::render() {
-	SDL_Rect fonte = { camera.x, camera.y, dimensoesCamera.x,dimensoesCamera.y };
-	SDL_Rect destino = { 0, 0, dimensoesCamera.x, dimensoesCamera.y };
-	GerenciadorDeTexturas::Desenhe(backgroundTex, fonte, destino);
+void Mapa::render() {;
+	SDL_Rect destino = { 0, 0, camera.w, camera.h };
+	GerenciadorDeTexturas::Desenhe(backgroundTex, camera, destino);
 
 	tileMap.render();
 }

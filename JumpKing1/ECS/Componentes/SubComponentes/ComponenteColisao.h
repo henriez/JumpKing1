@@ -16,8 +16,16 @@ public:
 		colisor.w = w;
 		colisor.h = h;
 	}
+	void setPos(int x, int y) {
+		colisor.x = x;
+		colisor.y = y;
+	}
 	void atualizar() {}
 	void render() {}
+
+	SDL_Rect getColisor() const{
+		return colisor;
+	}
 private:
 	SDL_Rect colisor;
 };

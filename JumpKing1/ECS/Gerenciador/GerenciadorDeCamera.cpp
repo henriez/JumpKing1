@@ -24,12 +24,6 @@ void GerenciadorDeCamera::AtualizaJogador() {
 	ComponenteTransform* transform = jogador->getComponente<ComponenteTransform>();
 	Vector2D dimMapa = Mapa::getDimensoes();
 
-	transform->velocidade.y += 0.035; // simula gravidade - // possivel perda de dados em casting
-
-	transform->posicao.x += transform->velocidade.x * jogador->speed;
-	transform->posicao.y += transform->velocidade.y * jogador->speed;
-
-
 	// Checa bordas do mapa em X
 	if (transform->posicao.x < 0 && transform->velocidade.x < 0)
 		transform->posicao.x = transform->velocidade.x = 0;
@@ -48,18 +42,18 @@ void GerenciadorDeCamera::AtualizaJogador() {
 
 	
 	// Posicao da camera centralizando o player
-	Mapa::camera.x = transform->posicao.x - Mapa::dimensoesCamera.x / 2;
-	Mapa::camera.y = transform->posicao.y - Mapa::dimensoesCamera.y / 2;
+	Mapa::camera.x = transform->posicao.x - Mapa::camera.w / 2;
+	Mapa::camera.y = transform->posicao.y - Mapa::camera.h / 2;
 
 	// Checa bordas do mapa para a camera em X
 	if (Mapa::camera.x <= 0)
 		Mapa::camera.x = 0;
-	else if (Mapa::camera.x + Mapa::dimensoesCamera.x >= dimMapa.x)
-		Mapa::camera.x = dimMapa.x - Mapa::dimensoesCamera.x;
+	else if (Mapa::camera.x + Mapa::camera.w >= dimMapa.x)
+		Mapa::camera.x = dimMapa.x - Mapa::camera.w;
 
 	// Checa bordas do mapa para a camera em Y
 	if (Mapa::camera.y <= 0)
 		Mapa::camera.y = 0;
-	else if (Mapa::camera.y + Mapa::dimensoesCamera.y >= dimMapa.y)
-		Mapa::camera.y = dimMapa.y - Mapa::dimensoesCamera.y;
+	else if (Mapa::camera.y + Mapa::camera.h >= dimMapa.y)
+		Mapa::camera.y = dimMapa.y - Mapa::camera.h;
 }

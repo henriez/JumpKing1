@@ -2,9 +2,10 @@
 #include "Jogador.h"
 #include "../../Jogo/Jogo.h"
 #include "../../../Gerenciador/GerenciadorDeCamera.h"
+#include "../../../Gerenciador/GerenciadorDeColisao.h"
 
 ControladorDeEventos::ControladorDeEventos() {
-	transform = nullptr;
+	jogador = nullptr;
 }
 
 ControladorDeEventos::~ControladorDeEventos() {
@@ -12,11 +13,11 @@ ControladorDeEventos::~ControladorDeEventos() {
 }
 
 void ControladorDeEventos::setTransform(Jogador* jg) {
-	transform = jg->getComponente<ComponenteTransform>();
+	jogador = jg;
 }
 
 void ControladorDeEventos::atualizar() {	
-
+	ComponenteTransform* transform = jogador->getComponente<ComponenteTransform>();
 	if (Jogo::evento.type == SDL_KEYUP) {
 		switch (Jogo::evento.key.keysym.sym) {
 		case SDLK_a:
@@ -39,12 +40,15 @@ void ControladorDeEventos::atualizar() {
 			transform->velocidade.x = 1;
 			break;
 		case SDLK_SPACE:
-			transform->velocidade.y = -2;
+			//if (jogador->inGround())
+				transform->velocidade.y = -2;
 			break;
 		default:
 			break;
 		}
 	}
+
+	GerenciadorDeColisao::colisao_jogador1();
 
 	GerenciadorDeCamera::AtualizaJogador();
 }

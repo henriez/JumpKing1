@@ -1,6 +1,8 @@
 #include "TileMap.h"
 #include "../../../Jogo.h"
 #include "../../../../ECS/Gerenciador/GerenciadorDeTexturas.h"
+#include "../../../../ECS/Gerenciador/GerenciadorDeColisao.h"
+#include "../Mapa.h"
 
 #include <fstream>
 #include <SDL_image.h>
@@ -22,6 +24,7 @@ TileMap::TileMap() {
 	algarismos[0] = algarismos[1] = algarismos[2] = 0;
 
 	Tile::setTex(tiles_png, hitbox_png);
+	GerenciadorDeColisao::setTileMap(this);
 }
 
 TileMap::~TileMap() {
@@ -185,21 +188,60 @@ void TileMap::inicializa() {
 	mapFile.close();
 }
 
+void TileMap::atualiza() {
+	for (auto& t : camada1) {
+		t->setScreen(false);
+		if (GerenciadorDeColisao::AABB(t->getPos(), Mapa::camera))
+			t->setScreen(true);
+	}
+
+	for (auto& t : camada2) {
+		t->setScreen(false);
+		if (GerenciadorDeColisao::AABB(t->getPos(), Mapa::camera))
+			t->setScreen(true);
+	}
+
+	for (auto& t : camada_espinhos) {
+		t->setScreen(false);
+		if (GerenciadorDeColisao::AABB(t->getPos(), Mapa::camera))
+			t->setScreen(true);
+	}
+
+	for (auto& t : hitbox_plataformas) {
+		t->setScreen(false);
+		if (GerenciadorDeColisao::AABB(t->getPos(), Mapa::camera))
+			t->setScreen(true);
+	}
+
+	for (auto& t : hitbox_espinhos) {
+		t->setScreen(false);
+		if (GerenciadorDeColisao::AABB(t->getPos(), Mapa::camera))
+			t->setScreen(true);
+	}
+
+	colisao_jogador1();
+}
+
 void TileMap::render() {
 	for (auto& t : camada1)
-		t->render();
+		if (t->isOnScreen())
+			t->render();
 
-	for (auto& t : camada2)
-		t->render();
+	for (auto& t : camada2) 
+		if (t->isOnScreen())
+			t->render();
 
 	for (auto& t : camada_espinhos)
-		t->render();
+		if (t->isOnScreen())
+			t->render();
 
-	/*for (auto& t : hitbox_plataformas)
-		t->renderHitbox();
+	for (auto& t : hitbox_plataformas)
+		if (t->isOnScreen())
+			t->renderHitbox();
 
 	for (auto& t : hitbox_espinhos)
-		t->renderHitbox();*/
+		if (t->isOnScreen())
+			t->renderHitbox();
 }
 
 void TileMap::clear() {
@@ -221,10 +263,51 @@ void TileMap::clear() {
 
 	for (auto& t : hitbox_espinhos)
 		delete t;
-
 	hitbox_espinhos.clear();
 }
 
 Vector2D TileMap::getNTiles() {
 	return nTiles;
+}
+
+void TileMap::colisao_jogador1() {
+	Jogador* jg = GerenciadorDeColisao::getJogador1();
+
+	SDL_Rect initialhitbox = jg->getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect hitbox = initialhitbox;
+
+	ComponenteTransform* transform = jg->getComponente<ComponenteTransform>();
+	
+	Vector2D velocity = transform->velocidade;
+
+	if (!jg->inGround())
+		transform->velocidade.y += 0.05; // simula gravidade 
+
+	jg->setGround(false);
+	for (auto& t : hitbox_plataformas) {
+		if (t->isOnScreen()) {
+			hitbox = initialhitbox;
+			hitbox.y += velocity.y * jg->getSpeed();
+			if (GerenciadorDeColisao::AABB(t->getPos(), hitbox)) {
+				if (velocity.y > 0) { //colidiu por cima
+					jg->setGround(true); 
+					transform->posicao.y = t->getPos().y - hitbox.h;
+				}
+				else if (velocity.y < 0) //colidiu por baixo
+					transform->posicao.y = t->getPos().y + hitbox.h;
+				transform->velocidade.y = 0;
+			}
+			hitbox = initialhitbox;
+			hitbox.x += velocity.x * jg->getSpeed();
+			if (GerenciadorDeColisao::AABB(t->getPos(), hitbox)) {
+				if (velocity.x > 0) { //colidiu pela esquerda
+					transform->posicao.x = t->getPos().x - hitbox.w;
+				}
+				else if (velocity.x < 0) //colidiu pela direita
+					transform->posicao.x = t->getPos().x + hitbox.w;
+				transform->velocidade.x = 0;
+			}
+		}
+
+	}
 }

@@ -18,8 +18,8 @@ public:
 	static int tamanhoTile();
 	static Vector2D getDimensoes();
 
-	static Vector2D camera;
-	static Vector2D dimensoesCamera;
+	static SDL_Rect camera;
+	
 	void clear();
 
 private:

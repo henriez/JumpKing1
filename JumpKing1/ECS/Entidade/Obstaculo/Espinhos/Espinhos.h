@@ -4,5 +4,8 @@
 
 class Espinhos : public Obstaculo
 {
+public:
+	Espinhos();
+	~Espinhos();
 };
 
