@@ -312,5 +312,6 @@
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeColisao.h">
       <Filter>ECS\Gerenciador</Filter>
     </ClInclude>
+    <ClInclude Include="Ente.h" />
   </ItemGroup>
 </Project>

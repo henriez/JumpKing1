@@ -1,9 +1,10 @@
 #pragma once
 #include "../Componentes/ListaDeComponentes/ListaDeComponentes.h"
+#include "../../Ente.h"
 
 class Jogo;
 
-class Entidade {
+class Entidade : public Ente{
 protected:
 	ListaDeComponentes componentes;
 public:

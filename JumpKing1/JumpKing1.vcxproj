@@ -203,6 +203,7 @@
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeCamera.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeColisao.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeTexturas.h" />
+    <ClInclude Include="Ente.h" />
     <ClInclude Include="Jogo\Fase\Fase.h" />
     <ClInclude Include="Jogo\Fase\Mapa\Mapa.h" />
     <ClInclude Include="Jogo\Fase\Mapa\TileMap\Tile.h" />

@@ -1,9 +1,11 @@
 #pragma once
+
+#include "../../Ente.h"
 #include "Mapa/Mapa.h"
 #include "../../ECS/Entidade/ListaDeEntidades/ListaDeEntidades.h"
 #include "../Jogo.h"
 
-class Fase {
+class Fase : public Ente{
 public:
 	Fase();
 	~Fase();
