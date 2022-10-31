@@ -8,5 +8,6 @@ public:
 	float y;
 
 	Vector2D operator* (int i);
+	Vector2D operator+= (Vector2D v2);
 private:
 };

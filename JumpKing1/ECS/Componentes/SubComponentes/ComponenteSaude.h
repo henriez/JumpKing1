@@ -7,9 +7,6 @@ public:
 	ComponenteSaude() { saude = saudeMax = 0; }
 	~ComponenteSaude() {}
 
-	void atualizar() {}
-	void render() {}
-
 private:
 	float saude;
 	float saudeMax;

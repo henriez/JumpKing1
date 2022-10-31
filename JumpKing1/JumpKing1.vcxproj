@@ -143,7 +143,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ECS\Componentes\Vector2D\intVector2D.cpp" />
     <ClCompile Include="ECS\Componentes\Vector2D\Vector2D.cpp" />
     <ClCompile Include="ECS\Entidade\ListaDeEntidades\ListaDeEntidades.cpp" />
     <ClCompile Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.cpp" />
@@ -177,12 +176,10 @@
   <ItemGroup>
     <ClInclude Include="ECS\Componentes\Componente.h" />
     <ClInclude Include="ECS\Componentes\ListaDeComponentes\ListaDeComponentes.h" />
-    <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteAudio.h" />
     <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteColisao.h" />
     <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteSaude.h" />
     <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteSprite.h" />
     <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteTransform.h" />
-    <ClInclude Include="ECS\Componentes\Vector2D\intVector2D.h" />
     <ClInclude Include="ECS\Componentes\Vector2D\Vector2D.h" />
     <ClInclude Include="ECS\Entidade\Entidade.h" />
     <ClInclude Include="ECS\Entidade\ListaDeEntidades\ListaDeEntidades.h" />

@@ -20,8 +20,6 @@ public:
 		colisor.x = x;
 		colisor.y = y;
 	}
-	void atualizar() {}
-	void render() {}
 
 	SDL_Rect getColisor() const{
 		return colisor;

@@ -53,9 +53,6 @@
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeTexturas.cpp">
       <Filter>ECS\Gerenciador</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Componentes\Vector2D\intVector2D.cpp">
-      <Filter>ECS\Componentes\Vector2D</Filter>
-    </ClCompile>
     <ClCompile Include="Menu\Botao\Botao.cpp">
       <Filter>Menu\Botao</Filter>
     </ClCompile>
@@ -213,9 +210,6 @@
     <ClInclude Include="ECS\Componentes\ListaDeComponentes\ListaDeComponentes.h">
       <Filter>ECS\Componentes\ListaDeComponentes</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteAudio.h">
-      <Filter>ECS\Componentes\SubComponentes</Filter>
-    </ClInclude>
     <ClInclude Include="ECS\Componentes\SubComponentes\ComponenteColisao.h">
       <Filter>ECS\Componentes\SubComponentes</Filter>
     </ClInclude>
@@ -272,9 +266,6 @@
     </ClInclude>
     <ClInclude Include="Menu\Menu.h">
       <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\Componentes\Vector2D\intVector2D.h">
-      <Filter>ECS\Componentes\Vector2D</Filter>
     </ClInclude>
     <ClInclude Include="Menu\Botao\Botao.h">
       <Filter>Menu\Botao</Filter>

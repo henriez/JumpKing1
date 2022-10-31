@@ -16,7 +16,6 @@ Jogador::Jogador() {
 Jogador::~Jogador() {}
 
 void Jogador::inicializar(){
-	addComponente<ComponenteAudio>();
 	addComponente<ComponenteColisao>();
 	addComponente<ComponenteSaude>();
 	addComponente<ComponenteSprite>();

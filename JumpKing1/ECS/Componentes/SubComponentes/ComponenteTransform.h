@@ -8,9 +8,6 @@ public:
 	ComponenteTransform() {}
 	~ComponenteTransform() {}
 
-	void atualizar() {}
-	void render() {}
-
 	Vector2D posicao;
 	Vector2D velocidade;
 private:

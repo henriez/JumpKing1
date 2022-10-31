@@ -6,7 +6,6 @@
 #include <iostream>
 
 #include "../SubComponentes/ComponenteSprite.h"
-#include "../SubComponentes/ComponenteAudio.h"
 #include "../SubComponentes/ComponenteColisao.h"
 #include "../SubComponentes/ComponenteTransform.h"
 #include "../SubComponentes/ComponenteSaude.h"

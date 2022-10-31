@@ -2,8 +2,6 @@
 #include "../../Jogo/Jogo.h"
 #include "../../ECS/Gerenciador/GerenciadorDeTexturas.h"
 
-//classe button
-
 Button::Button() {
 	pos.x = pos.y = pos.w = pos.h = 0;
 	SDL_Color white;
@@ -54,9 +52,12 @@ void Button::render() {
 	GerenciadorDeTexturas::Desenhe(texture, fonte, pos);
 }
 
-intVector2D Button::getMousePos() {
-	intVector2D v;
-	SDL_GetMouseState(&v.x, &v.y);
+Vector2D Button::getMousePos() {
+	Vector2D v;
+	int x, y;
+	SDL_GetMouseState(&x, &y);
+	v.x = x;
+	v.y = y;
 	return v;
 }
 

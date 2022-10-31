@@ -1,15 +1,23 @@
 ﻿  ListaDeEntidades.cpp
+  Espinhos.cpp
+  Obstaculo2.cpp
+  Chefe.cpp
+  InimigoTipo1.cpp
+  InimigoTipo2.cpp
+  InimigoTipo3.cpp
+  Jogador2.cpp
   ControladorDeEventos.cpp
   Jogador.cpp
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(32,82): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(32,60): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(37,85): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(37,63): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(31,82): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(31,60): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(36,85): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(36,63): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
   GerenciadorDeCamera.cpp
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeCamera.cpp(45,40): warning C4244: '=': conversão de 'float' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeCamera.cpp(46,40): warning C4244: '=': conversão de 'float' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeCamera.cpp(52,30): warning C4244: '=': conversão de 'float' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeCamera.cpp(58,30): warning C4244: '=': conversão de 'float' para 'int', possível perda de dados
+  GerenciadorDeColisao.cpp
   GerenciadorDeTexturas.cpp
   Fase.cpp
   Mapa.cpp
@@ -25,13 +33,16 @@ C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Mapa\TileMa
   Jogo.cpp
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Jogo.cpp(41,22): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Jogo.cpp(42,22): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-  main.cpp
   Botao.cpp
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\Botao\Botao.cpp(59,8): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\Botao\Botao.cpp(60,8): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
   LeaderboardMenu.cpp
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LeaderboardMenu\LeaderboardMenu.cpp(32,53): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LeaderboardMenu\LeaderboardMenu.cpp(32,53): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LeaderboardMenu\LeaderboardMenu.cpp(32,82): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LeaderboardMenu\LeaderboardMenu.cpp(32,82): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+  Gerando Código...
+  Compilando...
   LevelMenu.cpp
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(40,53): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(40,53): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
@@ -52,5 +63,6 @@ C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\Set
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(32,53): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(32,82): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(32,82): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+  main.cpp
   Gerando Código...
   JumpKing1.vcxproj -> C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\x64\Debug\JumpKing1.exe

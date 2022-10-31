@@ -18,7 +18,6 @@ public:
 		textura = GerenciadorDeTexturas::CarregaTextura(caminhoArquivo);
 	}
 
-	void atualizar() override {}
 	void render(SDL_Rect pos) {
 		SDL_Rect fonte = { 0,0,tamanhoTile,tamanhoTile };
 		GerenciadorDeTexturas::Desenhe(textura, fonte, pos);

@@ -6,7 +6,7 @@
 #include <SDL_events.h>
 #include <string>
 
-#include "../../ECS/Componentes/Vector2D/intVector2D.h"
+#include "../../ECS/Componentes/Vector2D/Vector2D.h"
 #include "../../ECS/Gerenciador/GerenciadorDeTexturas.h"
 
 #define BUTTON_QUIT 1
@@ -25,7 +25,7 @@ private:
 	bool isHovering;
 	bool isClicked;
 
-	intVector2D getMousePos();
+	Vector2D getMousePos();
 public:
 
 	Button();
