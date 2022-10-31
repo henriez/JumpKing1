@@ -1,11 +1,9 @@
-﻿  Espinhos.cpp
-  Tile.cpp
-  Jogador.cpp
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(30,82): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(30,60): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(35,85): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(35,63): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(39,69): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Jogador\Jogador.cpp(40,73): warning C4244: '=': conversão de 'const int' para 'float', possível perda de dados
-  Gerando Código...
+﻿  TileMap.cpp
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Mapa\TileMap\TileMap.cpp(284,34): warning C4305: '+=': truncamento de 'double' para 'float'
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Mapa\TileMap\TileMap.cpp(290,27): warning C4244: '+=': conversão de 'float' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Mapa\TileMap\TileMap.cpp(294,43): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Mapa\TileMap\TileMap.cpp(297,43): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Mapa\TileMap\TileMap.cpp(301,27): warning C4244: '+=': conversão de 'float' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Mapa\TileMap\TileMap.cpp(304,43): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Mapa\TileMap\TileMap.cpp(307,43): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
   JumpKing1.vcxproj -> C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\x64\Debug\JumpKing1.exe

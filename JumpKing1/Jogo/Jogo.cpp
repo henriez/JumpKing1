@@ -16,8 +16,8 @@ Jogo::Jogo(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCh
 
 Jogo::~Jogo() {
 	fase->clear();
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(janela);
+	//SDL_DestroyRenderer(renderer);
+	//SDL_DestroyWindow(janela);
 	SDL_Quit();
 	delete fase;
 }
@@ -25,21 +25,8 @@ Jogo::~Jogo() {
 void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia) {
 	SDL_Init(SDL_INIT_EVERYTHING);
 
-	SDL_DisplayMode dm;
+	GerenciadorGrafico::init(nomeJanela, largJanela, alturaJanela, telaCheia);
 
-	if (telaCheia) {
-		SDL_GetCurrentDisplayMode(0, &dm);
-		largJanela = dm.w;
-		alturaJanela = dm.h;
-	}
-	janela = SDL_CreateWindow("Jump King", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, largJanela, alturaJanela, NULL);
-	if (!janela) { std::cout << "Failed Creating Window! Error:" << SDL_GetError(); }
-
-	renderer = SDL_CreateRenderer(janela, -1, 0);
-	if (!renderer) { std::cout << "Failed Creating Renderer! Error:" << SDL_GetError(); }
-
-
-	GerenciadorGrafico::setRenderer(renderer);
 	dimensoesJanela.x = largJanela;
 	dimensoesJanela.y = alturaJanela;
 
@@ -57,10 +44,7 @@ void Jogo::mainMenu() {
 	int click = menu.start.update();
 	
 	while (click == NO_BUTTON_CLICKED) {
-		SDL_RenderClear(renderer);
-		SDL_PollEvent(&evento);
-		menu.start.render();
-		SDL_RenderPresent(renderer);
+		GerenciadorGrafico::renderMenu(menu.start);
 		click = menu.start.update();
 	}
 
@@ -89,10 +73,7 @@ void Jogo::pauseMenu() {
 	int click = menu.pause.update();
 
 	while (click == NO_BUTTON_CLICKED) {
-		SDL_RenderClear(renderer);
-		SDL_PollEvent(&evento);
-		menu.pause.render();
-		SDL_RenderPresent(renderer);
+		GerenciadorGrafico::renderMenu(menu.settings);
 		click = menu.pause.update();
 	}
 
@@ -117,10 +98,7 @@ void Jogo::settingsMenu() {
 	int click = menu.settings.update();
 
 	while (click == NO_BUTTON_CLICKED) {
-		SDL_RenderClear(renderer);
-		SDL_PollEvent(&evento);
-		menu.settings.render();
-		SDL_RenderPresent(renderer);
+		GerenciadorGrafico::renderMenu(menu.settings);
 		click = menu.settings.update();
 	}	
 	
@@ -142,10 +120,7 @@ void Jogo::leaderboardMenu() {
 	int click = menu.leaderboard.update();
 
 	while (click == NO_BUTTON_CLICKED) {
-		SDL_RenderClear(renderer);
-		SDL_PollEvent(&evento);
-		menu.leaderboard.render();
-		SDL_RenderPresent(renderer);
+		GerenciadorGrafico::renderMenu(menu.leaderboard);
 		click = menu.leaderboard.update();
 	}
 
@@ -165,10 +140,7 @@ void Jogo::levelMenu() {
 	int click = menu.level.update();
 
 	while (click == NO_BUTTON_CLICKED) {
-		SDL_RenderClear(renderer);
-		SDL_PollEvent(&evento);
-		menu.level.render();
-		SDL_RenderPresent(renderer);
+		GerenciadorGrafico::renderMenu(menu.level);
 		click = menu.level.update();
 	}
 
@@ -203,11 +175,7 @@ void Jogo::atualizar() {
 }
 
 void Jogo::render() {
-	SDL_RenderClear(renderer);
-
-	fase->render();
-
-	SDL_RenderPresent(renderer);
+	GerenciadorGrafico::renderFase(fase);
 }
 
 void Jogo::analisaEventos() {
