@@ -1,7 +1,8 @@
 #include "TileMap.h"
 #include "../../../Jogo.h"
-#include "../../../../ECS/Gerenciador/GerenciadorDeTexturas.h"
+#include "../../../../ECS/Gerenciador/GerenciadorGrafico.h"
 #include "../../../../ECS/Gerenciador/GerenciadorDeColisao.h"
+#include "../../../../ECS/Gerenciador/GerenciadorDeCamera.h"
 #include "../Mapa.h"
 
 #include <fstream>
@@ -12,8 +13,6 @@ const char* mapa1_camada2 = "Assets/TileMap/mapa1_camada_tiles_2.csv";
 const char* mapa1_camada_espinhos = "Assets/TileMap/mapa1_camada_espinhos.csv";
 const char* mapa1_camada_colisao = "Assets/TileMap/mapa1_camada_colisao.csv";
 
-const char* tiles_png = "Assets/TileMap/Tiles.png";
-const char* hitbox_png = "Assets/TileMap/hitboxes colisao.png";
 const int largura = 11;
 const int altura = 12;
 const int tamanhoTile = 32;
@@ -22,9 +21,8 @@ TileMap::TileMap() {
 	nTiles.x = 80;
 	nTiles.y = 200;
 	algarismos[0] = algarismos[1] = algarismos[2] = 0;
-
-	Tile::setTex(tiles_png, hitbox_png);
 	GerenciadorDeColisao::setTileMap(this);
+	GerenciadorGrafico::init_tileMap();
 }
 
 TileMap::~TileMap() {
@@ -32,6 +30,8 @@ TileMap::~TileMap() {
 }
 
 void TileMap::inicializa() {
+	
+
 	char c = 0;
 	std::fstream mapFile;
 
@@ -153,9 +153,9 @@ void TileMap::inicializa() {
 			srcY = (id / largura) * tamanhoTile;
 			srcX = (id % largura) * tamanhoTile;
 
-			Tile* tile = new Tile;
-			tile->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
-			camada_espinhos.push_back(tile);
+			Espinhos* espinhos = new Espinhos;
+			espinhos->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
+			camada_espinhos.push_back(espinhos);
 		}
 	}
 	mapFile.close();
@@ -191,31 +191,31 @@ void TileMap::inicializa() {
 void TileMap::atualiza() {
 	for (auto& t : camada1) {
 		t->setScreen(false);
-		if (GerenciadorDeColisao::AABB(t->getPos(), Mapa::camera))
+		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
 			t->setScreen(true);
 	}
 
 	for (auto& t : camada2) {
 		t->setScreen(false);
-		if (GerenciadorDeColisao::AABB(t->getPos(), Mapa::camera))
+		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
 			t->setScreen(true);
 	}
 
 	for (auto& t : camada_espinhos) {
 		t->setScreen(false);
-		if (GerenciadorDeColisao::AABB(t->getPos(), Mapa::camera))
+		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
 			t->setScreen(true);
 	}
 
 	for (auto& t : hitbox_plataformas) {
 		t->setScreen(false);
-		if (GerenciadorDeColisao::AABB(t->getPos(), Mapa::camera))
+		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
 			t->setScreen(true);
 	}
 
 	for (auto& t : hitbox_espinhos) {
 		t->setScreen(false);
-		if (GerenciadorDeColisao::AABB(t->getPos(), Mapa::camera))
+		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
 			t->setScreen(true);
 	}
 
@@ -235,13 +235,13 @@ void TileMap::render() {
 		if (t->isOnScreen())
 			t->render();
 
-	for (auto& t : hitbox_plataformas)
+	/*for (auto& t : hitbox_plataformas)
 		if (t->isOnScreen())
 			t->renderHitbox();
 
 	for (auto& t : hitbox_espinhos)
 		if (t->isOnScreen())
-			t->renderHitbox();
+			t->renderHitbox();*/
 }
 
 void TileMap::clear() {

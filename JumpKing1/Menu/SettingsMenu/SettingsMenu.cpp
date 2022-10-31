@@ -13,7 +13,7 @@ void SettingsMenu::init() {
 	quit.set(100, 500, 324, 156);
 	quit.setTex("Assets/Buttons/quit.png");;
 
-	background = GerenciadorDeTexturas::CarregaTextura("Assets/Buttons/menu.png");
+	background = GerenciadorGrafico::CarregaTextura("Assets/Buttons/menu.png");
 }
 
 void SettingsMenu::reset() {
@@ -30,6 +30,6 @@ int SettingsMenu::update() {
 void SettingsMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
 	SDL_Rect destino = { 0,0,Jogo::getDimensoesJanela().x,Jogo::getDimensoesJanela().y };
-	GerenciadorDeTexturas::Desenhe(background, fonte, destino);
+	GerenciadorGrafico::Desenhe(background, fonte, destino);
 	quit.render();
 }

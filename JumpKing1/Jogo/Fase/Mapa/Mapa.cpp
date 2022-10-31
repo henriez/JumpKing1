@@ -1,17 +1,14 @@
 #include "Mapa.h"
 #include "../../Jogo.h"
-#include "../../ECS/Gerenciador/GerenciadorDeTexturas.h"
+#include "../../ECS/Gerenciador/GerenciadorGrafico.h"
 #include "../../../ECS/Gerenciador/GerenciadorDeCamera.h"
 #include <iostream>
 
-
-SDL_Rect Mapa::camera;
 Vector2D Mapa::nTiles;
 int Mapa::tamanhoDoTile;
 
 Mapa::Mapa() {
 	backgroundTex = nullptr;
-	camera.x = camera.y = 0;
 	tamanhoDoTile = 32;
 }
 
@@ -21,16 +18,11 @@ Mapa::~Mapa() {
 }
 
 void Mapa::inicializar() {
-	backgroundTex = GerenciadorDeTexturas::CarregaTextura("Assets/TileMap/mapa1background.png");
-
-	SDL_DisplayMode dm;
-
-	SDL_GetCurrentDisplayMode(0, &dm);
-	camera.w = dm.w;
-	camera.h = dm.h;
+	backgroundTex = GerenciadorGrafico::CarregaTextura("Assets/TileMap/mapa1background.png");
 
 	tileMap.inicializa(); //passar id de mapa
 	nTiles = tileMap.getNTiles();
+	GerenciadorDeCamera::init();
 }
 
 void Mapa::atualizar() {
@@ -39,8 +31,8 @@ void Mapa::atualizar() {
 }
 
 void Mapa::render() {;
-	SDL_Rect destino = { 0, 0, camera.w, camera.h };
-	GerenciadorDeTexturas::Desenhe(backgroundTex, camera, destino);
+	SDL_Rect destino = { 0, 0, GerenciadorDeCamera::camera.w, GerenciadorDeCamera::camera.h };
+	GerenciadorGrafico::Desenhe(backgroundTex, GerenciadorDeCamera::camera, destino);
 
 	tileMap.render();
 }

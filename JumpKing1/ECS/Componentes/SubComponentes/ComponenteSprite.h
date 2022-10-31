@@ -2,7 +2,7 @@
 
 #include "../Componente.h"
 #include <SDL_image.h>
-#include "../../Gerenciador/GerenciadorDeTexturas.h"
+#include "../../Gerenciador/GerenciadorGrafico.h"
 #include "../Vector2D/Vector2D.h"
 
 class ComponenteSprite : public Componente {
@@ -15,12 +15,12 @@ public:
 	}
 
 	void setCaminhoArquivo(const char* caminhoArquivo) {
-		textura = GerenciadorDeTexturas::CarregaTextura(caminhoArquivo);
+		textura = GerenciadorGrafico::CarregaTextura(caminhoArquivo);
 	}
 
 	void render(SDL_Rect pos) {
 		SDL_Rect fonte = { 0,0,tamanhoTile,tamanhoTile };
-		GerenciadorDeTexturas::Desenhe(textura, fonte, pos);
+		GerenciadorGrafico::Desenhe(textura, fonte, pos);
 	}
 	
 private:

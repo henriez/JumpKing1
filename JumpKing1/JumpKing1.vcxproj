@@ -146,7 +146,7 @@
     <ClCompile Include="ECS\Componentes\Vector2D\Vector2D.cpp" />
     <ClCompile Include="ECS\Entidade\ListaDeEntidades\ListaDeEntidades.cpp" />
     <ClCompile Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.cpp" />
-    <ClCompile Include="ECS\Entidade\Obstaculo\Obstaculo2\Obstaculo2.cpp" />
+    <ClCompile Include="ECS\Entidade\Obstaculo\Tile\Tile.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo1\InimigoTipo1.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo2\InimigoTipo2.cpp" />
@@ -158,10 +158,9 @@
     <ClCompile Include="ECS\Entidade\Projetil\Projetil.cpp" />
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeCamera.cpp" />
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeColisao.cpp" />
-    <ClCompile Include="ECS\Gerenciador\GerenciadorDeTexturas.cpp" />
+    <ClCompile Include="ECS\Gerenciador\GerenciadorGrafico.cpp" />
     <ClCompile Include="Jogo\Fase\Fase.cpp" />
     <ClCompile Include="Jogo\Fase\Mapa\Mapa.cpp" />
-    <ClCompile Include="Jogo\Fase\Mapa\TileMap\Tile.cpp" />
     <ClCompile Include="Jogo\Fase\Mapa\TileMap\TileMap.cpp" />
     <ClCompile Include="Jogo\HUD\HUD.cpp" />
     <ClCompile Include="Jogo\Jogo.cpp" />
@@ -185,7 +184,7 @@
     <ClInclude Include="ECS\Entidade\ListaDeEntidades\ListaDeEntidades.h" />
     <ClInclude Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.h" />
     <ClInclude Include="ECS\Entidade\Obstaculo\Obstaculo.h" />
-    <ClInclude Include="ECS\Entidade\Obstaculo\Obstaculo2\Obstaculo2.h" />
+    <ClInclude Include="ECS\Entidade\Obstaculo\Tile\Tile.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Inimigo.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo1\InimigoTipo1.h" />
@@ -199,11 +198,10 @@
     <ClInclude Include="ECS\Entidade\Projetil\Projetil.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeCamera.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeColisao.h" />
-    <ClInclude Include="ECS\Gerenciador\GerenciadorDeTexturas.h" />
+    <ClInclude Include="ECS\Gerenciador\GerenciadorGrafico.h" />
     <ClInclude Include="Ente.h" />
     <ClInclude Include="Jogo\Fase\Fase.h" />
     <ClInclude Include="Jogo\Fase\Mapa\Mapa.h" />
-    <ClInclude Include="Jogo\Fase\Mapa\TileMap\Tile.h" />
     <ClInclude Include="Jogo\Fase\Mapa\TileMap\TileMap.h" />
     <ClInclude Include="Jogo\HUD\HUD.h" />
     <ClInclude Include="Jogo\Jogo.h" />

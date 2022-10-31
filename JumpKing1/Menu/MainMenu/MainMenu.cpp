@@ -1,5 +1,5 @@
 #include "MainMenu.h"
-#include "../../ECS/Gerenciador/GerenciadorDeTexturas.h"
+#include "../../ECS/Gerenciador/GerenciadorGrafico.h"
 #include "../../Jogo/Jogo.h"
 
 MainMenu::MainMenu() {
@@ -23,7 +23,7 @@ void MainMenu::init() {
 	leaderboard.set(500, 300, 324, 156);
 	leaderboard.setTex("Assets/Buttons/leaderboard.png");
 
-	background = GerenciadorDeTexturas::CarregaTextura("Assets/Buttons/menu.png");
+	background = GerenciadorGrafico::CarregaTextura("Assets/Buttons/menu.png");
 }
 
 void MainMenu::reset() {
@@ -53,7 +53,7 @@ int MainMenu::update() {
 void MainMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
 	SDL_Rect destino = { 0,0,Jogo::getDimensoesJanela().x,Jogo::getDimensoesJanela().y };
-	GerenciadorDeTexturas::Desenhe(background, fonte, destino);
+	GerenciadorGrafico::Desenhe(background, fonte, destino);
 
 	start.render();
 	settings.render();

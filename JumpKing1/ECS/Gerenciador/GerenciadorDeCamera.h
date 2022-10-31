@@ -2,7 +2,6 @@
 #include <SDL.h>
 
 class Jogador;
-class Mapa;
 
 class GerenciadorDeCamera
 {
@@ -11,8 +10,10 @@ private:
 public:
 	GerenciadorDeCamera();
 	~GerenciadorDeCamera();
+	static void init();
 	static void Atualiza();
 	static void AtualizaJogador();
 
 	static void setJogador(Jogador* jg);
+	static SDL_Rect camera;
 };

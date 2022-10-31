@@ -24,12 +24,12 @@ public:
 	void leaderboardMenu();
 	void levelMenu();
 
-	static SDL_Renderer* renderer;
 	static SDL_Event evento;
 	static Vector2D getDimensoesJanela();
 
 private:
 	void inicializar(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia);
+	SDL_Renderer* renderer;
 	SDL_Window* janela;
 	bool rodando;
 	static Vector2D dimensoesJanela;

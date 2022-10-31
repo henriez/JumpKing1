@@ -12,12 +12,13 @@ public:
 	void atualizar();
 	void render();
 
-	int getSpeed() const { return speed; }
+	const int getSpeed() const { return speed; }
 private:
 	void inicializar();
 	ControladorDeEventos controladorEventos;
 	friend class GerenciadorDeCamera;
 
-	int speed;
+	const int speed;
+	const int maxSpeed;
 	bool onGround;
 };

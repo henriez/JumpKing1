@@ -1,5 +1,5 @@
 #include "LevelMenu.h"
-#include "../../ECS/Gerenciador/GerenciadorDeTexturas.h"
+#include "../../ECS/Gerenciador/GerenciadorGrafico.h"
 #include "../../Jogo/Jogo.h"
 
 LevelMenu::LevelMenu() {
@@ -17,7 +17,7 @@ void LevelMenu::init() {
 	start.set(500, 300, 324, 156);
 	start.setTex("Assets/Buttons/start.png");
 
-	background = GerenciadorDeTexturas::CarregaTextura("Assets/Buttons/menu.png");
+	background = GerenciadorGrafico::CarregaTextura("Assets/Buttons/menu.png");
 }
 
 void LevelMenu::reset() {
@@ -38,7 +38,7 @@ int LevelMenu::update() {
 void LevelMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
 	SDL_Rect destino = { 0,0,Jogo::getDimensoesJanela().x,Jogo::getDimensoesJanela().y };
-	GerenciadorDeTexturas::Desenhe(background, fonte, destino);
+	GerenciadorGrafico::Desenhe(background, fonte, destino);
 	start.render();
 	quit.render();
 }

@@ -1,6 +1,6 @@
 #include "Botao.h"
 #include "../../Jogo/Jogo.h"
-#include "../../ECS/Gerenciador/GerenciadorDeTexturas.h"
+#include "../../ECS/Gerenciador/GerenciadorGrafico.h"
 
 Button::Button() {
 	pos.x = pos.y = pos.w = pos.h = 0;
@@ -19,7 +19,7 @@ void Button::set(int xpos, int ypos, int width, int height) {
 }
 
 void Button::setTex(const char* path) {
-	texture = GerenciadorDeTexturas::CarregaTextura(path);
+	texture = GerenciadorGrafico::CarregaTextura(path);
 	if (!texture) std::cout << "button failed loading! Error:" << IMG_GetError();
 }
 
@@ -49,7 +49,7 @@ void Button::render() {
 	fonte.x = fonte.y = 0;
 	fonte.w = pos.w;
 	fonte.h = pos.h;
-	GerenciadorDeTexturas::Desenhe(texture, fonte, pos);
+	GerenciadorGrafico::Desenhe(texture, fonte, pos);
 }
 
 Vector2D Button::getMousePos() {

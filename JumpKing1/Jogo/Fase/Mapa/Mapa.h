@@ -17,8 +17,6 @@ public:
 	void render();
 	static int tamanhoTile();
 	static Vector2D getDimensoes();
-
-	static SDL_Rect camera;
 	
 	void clear();
 

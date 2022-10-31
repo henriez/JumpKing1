@@ -7,7 +7,7 @@
 #include <string>
 
 #include "../../ECS/Componentes/Vector2D/Vector2D.h"
-#include "../../ECS/Gerenciador/GerenciadorDeTexturas.h"
+#include "../../ECS/Gerenciador/GerenciadorGrafico.h"
 
 #define BUTTON_QUIT 1
 #define BUTTON_START 2

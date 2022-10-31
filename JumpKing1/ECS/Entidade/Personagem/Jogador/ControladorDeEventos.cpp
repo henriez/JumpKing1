@@ -49,6 +49,4 @@ void ControladorDeEventos::atualizar() {
 	}
 
 	GerenciadorDeColisao::colisao_jogador1();
-
-	GerenciadorDeCamera::AtualizaJogador();
 }

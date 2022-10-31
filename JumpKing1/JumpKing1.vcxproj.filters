@@ -14,9 +14,6 @@
     <ClCompile Include="Jogo\Fase\Mapa\Mapa.cpp">
       <Filter>Jogo\Fase\Mapa</Filter>
     </ClCompile>
-    <ClCompile Include="Jogo\Fase\Mapa\TileMap\Tile.cpp">
-      <Filter>Jogo\Fase\Mapa\TileMap</Filter>
-    </ClCompile>
     <ClCompile Include="Jogo\Fase\Mapa\TileMap\TileMap.cpp">
       <Filter>Jogo\Fase\Mapa\TileMap</Filter>
     </ClCompile>
@@ -50,7 +47,7 @@
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeCamera.cpp">
       <Filter>ECS\Gerenciador</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Gerenciador\GerenciadorDeTexturas.cpp">
+    <ClCompile Include="ECS\Gerenciador\GerenciadorGrafico.cpp">
       <Filter>ECS\Gerenciador</Filter>
     </ClCompile>
     <ClCompile Include="Menu\Botao\Botao.cpp">
@@ -80,17 +77,14 @@
     <ClCompile Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.cpp">
       <Filter>ECS\Entidade\Obstaculo\Espinhos</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Entidade\Obstaculo\Obstaculo2\Obstaculo2.cpp">
-      <Filter>ECS\Entidade\Obstaculo\Obstaculo2</Filter>
-    </ClCompile>
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeColisao.cpp">
       <Filter>ECS\Gerenciador</Filter>
     </ClCompile>
+    <ClCompile Include="ECS\Entidade\Obstaculo\Tile\Tile.cpp">
+      <Filter>ECS\Entidade\Obstaculo\Tile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="ECS">
-      <UniqueIdentifier>{c0fd2635-ec96-4ee2-916a-fd3fb45d66e3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Jogo">
       <UniqueIdentifier>{8df8b5b4-f164-4cd1-a611-1a73ea7d0ea6}</UniqueIdentifier>
     </Filter>
@@ -105,6 +99,30 @@
     </Filter>
     <Filter Include="Jogo\Fase\Mapa\TileMap">
       <UniqueIdentifier>{eca8c06e-50c4-4f5e-864e-fe85f18e8762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{a366b527-e8e0-4709-83b8-2883fb3ab629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Botao">
+      <UniqueIdentifier>{0316bb5b-30ec-4815-b7fb-5c14f3d5fe33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\LeaderboardMenu">
+      <UniqueIdentifier>{e0a21f87-9694-4ada-ab01-2db5af543147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\LevelMenu">
+      <UniqueIdentifier>{3a322575-7943-458f-97e0-ab7aef14c01d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\MainMenu">
+      <UniqueIdentifier>{e4eff23a-ce6e-46f8-9606-d0ca778f10a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\PauseMenu">
+      <UniqueIdentifier>{7fed91cc-91f7-4df7-b342-ac4b9972a0b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\SettingsMenu">
+      <UniqueIdentifier>{8be5a70b-0eb6-4363-985b-1c92bf1f4e94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS">
+      <UniqueIdentifier>{c0fd2635-ec96-4ee2-916a-fd3fb45d66e3}</UniqueIdentifier>
     </Filter>
     <Filter Include="ECS\Componentes">
       <UniqueIdentifier>{3b8e018f-9765-4c3d-9369-1220fbd303de}</UniqueIdentifier>
@@ -139,20 +157,17 @@
     <Filter Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo2">
       <UniqueIdentifier>{f0492d3b-c54e-4206-953d-6684044cc226}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ECS\Entidade\Personagem\Jogador">
-      <UniqueIdentifier>{8a72a03b-1f08-400b-9ab8-52379ab0fa5d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ECS\Entidade\Projétil">
-      <UniqueIdentifier>{39efc323-f8ed-48e9-a9c5-dac49a9da678}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ECS\Gerenciador">
-      <UniqueIdentifier>{9d441728-caa0-4c4a-98f3-13c02a3c5db1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3">
       <UniqueIdentifier>{3338673c-e0a0-4e25-8905-5cf7d62fa89e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ECS\Entidade\Personagem\Jogador">
+      <UniqueIdentifier>{8a72a03b-1f08-400b-9ab8-52379ab0fa5d}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ECS\Entidade\Personagem\Jogador2">
       <UniqueIdentifier>{a76cc736-8791-465f-8c38-77f7283e90d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Projétil">
+      <UniqueIdentifier>{39efc323-f8ed-48e9-a9c5-dac49a9da678}</UniqueIdentifier>
     </Filter>
     <Filter Include="ECS\Entidade\Obstaculo">
       <UniqueIdentifier>{be14e524-b1da-4ed8-86fc-a9f330c60df3}</UniqueIdentifier>
@@ -160,29 +175,11 @@
     <Filter Include="ECS\Entidade\Obstaculo\Espinhos">
       <UniqueIdentifier>{f44782bd-0eeb-4612-836b-5a6533cf72ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ECS\Entidade\Obstaculo\Obstaculo2">
+    <Filter Include="ECS\Entidade\Obstaculo\Tile">
       <UniqueIdentifier>{e0b00532-f24d-4949-aa33-3708323cc4ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Menu">
-      <UniqueIdentifier>{a366b527-e8e0-4709-83b8-2883fb3ab629}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Menu\Botao">
-      <UniqueIdentifier>{0316bb5b-30ec-4815-b7fb-5c14f3d5fe33}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Menu\LeaderboardMenu">
-      <UniqueIdentifier>{e0a21f87-9694-4ada-ab01-2db5af543147}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Menu\LevelMenu">
-      <UniqueIdentifier>{3a322575-7943-458f-97e0-ab7aef14c01d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Menu\MainMenu">
-      <UniqueIdentifier>{e4eff23a-ce6e-46f8-9606-d0ca778f10a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Menu\PauseMenu">
-      <UniqueIdentifier>{7fed91cc-91f7-4df7-b342-ac4b9972a0b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Menu\SettingsMenu">
-      <UniqueIdentifier>{8be5a70b-0eb6-4363-985b-1c92bf1f4e94}</UniqueIdentifier>
+    <Filter Include="ECS\Gerenciador">
+      <UniqueIdentifier>{9d441728-caa0-4c4a-98f3-13c02a3c5db1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -197,9 +194,6 @@
     </ClInclude>
     <ClInclude Include="Jogo\Fase\Mapa\Mapa.h">
       <Filter>Jogo\Fase\Mapa</Filter>
-    </ClInclude>
-    <ClInclude Include="Jogo\Fase\Mapa\TileMap\Tile.h">
-      <Filter>Jogo\Fase\Mapa\TileMap</Filter>
     </ClInclude>
     <ClInclude Include="Jogo\Fase\Mapa\TileMap\TileMap.h">
       <Filter>Jogo\Fase\Mapa\TileMap</Filter>
@@ -261,7 +255,7 @@
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeCamera.h">
       <Filter>ECS\Gerenciador</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\Gerenciador\GerenciadorDeTexturas.h">
+    <ClInclude Include="ECS\Gerenciador\GerenciadorGrafico.h">
       <Filter>ECS\Gerenciador</Filter>
     </ClInclude>
     <ClInclude Include="Menu\Menu.h">
@@ -297,12 +291,12 @@
     <ClInclude Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.h">
       <Filter>ECS\Entidade\Obstaculo\Espinhos</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\Entidade\Obstaculo\Obstaculo2\Obstaculo2.h">
-      <Filter>ECS\Entidade\Obstaculo\Obstaculo2</Filter>
-    </ClInclude>
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeColisao.h">
       <Filter>ECS\Gerenciador</Filter>
     </ClInclude>
     <ClInclude Include="Ente.h" />
+    <ClInclude Include="ECS\Entidade\Obstaculo\Tile\Tile.h">
+      <Filter>ECS\Entidade\Obstaculo\Tile</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

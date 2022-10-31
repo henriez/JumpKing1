@@ -4,12 +4,11 @@
 #include "../../../../Jogo/Jogo.h"
 #include "../../../../Jogo/Fase/Mapa/Mapa.h"
 
-Jogador::Jogador() {
+Jogador::Jogador() : speed(8), maxSpeed(4) {
 	inicializar();
 	controladorEventos.setTransform(this);
 	GerenciadorDeCamera::setJogador(this);
 	GerenciadorDeColisao::setJogador(this);
-	speed = 8;
 	onGround = false;
 }
 
@@ -37,6 +36,9 @@ void Jogador::atualizar() {
 	controladorEventos.atualizar();
 	transform->posicao.x += transform->velocidade.x * speed;
 	transform->posicao.y += transform->velocidade.y * speed;
+	if (transform->velocidade.y < -maxSpeed) transform->velocidade.y = -maxSpeed;
+	else if (transform->velocidade.y > maxSpeed) transform->velocidade.y = maxSpeed; //velocidade terminal para queda
+	GerenciadorDeCamera::AtualizaJogador();
 }
 
 void Jogador::setGround(const bool inGround) {
@@ -50,8 +52,8 @@ bool Jogador::inGround() const {
 void Jogador::render() {
 	// Posicao Jogador na tela = Posicao Jogador no Mapa - Posicao Camera no Mapa
 	SDL_Rect posRect = {0,0,Mapa::tamanhoTile(),Mapa::tamanhoTile()};
-	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - Mapa::camera.x;
-	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - Mapa::camera.y;
+	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
+	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
 
 	getComponente<ComponenteSprite>()->render(posRect);
 }

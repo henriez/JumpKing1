@@ -1,10 +1,10 @@
 #include "Jogo.h"
 #include <iostream>
 #include "Fase/Fase.h"
+#include "../ECS/Gerenciador/GerenciadorGrafico.h"
 
 #define FPS 60
 
-SDL_Renderer* Jogo::renderer;
 SDL_Event Jogo::evento;
 Vector2D Jogo::dimensoesJanela;
 
@@ -38,6 +38,8 @@ void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela,
 	renderer = SDL_CreateRenderer(janela, -1, 0);
 	if (!renderer) { std::cout << "Failed Creating Renderer! Error:" << SDL_GetError(); }
 
+
+	GerenciadorGrafico::setRenderer(renderer);
 	dimensoesJanela.x = largJanela;
 	dimensoesJanela.y = alturaJanela;
 

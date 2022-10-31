@@ -1,5 +1,6 @@
 #pragma once
-#include "Tile.h"
+#include "../../ECS/Entidade/Obstaculo/Tile/Tile.h"
+#include "../../ECS/Entidade/Obstaculo/Espinhos/Espinhos.h"
 #include <vector>
 
 class Jogador;
@@ -20,7 +21,7 @@ public:
 private:
 	std::vector<Tile*> camada1;
 	std::vector<Tile*> camada2;
-	std::vector<Tile*> camada_espinhos;
+	std::vector<Espinhos*> camada_espinhos;
 	std::vector<Tile*> hitbox_plataformas;
 	std::vector<Tile*> hitbox_espinhos;
 

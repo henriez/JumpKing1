@@ -4,6 +4,7 @@
 #include "../../Jogo/Jogo.h"
 
 Jogador* GerenciadorDeCamera::jogador;
+SDL_Rect GerenciadorDeCamera::camera;
 
 GerenciadorDeCamera::GerenciadorDeCamera() {
 	jogador = nullptr;
@@ -13,6 +14,14 @@ GerenciadorDeCamera::~GerenciadorDeCamera() {}
 
 void GerenciadorDeCamera::setJogador(Jogador* jg) {
 	jogador = jg;
+}
+
+void GerenciadorDeCamera::init() {
+	SDL_DisplayMode dm;
+	SDL_GetCurrentDisplayMode(0, &dm);
+	GerenciadorDeCamera::camera.x = GerenciadorDeCamera::camera.y = 0;
+	GerenciadorDeCamera::camera.w = dm.w;
+	GerenciadorDeCamera::camera.h = dm.h;
 }
 
 void GerenciadorDeCamera::Atualiza() {
@@ -42,18 +51,18 @@ void GerenciadorDeCamera::AtualizaJogador() {
 
 	
 	// Posicao da camera centralizando o player
-	Mapa::camera.x = transform->posicao.x - Mapa::camera.w / 2;
-	Mapa::camera.y = transform->posicao.y - Mapa::camera.h / 2;
+	GerenciadorDeCamera::camera.x = transform->posicao.x - GerenciadorDeCamera::camera.w / 2;
+	GerenciadorDeCamera::camera.y = transform->posicao.y - GerenciadorDeCamera::camera.h / 2;
 
 	// Checa bordas do mapa para a camera em X
-	if (Mapa::camera.x <= 0)
-		Mapa::camera.x = 0;
-	else if (Mapa::camera.x + Mapa::camera.w >= dimMapa.x)
-		Mapa::camera.x = dimMapa.x - Mapa::camera.w;
+	if (GerenciadorDeCamera::camera.x <= 0)
+		GerenciadorDeCamera::camera.x = 0;
+	else if (GerenciadorDeCamera::camera.x + GerenciadorDeCamera::camera.w >= dimMapa.x)
+		GerenciadorDeCamera::camera.x = dimMapa.x - GerenciadorDeCamera::camera.w;
 
 	// Checa bordas do mapa para a camera em Y
-	if (Mapa::camera.y <= 0)
-		Mapa::camera.y = 0;
-	else if (Mapa::camera.y + Mapa::camera.h >= dimMapa.y)
-		Mapa::camera.y = dimMapa.y - Mapa::camera.h;
+	if (GerenciadorDeCamera::camera.y <= 0)
+		GerenciadorDeCamera::camera.y = 0;
+	else if (GerenciadorDeCamera::camera.y + GerenciadorDeCamera::camera.h >= dimMapa.y)
+		GerenciadorDeCamera::camera.y = dimMapa.y - GerenciadorDeCamera::camera.h;
 }
