@@ -18,7 +18,7 @@ Mapa::~Mapa() {
 }
 
 void Mapa::inicializar() {
-	backgroundTex = GerenciadorGrafico::CarregaTextura("Assets/TileMap/mapa1background.png");
+	backgroundTex = GerenciadorGrafico::CarregaTextura("Assets/TileMap/Mapa1/mapa1background.png");
 
 	tileMap.inicializa(); //passar id de mapa
 	nTiles = tileMap.getNTiles();

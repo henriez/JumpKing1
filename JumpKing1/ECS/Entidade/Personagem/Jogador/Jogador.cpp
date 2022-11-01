@@ -33,6 +33,8 @@ void Jogador::inicializar(){
 void Jogador::atualizar() {
 	ComponenteTransform* transform = getComponente<ComponenteTransform>();
 	getComponente<ComponenteColisao>()->setPos(transform->posicao.x, transform->posicao.y);
+
+	setGround(false);
 	controladorEventos.atualizar();
 	transform->posicao.x += transform->velocidade.x * speed;
 	transform->posicao.y += transform->velocidade.y * speed;

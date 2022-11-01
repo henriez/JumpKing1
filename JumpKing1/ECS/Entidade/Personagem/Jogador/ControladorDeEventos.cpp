@@ -42,6 +42,7 @@ void ControladorDeEventos::atualizar() {
 		case SDLK_SPACE:
 			//if (jogador->inGround())
 				transform->velocidade.y = -2;
+				jogador->setGround(false);
 			break;
 		default:
 			break;
