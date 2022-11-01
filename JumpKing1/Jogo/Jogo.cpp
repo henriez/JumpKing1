@@ -15,8 +15,6 @@ Jogo::Jogo(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCh
 
 Jogo::~Jogo() {
 	fase->clear();
-	//SDL_DestroyRenderer(renderer);
-	//SDL_DestroyWindow(janela);
 	SDL_Quit();
 	delete fase;
 }

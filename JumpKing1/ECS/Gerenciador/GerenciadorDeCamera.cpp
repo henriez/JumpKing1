@@ -25,7 +25,7 @@ void GerenciadorDeCamera::init() {
 }
 
 void GerenciadorDeCamera::Atualiza() {
-
+	AtualizaJogador();
 }
 
 void GerenciadorDeCamera::AtualizaJogador() {

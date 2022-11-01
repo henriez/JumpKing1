@@ -83,6 +83,9 @@
     <ClCompile Include="ECS\Entidade\Obstaculo\Tile\Tile.cpp">
       <Filter>ECS\Entidade\Obstaculo\Tile</Filter>
     </ClCompile>
+    <ClCompile Include="Jogo\Fase\Boss_Room\Boss_Room.cpp">
+      <Filter>Jogo\Fase\Boss_Room</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Jogo">
@@ -180,6 +183,9 @@
     </Filter>
     <Filter Include="ECS\Gerenciador">
       <UniqueIdentifier>{9d441728-caa0-4c4a-98f3-13c02a3c5db1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\Fase\Boss_Room">
+      <UniqueIdentifier>{1b808523-6da1-48b9-8454-9823189a5585}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -297,6 +303,9 @@
     <ClInclude Include="Ente.h" />
     <ClInclude Include="ECS\Entidade\Obstaculo\Tile\Tile.h">
       <Filter>ECS\Entidade\Obstaculo\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Jogo\Fase\Boss_Room\Boss_Room.h">
+      <Filter>Jogo\Fase\Boss_Room</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

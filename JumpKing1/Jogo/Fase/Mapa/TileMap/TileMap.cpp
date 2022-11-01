@@ -8,12 +8,7 @@
 #include <fstream>
 #include <SDL_image.h>
 
-const char* mapa1_camada1 = "Assets/TileMap/Mapa1/mapa1_camada_tiles_1.csv";
-const char* mapa1_camada2 = "Assets/TileMap/Mapa1/mapa1_camada_tiles_2.csv";
-const char* mapa1_camada_espinhos = "Assets/TileMap/Mapa1/mapa1_camada_espinhos.csv";
-const char* mapa1_camada_colisao = "Assets/TileMap/Mapa1/mapa1_camada_colisao.csv";
-
-const int largura = 11;
+const int largura = 11; //dados tileset
 const int altura = 12;
 const int tamanhoTile = 32;
 
@@ -23,22 +18,26 @@ TileMap::TileMap() {
 	algarismos[0] = algarismos[1] = algarismos[2] = 0;
 	GerenciadorDeColisao::setTileMap(this);
 	GerenciadorGrafico::init_tileMap();
+	fim = { 0,0,0,0 };
 }
 
 TileMap::~TileMap() {
 	clear();
 }
 
-void TileMap::inicializa() {
-	
+void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_colisao, const char* cam_espinhos, int tilesW, int tilesH) {
 
+	nTiles.x = tilesW;
+	nTiles.y = tilesH;
+
+	Mapa::setDimMapa(tilesW, tilesH);
 	char c = 0;
 	std::fstream mapFile;
 
 	int srcX, srcY, alg, id; //diferentes algarismos
 	srcX = srcY = alg = id = 0;
 
-	mapFile.open(mapa1_camada1);
+	mapFile.open(cam1);
 	for (int i = 0; i < nTiles.y; i++) {
 		for (int j = 0; j < nTiles.x; j++) {
 			algarismos[0] = algarismos[1] = algarismos[2] = alg = 0;
@@ -79,7 +78,7 @@ void TileMap::inicializa() {
 	mapFile.close();
 
 
-	mapFile.open(mapa1_camada2);
+	mapFile.open(cam2);
 	for (int i = 0; i < nTiles.y; i++) {
 		for (int j = 0; j < nTiles.x; j++) {
 			algarismos[0] = algarismos[1] = algarismos[2] = alg = 0;
@@ -120,7 +119,7 @@ void TileMap::inicializa() {
 	mapFile.close();
 
 
-	mapFile.open(mapa1_camada_espinhos);
+	mapFile.open(cam_espinhos);
 	for (int i = 0; i < nTiles.y; i++) {
 		for (int j = 0; j < nTiles.x; j++) {
 			algarismos[0] = algarismos[1] = algarismos[2] = alg = 0;
@@ -160,7 +159,7 @@ void TileMap::inicializa() {
 	}
 	mapFile.close();
 
-	mapFile.open(mapa1_camada_colisao);
+	mapFile.open(cam_colisao);
 	for (int i = 0; i < nTiles.y; i++) {
 		for (int j = 0; j < nTiles.x; j++) {
 			id = 0;
@@ -186,6 +185,10 @@ void TileMap::inicializa() {
 		}
 	}
 	mapFile.close();
+}
+
+void TileMap::setFim(SDL_Rect end) {
+	fim = end;
 }
 
 void TileMap::atualiza() {

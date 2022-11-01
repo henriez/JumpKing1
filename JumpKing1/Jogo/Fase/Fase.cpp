@@ -2,7 +2,6 @@
 #include "../../ECS/Gerenciador/GerenciadorDeCamera.h"
 
 Fase::Fase() {
-	arquivoSave = nullptr;
 	mapa = nullptr;
 }
 
@@ -30,6 +29,10 @@ void Fase::inicializar() {
 	listaEntidades.addEntidade(static_cast<Entidade*>(boss));
 
 	mapa->inicializar();
+}
+
+void Fase::init_BossRoom() {
+
 }
 
 void Fase::atualizar() {

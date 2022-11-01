@@ -40,7 +40,7 @@ void Jogador::atualizar() {
 	transform->posicao.y += transform->velocidade.y * speed;
 	if (transform->velocidade.y < -maxSpeed) transform->velocidade.y = -maxSpeed;
 	else if (transform->velocidade.y > maxSpeed) transform->velocidade.y = maxSpeed; //velocidade terminal para queda
-	GerenciadorDeCamera::AtualizaJogador();
+	//GerenciadorDeCamera::AtualizaJogador();
 }
 
 void Jogador::setGround(const bool inGround) {

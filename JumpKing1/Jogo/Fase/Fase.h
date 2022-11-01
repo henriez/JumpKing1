@@ -14,8 +14,8 @@ public:
 	void atualizar();
 	void render();
 	void clear();
+	void init_BossRoom();
 private:
 	ListaDeEntidades listaEntidades;
-	const char* arquivoSave;
 	Mapa* mapa;
 };
