@@ -311,7 +311,7 @@ void TileMap::colisao_jogador1() {
 		}
 	}
 
-	SDL_Rect hitbox_espinho;
+	SDL_Rect hitbox_espinho = {0,0,0,0};
 	
 	for (auto& t : hitbox_espinhos) {
 		if (t->isOnScreen()) {

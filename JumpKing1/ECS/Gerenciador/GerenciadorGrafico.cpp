@@ -8,11 +8,13 @@
 #include "../../Menu/PauseMenu/PauseMenu.h"
 #include "../../Menu/SettingsMenu/SettingsMenu.h"
 #include "../../Jogo/Fase/Fase.h"
+#include "../../ECS/Componentes/Vector2D/Vector2D.h"
 
 SDL_Texture* GerenciadorGrafico::tileset = nullptr;
 SDL_Texture* GerenciadorGrafico::tilesetHitbox = nullptr;
 SDL_Renderer* GerenciadorGrafico::renderer = nullptr;
 SDL_Window* GerenciadorGrafico::window = nullptr;
+Vector2D GerenciadorGrafico::dimensoesJanela;
 
 GerenciadorGrafico::GerenciadorGrafico() {
 }
@@ -24,6 +26,8 @@ GerenciadorGrafico::~GerenciadorGrafico() {
 
 void GerenciadorGrafico::init(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia) {
 	SDL_DisplayMode dm;
+	dm.w = largJanela;
+	dm.h = alturaJanela;
 
 	if (telaCheia) {
 		SDL_GetCurrentDisplayMode(0, &dm);
@@ -35,6 +39,9 @@ void GerenciadorGrafico::init(const char* nomeJanela, int largJanela, int altura
 
 	renderer = SDL_CreateRenderer(window, -1, 0);
 	if (!renderer) { std::cout << "Failed Creating Renderer! Error:" << SDL_GetError(); }
+
+	dimensoesJanela.x = (float)dm.w;
+	dimensoesJanela.y = (float)dm.h;
 }
 
 void GerenciadorGrafico::init_tileMap() {
@@ -52,6 +59,10 @@ SDL_Texture* GerenciadorGrafico::CarregaTextura(const char* fileName){
 		std::cout << SDL_GetError() << std::endl;
 
 	return tex;
+}
+
+Vector2D GerenciadorGrafico::getDimensoesJanela() {
+	return dimensoesJanela;
 }
 
 void GerenciadorGrafico::Desenhe(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino) {

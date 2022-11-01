@@ -6,7 +6,6 @@
 #define FPS 60
 
 SDL_Event Jogo::evento;
-Vector2D Jogo::dimensoesJanela;
 
 Jogo::Jogo(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia) {
 	rodando = true;
@@ -26,9 +25,6 @@ void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela,
 	SDL_Init(SDL_INIT_EVERYTHING);
 
 	GerenciadorGrafico::init(nomeJanela, largJanela, alturaJanela, telaCheia);
-
-	dimensoesJanela.x = largJanela;
-	dimensoesJanela.y = alturaJanela;
 
 	menu.start.init();
 	menu.leaderboard.init();
@@ -73,7 +69,7 @@ void Jogo::pauseMenu() {
 	int click = menu.pause.update();
 
 	while (click == NO_BUTTON_CLICKED) {
-		GerenciadorGrafico::renderMenu(menu.settings);
+		GerenciadorGrafico::renderMenu(menu.pause);
 		click = menu.pause.update();
 	}
 
@@ -194,7 +190,4 @@ bool Jogo::executando() {
 	return rodando;
 }
 
-Vector2D Jogo::getDimensoesJanela() {
-	return dimensoesJanela;
-}
 

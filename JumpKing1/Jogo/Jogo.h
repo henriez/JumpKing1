@@ -25,7 +25,6 @@ public:
 	void levelMenu();
 
 	static SDL_Event evento;
-	static Vector2D getDimensoesJanela();
 
 private:
 	void inicializar(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia);

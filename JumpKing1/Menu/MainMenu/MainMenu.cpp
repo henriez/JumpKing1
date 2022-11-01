@@ -52,7 +52,7 @@ int MainMenu::update() {
 
 void MainMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
-	SDL_Rect destino = { 0,0,Jogo::getDimensoesJanela().x,Jogo::getDimensoesJanela().y };
+	SDL_Rect destino = { 0,0,GerenciadorGrafico::getDimensoesJanela().x,GerenciadorGrafico::getDimensoesJanela().y };
 	GerenciadorGrafico::Desenhe(background, fonte, destino);
 
 	start.render();

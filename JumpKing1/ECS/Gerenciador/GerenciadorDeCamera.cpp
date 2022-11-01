@@ -51,8 +51,8 @@ void GerenciadorDeCamera::AtualizaJogador() {
 
 	
 	// Posicao da camera centralizando o player
-	GerenciadorDeCamera::camera.x = transform->posicao.x - GerenciadorDeCamera::camera.w / 2;
-	GerenciadorDeCamera::camera.y = transform->posicao.y - GerenciadorDeCamera::camera.h / 2;
+	GerenciadorDeCamera::camera.x = transform->posicao.x - GerenciadorDeCamera::camera.w / 2.0;
+	GerenciadorDeCamera::camera.y = transform->posicao.y - GerenciadorDeCamera::camera.h / 2.0;
 
 	// Checa bordas do mapa para a camera em X
 	if (GerenciadorDeCamera::camera.x <= 0)
