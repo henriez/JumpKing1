@@ -151,8 +151,6 @@
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo1\InimigoTipo1.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo2\InimigoTipo2.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3\InimigoTipo3.cpp" />
-    <ClCompile Include="ECS\Entidade\Personagem\Jogador2\ControladorDeEventos2.cpp" />
-    <ClCompile Include="ECS\Entidade\Personagem\Jogador2\Jogador2.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Jogador\ControladorDeEventos.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Jogador\Jogador.cpp" />
     <ClCompile Include="ECS\Entidade\Projetil\Projetil.cpp" />
@@ -191,8 +189,6 @@
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo1\InimigoTipo1.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo2\InimigoTipo2.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3\inimigoTipo3.h" />
-    <ClInclude Include="ECS\Entidade\Personagem\Jogador2\ControladorDeEventos2.h" />
-    <ClInclude Include="ECS\Entidade\Personagem\Jogador2\Jogador2.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Jogador\ControladorDeEventos.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Jogador\Jogador.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Personagem.h" />
