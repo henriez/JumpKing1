@@ -11,16 +11,19 @@ MainMenu::~MainMenu() {
 }
 
 void MainMenu::init() {
-	start.set(1400, 190, 250, 125);
+	SDL_DisplayMode dm;
+	SDL_GetCurrentDisplayMode(0, &dm);
+
+	start.set(0.75 * dm.w, 0.1 * dm.w, 250, 125);
 	start.setTex("Assets/Buttons/New Game Button.png");
 
-	settings.set(1400, 370, 250, 125);
+	settings.set(0.75 * dm.w, 0.2 * dm.w, 250, 125);
 	settings.setTex("Assets/Buttons/Options Button.png");
 
-	leaderboard.set(1400, 550, 250, 125);
+	leaderboard.set(0.75 * dm.w, 0.3 * dm.w, 250, 125);
 	leaderboard.setTex("Assets/Buttons/Button Leaderboard.png");
 
-	quit.set(100, 900, 250, 125);
+	quit.set(0.1 * dm.w, 0.8 * dm.h, 250, 125);
 	quit.setTex("Assets/Buttons/Exit Button.png");
 
 	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");

@@ -11,13 +11,16 @@ LevelMenu::~LevelMenu() {
 }
 
 void LevelMenu::init() {
-	back.set(100, 900, 250, 125);
+	SDL_DisplayMode dm;
+	SDL_GetCurrentDisplayMode(0, &dm);
+
+	back.set(0.1 * dm.w, 0.8 * dm.h , 250, 125);
 	back.setTex("Assets/Buttons/Back Button.png");
 
-	level1.set(1400, 275, 250, 125);
+	level1.set(0.75 * dm.w, 0.275 * dm.h, 250, 125);
 	level1.setTex("Assets/Buttons/Level 1.png");
 
-	level2.set(1400, 475, 250, 125);
+	level2.set(0.75 * dm.w, 0.425 * dm.h, 250, 125);
 	level2.setTex("Assets/Buttons/Level 2.png");
 
 	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");

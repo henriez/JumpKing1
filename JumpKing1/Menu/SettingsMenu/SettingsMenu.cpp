@@ -10,7 +10,10 @@ SettingsMenu::~SettingsMenu() {
 }
 
 void SettingsMenu::init() {
-	quit.set(100, 900, 250, 125);
+	SDL_DisplayMode dm;
+	SDL_GetCurrentDisplayMode(0, &dm);
+
+	quit.set(0.1 * dm.w, 0.8*dm.h, 250, 125);
 	quit.setTex("Assets/Buttons/Back Button.png");;
 
 	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");
