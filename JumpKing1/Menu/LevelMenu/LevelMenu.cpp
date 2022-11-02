@@ -11,26 +11,33 @@ LevelMenu::~LevelMenu() {
 }
 
 void LevelMenu::init() {
-	quit.set(100, 500, 324, 156);
-	quit.setTex("Assets/Buttons/quit.png");
+	back.set(100, 900, 250, 125);
+	back.setTex("Assets/Buttons/Back Button.png");
 
-	start.set(500, 300, 324, 156);
-	start.setTex("Assets/Buttons/start.png");
+	level1.set(1400, 275, 250, 125);
+	level1.setTex("Assets/Buttons/Level 1.png");
 
-	background = GerenciadorGrafico::CarregaTextura("Assets/Buttons/menu.png");
+	level2.set(1400, 475, 250, 125);
+	level2.setTex("Assets/Buttons/Level 2.png");
+
+	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");
 }
 
 void LevelMenu::reset() {
-	start.reset();
-	quit.reset();
+	level1.reset();
+	level2.reset();
+	back.reset();
 }
 
 int LevelMenu::update() {
-	start.handleEvents();
-	if (start.click()) return BUTTON_START;
+	level1.handleEvents();
+	if (level1.click()) return BUTTON_START1;	
+	
+	level2.handleEvents();
+	if (level2.click()) return BUTTON_START2;
 
-	quit.handleEvents();
-	if (quit.click()) return BUTTON_QUIT;
+	back.handleEvents();
+	if (back.click()) return BUTTON_QUIT;
 
 	return NO_BUTTON_CLICKED; //nenhum botao foi clicado
 }
@@ -38,7 +45,8 @@ int LevelMenu::update() {
 void LevelMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
 	SDL_Rect destino = { 0,0,GerenciadorGrafico::getDimensoesJanela().x,GerenciadorGrafico::getDimensoesJanela().y };
-	GerenciadorGrafico::Desenhe(background, fonte, destino);
-	start.render();
-	quit.render();
+	GerenciadorGrafico::render(background, fonte, destino);
+	level1.render();
+	level2.render();
+	back.render();
 }

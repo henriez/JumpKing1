@@ -24,8 +24,8 @@ void Jogador::inicializar(){
 	ComponenteTransform* transform = getComponente<ComponenteTransform>();
 	transform->velocidade.x = 0;
 	transform->velocidade.y = 0;
-	transform->posicao.x = 100;
-	transform->posicao.y = 6100;
+	transform->posicao.x = 0;
+	transform->posicao.y = 0; //inicializa na fase->inicializar(id)
 
 	getComponente<ComponenteColisao>()->set(transform->posicao.x, transform->posicao.y, 32, 32);
 }
@@ -40,7 +40,6 @@ void Jogador::atualizar() {
 	transform->posicao.y += transform->velocidade.y * speed;
 	if (transform->velocidade.y < -maxSpeed) transform->velocidade.y = -maxSpeed;
 	else if (transform->velocidade.y > maxSpeed) transform->velocidade.y = maxSpeed; //velocidade terminal para queda
-	//GerenciadorDeCamera::AtualizaJogador();
 }
 
 void Jogador::setGround(const bool inGround) {

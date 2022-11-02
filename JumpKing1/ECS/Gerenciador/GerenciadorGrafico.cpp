@@ -53,7 +53,7 @@ void GerenciadorGrafico::setRenderer(SDL_Renderer* rend) {
 	renderer = rend;
 }
 
-SDL_Texture* GerenciadorGrafico::CarregaTextura(const char* fileName){
+SDL_Texture* GerenciadorGrafico::LoadTexture(const char* fileName){
 	SDL_Texture* tex = IMG_LoadTexture(renderer, fileName);
 	if (!tex)
 		std::cout << SDL_GetError() << std::endl;
@@ -65,7 +65,7 @@ Vector2D GerenciadorGrafico::getDimensoesJanela() {
 	return dimensoesJanela;
 }
 
-void GerenciadorGrafico::Desenhe(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino) {
+void GerenciadorGrafico::render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino) {
 	SDL_RenderCopy(renderer, tex, &fonte, &destino);
 }
 

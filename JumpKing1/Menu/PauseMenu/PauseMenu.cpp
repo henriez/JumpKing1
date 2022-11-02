@@ -11,13 +11,13 @@ PauseMenu::~PauseMenu() {
 }
 
 void PauseMenu::init() {
-	quit.set(100, 500, 324, 156);
-	quit.setTex("Assets/Buttons/quit.png");
+	quit.set(100, 500, 250, 125);
+	quit.setTex("Assets/Buttons/Back Button.png");
 
-	resume.set(500, 300, 324, 156);
-	resume.setTex("Assets/Buttons/resume.png");
+	resume.set(500, 300, 250, 125);
+	resume.setTex("Assets/Buttons/Button Resume.png");
 
-	background = GerenciadorGrafico::CarregaTextura("Assets/Buttons/menu.png");
+	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");
 }
 
 void PauseMenu::reset() {
@@ -38,7 +38,7 @@ int PauseMenu::update() {
 void PauseMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
 	SDL_Rect destino = { 0,0,GerenciadorGrafico::getDimensoesJanela().x,GerenciadorGrafico::getDimensoesJanela().y };
-	GerenciadorGrafico::Desenhe(background, fonte, destino);
+	GerenciadorGrafico::render(background, fonte, destino);
 	resume.render();
 	quit.render();
 }

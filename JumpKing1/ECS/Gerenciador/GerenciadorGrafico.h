@@ -19,8 +19,8 @@ public:
 	static void init_tileMap();
 	static void setRenderer(SDL_Renderer* rend);
 
-	static SDL_Texture* CarregaTextura(const char* fileName);
-	static void Desenhe(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino);
+	static SDL_Texture* LoadTexture(const char* fileName);
+	static void render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino);
 
 	static Vector2D getDimensoesJanela();
 

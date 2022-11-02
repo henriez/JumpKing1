@@ -11,9 +11,9 @@ LeaderboardMenu::~LeaderboardMenu() {
 }
 
 void LeaderboardMenu::init() {
-	quit.set(100, 500, 324, 156);
-	quit.setTex("Assets/Buttons/quit.png");
-	background = GerenciadorGrafico::CarregaTextura("Assets/Buttons/menu.png");
+	quit.set(100, 900, 250, 125);
+	quit.setTex("Assets/Buttons/Back Button.png");
+	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");
 }
 
 void LeaderboardMenu::reset() {
@@ -30,6 +30,6 @@ int LeaderboardMenu::update() {
 void LeaderboardMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
 	SDL_Rect destino = { 0,0,GerenciadorGrafico::getDimensoesJanela().x,GerenciadorGrafico::getDimensoesJanela().y}; //receber dados da janela
-	GerenciadorGrafico::Desenhe(background, fonte, destino);
+	GerenciadorGrafico::render(background, fonte, destino);
 	quit.render();
 }

@@ -10,12 +10,13 @@
 #include "../../ECS/Gerenciador/GerenciadorGrafico.h"
 
 #define BUTTON_QUIT 1
-#define BUTTON_START 2
-#define BUTTON_SETTINGS 3
-#define BUTTON_RESUME 4
-#define BUTTON_LEADERBOARD 5
+#define BUTTON_START1 2
+#define BUTTON_START2 3
+#define BUTTON_SETTINGS 4
+#define BUTTON_RESUME 5
+#define BUTTON_LEADERBOARD 6
 
-#define NO_BUTTON_CLICKED 6
+#define NO_BUTTON_CLICKED 7
 
 class Button {
 private:

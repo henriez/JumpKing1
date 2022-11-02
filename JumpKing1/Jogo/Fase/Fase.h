@@ -10,7 +10,7 @@ public:
 	Fase();
 	~Fase();
 
-	void inicializar();
+	void inicializar(const int id);
 	void atualizar();
 	void render();
 	void clear();

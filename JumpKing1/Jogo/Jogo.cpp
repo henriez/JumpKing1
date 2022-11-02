@@ -43,7 +43,7 @@ void Jogo::mainMenu() {
 	}
 
 	switch (click) { //apos algum clique
-	case BUTTON_START:
+	case BUTTON_START1:
 		levelMenu();
 		break;
 	case BUTTON_LEADERBOARD:
@@ -139,8 +139,12 @@ void Jogo::levelMenu() {
 	}
 
 	switch (click) { //apos algum clique
-	case BUTTON_START:
-		fase->inicializar();
+	case BUTTON_START1:
+		fase->inicializar(1);
+		atualizar();
+		break;
+	case BUTTON_START2:
+		fase->inicializar(2);
 		atualizar();
 		break;
 	case BUTTON_QUIT:

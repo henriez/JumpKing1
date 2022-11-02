@@ -16,8 +16,9 @@ public:
 	int update();
 	void render();
 private:
-	Button start;
-	Button quit;
+	Button level1;
+	Button level2;
+	Button back;
 
 	SDL_Texture* background;
 };

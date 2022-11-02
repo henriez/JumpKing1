@@ -18,7 +18,6 @@ TileMap::TileMap() {
 	algarismos[0] = algarismos[1] = algarismos[2] = 0;
 	GerenciadorDeColisao::setTileMap(this);
 	GerenciadorGrafico::init_tileMap();
-	fim = { 0,0,0,0 };
 }
 
 TileMap::~TileMap() {
@@ -187,10 +186,6 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 		}
 	}
 	mapFile.close();
-}
-
-void TileMap::setFim(SDL_Rect end) {
-	fim = end;
 }
 
 void TileMap::atualiza() {

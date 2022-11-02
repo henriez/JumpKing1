@@ -13,14 +13,17 @@ const char* mapa1_camada2 = "Assets/TileMap/Mapa1/mapa1_camada_tiles_2.csv";
 const char* mapa1_camada_espinhos = "Assets/TileMap/Mapa1/mapa1_camada_espinhos.csv";
 const char* mapa1_camada_colisao = "Assets/TileMap/Mapa1/mapa1_camada_colisao.csv";
 
+const char* mapa2_camada1 = "Assets/TileMap/Mapa2/mapa2_Camada_0.csv";
+const char* mapa2_camada2 = "Assets/TileMap/Mapa2/mapa2_Camada_1.csv";
+const char* mapa2_camada_espinhos = "Assets/TileMap/Mapa2/mapa2_Camada_espinhos.csv";
+const char* mapa2_camada_colisao = "Assets/TileMap/Mapa2/mapa2_Camada_colisao.csv";
+
 Mapa::Mapa() {
 	backgroundTex = nullptr;
 	tamanhoDoTile = 32;
-	fim.x = 0;
-	fim.y = 64;
-	fim.w = 32;
-	fim.h = 96;
+	fim = { 0,0,0,0 };
 	onBossRoom = false;
+	id = 0;
 }
 
 Mapa::~Mapa() {
@@ -28,11 +31,23 @@ Mapa::~Mapa() {
 
 }
 
-void Mapa::inicializar() {
-	backgroundTex = GerenciadorGrafico::CarregaTextura("Assets/TileMap/Mapa1/mapa1background.png");
+void Mapa::inicializar(int id) {
+	this->id = id;
 
-	tileMap.inicializa(mapa1_camada1, mapa1_camada2, mapa1_camada_colisao, mapa1_camada_espinhos, 80, 200); //passar id de mapa
-	tileMap.setFim(fim);
+	switch (id) {
+	case 1:
+		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa1/mapa1background.png");
+		fim = { 0,64,32,96 };
+		tileMap.inicializa(mapa1_camada1, mapa1_camada2, mapa1_camada_colisao, mapa1_camada_espinhos, 80, 200); 
+		break;
+	case 2:
+		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa2/mapa2.png");
+		fim = { 0,96,32,288 };
+		tileMap.inicializa(mapa2_camada1, mapa2_camada2, mapa2_camada_colisao, mapa2_camada_espinhos, 65, 250);
+	default:
+		break;
+	}
+
 	nTiles = tileMap.getNTiles();
 	GerenciadorDeCamera::init();
 }
@@ -45,7 +60,7 @@ void Mapa::atualizar() {
 		if (GerenciadorDeColisao::AABB(fim, hitbox)) {
 			clear();
 			onBossRoom = true;
-			boss_room.inicializar();
+			boss_room.inicializar(id);
 		}
 	}
 	else
@@ -58,7 +73,7 @@ void Mapa::render() {
 		boss_room.render();
 	else {
 		SDL_Rect destino = { 0, 0, GerenciadorDeCamera::camera.w, GerenciadorDeCamera::camera.h };
-		GerenciadorGrafico::Desenhe(backgroundTex, GerenciadorDeCamera::camera, destino);
+		GerenciadorGrafico::render(backgroundTex, GerenciadorDeCamera::camera, destino);
 
 		tileMap.render();
 	}

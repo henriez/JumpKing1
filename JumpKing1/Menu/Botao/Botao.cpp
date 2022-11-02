@@ -19,7 +19,7 @@ void Button::set(int xpos, int ypos, int width, int height) {
 }
 
 void Button::setTex(const char* path) {
-	texture = GerenciadorGrafico::CarregaTextura(path);
+	texture = GerenciadorGrafico::LoadTexture(path);
 	if (!texture) std::cout << "button failed loading! Error:" << IMG_GetError();
 }
 
@@ -49,7 +49,7 @@ void Button::render() {
 	fonte.x = fonte.y = 0;
 	fonte.w = pos.w;
 	fonte.h = pos.h;
-	GerenciadorGrafico::Desenhe(texture, fonte, pos);
+	GerenciadorGrafico::render(texture, fonte, pos);
 }
 
 Vector2D Button::getMousePos() {

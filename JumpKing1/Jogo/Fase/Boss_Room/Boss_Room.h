@@ -9,7 +9,7 @@ class Boss_Room {
 public:
 	Boss_Room();
 	~Boss_Room();
-	void inicializar();
+	void inicializar(int id);
 
 	void atualizar();
 	void render();

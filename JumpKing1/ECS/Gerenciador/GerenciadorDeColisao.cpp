@@ -23,8 +23,6 @@ void GerenciadorDeColisao::setTileMap(TileMap* tmap) {
 }
 
 void GerenciadorDeColisao::colisao_jogador1() {
-		bool collided = true;
-
 	SDL_Rect initialhitbox = jogador1->getComponente<ComponenteColisao>()->getColisor();
 	SDL_Rect hitbox = initialhitbox;
 
@@ -83,7 +81,6 @@ void GerenciadorDeColisao::colisao_jogador1() {
 				else if (velocity.y < 0) //colidiu por baixo // em teoria, pela montagem da fase, nunca deve acontecer
 					transform->posicao.y = hitbox_espinho.y + hitbox_espinho.h;
 				transform->velocidade.y = 0;
-				collided = true;
 			}
 			hitbox = initialhitbox;
 			hitbox.x += velocity.x * jogador1->getSpeed();

@@ -12,7 +12,7 @@ class Mapa {
 public:
 	Mapa();
 	~Mapa();
-	void inicializar();
+	void inicializar(int id);
 
 	void atualizar();
 	void render();
@@ -30,4 +30,5 @@ private:
 	Boss_Room boss_room;
 	bool onBossRoom;
 	SDL_Rect fim; //retangulo que indica fim da fase (entrada da sala do boss)
+	int id; //relativo à fase
 };

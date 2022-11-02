@@ -10,7 +10,6 @@ public:
 	TileMap();
 	~TileMap();
 	void inicializa(const char* cam1, const char* cam2, const char* cam_colisao, const char* cam_espinhos, int tilesW, int tilesH);
-	void setFim(SDL_Rect end);
 	void atualiza();
 	void render();
 
@@ -27,7 +26,6 @@ private:
 
 	Vector2D nTiles;
 	int algarismos[3];
-	SDL_Rect fim; //retangulo que indica fim da fase (entrada da sala do boss)
 
 	friend class GerenciadorDeColisao;
 };

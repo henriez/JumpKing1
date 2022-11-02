@@ -11,19 +11,19 @@ MainMenu::~MainMenu() {
 }
 
 void MainMenu::init() {
-	start.set(100, 100, 324, 156);
-	start.setTex("Assets/Buttons/start.png");
+	start.set(1400, 190, 250, 125);
+	start.setTex("Assets/Buttons/New Game Button.png");
 
-	settings.set(100, 300, 324, 156);
-	settings.setTex("Assets/Buttons/settingstest.png");
+	settings.set(1400, 370, 250, 125);
+	settings.setTex("Assets/Buttons/Options Button.png");
 
-	quit.set(100, 500, 324, 156);
-	quit.setTex("Assets/Buttons/quit.png");
+	leaderboard.set(1400, 550, 250, 125);
+	leaderboard.setTex("Assets/Buttons/Button Leaderboard.png");
 
-	leaderboard.set(500, 300, 324, 156);
-	leaderboard.setTex("Assets/Buttons/leaderboard.png");
+	quit.set(100, 900, 250, 125);
+	quit.setTex("Assets/Buttons/Exit Button.png");
 
-	background = GerenciadorGrafico::CarregaTextura("Assets/Buttons/menu.png");
+	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");
 }
 
 void MainMenu::reset() {
@@ -35,7 +35,7 @@ void MainMenu::reset() {
 
 int MainMenu::update() {
 	start.handleEvents();
-	if (start.click()) return BUTTON_START;
+	if (start.click()) return BUTTON_START1;
 
 	settings.handleEvents();
 	if (settings.click()) return BUTTON_SETTINGS;
@@ -53,7 +53,7 @@ int MainMenu::update() {
 void MainMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
 	SDL_Rect destino = { 0,0,GerenciadorGrafico::getDimensoesJanela().x,GerenciadorGrafico::getDimensoesJanela().y };
-	GerenciadorGrafico::Desenhe(background, fonte, destino);
+	GerenciadorGrafico::render(background, fonte, destino);
 
 	start.render();
 	settings.render();

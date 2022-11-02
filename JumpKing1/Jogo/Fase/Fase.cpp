@@ -12,9 +12,21 @@ Fase::~Fase() {
 	}
 }
 
-void Fase::inicializar() {
+void Fase::inicializar(const int id) {
 	mapa = new Mapa;
 	Jogador* jogador = new Jogador;
+	switch (id) {
+	case 1:
+		jogador->getComponente<ComponenteTransform>()->posicao.x = 100;
+		jogador->getComponente<ComponenteTransform>()->posicao.y = 6240;
+		break;
+	case 2:
+		jogador->getComponente<ComponenteTransform>()->posicao.x = 300;
+		jogador->getComponente<ComponenteTransform>()->posicao.y = 7648;
+		break;
+	default:
+		break;
+	}
 	GerenciadorDeCamera::setJogador(jogador);
 	InimigoTipo1* en1 = new InimigoTipo1;
 	InimigoTipo2* en2 = new InimigoTipo2;
@@ -28,7 +40,7 @@ void Fase::inicializar() {
 	listaEntidades.addEntidade(static_cast<Entidade*>(en3));
 	listaEntidades.addEntidade(static_cast<Entidade*>(boss));
 
-	mapa->inicializar();
+	mapa->inicializar(id);
 }
 
 void Fase::init_BossRoom() {
