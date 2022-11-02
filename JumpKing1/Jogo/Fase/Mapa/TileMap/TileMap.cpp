@@ -27,6 +27,8 @@ TileMap::~TileMap() {
 
 void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_colisao, const char* cam_espinhos, int tilesW, int tilesH) {
 
+	GerenciadorDeColisao::setTileMap(this);
+
 	nTiles.x = tilesW;
 	nTiles.y = tilesH;
 
@@ -222,7 +224,7 @@ void TileMap::atualiza() {
 			t->setScreen(true);
 	}
 
-	colisao_jogador1();
+	GerenciadorDeColisao::colisao_jogador1();
 }
 
 void TileMap::render() {
@@ -245,6 +247,7 @@ void TileMap::render() {
 	for (auto& t : hitbox_espinhos)
 		if (t->isOnScreen())
 			t->renderHitbox();
+			
 }
 
 void TileMap::clear() {
@@ -271,82 +274,4 @@ void TileMap::clear() {
 
 Vector2D TileMap::getNTiles() {
 	return nTiles;
-}
-
-void TileMap::colisao_jogador1() {
-	Jogador* jg = GerenciadorDeColisao::getJogador1();
-	bool collided = true;
-
-	SDL_Rect initialhitbox = jg->getComponente<ComponenteColisao>()->getColisor();
-	SDL_Rect hitbox = initialhitbox;
-
-	ComponenteTransform* transform = jg->getComponente<ComponenteTransform>();
-	
-	Vector2D velocity = transform->velocidade;
-
-	if (!jg->inGround())
-		transform->velocidade.y += 0.05; // simula gravidade 
-
-	for (auto& t : hitbox_plataformas) {
-		if (t->isOnScreen()) {
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * jg->getSpeed();
-			if (GerenciadorDeColisao::AABB(t->getPos(), hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					jg->setGround(true); 
-					transform->posicao.y = t->getPos().y - hitbox.h;
-				}
-				else if (velocity.y < 0) //colidiu por baixo
-					transform->posicao.y = t->getPos().y + hitbox.h;
-				transform->velocidade.y = 0;
-				
-			}
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * jg->getSpeed();
-			if (GerenciadorDeColisao::AABB(t->getPos(), hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = t->getPos().x - hitbox.w;
-				}
-				else if (velocity.x < 0) //colidiu pela direita
-					transform->posicao.x = t->getPos().x + hitbox.w;
-				transform->velocidade.x = 0;
-			}
-		}
-	}
-
-	SDL_Rect hitbox_espinho = {0,0,0,0};
-	
-	for (auto& t : hitbox_espinhos) {
-		if (t->isOnScreen()) {
-			//hitbox na parte inferior do tile
-			hitbox_espinho.x = t->getPos().x;
-			hitbox_espinho.y = t->getPos().y + tamanhoTile / 2;
-			hitbox_espinho.w = t->getPos().w;
-			hitbox_espinho.h = t->getPos().h - tamanhoTile / 2;
-
-			//mesma checagem usada para as plataformas
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * jg->getSpeed();
-			if (GerenciadorDeColisao::AABB(hitbox_espinho, hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					jg->setGround(true);
-					transform->posicao.y = hitbox_espinho.y - hitbox.h;
-				}
-				else if (velocity.y < 0) //colidiu por baixo // em teoria, pela montagem da fase, nunca deve acontecer
-					transform->posicao.y = hitbox_espinho.y + hitbox_espinho.h;
-				transform->velocidade.y = 0;
-				collided = true;
-			}
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * jg->getSpeed();
-			if (GerenciadorDeColisao::AABB(hitbox_espinho, hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = t->getPos().x - hitbox.w;
-				}
-				else if (velocity.x < 0) //colidiu pela direita
-					transform->posicao.x = t->getPos().x + hitbox.w;
-				transform->velocidade.x = 0;
-			}
-		}
-	}
 }

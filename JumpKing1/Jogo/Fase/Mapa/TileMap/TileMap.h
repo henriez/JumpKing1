@@ -17,8 +17,6 @@ public:
 	void clear();
 
 	Vector2D getNTiles();
-
-	void colisao_jogador1();
 private:
 	std::vector<Tile*> camada1;
 	std::vector<Tile*> camada2;
