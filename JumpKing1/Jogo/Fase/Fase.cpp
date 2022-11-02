@@ -28,7 +28,20 @@ void Fase::inicializar(const int id) {
 		break;
 	}
 	GerenciadorDeCamera::setJogador(jogador);
+
+	// Escolher lugares aleatorios e criar mais inimigos. Ex:
+	/*
+	for (qtd = 0; qtd < qtdMax; qtd++) {
+		InimigoTipo1* tmp = new InimigoTipo1;
+		tmp->getComponente<ComponenteTransform>()->posicao.x = lugarX;
+		tmp->getComponente<ComponenteTransform>()->posicao.y = lugarY;
+		listaEntidades.addEntidade(static_cast<Entidade*>(tmp));
+	}
+	*/
 	InimigoTipo1* en1 = new InimigoTipo1;
+	en1->getComponente<ComponenteTransform>()->posicao.x = 164;
+	en1->getComponente<ComponenteTransform>()->posicao.y = 6200;
+
 	InimigoTipo2* en2 = new InimigoTipo2;
 	InimigoTipo3* en3 = new InimigoTipo3;
 	Chefe* boss = new Chefe;

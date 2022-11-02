@@ -9,4 +9,7 @@ public:
 
 	void atualizar();
 	void render();
+private:
+	SDL_Rect sprite;
+	bool flip;
 };

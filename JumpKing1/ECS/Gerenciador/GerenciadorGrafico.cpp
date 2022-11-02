@@ -65,8 +65,15 @@ Vector2D GerenciadorGrafico::getDimensoesJanela() {
 	return dimensoesJanela;
 }
 
-void GerenciadorGrafico::render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino) {
+/*void GerenciadorGrafico::render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino) {
 	SDL_RenderCopy(renderer, tex, &fonte, &destino);
+}*/
+
+void GerenciadorGrafico::render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino, bool flip) {
+	if (flip)
+		SDL_RenderCopyEx(renderer, tex, &fonte, &destino, 0, NULL, SDL_FLIP_HORIZONTAL);
+	else
+		SDL_RenderCopy(renderer, tex, &fonte, &destino);
 }
 
 void GerenciadorGrafico::renderFase(Fase* fase) {

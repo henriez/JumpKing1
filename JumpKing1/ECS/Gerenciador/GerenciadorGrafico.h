@@ -20,7 +20,8 @@ public:
 	static void setRenderer(SDL_Renderer* rend);
 
 	static SDL_Texture* LoadTexture(const char* fileName);
-	static void render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino);
+	//static void render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino);
+	static void render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino, bool flip = false);
 
 	static Vector2D getDimensoesJanela();
 

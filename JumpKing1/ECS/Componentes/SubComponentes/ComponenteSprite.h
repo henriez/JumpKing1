@@ -19,8 +19,12 @@ public:
 	}
 
 	void render(SDL_Rect pos) {
-		SDL_Rect fonte = { 0,0,tamanhoTile,tamanhoTile };
+		SDL_Rect fonte = { 0, 0, tamanhoTile, tamanhoTile };
 		GerenciadorGrafico::render(textura, fonte, pos);
+	}
+
+	void render(SDL_Rect pos, SDL_Rect fonte, bool flip = false) {
+		GerenciadorGrafico::render(textura, fonte, pos, flip);
 	}
 	
 private:
