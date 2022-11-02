@@ -47,8 +47,10 @@ void Button::handleEvents() {
 void Button::render() {
 	SDL_Rect fonte;
 	fonte.x = fonte.y = 0;
-	fonte.w = pos.w;
-	fonte.h = pos.h;
+	SDL_Point textureSize;
+	SDL_QueryTexture(texture, NULL, NULL, &textureSize.x, &textureSize.y);
+	fonte.w = textureSize.x;
+	fonte.h = textureSize.y;
 	GerenciadorGrafico::render(texture, fonte, pos);
 }
 

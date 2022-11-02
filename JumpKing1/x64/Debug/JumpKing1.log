@@ -1,10 +1,50 @@
-﻿  PauseMenu.cpp
+﻿  LeaderboardMenu.cpp
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LeaderboardMenu\LeaderboardMenu.cpp(17,54): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LeaderboardMenu\LeaderboardMenu.cpp(17,40): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LeaderboardMenu\LeaderboardMenu.cpp(17,27): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LeaderboardMenu\LeaderboardMenu.cpp(17,15): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LeaderboardMenu\LeaderboardMenu.cpp(35,67): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LeaderboardMenu\LeaderboardMenu.cpp(35,67): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LeaderboardMenu\LeaderboardMenu.cpp(35,110): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LeaderboardMenu\LeaderboardMenu.cpp(35,110): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+  LevelMenu.cpp
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(17,54): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(17,40): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(17,27): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(17,15): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(20,59): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(20,45): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(20,32): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(20,18): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(23,59): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(23,45): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(23,32): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(23,18): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(50,67): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(50,67): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(50,110): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\LevelMenu\LevelMenu.cpp(50,110): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+  PauseMenu.cpp
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(17,54): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(17,40): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(17,27): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(17,14): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(20,56): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(20,42): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(20,29): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(20,17): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(43,67): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(43,67): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(43,110): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\PauseMenu\PauseMenu.cpp(43,110): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+  SettingsMenu.cpp
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(16,52): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(16,38): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(16,26): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(16,15): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(35,67): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(35,67): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(35,110): warning C4838: a conversão de 'float' em 'int' requer uma conversão de restrição
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Menu\SettingsMenu\SettingsMenu.cpp(35,110): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+  Gerando Código...
   JumpKing1.vcxproj -> C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\x64\Debug\JumpKing1.exe

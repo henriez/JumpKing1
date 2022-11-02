@@ -14,16 +14,16 @@ void MainMenu::init() {
 	SDL_DisplayMode dm;
 	SDL_GetCurrentDisplayMode(0, &dm);
 
-	start.set(0.75 * dm.w, 0.1 * dm.w, 250, 125);
+	start.set(0.75 * dm.w, 0.1 * dm.w, 0.13 * dm.w, 0.115*dm.h);
 	start.setTex("Assets/Buttons/New Game Button.png");
 
-	settings.set(0.75 * dm.w, 0.2 * dm.w, 250, 125);
+	settings.set(0.75 * dm.w, 0.2 * dm.w, 0.13 * dm.w, 0.115 * dm.h);
 	settings.setTex("Assets/Buttons/Options Button.png");
 
-	leaderboard.set(0.75 * dm.w, 0.3 * dm.w, 250, 125);
+	leaderboard.set(0.75 * dm.w, 0.3 * dm.w, 0.13 * dm.w, 0.115 * dm.h);
 	leaderboard.setTex("Assets/Buttons/Button Leaderboard.png");
 
-	quit.set(0.1 * dm.w, 0.8 * dm.h, 250, 125);
+	quit.set(0.1 * dm.w, 0.8 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	quit.setTex("Assets/Buttons/Exit Button.png");
 
 	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");
