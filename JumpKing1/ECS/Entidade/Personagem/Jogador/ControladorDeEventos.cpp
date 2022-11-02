@@ -49,5 +49,14 @@ void ControladorDeEventos::atualizar() {
 		}
 	}
 
+	if (Jogo::evento.type == SDL_KEYDOWN) {
+		switch (Jogo::evento.key.keysym.sym) {
+		case SDLK_p:
+			std::cout << jogador->getComponente<ComponenteTransform>()->posicao.x << " " << jogador->getComponente<ComponenteTransform>()->posicao.y << std::endl;
+		default:
+			break;
+		}
+	}
+
 	GerenciadorDeColisao::colisao_jogador1();
 }

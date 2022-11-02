@@ -3,6 +3,7 @@
 
 class Jogador;
 class TileMap;
+class InimigoTipo1;
 
 class GerenciadorDeColisao
 {
@@ -15,6 +16,7 @@ public:
 	static void setTileMap(TileMap* tmap);
 
 	static void colisao_jogador1();
+	static void colisao_inimigo1(InimigoTipo1* in1);
 	//void colisao_jogador2();
 	//static void colisao_inimigos();
 

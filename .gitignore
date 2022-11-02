@@ -42,3 +42,11 @@ JumpKing1/x64/Debug/vc143.pdb
 JumpKing1/x64/Debug/Vector2D.obj
 x64/Debug/JumpKing1.exe
 x64/Debug/JumpKing1.pdb
+*.obj
+*.ilk
+*.log
+*.tlog
+*.idb
+*.pdb
+*.exe
+*.pdb

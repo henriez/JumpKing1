@@ -35,11 +35,11 @@ void Jogador::atualizar() {
 	getComponente<ComponenteColisao>()->setPos(transform->posicao.x, transform->posicao.y);
 
 	setGround(false);
-	controladorEventos.atualizar();
 	transform->posicao.x += transform->velocidade.x * speed;
 	transform->posicao.y += transform->velocidade.y * speed;
 	if (transform->velocidade.y < -maxSpeed) transform->velocidade.y = -maxSpeed;
 	else if (transform->velocidade.y > maxSpeed) transform->velocidade.y = maxSpeed; //velocidade terminal para queda
+	controladorEventos.atualizar();
 }
 
 void Jogador::setGround(const bool inGround) {

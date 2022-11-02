@@ -38,9 +38,15 @@ void Fase::inicializar(const int id) {
 		listaEntidades.addEntidade(static_cast<Entidade*>(tmp));
 	}
 	*/
-	InimigoTipo1* en1 = new InimigoTipo1;
-	en1->getComponente<ComponenteTransform>()->posicao.x = 164;
-	en1->getComponente<ComponenteTransform>()->posicao.y = 6200;
+	InimigoTipo1* en1T1 = new InimigoTipo1;
+	en1T1->getComponente<ComponenteTransform>()->posicao.x = 164;
+	en1T1->getComponente<ComponenteTransform>()->posicao.y = 6200;
+	listaEntidades.addEntidade(static_cast<Entidade*>(en1T1));
+
+	InimigoTipo1* en2T1 = new InimigoTipo1;
+	en2T1->getComponente<ComponenteTransform>()->posicao.x = 1404;
+	en2T1->getComponente<ComponenteTransform>()->posicao.y = 5984;
+	listaEntidades.addEntidade(static_cast<Entidade*>(en2T1));
 
 	InimigoTipo2* en2 = new InimigoTipo2;
 	InimigoTipo3* en3 = new InimigoTipo3;
@@ -48,7 +54,6 @@ void Fase::inicializar(const int id) {
 
 
 	listaEntidades.addEntidade(static_cast<Entidade*>(jogador));
-	listaEntidades.addEntidade(static_cast<Entidade*>(en1));
 	listaEntidades.addEntidade(static_cast<Entidade*>(en2));
 	listaEntidades.addEntidade(static_cast<Entidade*>(en3));
 	listaEntidades.addEntidade(static_cast<Entidade*>(boss));

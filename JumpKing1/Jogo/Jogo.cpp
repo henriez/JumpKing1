@@ -30,6 +30,7 @@ void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela,
 	menu.pause.init();
 	menu.settings.init();
 	mainMenu();
+	srand(time(NULL));
 }
 
 void Jogo::mainMenu() {

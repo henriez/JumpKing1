@@ -1,5 +1,9 @@
+#include <cstdlib>
 #include "InimigoTipo1.h"
+#include "../../Jogo/Fase/Mapa/Mapa.h"
+#include "../../Jogo/Fase/Mapa/TileMap/TileMap.h"
 #include "../../ECS/Gerenciador/GerenciadorDeCamera.h"
+#include "../../ECS/Gerenciador/GerenciadorDeColisao.h"
 
 #define SCALE 1.5
 #define ATTACKING 0
@@ -8,9 +12,10 @@
 #define IDLE 3
 #define HIT 4
 
-InimigoTipo1::InimigoTipo1() {
-	sprite = { 0, 0, 64, 64 };
+InimigoTipo1::InimigoTipo1() : speed(1), maxSpeed(4) {
+	sprite = { 0, 0, 42, 48 };
 	flip = false;
+	onGround = false;
 
 	addComponente<ComponenteColisao>();
 	addComponente<ComponenteSaude>();
@@ -19,20 +24,34 @@ InimigoTipo1::InimigoTipo1() {
 	getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/Enemies/Skeleton.png");
 
 	ComponenteTransform* transform = getComponente<ComponenteTransform>();
-	transform->velocidade.x = 0;
+	transform->velocidade.x = 2 * (rand() & 0x01) - 1;
 	transform->velocidade.y = 0;
 	transform->posicao.x = 0;
 	transform->posicao.y = 0;
 
 	getComponente<ComponenteColisao>()->set(transform->posicao.x, transform->posicao.y, sprite.w * SCALE, sprite.h * SCALE);
+	if (transform->velocidade.x == -1) { flip = true; }
 }
 
 InimigoTipo1::~InimigoTipo1() {}
+
+void InimigoTipo1::setGround(const bool inGround) {
+	onGround = inGround;
+}
+
+bool InimigoTipo1::inGround() const {
+	return onGround;
+}
 
 void InimigoTipo1::atualizar() {
 	ComponenteTransform* transform = getComponente<ComponenteTransform>();
 	getComponente<ComponenteColisao>()->setPos(transform->posicao.x, transform->posicao.y);
 
+	transform->posicao.x += transform->velocidade.x * speed;
+	transform->posicao.y += transform->velocidade.y * speed;
+	if (transform->velocidade.y < -maxSpeed) transform->velocidade.y = -maxSpeed;
+	else if (transform->velocidade.y > maxSpeed) transform->velocidade.y = maxSpeed;
+	GerenciadorDeColisao::colisao_inimigo1(this);
 	// if (collide || end platform) { side = false; switch direction;}
 
 }
@@ -41,6 +60,5 @@ void InimigoTipo1::render() {
 	SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
 	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
 	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
-	flip = true;
 	getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
 }
