@@ -19,5 +19,6 @@ private:
 	bool flip;
 	const int speed;
 	const int maxSpeed;
+	const int fSpeed;
 	bool onGround;
 };

@@ -12,8 +12,8 @@
 #define IDLE 3
 #define HIT 4
 
-InimigoTipo1::InimigoTipo1() : speed(1), maxSpeed(4) {
-	sprite = { 0, 0, 42, 48 };
+InimigoTipo1::InimigoTipo1() : speed(1), maxSpeed(4), fSpeed(90) {
+	sprite = { 0, 64 * WALKING, 42, 49 };
 	flip = false;
 	onGround = false;
 
@@ -29,7 +29,7 @@ InimigoTipo1::InimigoTipo1() : speed(1), maxSpeed(4) {
 	transform->posicao.x = 0;
 	transform->posicao.y = 0;
 
-	getComponente<ComponenteColisao>()->set(transform->posicao.x, transform->posicao.y, sprite.w * SCALE, sprite.h * SCALE);
+	getComponente<ComponenteColisao>()->set(transform->posicao.x, transform->posicao.y, sprite.w * SCALE, (sprite.h - 1) * SCALE);
 	if (transform->velocidade.x == -1) { flip = true; }
 }
 
@@ -57,8 +57,11 @@ void InimigoTipo1::atualizar() {
 }
 
 void InimigoTipo1::render() {
+	if (getComponente<ComponenteTransform>()->velocidade.x == -1) { flip = true; }
+	else { flip = false; }
 	SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
 	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
 	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
+	sprite.x = 64 * static_cast<int>((SDL_GetTicks() / fSpeed) % 12);
 	getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
 }
