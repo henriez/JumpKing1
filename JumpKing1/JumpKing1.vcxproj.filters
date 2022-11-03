@@ -68,12 +68,6 @@
     <ClCompile Include="Menu\SettingsMenu\SettingsMenu.cpp">
       <Filter>Menu\SettingsMenu</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Entidade\Personagem\Jogador2\ControladorDeEventos2.cpp">
-      <Filter>ECS\Entidade\Personagem\Jogador2</Filter>
-    </ClCompile>
-    <ClCompile Include="ECS\Entidade\Personagem\Jogador2\Jogador2.cpp">
-      <Filter>ECS\Entidade\Personagem\Jogador2</Filter>
-    </ClCompile>
     <ClCompile Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.cpp">
       <Filter>ECS\Entidade\Obstaculo\Espinhos</Filter>
     </ClCompile>
@@ -165,9 +159,6 @@
     </Filter>
     <Filter Include="ECS\Entidade\Personagem\Jogador">
       <UniqueIdentifier>{8a72a03b-1f08-400b-9ab8-52379ab0fa5d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ECS\Entidade\Personagem\Jogador2">
-      <UniqueIdentifier>{a76cc736-8791-465f-8c38-77f7283e90d7}</UniqueIdentifier>
     </Filter>
     <Filter Include="ECS\Entidade\Projétil">
       <UniqueIdentifier>{39efc323-f8ed-48e9-a9c5-dac49a9da678}</UniqueIdentifier>
@@ -284,12 +275,6 @@
     </ClInclude>
     <ClInclude Include="Menu\SettingsMenu\SettingsMenu.h">
       <Filter>Menu\SettingsMenu</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\Entidade\Personagem\Jogador2\ControladorDeEventos2.h">
-      <Filter>ECS\Entidade\Personagem\Jogador2</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\Entidade\Personagem\Jogador2\Jogador2.h">
-      <Filter>ECS\Entidade\Personagem\Jogador2</Filter>
     </ClInclude>
     <ClInclude Include="ECS\Entidade\Obstaculo\Obstaculo.h">
       <Filter>ECS\Entidade\Obstaculo</Filter>

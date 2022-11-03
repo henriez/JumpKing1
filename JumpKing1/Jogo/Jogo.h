@@ -29,7 +29,6 @@ public:
 private:
 	void inicializar(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia);
 	bool rodando;
-	static Vector2D dimensoesJanela;
 	
 	Menu menu;
 

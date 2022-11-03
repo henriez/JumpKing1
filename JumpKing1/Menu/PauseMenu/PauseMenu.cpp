@@ -14,10 +14,10 @@ void PauseMenu::init() {
 	SDL_DisplayMode dm;
 	SDL_GetCurrentDisplayMode(0, &dm);
 
-	quit.set(0.1* dm.w, 0.45 * dm.h, 250, 125);
+	quit.set(0.1* dm.w, 0.45 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	quit.setTex("Assets/Buttons/Exit Button.png");
 
-	resume.set(0.35* dm.w, 0.3 * dm.h, 250, 125);
+	resume.set(0.35* dm.w, 0.3 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	resume.setTex("Assets/Buttons/Button Resume.png");
 
 	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");

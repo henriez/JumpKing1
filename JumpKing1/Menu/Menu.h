@@ -12,6 +12,14 @@ public:
 	Menu() {}
 	~Menu() {}
 
+	void init() {
+		start.init();
+		pause.init();
+		settings.init();
+		leaderboard.init();
+		level.init();
+	}
+
 	MainMenu start;
 	PauseMenu pause;
 	SettingsMenu settings;

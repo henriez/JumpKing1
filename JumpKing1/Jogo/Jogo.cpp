@@ -24,11 +24,7 @@ void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela,
 
 	GerenciadorGrafico::init(nomeJanela, largJanela, alturaJanela, telaCheia);
 
-	menu.start.init();
-	menu.leaderboard.init();
-	menu.level.init();
-	menu.pause.init();
-	menu.settings.init();
+	menu.init();
 	mainMenu();
 	srand(time(NULL));
 }
