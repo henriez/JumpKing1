@@ -24,7 +24,7 @@ TileMap::~TileMap() {
 	clear();
 }
 
-void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_colisao, const char* cam_espinhos, int tilesW, int tilesH) {
+void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_colisao, const char* cam_espinhos, const char* cam_lava, int tilesW, int tilesH) {
 
 	GerenciadorDeColisao::setTileMap(this);
 
@@ -160,6 +160,46 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 	}
 	mapFile.close();
 
+	mapFile.open(cam_lava);
+	for (int i = 0; i < nTiles.y; i++) {
+		for (int j = 0; j < nTiles.x; j++) {
+			algarismos[0] = algarismos[1] = algarismos[2] = alg = 0;
+			mapFile.get(c);
+
+			if (c == '-') {
+				mapFile.ignore();
+				mapFile.ignore();
+				continue;
+			}
+			if (j == nTiles.x - 1)
+				while (c != '\n') {
+					algarismos[alg++] = atoi(&c);
+					mapFile.get(c);
+				}
+			else {
+				while (c != ',') {
+					algarismos[alg++] = atoi(&c);
+					mapFile.get(c);
+				}
+			}
+			// ao final do loop alg será 2 3 (depende do n de algarismos do id)
+			if (alg == 3)
+				id = algarismos[0] * 100 + algarismos[1] * 10 + algarismos[2];
+			else if (alg == 2)
+				id = algarismos[0] * 10 + algarismos[1];
+			else //alg == 1
+				id = algarismos[0];
+
+			srcY = (id / largura) * tamanhoTile;
+			srcX = (id % largura) * tamanhoTile;
+
+			Lava* lava = new Lava; //TROCAR PARA CLASSE LAVA
+			lava->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
+			camada_lava.push_back(lava);
+		}
+	}
+	mapFile.close();
+
 	mapFile.open(cam_colisao);
 	for (int i = 0; i < nTiles.y; i++) {
 		for (int j = 0; j < nTiles.x; j++) {
@@ -183,6 +223,8 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 				hitbox_plataformas.push_back(tile);
 			else if (id == 2)
 				hitbox_espinhos.push_back(tile);
+			else if (id == 3)
+				hitbox_lavas.push_back(tile);
 		}
 	}
 	mapFile.close();
@@ -206,6 +248,12 @@ void TileMap::atualiza() {
 		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
 			t->setScreen(true);
 	}
+	
+	for (auto& t : camada_lava) {
+		t->setScreen(false);
+		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
+			t->setScreen(true);
+	}
 
 	for (auto& t : hitbox_plataformas) {
 		t->setScreen(false);
@@ -214,6 +262,12 @@ void TileMap::atualiza() {
 	}
 
 	for (auto& t : hitbox_espinhos) {
+		t->setScreen(false);
+		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
+			t->setScreen(true);
+	}
+	
+	for (auto& t : hitbox_lavas) {
 		t->setScreen(false);
 		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
 			t->setScreen(true);
@@ -234,12 +288,20 @@ void TileMap::render() {
 	for (auto& t : camada_espinhos)
 		if (t->isOnScreen())
 			t->render();
+	
+	for (auto& t : camada_lava)
+		if (t->isOnScreen())
+			t->render();
 
 	for (auto& t : hitbox_plataformas)
 		if (t->isOnScreen())
 			t->renderHitbox();
 
 	for (auto& t : hitbox_espinhos)
+		if (t->isOnScreen())
+			t->renderHitbox();
+
+	for (auto& t : hitbox_lavas)
 		if (t->isOnScreen())
 			t->renderHitbox();
 			

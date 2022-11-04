@@ -83,6 +83,9 @@
     <ClCompile Include="Menu\GameOverMenu\GameOverMenu.cpp">
       <Filter>Menu\GameOverMenu</Filter>
     </ClCompile>
+    <ClCompile Include="ECS\Entidade\Obstaculo\Lava\Lava.cpp">
+      <Filter>ECS\Entidade\Obstaculo\Lava</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Jogo">
@@ -192,6 +195,9 @@
     </Filter>
     <Filter Include="Menu\GameOverMenu">
       <UniqueIdentifier>{67ca6f47-a51a-418e-8815-303944d99acc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Obstaculo\Lava">
+      <UniqueIdentifier>{ed246e23-bcd5-45e2-a3e8-37469d4309ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +315,9 @@
     </ClInclude>
     <ClInclude Include="Menu\GameOverMenu\GameOverMenu.h">
       <Filter>Menu\GameOverMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Obstaculo\Lava\Lava.h">
+      <Filter>ECS\Entidade\Obstaculo\Lava</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

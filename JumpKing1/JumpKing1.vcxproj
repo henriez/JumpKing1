@@ -146,6 +146,7 @@
     <ClCompile Include="ECS\Componentes\Vector2D\Vector2D.cpp" />
     <ClCompile Include="ECS\Entidade\ListaDeEntidades\ListaDeEntidades.cpp" />
     <ClCompile Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.cpp" />
+    <ClCompile Include="ECS\Entidade\Obstaculo\Lava\Lava.cpp" />
     <ClCompile Include="ECS\Entidade\Obstaculo\Tile\Tile.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo1\InimigoTipo1.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="ECS\Entidade\Entidade.h" />
     <ClInclude Include="ECS\Entidade\ListaDeEntidades\ListaDeEntidades.h" />
     <ClInclude Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.h" />
+    <ClInclude Include="ECS\Entidade\Obstaculo\Lava\Lava.h" />
     <ClInclude Include="ECS\Entidade\Obstaculo\Obstaculo.h" />
     <ClInclude Include="ECS\Entidade\Obstaculo\Tile\Tile.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.h" />
