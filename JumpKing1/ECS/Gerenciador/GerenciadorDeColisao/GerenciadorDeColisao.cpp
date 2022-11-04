@@ -114,10 +114,9 @@ void GerenciadorDeColisao::colisao_jogador1() {
 		}
 	}
 
-	//if (!jogador1->isAlive()) { //morreu -> encerra fase
-		//fase->clear();
-		//jogo->mainMenu();
-	//}
+	if (!jogador1->isAlive()) { //morreu -> encerra fase
+		fase->gameOver();
+	}
 }
 
 void GerenciadorDeColisao::colisao_inimigo1(InimigoTipo1* in1) {

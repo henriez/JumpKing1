@@ -24,6 +24,7 @@ void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela,
 	SDL_Init(SDL_INIT_EVERYTHING);
 
 	GerenciadorGrafico::init(nomeJanela, largJanela, alturaJanela, telaCheia);
+	fase->setJogo(this);
 
 	menu.init();
 	mainMenu();
@@ -74,6 +75,24 @@ void Jogo::pauseMenu() {
 	case BUTTON_RESUME:
 		atualizar();
 		break;
+	case BUTTON_QUIT:
+		fase->clear();
+		mainMenu();
+		break;
+	default:
+		break;
+	}
+}void Jogo::gameOverMenu() {
+
+	menu.gameOver.reset();
+	int click = menu.gameOver.update();
+
+	while (click == NO_BUTTON_CLICKED) {
+		GerenciadorGrafico::renderMenu(menu.gameOver);
+		click = menu.gameOver.update();
+	}
+
+	switch (click) { //apos algum clique
 	case BUTTON_QUIT:
 		fase->clear();
 		mainMenu();

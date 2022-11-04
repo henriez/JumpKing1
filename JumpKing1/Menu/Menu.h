@@ -3,6 +3,7 @@
 #include "../Ente.h"
 #include "MainMenu/MainMenu.h"
 #include "PauseMenu/PauseMenu.h"
+#include "GameOverMenu/GameOverMenu.h"
 #include "SettingsMenu/SettingsMenu.h"
 #include "LeaderboardMenu/LeaderboardMenu.h"
 #include "LevelMenu/LevelMenu.h"
@@ -18,6 +19,7 @@ public:
 		settings.init();
 		leaderboard.init();
 		level.init();
+		gameOver.init();
 	}
 
 	MainMenu start;
@@ -25,4 +27,5 @@ public:
 	SettingsMenu settings;
 	LeaderboardMenu leaderboard;
 	LevelMenu level;
+	GameOverMenu gameOver;
 };

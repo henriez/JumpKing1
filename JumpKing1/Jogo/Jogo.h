@@ -19,6 +19,7 @@ public:
 	bool executando();
 
 	void mainMenu();
+	void gameOverMenu();
 	void pauseMenu();
 	void settingsMenu();
 	void leaderboardMenu();

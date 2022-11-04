@@ -8,6 +8,7 @@
 #include "../../../Menu/LevelMenu/LevelMenu.h"
 #include "../../../Menu/MainMenu/MainMenu.h"
 #include "../../../Menu/PauseMenu/PauseMenu.h"
+#include "../../../Menu/GameOverMenu/GameOverMenu.h"
 #include "../../../Menu/SettingsMenu/SettingsMenu.h"
 
 #include "../../../Jogo/Jogo.h"
@@ -57,7 +58,6 @@ void GerenciadorGrafico::init_tileMap() {
 void GerenciadorGrafico::setListaDeEntidades(ListaDeEntidades* lista) {
 	entidades = lista;
 }
-
 
 SDL_Texture* GerenciadorGrafico::LoadTexture(const char* fileName){
 	SDL_Texture* tex = IMG_LoadTexture(renderer, fileName);
@@ -123,6 +123,13 @@ void GerenciadorGrafico::renderMenu(PauseMenu& pause) {
 	SDL_RenderClear(renderer);
 	SDL_PollEvent(&Jogo::evento);
 	pause.render();
+	SDL_RenderPresent(renderer);
+}
+
+void GerenciadorGrafico::renderMenu(GameOverMenu& gameover) {
+	SDL_RenderClear(renderer);
+	SDL_PollEvent(&Jogo::evento);
+	gameover.render();
 	SDL_RenderPresent(renderer);
 }
 

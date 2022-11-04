@@ -80,6 +80,9 @@
     <ClCompile Include="ECS\Gerenciador\GerenciadorGrafico\GerenciadorGrafico.cpp">
       <Filter>ECS\Gerenciador\GerenciadorGrafico</Filter>
     </ClCompile>
+    <ClCompile Include="Menu\GameOverMenu\GameOverMenu.cpp">
+      <Filter>Menu\GameOverMenu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Jogo">
@@ -186,6 +189,9 @@
     </Filter>
     <Filter Include="ECS\Gerenciador\GerenciadorGrafico">
       <UniqueIdentifier>{84f7373f-3165-448b-8c25-795e993a265a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\GameOverMenu">
+      <UniqueIdentifier>{67ca6f47-a51a-418e-8815-303944d99acc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +306,9 @@
     </ClInclude>
     <ClInclude Include="ECS\Gerenciador\GerenciadorGrafico\GerenciadorGrafico.h">
       <Filter>ECS\Gerenciador\GerenciadorGrafico</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu\GameOverMenu\GameOverMenu.h">
+      <Filter>Menu\GameOverMenu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

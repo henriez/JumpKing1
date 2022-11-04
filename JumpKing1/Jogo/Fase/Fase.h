@@ -11,6 +11,7 @@ public:
 	~Fase();
 
 	void inicializar(const int id);
+	void setJogo(Jogo* jg);
 	void atualizar();
 	void render();
 	void clear();
@@ -19,4 +20,5 @@ private:
 	ListaDeEntidades listaEntidades;
 	Mapa* mapa;
 	bool player_is_alive;
+	Jogo* jogo;
 };

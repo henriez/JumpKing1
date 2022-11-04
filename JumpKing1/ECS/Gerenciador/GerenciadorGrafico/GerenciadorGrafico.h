@@ -5,6 +5,7 @@ class LeaderboardMenu;
 class LevelMenu;
 class MainMenu;
 class PauseMenu;
+class GameOverMenu;
 class SettingsMenu;
 class Fase;
 class Vector2D;
@@ -36,6 +37,7 @@ public:
 	static void renderMenu(LevelMenu& level);
 	static void renderMenu(MainMenu& start);
 	static void renderMenu(PauseMenu& pause);
+	static void renderMenu(GameOverMenu& gameover);
 	static void renderMenu(SettingsMenu& settings);
 private:
 	static SDL_Texture* tileset;

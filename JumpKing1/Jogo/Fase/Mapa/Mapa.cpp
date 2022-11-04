@@ -54,7 +54,6 @@ void Mapa::inicializar(int id) {
 
 void Mapa::atualizar() {
 	if (!onBossRoom) {
-		GerenciadorDeCamera::Atualiza();
 		tileMap.atualiza();
 		SDL_Rect hitbox = GerenciadorDeColisao::getJogador1()->getComponente<ComponenteColisao>()->getColisor();
 		if (GerenciadorDeColisao::AABB(fim, hitbox)) {

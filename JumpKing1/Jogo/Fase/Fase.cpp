@@ -5,6 +5,7 @@
 Fase::Fase() {
 	mapa = nullptr;
 	player_is_alive = true;
+	jogo = nullptr;
 }
 
 Fase::~Fase() {
@@ -18,6 +19,7 @@ void Fase::inicializar(const int id) {
 	GerenciadorDeColisao::setFase(this);
 	mapa = new Mapa;
 	Jogador* jogador = new Jogador;
+	player_is_alive = true;
 	GerenciadorDeCamera::setJogador(jogador);
 	GerenciadorDeColisao::setJogador(jogador);
 	switch (id) {
@@ -79,17 +81,26 @@ void Fase::inicializar(const int id) {
 	mapa->inicializar(id);
 }
 
+void Fase::setJogo(Jogo* jg) {
+	jogo = jg;
+}
 
 void Fase::atualizar() {
 	if (player_is_alive) {
 		listaEntidades.atualizar();
-		if (player_is_alive) {
-			if (mapa != nullptr)
-				mapa->atualizar();
+		if (mapa != nullptr) {
+			mapa->atualizar();
 		}
+		GerenciadorDeColisao::colisao_jogador1();
+		GerenciadorDeCamera::Atualiza();
+		
 	}
-	GerenciadorDeColisao::colisao_jogador1();
-	GerenciadorDeCamera::Atualiza();
+	else {
+		clear();
+		jogo->gameOverMenu();
+	}
+	//else Jogo::evento.key.keysym.sym = SDLK_ESCAPE; //simula menu de pause
+
 }
 
 void Fase::render() {
@@ -103,6 +114,6 @@ void Fase::clear() {
 }
 
 void Fase::gameOver() {
-	clear();
+	//clear();
 	player_is_alive = false;
 }

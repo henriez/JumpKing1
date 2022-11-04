@@ -165,6 +165,7 @@
     <ClCompile Include="Jogo\Jogo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu\Botao\Botao.cpp" />
+    <ClCompile Include="Menu\GameOverMenu\GameOverMenu.cpp" />
     <ClCompile Include="Menu\LeaderboardMenu\LeaderboardMenu.cpp" />
     <ClCompile Include="Menu\LevelMenu\LevelMenu.cpp" />
     <ClCompile Include="Menu\MainMenu\MainMenu.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Jogo\HUD\HUD.h" />
     <ClInclude Include="Jogo\Jogo.h" />
     <ClInclude Include="Menu\Botao\Botao.h" />
+    <ClInclude Include="Menu\GameOverMenu\GameOverMenu.h" />
     <ClInclude Include="Menu\LeaderboardMenu\LeaderboardMenu.h" />
     <ClInclude Include="Menu\LevelMenu\LevelMenu.h" />
     <ClInclude Include="Menu\MainMenu\MainMenu.h" />
