@@ -39,7 +39,7 @@ void Fase::inicializar(const int id) {
 	// Escolher lugares aleatorios e criar mais inimigos. Ex:
 	/*
 	for (qtd = 0; qtd < qtdMax; qtd++) {
-		InimigoTipo1* tmp = new InimigoTipo1;
+		Esqueleto* tmp = new Esqueleto;
 		tmp->getComponente<ComponenteTransform>()->posicao.x = lugarX;
 		tmp->getComponente<ComponenteTransform>()->posicao.y = lugarY;
 		listaEntidades.addEntidade(static_cast<Entidade*>(tmp));
@@ -47,35 +47,33 @@ void Fase::inicializar(const int id) {
 	*/
 	
 	if (id == 1) {
-		InimigoTipo1* en1T1 = new InimigoTipo1;
+		Esqueleto* en1T1 = new Esqueleto;
 		en1T1->getComponente<ComponenteTransform>()->posicao.x = 456;
 		en1T1->getComponente<ComponenteTransform>()->posicao.y = 6240;
 		listaEntidades.addEntidade(static_cast<Entidade*>(en1T1));
 
-		InimigoTipo1* en2T1 = new InimigoTipo1;
+		Esqueleto* en2T1 = new Esqueleto;
 		en2T1->getComponente<ComponenteTransform>()->posicao.x = 160;
 		en2T1->getComponente<ComponenteTransform>()->posicao.y = 5632.8;
 		listaEntidades.addEntidade(static_cast<Entidade*>(en2T1));
 
-		InimigoTipo1* en3T1 = new InimigoTipo1;
+		Esqueleto* en3T1 = new Esqueleto;
 		en3T1->getComponente<ComponenteTransform>()->posicao.x = 1064;
 		en3T1->getComponente<ComponenteTransform>()->posicao.y = 5358;
 		listaEntidades.addEntidade(static_cast<Entidade*>(en3T1));
 
-		InimigoTipo1* en4T1 = new InimigoTipo1;
+		Esqueleto* en4T1 = new Esqueleto;
 		en4T1->getComponente<ComponenteTransform>()->posicao.x = 1500;
 		en4T1->getComponente<ComponenteTransform>()->posicao.y = 5984;
 		listaEntidades.addEntidade(static_cast<Entidade*>(en4T1));
 	}
 
-	InimigoTipo2* en2 = new InimigoTipo2;
-	InimigoTipo3* en3 = new InimigoTipo3;
+	Zumbi* zumbi = new Zumbi;
 	Chefe* boss = new Chefe;
 
 
 	listaEntidades.addEntidade(static_cast<Entidade*>(jogador));
-	listaEntidades.addEntidade(static_cast<Entidade*>(en2));
-	listaEntidades.addEntidade(static_cast<Entidade*>(en3));
+	listaEntidades.addEntidade(static_cast<Entidade*>(zumbi));
 	listaEntidades.addEntidade(static_cast<Entidade*>(boss));
 
 	mapa->inicializar(id);

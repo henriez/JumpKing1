@@ -3,9 +3,8 @@
 #include <vector>
 
 #include "../Personagem/Jogador/Jogador.h"
-#include "../Personagem/Inimigo/InimigoTipo1/InimigoTipo1.h"
-#include "../Personagem/Inimigo/InimigoTipo2/InimigoTipo2.h"
-#include "../Personagem/Inimigo/InimigoTipo3/InimigoTipo3.h"
+#include "../Personagem/Inimigo/Esqueleto/Esqueleto.h"
+#include "../Personagem/Inimigo/Zumbi/Zumbi.h"
 #include "../Personagem/Inimigo/Chefe/Chefe.h"
 
 class ListaDeEntidades {

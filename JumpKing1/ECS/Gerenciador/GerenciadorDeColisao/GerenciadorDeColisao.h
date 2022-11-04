@@ -3,7 +3,7 @@
 
 class Jogador;
 class TileMap;
-class InimigoTipo1;
+class Esqueleto;
 class Fase;
 class Jogo;
 
@@ -20,7 +20,7 @@ public:
 	static void setTileMap(TileMap* tmap);
 
 	static void colisao_jogador1();
-	static void colisao_inimigo1(InimigoTipo1* in1);
+	static void colisao_inimigo1(Esqueleto* in1);
 
 	static bool AABB(SDL_Rect A, SDL_Rect B);
 private:

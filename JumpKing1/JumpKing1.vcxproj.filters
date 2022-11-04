@@ -26,15 +26,6 @@
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.cpp">
       <Filter>ECS\Entidade\Personagem\Inimigo\Chefe</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo1\InimigoTipo1.cpp">
-      <Filter>ECS\Entidade\Personagem\Inimigo\InimigoTipo1</Filter>
-    </ClCompile>
-    <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo2\InimigoTipo2.cpp">
-      <Filter>ECS\Entidade\Personagem\Inimigo\InimigoTipo2</Filter>
-    </ClCompile>
-    <ClCompile Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3\InimigoTipo3.cpp">
-      <Filter>ECS\Entidade\Personagem\Inimigo\InimigoTipo3</Filter>
-    </ClCompile>
     <ClCompile Include="ECS\Entidade\Personagem\Jogador\ControladorDeEventos.cpp">
       <Filter>ECS\Entidade\Personagem\Jogador</Filter>
     </ClCompile>
@@ -85,6 +76,12 @@
     </ClCompile>
     <ClCompile Include="ECS\Entidade\Obstaculo\Lava\Lava.cpp">
       <Filter>ECS\Entidade\Obstaculo\Lava</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp">
+      <Filter>ECS\Entidade\Personagem\Inimigo\Esqueleto</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Zumbi\Zumbi.cpp">
+      <Filter>ECS\Entidade\Personagem\Inimigo\Zumbi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,15 +151,6 @@
     <Filter Include="ECS\Entidade\Personagem\Inimigo\Chefe">
       <UniqueIdentifier>{bc8c93d8-5821-4005-88ff-f5998fdcff61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo1">
-      <UniqueIdentifier>{a0bf0055-cbff-4858-a30d-2b7ee2a46484}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo2">
-      <UniqueIdentifier>{f0492d3b-c54e-4206-953d-6684044cc226}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3">
-      <UniqueIdentifier>{3338673c-e0a0-4e25-8905-5cf7d62fa89e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ECS\Entidade\Personagem\Jogador">
       <UniqueIdentifier>{8a72a03b-1f08-400b-9ab8-52379ab0fa5d}</UniqueIdentifier>
     </Filter>
@@ -198,6 +186,12 @@
     </Filter>
     <Filter Include="ECS\Entidade\Obstaculo\Lava">
       <UniqueIdentifier>{ed246e23-bcd5-45e2-a3e8-37469d4309ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Personagem\Inimigo\Esqueleto">
+      <UniqueIdentifier>{af30e54a-f985-4bd9-8859-50eec13105df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Personagem\Inimigo\Zumbi">
+      <UniqueIdentifier>{629eb77f-4e2a-473b-9b18-83b7a2388bac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -251,15 +245,6 @@
     </ClInclude>
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.h">
       <Filter>ECS\Entidade\Personagem\Inimigo\Chefe</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo1\InimigoTipo1.h">
-      <Filter>ECS\Entidade\Personagem\Inimigo\InimigoTipo1</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo2\InimigoTipo2.h">
-      <Filter>ECS\Entidade\Personagem\Inimigo\InimigoTipo2</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\InimigoTipo3\inimigoTipo3.h">
-      <Filter>ECS\Entidade\Personagem\Inimigo\InimigoTipo3</Filter>
     </ClInclude>
     <ClInclude Include="ECS\Entidade\Personagem\Jogador\ControladorDeEventos.h">
       <Filter>ECS\Entidade\Personagem\Jogador</Filter>
@@ -318,6 +303,12 @@
     </ClInclude>
     <ClInclude Include="ECS\Entidade\Obstaculo\Lava\Lava.h">
       <Filter>ECS\Entidade\Obstaculo\Lava</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.h">
+      <Filter>ECS\Entidade\Personagem\Inimigo\Esqueleto</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Zumbi\Zumbi.h">
+      <Filter>ECS\Entidade\Personagem\Inimigo\Zumbi</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

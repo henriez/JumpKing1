@@ -4,7 +4,7 @@
 #include "../../../Jogo/Fase/Mapa/Mapa.h"
 #include "../../../Jogo/Fase/Mapa/TileMap/TileMap.h"
 #include "../../Entidade/Personagem/Jogador/Jogador.h"
-#include "../../Entidade/Personagem/Inimigo/InimigoTipo1/InimigoTipo1.h"
+#include "../../Entidade/Personagem/Inimigo/Esqueleto/Esqueleto.h"
 
 TileMap* GerenciadorDeColisao::tilemap = nullptr;
 Jogador* GerenciadorDeColisao::jogador1 = nullptr;
@@ -161,7 +161,7 @@ void GerenciadorDeColisao::colisao_jogador1() {
 	}
 }
 
-void GerenciadorDeColisao::colisao_inimigo1(InimigoTipo1* in1) {
+void GerenciadorDeColisao::colisao_inimigo1(Esqueleto* in1) {
 	SDL_Rect initialhitbox = in1->getComponente<ComponenteColisao>()->getColisor();
 	SDL_Rect hitbox = initialhitbox;
 	SDL_Rect platHitbox = initialhitbox;
