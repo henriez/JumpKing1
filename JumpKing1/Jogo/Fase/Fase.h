@@ -14,8 +14,9 @@ public:
 	void atualizar();
 	void render();
 	void clear();
-	void init_BossRoom();
+	void gameOver();
 private:
 	ListaDeEntidades listaEntidades;
 	Mapa* mapa;
+	bool player_is_alive;
 };

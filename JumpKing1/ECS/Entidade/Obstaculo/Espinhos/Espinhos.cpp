@@ -1,6 +1,6 @@
 #include "Espinhos.h"
-#include "../../../Gerenciador/GerenciadorGrafico.h"
-#include "../../../Gerenciador/GerenciadorDeCamera.h"
+#include "../../../Gerenciador/GerenciadorGrafico/GerenciadorGrafico.h"
+#include "../../../Gerenciador/GerenciadorDeCamera/GerenciadorDeCamera.h"
 
 Espinhos::Espinhos() {
 	fonte = { 0,0,32,32 };

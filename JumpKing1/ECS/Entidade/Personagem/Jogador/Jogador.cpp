@@ -1,14 +1,12 @@
 #include "Jogador.h"
-#include "../../../Gerenciador/GerenciadorDeCamera.h"
-#include "../../../Gerenciador/GerenciadorDeColisao.h"
+#include "../../../Gerenciador/GerenciadorDeCamera/GerenciadorDeCamera.h"
+#include "../../../Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
 #include "../../../../Jogo/Jogo.h"
 #include "../../../../Jogo/Fase/Mapa/Mapa.h"
 
 Jogador::Jogador() : speed(8), maxSpeed(4) {
 	inicializar();
 	controladorEventos.setTransform(this);
-	GerenciadorDeCamera::setJogador(this);
-	GerenciadorDeColisao::setJogador(this);
 	onGround = false;
 }
 
@@ -28,6 +26,7 @@ void Jogador::inicializar(){
 	transform->posicao.y = 0; //inicializa na fase->inicializar(id)
 
 	getComponente<ComponenteColisao>()->set(transform->posicao.x, transform->posicao.y, 32, 32);
+	getComponente<ComponenteSaude>()->init(6);
 }
 
 void Jogador::atualizar() {
@@ -39,6 +38,8 @@ void Jogador::atualizar() {
 	transform->posicao.y += transform->velocidade.y * speed;
 	if (transform->velocidade.y < -maxSpeed) transform->velocidade.y = -maxSpeed;
 	else if (transform->velocidade.y > maxSpeed) transform->velocidade.y = maxSpeed; //velocidade terminal para queda
+
+	
 	controladorEventos.atualizar();
 }
 
@@ -57,4 +58,14 @@ void Jogador::render() {
 	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
 
 	getComponente<ComponenteSprite>()->render(posRect);
+}
+
+void Jogador::damage() {
+	getComponente<ComponenteSaude>()->damage();
+}
+
+bool Jogador::isAlive() {
+	if (getComponente<ComponenteSaude>()->atualiza() == DEAD)
+		return false;
+	return true;
 }

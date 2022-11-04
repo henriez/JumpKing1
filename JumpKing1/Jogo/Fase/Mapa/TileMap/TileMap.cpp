@@ -1,8 +1,8 @@
 #include "TileMap.h"
 #include "../../../Jogo.h"
-#include "../../../../ECS/Gerenciador/GerenciadorGrafico.h"
-#include "../../../../ECS/Gerenciador/GerenciadorDeColisao.h"
-#include "../../../../ECS/Gerenciador/GerenciadorDeCamera.h"
+#include "../../../../ECS/Gerenciador/GerenciadorGrafico/GerenciadorGrafico.h"
+#include "../../../../ECS/Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
+#include "../../../../ECS/Gerenciador/GerenciadorDeCamera/GerenciadorDeCamera.h"
 #include "../Mapa.h"
 
 #include <fstream>

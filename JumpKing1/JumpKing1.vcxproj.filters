@@ -44,12 +44,6 @@
     <ClCompile Include="ECS\Entidade\Projetil\Projetil.cpp">
       <Filter>ECS\Entidade\Projétil</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Gerenciador\GerenciadorDeCamera.cpp">
-      <Filter>ECS\Gerenciador</Filter>
-    </ClCompile>
-    <ClCompile Include="ECS\Gerenciador\GerenciadorGrafico.cpp">
-      <Filter>ECS\Gerenciador</Filter>
-    </ClCompile>
     <ClCompile Include="Menu\Botao\Botao.cpp">
       <Filter>Menu\Botao</Filter>
     </ClCompile>
@@ -71,14 +65,20 @@
     <ClCompile Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.cpp">
       <Filter>ECS\Entidade\Obstaculo\Espinhos</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Gerenciador\GerenciadorDeColisao.cpp">
-      <Filter>ECS\Gerenciador</Filter>
-    </ClCompile>
     <ClCompile Include="ECS\Entidade\Obstaculo\Tile\Tile.cpp">
       <Filter>ECS\Entidade\Obstaculo\Tile</Filter>
     </ClCompile>
     <ClCompile Include="Jogo\Fase\Boss_Room\Boss_Room.cpp">
       <Filter>Jogo\Fase\Boss_Room</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Gerenciador\GerenciadorDeCamera\GerenciadorDeCamera.cpp">
+      <Filter>ECS\Gerenciador\GerenciadorDeCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp">
+      <Filter>ECS\Gerenciador\GerenciadorDeColisao</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Gerenciador\GerenciadorGrafico\GerenciadorGrafico.cpp">
+      <Filter>ECS\Gerenciador\GerenciadorGrafico</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +178,15 @@
     <Filter Include="Jogo\Fase\Boss_Room">
       <UniqueIdentifier>{1b808523-6da1-48b9-8454-9823189a5585}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ECS\Gerenciador\GerenciadorDeCamera">
+      <UniqueIdentifier>{9cb3f927-e404-4891-95f9-84f5b77986df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Gerenciador\GerenciadorDeColisao">
+      <UniqueIdentifier>{ad8f92a4-7810-4e62-93eb-874bcb5aa48c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Gerenciador\GerenciadorGrafico">
+      <UniqueIdentifier>{84f7373f-3165-448b-8c25-795e993a265a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Jogo\Jogo.h">
@@ -249,12 +258,6 @@
     <ClInclude Include="ECS\Entidade\Projetil\Projetil.h">
       <Filter>ECS\Entidade\Projétil</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\Gerenciador\GerenciadorDeCamera.h">
-      <Filter>ECS\Gerenciador</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\Gerenciador\GerenciadorGrafico.h">
-      <Filter>ECS\Gerenciador</Filter>
-    </ClInclude>
     <ClInclude Include="Menu\Menu.h">
       <Filter>Menu</Filter>
     </ClInclude>
@@ -282,15 +285,21 @@
     <ClInclude Include="ECS\Entidade\Obstaculo\Espinhos\Espinhos.h">
       <Filter>ECS\Entidade\Obstaculo\Espinhos</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\Gerenciador\GerenciadorDeColisao.h">
-      <Filter>ECS\Gerenciador</Filter>
-    </ClInclude>
     <ClInclude Include="Ente.h" />
     <ClInclude Include="ECS\Entidade\Obstaculo\Tile\Tile.h">
       <Filter>ECS\Entidade\Obstaculo\Tile</Filter>
     </ClInclude>
     <ClInclude Include="Jogo\Fase\Boss_Room\Boss_Room.h">
       <Filter>Jogo\Fase\Boss_Room</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Gerenciador\GerenciadorDeCamera\GerenciadorDeCamera.h">
+      <Filter>ECS\Gerenciador\GerenciadorDeCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.h">
+      <Filter>ECS\Gerenciador\GerenciadorDeColisao</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Gerenciador\GerenciadorGrafico\GerenciadorGrafico.h">
+      <Filter>ECS\Gerenciador\GerenciadorGrafico</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

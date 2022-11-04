@@ -1,20 +1,25 @@
 #include "GerenciadorGrafico.h"
-#include "../../Jogo/Jogo.h"
 #include <SDL_image.h>
 #include <iostream>
-#include "../../Menu/LeaderboardMenu/LeaderboardMenu.h"
-#include "../../Menu/LevelMenu/LevelMenu.h"
-#include "../../Menu/MainMenu/MainMenu.h"
-#include "../../Menu/PauseMenu/PauseMenu.h"
-#include "../../Menu/SettingsMenu/SettingsMenu.h"
-#include "../../Jogo/Fase/Fase.h"
-#include "../../ECS/Componentes/Vector2D/Vector2D.h"
+
+#include "../../Entidade/ListaDeEntidades/ListaDeEntidades.h"
+
+#include "../../../Menu/LeaderboardMenu/LeaderboardMenu.h"
+#include "../../../Menu/LevelMenu/LevelMenu.h"
+#include "../../../Menu/MainMenu/MainMenu.h"
+#include "../../../Menu/PauseMenu/PauseMenu.h"
+#include "../../../Menu/SettingsMenu/SettingsMenu.h"
+
+#include "../../../Jogo/Jogo.h"
+#include "../../../Jogo/Fase/Fase.h"
+#include "../../../ECS/Componentes/Vector2D/Vector2D.h"
 
 SDL_Texture* GerenciadorGrafico::tileset = nullptr;
 SDL_Texture* GerenciadorGrafico::tilesetHitbox = nullptr;
 SDL_Renderer* GerenciadorGrafico::renderer = nullptr;
 SDL_Window* GerenciadorGrafico::window = nullptr;
 Vector2D GerenciadorGrafico::dimensoesJanela;
+ListaDeEntidades* GerenciadorGrafico::entidades = nullptr;
 
 GerenciadorGrafico::GerenciadorGrafico() {
 }
@@ -49,9 +54,10 @@ void GerenciadorGrafico::init_tileMap() {
 	tileset = IMG_LoadTexture(renderer, "Assets/TileMap/Tiles.png");
 }
 
-void GerenciadorGrafico::setRenderer(SDL_Renderer* rend) {
-	renderer = rend;
+void GerenciadorGrafico::setListaDeEntidades(ListaDeEntidades* lista) {
+	entidades = lista;
 }
+
 
 SDL_Texture* GerenciadorGrafico::LoadTexture(const char* fileName){
 	SDL_Texture* tex = IMG_LoadTexture(renderer, fileName);

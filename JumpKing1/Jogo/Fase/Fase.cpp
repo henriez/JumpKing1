@@ -1,20 +1,25 @@
 #include "Fase.h"
-#include "../../ECS/Gerenciador/GerenciadorDeCamera.h"
+#include "../../ECS/Gerenciador/GerenciadorDeCamera/GerenciadorDeCamera.h"
+#include "../../ECS/Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
 
 Fase::Fase() {
 	mapa = nullptr;
+	player_is_alive = true;
 }
 
 Fase::~Fase() {
-	clear();
 	if (mapa != nullptr) {
 		delete mapa;
 	}
 }
 
 void Fase::inicializar(const int id) {
+	GerenciadorGrafico::setListaDeEntidades(&listaEntidades);
+	GerenciadorDeColisao::setFase(this);
 	mapa = new Mapa;
 	Jogador* jogador = new Jogador;
+	GerenciadorDeCamera::setJogador(jogador);
+	GerenciadorDeColisao::setJogador(jogador);
 	switch (id) {
 	case 1:
 		jogador->getComponente<ComponenteTransform>()->posicao.x = 100;
@@ -74,14 +79,17 @@ void Fase::inicializar(const int id) {
 	mapa->inicializar(id);
 }
 
-void Fase::init_BossRoom() {
-
-}
 
 void Fase::atualizar() {
-	listaEntidades.atualizar();
-	if (mapa != nullptr)
-		mapa->atualizar();
+	if (player_is_alive) {
+		listaEntidades.atualizar();
+		if (player_is_alive) {
+			if (mapa != nullptr)
+				mapa->atualizar();
+		}
+	}
+	GerenciadorDeColisao::colisao_jogador1();
+	GerenciadorDeCamera::Atualiza();
 }
 
 void Fase::render() {
@@ -92,4 +100,9 @@ void Fase::render() {
 void Fase::clear() {
 
 	listaEntidades.clear();
+}
+
+void Fase::gameOver() {
+	clear();
+	player_is_alive = false;
 }

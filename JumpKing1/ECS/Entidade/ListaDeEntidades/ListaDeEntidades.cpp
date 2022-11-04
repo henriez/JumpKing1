@@ -18,7 +18,7 @@ void ListaDeEntidades::addEntidade(Entidade* en) {
 }
 
 void ListaDeEntidades::render() {
-	for (auto& e : listaEntidades) 
+	for (auto& e : listaEntidades)
 		e->render();
 }
 

@@ -1,7 +1,8 @@
 #include "GerenciadorDeCamera.h"
-#include "../Entidade/Personagem/Jogador/Jogador.h"
-#include "../../Jogo/Fase/Mapa/Mapa.h"
-#include "../../Jogo/Jogo.h"
+#include "../../Entidade/Personagem/Jogador/Jogador.h"
+#include "../../../Jogo/Fase/Mapa/Mapa.h"
+#include "../../../Jogo/Jogo.h"
+#include "../../../Jogo/Fase/Fase.h"
 
 Jogador* GerenciadorDeCamera::jogador;
 SDL_Rect GerenciadorDeCamera::camera;

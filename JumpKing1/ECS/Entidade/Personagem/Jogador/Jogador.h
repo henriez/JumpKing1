@@ -11,6 +11,8 @@ public:
 	bool inGround() const;
 	void atualizar();
 	void render();
+	void damage();
+	bool isAlive();
 
 	const int getSpeed() const { return speed; }
 private:

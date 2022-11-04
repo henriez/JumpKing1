@@ -8,6 +8,7 @@ class PauseMenu;
 class SettingsMenu;
 class Fase;
 class Vector2D;
+class ListaDeEntidades;
 
 class GerenciadorGrafico
 {
@@ -17,7 +18,8 @@ public:
 
 	static void init(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia);
 	static void init_tileMap();
-	static void setRenderer(SDL_Renderer* rend);
+
+	static void setListaDeEntidades(ListaDeEntidades* lista);
 
 	static SDL_Texture* LoadTexture(const char* fileName);
 	//static void render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino);
@@ -41,4 +43,5 @@ private:
 	static SDL_Renderer* renderer;
 	static SDL_Window* window;
 	static Vector2D dimensoesJanela;
+	static ListaDeEntidades* entidades;
 };

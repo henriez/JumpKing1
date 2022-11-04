@@ -1,5 +1,5 @@
 #include "PauseMenu.h"
-#include "../../ECS/Gerenciador/GerenciadorGrafico.h"
+#include "../../ECS/Gerenciador/GerenciadorGrafico/GerenciadorGrafico.h"
 #include "../../Jogo/Jogo.h"
 
 PauseMenu::PauseMenu() {

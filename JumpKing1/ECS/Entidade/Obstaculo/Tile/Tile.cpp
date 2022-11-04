@@ -1,6 +1,6 @@
 #include "Tile.h"
-#include "../../../Gerenciador/GerenciadorGrafico.h"
-#include "../../../Gerenciador/GerenciadorDeCamera.h"
+#include "../../../Gerenciador/GerenciadorGrafico/GerenciadorGrafico.h"
+#include "../../../Gerenciador/GerenciadorDeCamera/GerenciadorDeCamera.h"
 
 #include <SDL_image.h>
 #include <SDL.h>

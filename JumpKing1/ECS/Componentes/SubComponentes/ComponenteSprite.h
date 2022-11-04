@@ -2,7 +2,7 @@
 
 #include "../Componente.h"
 #include <SDL_image.h>
-#include "../../Gerenciador/GerenciadorGrafico.h"
+#include "../../Gerenciador/GerenciadorGrafico/GerenciadorGrafico.h"
 #include "../Vector2D/Vector2D.h"
 
 class ComponenteSprite : public Componente {

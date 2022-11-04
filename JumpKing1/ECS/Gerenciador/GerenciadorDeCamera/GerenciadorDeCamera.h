@@ -2,6 +2,7 @@
 #include <SDL.h>
 
 class Jogador;
+class Fase;
 
 class GerenciadorDeCamera
 {

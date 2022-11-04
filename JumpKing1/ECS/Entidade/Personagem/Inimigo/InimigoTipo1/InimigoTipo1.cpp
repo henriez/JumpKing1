@@ -2,8 +2,8 @@
 #include "InimigoTipo1.h"
 #include "../../Jogo/Fase/Mapa/Mapa.h"
 #include "../../Jogo/Fase/Mapa/TileMap/TileMap.h"
-#include "../../ECS/Gerenciador/GerenciadorDeCamera.h"
-#include "../../ECS/Gerenciador/GerenciadorDeColisao.h"
+#include "../../ECS/Gerenciador/GerenciadorDeCamera/GerenciadorDeCamera.h"
+#include "../../ECS/Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
 
 #define SCALE 1.5
 #define ATTACKING 0

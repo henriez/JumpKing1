@@ -1,5 +1,5 @@
 #include "MainMenu.h"
-#include "../../ECS/Gerenciador/GerenciadorGrafico.h"
+#include "../../ECS/Gerenciador/GerenciadorGrafico/GerenciadorGrafico.h"
 #include "../../Jogo/Jogo.h"
 
 MainMenu::MainMenu() {

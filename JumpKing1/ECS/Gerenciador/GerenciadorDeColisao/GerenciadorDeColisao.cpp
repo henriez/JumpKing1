@@ -1,12 +1,15 @@
 #include "GerenciadorDeColisao.h"
 
-#include "../../Jogo/Fase/Mapa/Mapa.h"
-#include "../../Jogo/Fase/Mapa/TileMap/TileMap.h"
-#include "../Entidade/Personagem/Jogador/Jogador.h"
-#include "../Entidade/Personagem/Inimigo/InimigoTipo1/InimigoTipo1.h"
+#include "../../../Jogo/Fase/Fase.h"
+#include "../../../Jogo/Fase/Mapa/Mapa.h"
+#include "../../../Jogo/Fase/Mapa/TileMap/TileMap.h"
+#include "../../Entidade/Personagem/Jogador/Jogador.h"
+#include "../../Entidade/Personagem/Inimigo/InimigoTipo1/InimigoTipo1.h"
 
 TileMap* GerenciadorDeColisao::tilemap = nullptr;
 Jogador* GerenciadorDeColisao::jogador1 = nullptr;
+Jogo* GerenciadorDeColisao::jogo = nullptr;
+Fase* GerenciadorDeColisao::fase = nullptr;
 
 GerenciadorDeColisao::GerenciadorDeColisao() {
 	tilemap = nullptr;
@@ -21,6 +24,14 @@ void GerenciadorDeColisao::setJogador(Jogador* jg) {
 
 void GerenciadorDeColisao::setTileMap(TileMap* tmap) {
 	tilemap = tmap;
+}
+
+void GerenciadorDeColisao::setJogo(Jogo* jg) {
+	jogo = jg;
+}
+
+void GerenciadorDeColisao::setFase(Fase* fs) {
+	fase = fs;
 }
 
 void GerenciadorDeColisao::colisao_jogador1() {
@@ -76,25 +87,37 @@ void GerenciadorDeColisao::colisao_jogador1() {
 			hitbox.y += velocity.y * jogador1->getSpeed();
 			if (AABB(hitbox_espinho, hitbox)) {
 				if (velocity.y > 0) { //colidiu por cima
-					jogador1->setGround(true);
 					transform->posicao.y = hitbox_espinho.y - hitbox.h;
+					transform->velocidade.y = -1.4;
 				}
-				else if (velocity.y < 0) //colidiu por baixo // em teoria, pela montagem da fase, nunca deve acontecer
+				else if (velocity.y < 0) {//colidiu por baixo // em teoria, pela montagem da fase, nunca deve acontecer
 					transform->posicao.y = hitbox_espinho.y + hitbox_espinho.h;
-				transform->velocidade.y = 0;
+					transform->velocidade.y = 0;
+				}
+				jogador1->damage();
+				break; //apenas uma colisao por vez
 			}
 			hitbox = initialhitbox;
 			hitbox.x += velocity.x * jogador1->getSpeed();
 			if (AABB(hitbox_espinho, hitbox)) {
 				if (velocity.x > 0) { //colidiu pela esquerda
 					transform->posicao.x = t->getPos().x - hitbox.w;
+					transform->velocidade.x = -1;
 				}
-				else if (velocity.x < 0) //colidiu pela direita
+				else if (velocity.x < 0) { //colidiu pela direita
 					transform->posicao.x = t->getPos().x + hitbox.w;
-				transform->velocidade.x = 0;
+					transform->velocidade.x = 1;
+				}
+				jogador1->damage();
+				break;
 			}
 		}
 	}
+
+	//if (!jogador1->isAlive()) { //morreu -> encerra fase
+		//fase->clear();
+		//jogo->mainMenu();
+	//}
 }
 
 void GerenciadorDeColisao::colisao_inimigo1(InimigoTipo1* in1) {

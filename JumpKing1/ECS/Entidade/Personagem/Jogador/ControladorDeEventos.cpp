@@ -1,8 +1,6 @@
 #include "ControladorDeEventos.h"
 #include "Jogador.h"
 #include "../../Jogo/Jogo.h"
-#include "../../../Gerenciador/GerenciadorDeCamera.h"
-#include "../../../Gerenciador/GerenciadorDeColisao.h"
 
 ControladorDeEventos::ControladorDeEventos() {
 	jogador = nullptr;
@@ -57,6 +55,4 @@ void ControladorDeEventos::atualizar() {
 			break;
 		}
 	}
-
-	GerenciadorDeColisao::colisao_jogador1();
 }

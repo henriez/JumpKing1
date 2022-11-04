@@ -1,7 +1,8 @@
 #include "Jogo.h"
 #include <iostream>
 #include "Fase/Fase.h"
-#include "../ECS/Gerenciador/GerenciadorGrafico.h"
+#include "../ECS/Gerenciador/GerenciadorGrafico/GerenciadorGrafico.h"
+#include "../ECS/Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
 
 #define FPS 60
 
@@ -14,7 +15,7 @@ Jogo::Jogo(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCh
 }
 
 Jogo::~Jogo() {
-	fase->clear();
+	//fase->clear();
 	SDL_Quit();
 	delete fase;
 }
@@ -27,6 +28,7 @@ void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela,
 	menu.init();
 	mainMenu();
 	srand(time(NULL));
+	GerenciadorDeColisao::setJogo(this);
 }
 
 void Jogo::mainMenu() {

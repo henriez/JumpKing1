@@ -1,6 +1,6 @@
 #include "Botao.h"
 #include "../../Jogo/Jogo.h"
-#include "../../ECS/Gerenciador/GerenciadorGrafico.h"
+#include "../../ECS/Gerenciador/GerenciadorGrafico/GerenciadorGrafico.h"
 
 Button::Button() {
 	pos.x = pos.y = pos.w = pos.h = 0;
