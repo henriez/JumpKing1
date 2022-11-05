@@ -58,6 +58,18 @@ void Jogador::render() {
 	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
 
 	getComponente<ComponenteSprite>()->render(posRect);
+
+	//coloca CORACOES na tela
+	int maxSaude = getComponente<ComponenteSaude>()->getMaxHealth();
+	int saude = getComponente<ComponenteSaude>()->getHealth();
+	SDL_Rect fonte = { 0,0,40,40 };
+
+	for (int i = 0; i < saude; i++) {
+		posRect.x = (0.03 * i + 0.02) * GerenciadorDeCamera::camera.w;
+		posRect.y = (0.03) * GerenciadorDeCamera::camera.h;
+		posRect.w = posRect.h = 40;
+		GerenciadorGrafico::renderCoracao(fonte, posRect);
+	}
 }
 
 void Jogador::damage() {

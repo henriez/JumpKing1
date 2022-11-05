@@ -5,7 +5,10 @@
 class Obstaculo : public Entidade
 {
 public:
-	Obstaculo() { onScreen = false; }
+	Obstaculo() { 
+		onScreen = false; 
+		addComponente<ComponenteColisao>();
+	}
 	virtual ~Obstaculo() {}
 
 	virtual void render() = 0;

@@ -28,6 +28,14 @@ public:
 
 	}
 
+	int getHealth() const {
+		return saude;
+	}
+
+	int getMaxHealth() const {
+		return saudeMax;
+	}
+
 private:
 	float saude;
 	float saudeMax;

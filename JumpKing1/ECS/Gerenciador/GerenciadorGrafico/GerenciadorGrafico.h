@@ -35,6 +35,8 @@ public:
 	static void renderEspinho(SDL_Rect fonte, SDL_Rect destino);
 	static void renderLava(SDL_Rect fonte, SDL_Rect destino);
 
+	static void renderCoracao(SDL_Rect fonte, SDL_Rect destino);
+
 	static void renderMenu(LeaderboardMenu& leaderboard);
 	static void renderMenu(LevelMenu& level);
 	static void renderMenu(MainMenu& start);
@@ -46,6 +48,7 @@ private:
 	static SDL_Texture* tilesetHitbox;
 	static SDL_Texture* lava;
 	static SDL_Texture* espinhos;
+	static SDL_Texture* coracao;
 	static SDL_Renderer* renderer;
 	static SDL_Window* window;
 	static Vector2D dimensoesJanela;

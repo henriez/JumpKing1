@@ -18,6 +18,5 @@ public:
 private:
 	SDL_Rect fonte;
 	SDL_Rect destino;
-	bool onScreen;
 };
 

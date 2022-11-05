@@ -10,7 +10,6 @@
 
 TileMap* GerenciadorDeColisao::tilemap = nullptr;
 Jogador* GerenciadorDeColisao::jogador1 = nullptr;
-Jogo* GerenciadorDeColisao::jogo = nullptr;
 Fase* GerenciadorDeColisao::fase = nullptr;
 std::vector<Obstaculo*> GerenciadorDeColisao::obstaculos;
 
@@ -29,9 +28,6 @@ void GerenciadorDeColisao::setTileMap(TileMap* tmap) {
 	tilemap = tmap;
 }
 
-void GerenciadorDeColisao::setJogo(Jogo* jg) {
-	jogo = jg;
-}
 
 void GerenciadorDeColisao::setFase(Fase* fs) {
 	fase = fs;
@@ -137,92 +133,6 @@ void GerenciadorDeColisao::colisao_jogador1() {
 
 	}
 
-	//checagem antiga espinhos
-	/*SDL_Rect hitbox_espinho = {0,0,0,0};
-	
-	for (auto& t : tilemap->hitbox_espinhos) {
-		if (t->isOnScreen()) {
-			//hitbox na parte inferior do tile
-			hitbox_espinho.x = t->getPos().x;
-			hitbox_espinho.y = t->getPos().y + Mapa::tamanhoTile() / 2;
-			hitbox_espinho.w = t->getPos().w;
-			hitbox_espinho.h = t->getPos().h - Mapa::tamanhoTile() / 2;
-
-			//mesma checagem usada para as plataformas
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * jogador1->getSpeed();
-			if (AABB(hitbox_espinho, hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					transform->posicao.y = hitbox_espinho.y - hitbox.h;
-					transform->velocidade.y = -1.4;
-				}
-				else if (velocity.y < 0) {//colidiu por baixo // em teoria, pela montagem da fase, nunca deve acontecer
-					transform->posicao.y = hitbox_espinho.y + hitbox_espinho.h;
-					transform->velocidade.y = 0;
-				}
-				jogador1->damage();
-				break; //apenas uma colisao por vez
-			}
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * jogador1->getSpeed();
-			if (AABB(hitbox_espinho, hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = t->getPos().x - hitbox.w;
-					transform->velocidade.x = -1;
-				}
-				else if (velocity.x < 0) { //colidiu pela direita
-					transform->posicao.x = t->getPos().x + hitbox.w;
-					transform->velocidade.x = 1;
-				}
-				jogador1->damage();
-				break;
-			}
-		}
-	}
-	*/
-
-	//checagem antiga lava
-	/*SDL_Rect hitbox_lava = {0,0,0,0};
-
-	for (auto& t : tilemap->hitbox_lavas) {
-		if (t->isOnScreen()) {
-			//hitbox na parte inferior do tile
-			hitbox_lava.x = t->getPos().x;
-			hitbox_lava.y = t->getPos().y;
-			hitbox_lava.w = t->getPos().w;
-			hitbox_lava.h = t->getPos().h;
-
-			//mesma checagem usada para as plataformas
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * jogador1->getSpeed();
-			if (AABB(hitbox_lava, hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					transform->posicao.y = hitbox_lava.y - hitbox.h;
-					transform->velocidade.y = -1.4;
-				}
-				else if (velocity.y < 0) {//colidiu por baixo // em teoria, pela montagem da fase, nunca deve acontecer
-					transform->posicao.y = hitbox_lava.y + hitbox_lava.h;
-					transform->velocidade.y = 0;
-				}
-				jogador1->damage();
-				break; //apenas uma colisao por vez
-			}
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * jogador1->getSpeed();
-			if (AABB(hitbox_lava, hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = t->getPos().x - hitbox.w;
-					transform->velocidade.x = -1;
-				}
-				else if (velocity.x < 0) { //colidiu pela direita
-					transform->posicao.x = t->getPos().x + hitbox.w;
-					transform->velocidade.x = 1;
-				}
-				jogador1->damage();
-				break;
-			}
-		}
-	}*/
 
 	if (!jogador1->isAlive()) { //morreu -> encerra fase
 		fase->gameOver();

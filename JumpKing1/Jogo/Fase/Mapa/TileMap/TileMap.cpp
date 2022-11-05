@@ -309,9 +309,9 @@ void TileMap::render() {
 		if (t->isOnScreen())
 			t->render();
 
-	for (auto& t : hitbox_plataformas)
+	/*for (auto& t : hitbox_plataformas)
 		if (t->isOnScreen())
-			t->renderHitbox();	
+			t->renderHitbox();	*/
 }
 
 void TileMap::clear() {

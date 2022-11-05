@@ -19,6 +19,7 @@ SDL_Texture* GerenciadorGrafico::tileset = nullptr;
 SDL_Texture* GerenciadorGrafico::tilesetHitbox = nullptr;
 SDL_Texture* GerenciadorGrafico::lava = nullptr;
 SDL_Texture* GerenciadorGrafico::espinhos = nullptr;
+SDL_Texture* GerenciadorGrafico::coracao = nullptr;
 SDL_Renderer* GerenciadorGrafico::renderer = nullptr;
 SDL_Window* GerenciadorGrafico::window = nullptr;
 Vector2D GerenciadorGrafico::dimensoesJanela;
@@ -57,6 +58,7 @@ void GerenciadorGrafico::init_tileMap() {
 	tileset = IMG_LoadTexture(renderer, "Assets/TileMap/Tiles.png");
 	lava = IMG_LoadTexture(renderer, "Assets/TileMap/lava.png");
 	espinhos = IMG_LoadTexture(renderer, "Assets/TileMap/espinhos.png");
+	coracao = IMG_LoadTexture(renderer, "Assets/coracao.png");
 }
 
 void GerenciadorGrafico::setListaDeEntidades(ListaDeEntidades* lista) {
@@ -104,6 +106,10 @@ void GerenciadorGrafico::renderHitbox(SDL_Rect fonte, SDL_Rect destino) {
 
 void GerenciadorGrafico::renderEspinho(SDL_Rect fonte, SDL_Rect destino) {
 	SDL_RenderCopy(renderer, espinhos, &fonte, &destino);
+}
+
+void GerenciadorGrafico::renderCoracao(SDL_Rect fonte, SDL_Rect destino) {
+	SDL_RenderCopy(renderer, coracao, &fonte, &destino);
 }
 
 void GerenciadorGrafico::renderLava(SDL_Rect fonte, SDL_Rect destino) {

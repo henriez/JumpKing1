@@ -23,7 +23,6 @@ public:
 	static void clear();
 
 	static void setJogador(Jogador* jg);
-	static void setJogo(Jogo* jg);
 	static void setFase(Fase* fs);
 	static void setTileMap(TileMap* tmap);
 
@@ -35,7 +34,6 @@ private:
 
 	static Jogador* jogador1;
 	static TileMap* tilemap;
-	static Jogo* jogo;
 	static Fase* fase;
 	static std::vector<Obstaculo*> obstaculos;
 };

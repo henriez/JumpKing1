@@ -29,7 +29,6 @@ void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela,
 	menu.init();
 	mainMenu();
 	srand(time(NULL));
-	GerenciadorDeColisao::setJogo(this);
 }
 
 void Jogo::mainMenu() {

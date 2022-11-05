@@ -22,11 +22,7 @@ public:
 private:
 	std::vector<Tile*> camada1;
 	std::vector<Tile*> camada2;
-	std::vector<Lava*> camada_lava;
-	std::vector<Espinhos*> camada_espinhos;
 	std::vector<Tile*> hitbox_plataformas;
-	std::vector<Tile*> hitbox_espinhos;
-	std::vector<Tile*> hitbox_lavas;
 
 
 	Vector2D nTiles;
