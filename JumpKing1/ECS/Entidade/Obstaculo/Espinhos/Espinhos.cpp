@@ -29,7 +29,6 @@ void Espinhos::renderHitbox() {
 	GerenciadorGrafico::renderHitbox(fonte, tempDest);
 }
 
-
 void Espinhos::setPosition(int x, int y, int srcX, int srcY) {
 	destino.x = x;
 	destino.y = y;
@@ -39,14 +38,6 @@ void Espinhos::setPosition(int x, int y, int srcX, int srcY) {
 
 SDL_Rect Espinhos::getPos() const {
 	return destino;
-}
-
-void Espinhos::setScreen(const bool inScreen) {
-	onScreen = inScreen;
-}
-
-bool Espinhos::isOnScreen() const {
-	return onScreen;
 }
 
 void Espinhos::atualizar() {}

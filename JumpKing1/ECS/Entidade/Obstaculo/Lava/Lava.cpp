@@ -42,12 +42,4 @@ SDL_Rect Lava::getPos() const {
 	return destino;
 }
 
-void Lava::setScreen(const bool inScreen) {
-	onScreen = inScreen;
-}
-
-bool Lava::isOnScreen() const {
-	return onScreen;
-}
-
 void Lava::atualizar() {}

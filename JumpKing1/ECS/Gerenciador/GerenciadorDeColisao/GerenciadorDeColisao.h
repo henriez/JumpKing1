@@ -18,6 +18,7 @@ public:
 	static Jogador* getJogador1();
 
 	static void addObstaculo(Obstaculo* obst);
+	static void atualizaObstaculos();
 	static void renderObstaculos();
 	static void clear();
 

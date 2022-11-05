@@ -1,4 +1,5 @@
 #include "GerenciadorDeColisao.h"
+#include "../GerenciadorDeCamera/GerenciadorDeCamera.h"
 
 #include "../../../Jogo/Fase/Fase.h"
 #include "../../../Jogo/Fase/Mapa/Mapa.h"
@@ -40,10 +41,21 @@ void GerenciadorDeColisao::addObstaculo(Obstaculo* obst) {
 	obstaculos.push_back(obst);
 }
 
+void GerenciadorDeColisao::atualizaObstaculos() {
+
+	for (auto& o : obstaculos) {
+		o->setScreen(false);
+		if (AABB(o->getComponente<ComponenteColisao>()->getColisor(), GerenciadorDeCamera::camera))
+			o->setScreen(true);
+	}
+
+}
+
 void GerenciadorDeColisao::renderObstaculos() {
 
 	for (auto& o : obstaculos)
-		o->render();
+		if (o->isOnScreen())
+			o->render();
 }
 
 void GerenciadorDeColisao::clear() {
@@ -90,35 +102,37 @@ void GerenciadorDeColisao::colisao_jogador1() {
 	}
 
 	for (auto& o : obstaculos) {
-		hitbox = initialhitbox;
-		hitbox.y += velocity.y * jogador1->getSpeed();
-		SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
-		if (AABB(colisor, hitbox)) {
-			if (velocity.y > 0) { //colidiu por cima
-				transform->posicao.y = colisor.y - hitbox.h;
-				transform->velocidade.y = -1.4;
+		if (o->isOnScreen()) {
+			hitbox = initialhitbox;
+			hitbox.y += velocity.y * jogador1->getSpeed();
+			SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
+			if (AABB(colisor, hitbox)) {
+				if (velocity.y > 0) { //colidiu por cima
+					transform->posicao.y = colisor.y - hitbox.h;
+					transform->velocidade.y = -1.4;
+				}
+				else if (velocity.y < 0) { //colidiu por baixo
+					transform->posicao.y = colisor.y + colisor.h;
+					transform->velocidade.y = 0;
+				}
+				jogador1->damage();
+				break;
 			}
-			else if (velocity.y < 0) { //colidiu por baixo
-				transform->posicao.y = colisor.y + colisor.h;
-				transform->velocidade.y = 0;
+
+			hitbox = initialhitbox;
+			hitbox.x += velocity.x * jogador1->getSpeed();
+			if (AABB(colisor, hitbox)) {
+				if (velocity.x > 0) { //colidiu pela esquerda
+					transform->posicao.x = colisor.x - hitbox.w;
+					transform->velocidade.x = -1;
+				}
+				else if (velocity.x < 0) { //colidiu pela direita
+					transform->posicao.x = colisor.x + colisor.w;
+					transform->velocidade.x = 1;
+				}
+				jogador1->damage();
+				break;
 			}
-			jogador1->damage(); 
-			break;
-		}
-	
-		hitbox = initialhitbox;
-		hitbox.x += velocity.x * jogador1->getSpeed();
-		if (AABB(colisor, hitbox)) {
-			if (velocity.x > 0) { //colidiu pela esquerda
-				transform->posicao.x = colisor.x - hitbox.w;
-				transform->velocidade.x = -1;
-			}
-			else if (velocity.x < 0) { //colidiu pela direita
-				transform->posicao.x = colisor.x + colisor.w;
-				transform->velocidade.x = 1;
-			}
-			jogador1->damage();
-			break;
 		}
 
 	}

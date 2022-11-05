@@ -40,12 +40,5 @@ SDL_Rect Tile::getPos() const {
 	return destino;
 }
 
-void Tile::setScreen(const bool inScreen) {
-	onScreen = inScreen;
-}
-
-bool Tile::isOnScreen() const {
-	return onScreen;
-}
 
 void Tile::atualizar() {}

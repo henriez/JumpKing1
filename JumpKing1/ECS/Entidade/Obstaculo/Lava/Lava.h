@@ -13,8 +13,6 @@ public:
 	void atualizar();
 
 	SDL_Rect getPos() const;
-	bool isOnScreen() const;
-	void setScreen(const bool inScreen);
 
 	void setPosition(int x, int y, int srcX, int srcY);
 private:
