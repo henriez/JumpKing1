@@ -13,12 +13,16 @@ const char* mapa1_camada2 = "Assets/TileMap/Mapa1/mapa1_camada_tiles_2.csv";
 const char* mapa1_camada_espinhos = "Assets/TileMap/Mapa1/mapa1_camada_espinhos.csv";
 const char* mapa1_camada_lava = "Assets/TileMap/Mapa1/mapa1_camada_lava.csv";
 const char* mapa1_camada_colisao = "Assets/TileMap/Mapa1/mapa1_camada_colisao.csv";
+const char* mapa1_posicoes_lava = "Assets/TileMap/Mapa1/mapa1_posicoes_lava.csv";
+const char* mapa1_posicoes_espinhos = "Assets/TileMap/Mapa1/mapa1_posicoes_espinhos.csv";
 
 const char* mapa2_camada1 = "Assets/TileMap/Mapa2/mapa2_Camada_0.csv";
 const char* mapa2_camada2 = "Assets/TileMap/Mapa2/mapa2_Camada_1.csv";
 const char* mapa2_camada_espinhos = "Assets/TileMap/Mapa2/mapa2_Camada_espinhos.csv";
 const char* mapa2_camada_lava = "Assets/TileMap/Mapa2/mapa2_Camada_lava.csv";
-const char* mapa2_camada_colisao = "Assets/TileMap/Mapa2/mapa2_Camada_colisao.csv";
+const char* mapa2_camada_colisao = "Assets/TileMap/Mapa2/mapa2_Camada_colisao.csv"; 
+const char* mapa2_posicoes_lava = "Assets/TileMap/Mapa2/mapa2_posicoes_lava.csv";
+const char* mapa2_posicoes_espinhos = "Assets/TileMap/Mapa2/mapa2_posicoes_espinhos.csv";
 
 Mapa::Mapa() {
 	backgroundTex = nullptr;
@@ -30,6 +34,7 @@ Mapa::Mapa() {
 
 Mapa::~Mapa() {
 	clear();
+	SDL_DestroyTexture(backgroundTex);
 
 }
 
@@ -40,12 +45,13 @@ void Mapa::inicializar(int id) {
 	case 1:
 		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa1/mapa1background.png");
 		fim = { 0,64,32,96 };
-		tileMap.inicializa(mapa1_camada1, mapa1_camada2, mapa1_camada_colisao, mapa1_camada_espinhos, mapa1_camada_lava, 80, 200); 
+		tileMap.carregaPosicoesValidas(mapa1_posicoes_lava, mapa1_posicoes_espinhos);
+		tileMap.inicializa(mapa1_camada1, mapa1_camada2, mapa1_camada_colisao, 80, 200); 
 		break;
 	case 2:
 		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa2/mapa2.png");
 		fim = { 0,96,32,288 };
-		tileMap.inicializa(mapa2_camada1, mapa2_camada2, mapa2_camada_colisao, mapa2_camada_espinhos, mapa2_camada_lava, 65, 250);
+		tileMap.inicializa(mapa2_camada1, mapa2_camada2, mapa2_camada_colisao, 65, 250);
 	default:
 		break;
 	}
@@ -94,7 +100,6 @@ Vector2D Mapa::getDimensoes() {
 }
 
 void Mapa::clear() {
-	SDL_DestroyTexture(backgroundTex);
 	tileMap.clear();
 	boss_room.clear();
 }

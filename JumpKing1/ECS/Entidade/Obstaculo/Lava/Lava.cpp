@@ -3,19 +3,23 @@
 #include "../../../Gerenciador/GerenciadorDeCamera/GerenciadorDeCamera.h"
 
 Lava::Lava() {
-	fonte = { 0,0,32,32 };
-	destino = { 0,0,32,32 };
+	addComponente<ComponenteColisao>();
+	fonte = { 0,0,32,64 };
+	destino = { 0,0,32,64 };
 	onScreen = false;
 }
 
 Lava::~Lava() {}
 
 void Lava::render() {
-	SDL_Rect tempDest = { 0,0,32,32 };
+	SDL_Rect colisor = getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect destino = { colisor.x, colisor.y - 32,32,64 };//tamanho da textura
 
-	tempDest.x = destino.x - GerenciadorDeCamera::camera.x;
-	tempDest.y = destino.y - GerenciadorDeCamera::camera.y;
-	GerenciadorGrafico::renderTile(fonte, tempDest);
+	SDL_Rect dest = { 0,0,32,64 };
+	dest.x = destino.x - GerenciadorDeCamera::camera.x;
+	dest.y = destino.y - GerenciadorDeCamera::camera.y;
+	GerenciadorGrafico::renderLava(fonte, dest);
+
 }
 
 void Lava::renderHitbox() {

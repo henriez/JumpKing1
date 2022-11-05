@@ -103,11 +103,13 @@ void Fase::atualizar() {
 
 void Fase::render() {
 	mapa->render();
+	GerenciadorDeColisao::renderObstaculos();
 	listaEntidades.render();
 }
 
 void Fase::clear() {
 
+	mapa->clear();
 	listaEntidades.clear();
 }
 

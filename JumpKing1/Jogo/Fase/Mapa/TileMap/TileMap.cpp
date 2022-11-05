@@ -12,21 +12,117 @@ const int largura = 11; //dados tileset
 const int altura = 12;
 const int tamanhoTile = 32;
 
+
 TileMap::TileMap() {
 	nTiles.x = 80;
 	nTiles.y = 200;
-	algarismos[0] = algarismos[1] = algarismos[2] = 0;
 	GerenciadorDeColisao::setTileMap(this);
-	GerenciadorGrafico::init_tileMap();
+	GerenciadorGrafico::init_tileMap(); 
 }
 
 TileMap::~TileMap() {
 	clear();
 }
 
-void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_colisao, const char* cam_espinhos, const char* cam_lava, int tilesW, int tilesH) {
+void TileMap::carregaPosicoesValidas(const char* posicoes_lava, const char* posicoes_espinhos) {
+	char c;
+	int a1, a2, a3, a4, nPosicoes;
+	SDL_Point pos = { 0,0 };
 
+	std::fstream mapFile;
+	mapFile.open(posicoes_lava);
+
+	mapFile.get(c);
+	a1 = atoi(&c);
+	mapFile.get(c);
+	a2 = atoi(&c);
+	mapFile.get(c);
+	a3 = atoi(&c);
+	mapFile.ignore();
+
+	nPosicoes = a1 * 100 + a2 * 10 + a3;
+
+	for (int i = 0; i < nPosicoes; i++) {
+
+		mapFile.get(c);
+		a1 = atoi(&c);
+		mapFile.get(c);
+		a2 = atoi(&c);
+		mapFile.get(c);
+		a3 = atoi(&c);
+		mapFile.get(c);
+		a4 = atoi(&c);
+		mapFile.ignore();
+		pos.x = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+
+		mapFile.get(c);
+		a1 = atoi(&c);
+		mapFile.get(c);
+		a2 = atoi(&c);
+		mapFile.get(c);
+		a3 = atoi(&c);
+		mapFile.get(c);
+		a4 = atoi(&c);
+		mapFile.ignore();
+		pos.y = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+		this->posicoes_lava.push_back(pos);
+	}
+
+	mapFile.close();
+
+	/* ============================================= */
+	/* Posicoes validas para espinhos */
+
+	mapFile.open(posicoes_espinhos);
+
+	mapFile.get(c);
+	a1 = atoi(&c);
+	mapFile.get(c);
+	a2 = atoi(&c);
+	mapFile.get(c);
+	a3 = atoi(&c);
+	mapFile.ignore();
+
+	nPosicoes = a1 * 100 + a2 * 10 + a3;
+
+	for (int i = 0; i < nPosicoes; i++) {
+
+		mapFile.get(c);
+		a1 = atoi(&c);
+		mapFile.get(c);
+		a2 = atoi(&c);
+		mapFile.get(c);
+		a3 = atoi(&c);
+		mapFile.get(c);
+		a4 = atoi(&c);
+		mapFile.ignore();
+		pos.x = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+
+		mapFile.get(c);
+		a1 = atoi(&c);
+		mapFile.get(c);
+		a2 = atoi(&c);
+		mapFile.get(c);
+		a3 = atoi(&c);
+		mapFile.get(c);
+		a4 = atoi(&c);
+		mapFile.ignore();
+		pos.y = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+		this->posicoes_espinhos.push_back(pos);
+	}
+
+	mapFile.close();
+}
+
+void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_colisao, int tilesW, int tilesH) {
 	GerenciadorDeColisao::setTileMap(this);
+
+	int algarismos[3];
+	algarismos[0] = algarismos[1] = algarismos[2] = 0;
+
+	Lava* lava = nullptr;
+	Espinhos* espinhos = nullptr;
+	SDL_Point random_pos = { 0,0 };
 
 	nTiles.x = tilesW;
 	nTiles.y = tilesH;
@@ -119,8 +215,27 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 	}
 	mapFile.close();
 
+	int nEspinhos = rand() % (posicoes_espinhos.size()/2) + 3;
+	int nLavas = rand() % (posicoes_lava.size()/2) + 3;
+	
+	for (int i = 0; i < nEspinhos; i++) {
+		random_pos = posicoes_espinhos[rand() % posicoes_espinhos.size()]; //posicao aleatoria do vetor retorna uma posicao valida definida
+		espinhos = new Espinhos;
+		espinhos->getComponente<ComponenteColisao>()->set(random_pos.x, random_pos.y+16, 32, 16);
+		GerenciadorDeColisao::addObstaculo(static_cast<Obstaculo*>(espinhos));
+		//adiciona espinhos ao manager
+	}
 
-	mapFile.open(cam_espinhos);
+	for (int i = 0; i < nLavas; i++) {
+		random_pos = posicoes_lava[rand() % posicoes_lava.size()]; //posicao aleatoria do vetor retorna uma posicao valida definida
+		lava = new Lava;
+		lava->getComponente<ComponenteColisao>()->set(random_pos.x, random_pos.y, 32, 32);
+		GerenciadorDeColisao::addObstaculo(static_cast<Obstaculo*>(lava));
+		//adiciona lava ao manager
+	}
+
+
+	/*mapFile.open(cam_espinhos);
 	for (int i = 0; i < nTiles.y; i++) {
 		for (int j = 0; j < nTiles.x; j++) {
 			algarismos[0] = algarismos[1] = algarismos[2] = alg = 0;
@@ -160,6 +275,7 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 	}
 	mapFile.close();
 
+
 	mapFile.open(cam_lava);
 	for (int i = 0; i < nTiles.y; i++) {
 		for (int j = 0; j < nTiles.x; j++) {
@@ -198,7 +314,8 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 			camada_lava.push_back(lava);
 		}
 	}
-	mapFile.close();
+	mapFile.close();*/
+
 
 	mapFile.open(cam_colisao);
 	for (int i = 0; i < nTiles.y; i++) {
@@ -221,13 +338,13 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 			tile->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
 			if (id == 1)
 				hitbox_plataformas.push_back(tile);
-			else if (id == 2)
-				hitbox_espinhos.push_back(tile);
-			else if (id == 3)
-				hitbox_lavas.push_back(tile);
 		}
 	}
 	mapFile.close();
+
+	//for (auto& t : hitbox_espinhos)
+	//	std::cout << t->getPos().x << "," << t->getPos().y << std::endl;
+	
 }
 
 void TileMap::atualiza() {
@@ -243,31 +360,7 @@ void TileMap::atualiza() {
 			t->setScreen(true);
 	}
 
-	for (auto& t : camada_espinhos) {
-		t->setScreen(false);
-		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
-			t->setScreen(true);
-	}
-	
-	for (auto& t : camada_lava) {
-		t->setScreen(false);
-		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
-			t->setScreen(true);
-	}
-
 	for (auto& t : hitbox_plataformas) {
-		t->setScreen(false);
-		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
-			t->setScreen(true);
-	}
-
-	for (auto& t : hitbox_espinhos) {
-		t->setScreen(false);
-		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
-			t->setScreen(true);
-	}
-	
-	for (auto& t : hitbox_lavas) {
 		t->setScreen(false);
 		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
 			t->setScreen(true);
@@ -285,26 +378,9 @@ void TileMap::render() {
 		if (t->isOnScreen())
 			t->render();
 
-	for (auto& t : camada_espinhos)
-		if (t->isOnScreen())
-			t->render();
-	
-	for (auto& t : camada_lava)
-		if (t->isOnScreen())
-			t->render();
-
 	for (auto& t : hitbox_plataformas)
 		if (t->isOnScreen())
-			t->renderHitbox();
-
-	for (auto& t : hitbox_espinhos)
-		if (t->isOnScreen())
-			t->renderHitbox();
-
-	for (auto& t : hitbox_lavas)
-		if (t->isOnScreen())
-			t->renderHitbox();
-			
+			t->renderHitbox();			
 }
 
 void TileMap::clear() {
@@ -316,17 +392,13 @@ void TileMap::clear() {
 		delete t;
 	camada2.clear();
 
-	for (auto& t : camada_espinhos)
-		delete t;
-	camada_espinhos.clear();
-
 	for (auto& t : hitbox_plataformas)
 		delete t;
 	hitbox_plataformas.clear();
 
-	for (auto& t : hitbox_espinhos)
-		delete t;
-	hitbox_espinhos.clear();
+	posicoes_espinhos.clear();
+	posicoes_lava.clear();
+	GerenciadorDeColisao::clear();
 }
 
 Vector2D TileMap::getNTiles() {

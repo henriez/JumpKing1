@@ -10,7 +10,9 @@ class TileMap {
 public:
 	TileMap();
 	~TileMap();
-	void inicializa(const char* cam1, const char* cam2, const char* cam_colisao, const char* cam_espinhos, const char* cam_lava, int tilesW, int tilesH);
+
+	void carregaPosicoesValidas(const char* posicoes_lava, const char* posicoes_espinhos);
+	void inicializa(const char* cam1, const char* cam2, const char* cam_colisao, int tilesW, int tilesH);
 	void atualiza();
 	void render();
 
@@ -20,15 +22,13 @@ public:
 private:
 	std::vector<Tile*> camada1;
 	std::vector<Tile*> camada2;
-	std::vector<Espinhos*> camada_espinhos;
-	std::vector<Lava*> camada_lava;
 	std::vector<Tile*> hitbox_plataformas;
-	std::vector<Tile*> hitbox_espinhos;
-	std::vector<Tile*> hitbox_lavas;
 
 
 	Vector2D nTiles;
-	int algarismos[3];
+
+	std::vector<SDL_Point> posicoes_lava;
+	std::vector<SDL_Point> posicoes_espinhos;
 
 	friend class GerenciadorDeColisao;
 };

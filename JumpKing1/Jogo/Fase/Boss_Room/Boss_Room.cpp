@@ -33,11 +33,11 @@ void Boss_Room::inicializar(int id) {
 	switch (id) {
 	case 1:
 		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa1/Boss_Room/boss_room.png");
-		tileMap.inicializa(boss1_camada1, boss1_camada2, boss1_camada_colisao, boss1_camada_espinhos, boss1_camada_lava, 60, 34);
+		tileMap.inicializa(boss1_camada1, boss1_camada2, boss1_camada_colisao, 60, 34);
 		break;
 	case 2:
 		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa2/Boss_Room/boss_room2.png");
-		tileMap.inicializa(boss2_camada1, boss2_camada2, boss2_camada_colisao, boss2_camada_espinhos, boss2_camada_lava, 60, 40);
+		tileMap.inicializa(boss2_camada1, boss2_camada2, boss2_camada_colisao, 60, 40);
 		break;
 	default:
 		break;

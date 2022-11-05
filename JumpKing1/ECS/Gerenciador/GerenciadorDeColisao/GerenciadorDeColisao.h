@@ -1,8 +1,10 @@
 #pragma once
 #include <SDL.h>
+#include <vector>
 
 class Jogador;
 class TileMap;
+class Obstaculo;
 class Esqueleto;
 class Fase;
 class Jogo;
@@ -14,6 +16,11 @@ public:
 	~GerenciadorDeColisao();
 
 	static Jogador* getJogador1();
+
+	static void addObstaculo(Obstaculo* obst);
+	static void renderObstaculos();
+	static void clear();
+
 	static void setJogador(Jogador* jg);
 	static void setJogo(Jogo* jg);
 	static void setFase(Fase* fs);
@@ -29,5 +36,6 @@ private:
 	static TileMap* tilemap;
 	static Jogo* jogo;
 	static Fase* fase;
+	static std::vector<Obstaculo*> obstaculos;
 };
 

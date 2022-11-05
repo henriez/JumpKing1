@@ -14,7 +14,6 @@ public:
 	bool isOnScreen() const;
 	void setScreen(const bool inScreen);
 
-	static void setTex(const char* path, const char* hitboxPath);
 	void setPosition(int x, int y, int srcX, int srcY);
 private:
 	SDL_Rect fonte;

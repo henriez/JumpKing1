@@ -3,6 +3,7 @@
 #include "../../../Gerenciador/GerenciadorDeCamera/GerenciadorDeCamera.h"
 
 Espinhos::Espinhos() {
+	addComponente<ComponenteColisao>();
 	fonte = { 0,0,32,32 };
 	destino = { 0,0,32,32 };
 	onScreen = false;
@@ -11,11 +12,13 @@ Espinhos::Espinhos() {
 Espinhos::~Espinhos() {}
 
 void Espinhos::render() {
-	SDL_Rect tempDest = { 0,0,32,32 };
-
-	tempDest.x = destino.x - GerenciadorDeCamera::camera.x;
-	tempDest.y = destino.y - GerenciadorDeCamera::camera.y;
-	GerenciadorGrafico::renderTile(fonte, tempDest);
+	SDL_Rect colisor = getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect destino = { colisor.x, colisor.y -16,32,32 };//tamanho da textura
+	//REDEFINIR RENDER PARA ESPINHO E LAVA
+	SDL_Rect dest = {0,0,32,32};
+	dest.x = destino.x - GerenciadorDeCamera::camera.x;
+	dest.y = destino.y - GerenciadorDeCamera::camera.y;
+	GerenciadorGrafico::renderEspinho(fonte, dest);
 }
 
 void Espinhos::renderHitbox() {
