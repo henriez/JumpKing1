@@ -6,6 +6,7 @@
 #include "../Personagem/Inimigo/Esqueleto/Esqueleto.h"
 #include "../Personagem/Inimigo/Zumbi/Zumbi.h"
 #include "../Personagem/Inimigo/Chefe/Chefe.h"
+#include "../Projetil/Projetil.h"
 
 class ListaDeEntidades {
 public:

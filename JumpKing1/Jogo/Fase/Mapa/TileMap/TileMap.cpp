@@ -332,6 +332,6 @@ void TileMap::clear() {
 	GerenciadorDeColisao::clear();
 }
 
-Vector2D TileMap::getNTiles() {
+SDL_Point TileMap::getNTiles() {
 	return nTiles;
 }

@@ -26,7 +26,7 @@ private:
 	bool isHovering;
 	bool isClicked;
 
-	Vector2D getMousePos();
+	SDL_Point getMousePos();
 public:
 
 	Button();

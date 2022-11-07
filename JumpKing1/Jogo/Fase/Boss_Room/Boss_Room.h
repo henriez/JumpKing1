@@ -14,13 +14,13 @@ public:
 	void atualizar();
 	void render();
 	static int tamanhoTile();
-	static Vector2D getDimensoes();
+	static SDL_Point getDimensoes();
 	
 	void clear();
 
 private:
 	SDL_Texture* backgroundTex; //background
-	static Vector2D nTiles;
+	static SDL_Point nTiles;
 	static int tamanhoDoTile;
 	TileMap tileMap;
 };

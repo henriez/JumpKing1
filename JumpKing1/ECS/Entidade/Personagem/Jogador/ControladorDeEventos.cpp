@@ -37,6 +37,9 @@ void ControladorDeEventos::atualizar() {
 		case SDLK_d:
 			transform->velocidade.x = 1;
 			break;
+		case SDLK_LSHIFT:
+			jogador->shoot();
+			break;
 		case SDLK_SPACE:
 			//if (jogador->inGround())
 				transform->velocidade.y = -2;
@@ -47,12 +50,4 @@ void ControladorDeEventos::atualizar() {
 		}
 	}
 
-	if (Jogo::evento.type == SDL_KEYDOWN) {
-		switch (Jogo::evento.key.keysym.sym) {
-		case SDLK_p:
-			std::cout << jogador->getComponente<ComponenteTransform>()->posicao.x << " " << jogador->getComponente<ComponenteTransform>()->posicao.y << std::endl;
-		default:
-			break;
-		}
-	}
 }

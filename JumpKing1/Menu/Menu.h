@@ -22,6 +22,9 @@ public:
 		gameOver.init();
 	}
 
+	void atualizar() {}
+	void render() {}
+
 	MainMenu start;
 	PauseMenu pause;
 	SettingsMenu settings;

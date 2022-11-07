@@ -8,7 +8,6 @@ class PauseMenu;
 class GameOverMenu;
 class SettingsMenu;
 class Fase;
-class Vector2D;
 class ListaDeEntidades;
 
 class GerenciadorGrafico
@@ -26,7 +25,7 @@ public:
 	//static void render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino);
 	static void render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino, bool flip = false);
 
-	static Vector2D getDimensoesJanela();
+	static SDL_Point getDimensoesJanela();
 
 	static void renderFase(Fase* fase);
 
@@ -51,6 +50,6 @@ private:
 	static SDL_Texture* coracao;
 	static SDL_Renderer* renderer;
 	static SDL_Window* window;
-	static Vector2D dimensoesJanela;
+	static SDL_Point dimensoesJanela;
 	static ListaDeEntidades* entidades;
 };

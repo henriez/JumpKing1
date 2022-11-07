@@ -66,6 +66,7 @@ void Fase::inicializar(const int id) {
 		en4T1->getComponente<ComponenteTransform>()->posicao.x = 1500;
 		en4T1->getComponente<ComponenteTransform>()->posicao.y = 5984;
 		listaEntidades.addEntidade(static_cast<Entidade*>(en4T1));
+
 	}
 
 	Zumbi* zumbi = new Zumbi;
@@ -89,6 +90,8 @@ void Fase::atualizar() {
 		if (mapa != nullptr) {
 			mapa->atualizar();
 		}
+		GerenciadorDeColisao::atualizaProjeteis();
+		GerenciadorDeColisao::atualizaObstaculos();
 		GerenciadorDeColisao::colisao_jogador1();
 		GerenciadorDeCamera::Atualiza();
 		
@@ -104,6 +107,7 @@ void Fase::atualizar() {
 void Fase::render() {
 	mapa->render();
 	GerenciadorDeColisao::renderObstaculos();
+	GerenciadorDeColisao::renderProjeteis();
 	listaEntidades.render();
 }
 

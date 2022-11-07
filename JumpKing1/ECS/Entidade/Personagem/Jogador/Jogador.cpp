@@ -8,6 +8,7 @@ Jogador::Jogador() : speed(8), maxSpeed(4) {
 	inicializar();
 	controladorEventos.setTransform(this);
 	onGround = false;
+	flip = false;
 }
 
 Jogador::~Jogador() {}
@@ -30,6 +31,9 @@ void Jogador::inicializar(){
 }
 
 void Jogador::atualizar() {
+
+	if (getComponente<ComponenteTransform>()->velocidade.x < 0 ) { flip = true; }
+	else if ((getComponente<ComponenteTransform>()->velocidade.x > 0)) { flip = false; }
 	ComponenteTransform* transform = getComponente<ComponenteTransform>();
 	getComponente<ComponenteColisao>()->setPos(transform->posicao.x, transform->posicao.y);
 
@@ -57,12 +61,13 @@ void Jogador::render() {
 	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
 	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
 
-	getComponente<ComponenteSprite>()->render(posRect);
+	SDL_Rect fonte = { 0,0,32,32 }; //muda caso jogador seja animado
+	getComponente<ComponenteSprite>()->render(posRect, fonte, flip);
 
 	//coloca CORACOES na tela
 	int maxSaude = getComponente<ComponenteSaude>()->getMaxHealth();
 	int saude = getComponente<ComponenteSaude>()->getHealth();
-	SDL_Rect fonte = { 0,0,40,40 };
+	fonte = { 0,0,40,40 };
 
 	for (int i = 0; i < saude; i++) {
 		posRect.x = (0.03 * i + 0.02) * GerenciadorDeCamera::camera.w;
@@ -70,6 +75,16 @@ void Jogador::render() {
 		posRect.w = posRect.h = 40;
 		GerenciadorGrafico::renderCoracao(fonte, posRect);
 	}
+}
+
+void Jogador::shoot() {
+	Projetil* proj = new Projetil;
+	proj->getComponente<ComponenteTransform>()->posicao.x = getComponente<ComponenteTransform>()->posicao.x;
+	proj->getComponente<ComponenteTransform>()->posicao.y = getComponente<ComponenteTransform>()->posicao.y;
+	if (flip) { proj->getComponente<ComponenteTransform>()->velocidade.x = -3; }
+	else { proj->getComponente<ComponenteTransform>()->velocidade.x = 3; }
+	
+	GerenciadorDeColisao::addProjetil(proj);
 }
 
 void Jogador::damage() {

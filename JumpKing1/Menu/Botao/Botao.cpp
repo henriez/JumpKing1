@@ -54,8 +54,8 @@ void Button::render() {
 	GerenciadorGrafico::render(texture, fonte, pos);
 }
 
-Vector2D Button::getMousePos() {
-	Vector2D v;
+SDL_Point Button::getMousePos() {
+	SDL_Point v;
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 	v.x = x;

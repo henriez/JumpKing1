@@ -11,6 +11,7 @@ public:
 	bool inGround() const;
 	void atualizar();
 	void render();
+	void shoot();
 	void damage();
 	bool isAlive();
 
@@ -23,4 +24,5 @@ private:
 	const int speed;
 	const int maxSpeed;
 	bool onGround;
+	bool flip;
 };

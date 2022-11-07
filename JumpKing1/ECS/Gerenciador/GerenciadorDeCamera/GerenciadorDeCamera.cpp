@@ -32,7 +32,7 @@ void GerenciadorDeCamera::Atualiza() {
 void GerenciadorDeCamera::AtualizaJogador() {
 
 	ComponenteTransform* transform = jogador->getComponente<ComponenteTransform>();
-	Vector2D dimMapa = Mapa::getDimensoes();
+	SDL_Point dimMapa = Mapa::getDimensoes();
 
 	// Checa bordas do mapa em X
 	if (transform->posicao.x < 0 && transform->velocidade.x < 0)

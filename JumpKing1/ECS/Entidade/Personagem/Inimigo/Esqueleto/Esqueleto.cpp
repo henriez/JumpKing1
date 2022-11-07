@@ -57,7 +57,7 @@ void Esqueleto::atualizar() {
 }
 
 void Esqueleto::render() {
-	if (getComponente<ComponenteTransform>()->velocidade.x == -1) { flip = true; }
+	if (getComponente<ComponenteTransform>()->velocidade.x < 0) { flip = true; }
 	else { flip = false; }
 	SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
 	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;

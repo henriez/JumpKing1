@@ -10,7 +10,7 @@ ListaDeEntidades::~ListaDeEntidades() {
 void ListaDeEntidades::atualizar() {
 	for (auto& e : listaEntidades)
 		if (e != nullptr)
-		e->atualizar();
+			e->atualizar();
 }
 
 void ListaDeEntidades::addEntidade(Entidade* en) {

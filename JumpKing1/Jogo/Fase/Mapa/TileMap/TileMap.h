@@ -18,14 +18,14 @@ public:
 
 	void clear();
 
-	Vector2D getNTiles();
+	SDL_Point getNTiles();
 private:
 	std::vector<Tile*> camada1;
 	std::vector<Tile*> camada2;
 	std::vector<Tile*> hitbox_plataformas;
 
 
-	Vector2D nTiles;
+	SDL_Point nTiles;
 
 	std::vector<SDL_Point> posicoes_lava;
 	std::vector<SDL_Point> posicoes_espinhos;

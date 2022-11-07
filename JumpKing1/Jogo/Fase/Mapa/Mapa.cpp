@@ -5,7 +5,7 @@
 #include "../../../ECS/Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
 #include <iostream>
 
-Vector2D Mapa::nTiles;
+SDL_Point Mapa::nTiles;
 int Mapa::tamanhoDoTile;
 
 const char* mapa1_camada1 = "Assets/TileMap/Mapa1/mapa1_camada_tiles_1.csv";
@@ -92,8 +92,11 @@ void Mapa::setDimMapa(int w, int h) {
 	nTiles.y = h;
 }
 
-Vector2D Mapa::getDimensoes() {
-	return nTiles*tamanhoDoTile;
+SDL_Point Mapa::getDimensoes() {
+	SDL_Point temp = nTiles;
+	temp.x *= tamanhoDoTile;
+	temp.y *= tamanhoDoTile;
+	return temp;
 }
 
 void Mapa::clear() {

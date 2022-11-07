@@ -5,7 +5,7 @@
 #include "../../../ECS/Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
 #include <iostream>
 
-Vector2D Boss_Room::nTiles;
+SDL_Point Boss_Room::nTiles;
 int Boss_Room::tamanhoDoTile;
 
 const char* boss1_camada1 = "Assets/TileMap/Mapa1/Boss_Room/boss_room_Camada_0.csv";
@@ -64,8 +64,11 @@ int Boss_Room::tamanhoTile() {
 	return tamanhoDoTile;
 }
 
-Vector2D Boss_Room::getDimensoes() {
-	return nTiles*tamanhoDoTile;
+SDL_Point Boss_Room::getDimensoes() {
+	SDL_Point temp = nTiles;
+	temp.x *= tamanhoDoTile;
+	temp.y *= tamanhoDoTile;
+	return temp;
 }
 
 void Boss_Room::clear() {

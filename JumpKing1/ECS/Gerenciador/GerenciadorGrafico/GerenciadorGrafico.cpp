@@ -22,7 +22,7 @@ SDL_Texture* GerenciadorGrafico::espinhos = nullptr;
 SDL_Texture* GerenciadorGrafico::coracao = nullptr;
 SDL_Renderer* GerenciadorGrafico::renderer = nullptr;
 SDL_Window* GerenciadorGrafico::window = nullptr;
-Vector2D GerenciadorGrafico::dimensoesJanela;
+SDL_Point GerenciadorGrafico::dimensoesJanela;
 ListaDeEntidades* GerenciadorGrafico::entidades = nullptr;
 
 GerenciadorGrafico::GerenciadorGrafico() {
@@ -73,7 +73,7 @@ SDL_Texture* GerenciadorGrafico::LoadTexture(const char* fileName){
 	return tex;
 }
 
-Vector2D GerenciadorGrafico::getDimensoesJanela() {
+SDL_Point GerenciadorGrafico::getDimensoesJanela() {
 	return dimensoesJanela;
 }
 
