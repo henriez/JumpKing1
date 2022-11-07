@@ -7,6 +7,8 @@
 #include "SettingsMenu/SettingsMenu.h"
 #include "LeaderboardMenu/LeaderboardMenu.h"
 #include "LevelMenu/LevelMenu.h"
+#include "SaveMenu/SaveMenu.h"
+#include "LoadMenu/LoadMenu.h"
 
 class Menu : public Ente{
 public:
@@ -20,6 +22,8 @@ public:
 		leaderboard.init();
 		level.init();
 		gameOver.init();
+		save.init();
+		load.init();
 	}
 
 	void atualizar() {}
@@ -31,4 +35,6 @@ public:
 	LeaderboardMenu leaderboard;
 	LevelMenu level;
 	GameOverMenu gameOver;
+	SaveMenu save;
+	LoadMenu load;
 };

@@ -12,11 +12,12 @@ class ListaDeEntidades {
 public:
 	ListaDeEntidades();
 	~ListaDeEntidades();
+	//int size() { return listaEntidades.size(); }
 	void atualizar();
 	void addEntidade(Entidade* en);
 	void render();
 	void clear();
-private:
+//private:
 	std::vector<Entidade*> listaEntidades;
 
 

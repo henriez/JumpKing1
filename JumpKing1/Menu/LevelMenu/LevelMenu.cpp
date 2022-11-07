@@ -17,10 +17,10 @@ void LevelMenu::init() {
 	back.set(0.1 * dm.w, 0.8 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	back.setTex("Assets/Buttons/Back Button.png");
 
-	level1.set(0.75 * dm.w, 0.275 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
+	level1.set(0.75 * dm.w, 0.25 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	level1.setTex("Assets/Buttons/Level 1.png");
 
-	level2.set(0.75 * dm.w, 0.425 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
+	level2.set(0.75 * dm.w, 0.43 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	level2.setTex("Assets/Buttons/Level 2.png");
 
 	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");

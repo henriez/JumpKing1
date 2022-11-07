@@ -7,6 +7,8 @@ class MainMenu;
 class PauseMenu;
 class GameOverMenu;
 class SettingsMenu;
+class SaveMenu;
+class LoadMenu;
 class Fase;
 class ListaDeEntidades;
 
@@ -42,6 +44,8 @@ public:
 	static void renderMenu(PauseMenu& pause);
 	static void renderMenu(GameOverMenu& gameover);
 	static void renderMenu(SettingsMenu& settings);
+	static void renderMenu(SaveMenu& save);
+	static void renderMenu(LoadMenu& load);
 private:
 	static SDL_Texture* tileset;
 	static SDL_Texture* tilesetHitbox;

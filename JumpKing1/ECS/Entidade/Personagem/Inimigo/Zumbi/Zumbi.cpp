@@ -1,6 +1,8 @@
 #include "Zumbi.h"
 
-Zumbi::Zumbi() {}
+Zumbi::Zumbi() {
+	addComponente<ComponenteTransform>();
+}
 
 Zumbi::~Zumbi() {}
 

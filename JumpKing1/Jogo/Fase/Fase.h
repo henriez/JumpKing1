@@ -16,9 +16,11 @@ public:
 	void render();
 	void clear();
 	void gameOver();
+	void save();
 private:
 	ListaDeEntidades listaEntidades;
 	Mapa* mapa;
 	bool player_is_alive;
 	Jogo* jogo;
+	int id;
 };

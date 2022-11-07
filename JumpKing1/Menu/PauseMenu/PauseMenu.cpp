@@ -14,11 +14,14 @@ void PauseMenu::init() {
 	SDL_DisplayMode dm;
 	SDL_GetCurrentDisplayMode(0, &dm);
 
-	quit.set(0.1* dm.w, 0.45 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
+	quit.set(0.1 * dm.w, 0.6 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	quit.setTex("Assets/Buttons/Exit Button.png");
 
 	resume.set(0.35* dm.w, 0.3 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	resume.setTex("Assets/Buttons/Button Resume.png");
+
+	save.set(0.35 * dm.w, 0.45 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
+	save.setTex("Assets/Buttons/Save.png");
 
 	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");
 }
@@ -26,6 +29,7 @@ void PauseMenu::init() {
 void PauseMenu::reset() {
 	resume.reset();
 	quit.reset();
+	save.reset();
 }
 
 int PauseMenu::update() {
@@ -34,6 +38,10 @@ int PauseMenu::update() {
 
 	quit.handleEvents();
 	if (quit.click()) return BUTTON_QUIT;
+
+	save.handleEvents();
+	if (save.click()) 
+		return BUTTON_SAVE;
 
 	return NO_BUTTON_CLICKED; //nenhum botao foi clicado
 }
@@ -44,4 +52,5 @@ void PauseMenu::render() {
 	GerenciadorGrafico::render(background, fonte, destino);
 	resume.render();
 	quit.render();
+	save.render();
 }

@@ -17,6 +17,6 @@ public:
 	void setScreen(const bool inScreen) { onScreen = inScreen; }
 private:
 	bool onScreen;
-	bool speed;
+	int speed;
 };
 

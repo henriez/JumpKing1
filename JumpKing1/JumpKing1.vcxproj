@@ -168,8 +168,10 @@
     <ClCompile Include="Menu\GameOverMenu\GameOverMenu.cpp" />
     <ClCompile Include="Menu\LeaderboardMenu\LeaderboardMenu.cpp" />
     <ClCompile Include="Menu\LevelMenu\LevelMenu.cpp" />
+    <ClCompile Include="Menu\LoadMenu\LoadMenu.cpp" />
     <ClCompile Include="Menu\MainMenu\MainMenu.cpp" />
     <ClCompile Include="Menu\PauseMenu\PauseMenu.cpp" />
+    <ClCompile Include="Menu\SaveMenu\SaveMenu.cpp" />
     <ClCompile Include="Menu\SettingsMenu\SettingsMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -208,9 +210,11 @@
     <ClInclude Include="Menu\GameOverMenu\GameOverMenu.h" />
     <ClInclude Include="Menu\LeaderboardMenu\LeaderboardMenu.h" />
     <ClInclude Include="Menu\LevelMenu\LevelMenu.h" />
+    <ClInclude Include="Menu\LoadMenu\LoadMenu.h" />
     <ClInclude Include="Menu\MainMenu\MainMenu.h" />
     <ClInclude Include="Menu\Menu.h" />
     <ClInclude Include="Menu\PauseMenu\PauseMenu.h" />
+    <ClInclude Include="Menu\SaveMenu\SaveMenu.h" />
     <ClInclude Include="Menu\SettingsMenu\SettingsMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

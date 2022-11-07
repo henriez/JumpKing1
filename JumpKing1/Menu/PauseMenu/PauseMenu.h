@@ -20,6 +20,7 @@ public:
 private:
 	Button resume;
 	Button quit;
+	Button save;
 	SDL_Texture* background;
 };
 

@@ -1,6 +1,8 @@
 #include "Chefe.h"
 
-Chefe::Chefe() {}
+Chefe::Chefe() {
+	addComponente<ComponenteTransform>();
+}
 
 Chefe::~Chefe() {}
 

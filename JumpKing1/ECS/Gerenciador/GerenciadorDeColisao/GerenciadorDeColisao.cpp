@@ -12,7 +12,7 @@ TileMap* GerenciadorDeColisao::tilemap = nullptr;
 Jogador* GerenciadorDeColisao::jogador1 = nullptr;
 Fase* GerenciadorDeColisao::fase = nullptr;
 std::vector<Obstaculo*> GerenciadorDeColisao::obstaculos;
-std::list<Projetil*> GerenciadorDeColisao::projeteis;
+std::vector<Projetil*> GerenciadorDeColisao::projeteis;
 
 GerenciadorDeColisao::GerenciadorDeColisao() {
 	tilemap = nullptr;
@@ -21,6 +21,45 @@ GerenciadorDeColisao::GerenciadorDeColisao() {
 
 GerenciadorDeColisao::~GerenciadorDeColisao() {}
 
+void GerenciadorDeColisao::saveObstaculos(const char* path) {
+	
+	std::ofstream out(path, std::ios::out);
+	if (out) {
+		for (int i = 0; i < obstaculos.size(); i++) {
+			out << typeid(*obstaculos[i]).name() << " "
+				<< obstaculos[i]->getComponente<ComponenteColisao>()->getColisor().x << " "
+				<< obstaculos[i]->getComponente<ComponenteColisao>()->getColisor().y << " "
+				<< obstaculos[i]->getComponente<ComponenteColisao>()->getColisor().w << " "
+				<< obstaculos[i]->getComponente<ComponenteColisao>()->getColisor().h << std::endl;
+		}
+	}
+	else {
+		std::cout << "Failed saving!\n";
+		return;
+	}
+	out.close();
+}
+
+void GerenciadorDeColisao::saveProjeteis(const char* path) {
+	std::ofstream out(path, std::ios::out);
+	if (out) {
+		for (int i = 0; i < projeteis.size(); i++) {
+			out << typeid(*projeteis[i]).name() << " "
+				<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().x << " "
+				<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().y << " "
+				<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().w << " "
+				<< projeteis[i]->getComponente<ComponenteTransform>()->velocidade.x << " "
+				<< projeteis[i]->getComponente<ComponenteTransform>()->velocidade.y << " "
+				<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().h << std::endl;
+		}
+	}
+	else {
+		std::cout << "Failed saving!\n";
+		return;
+	}
+	out.close();
+}
+
 void GerenciadorDeColisao::setJogador(Jogador* jg) {
 	jogador1 = jg;
 }
@@ -28,7 +67,6 @@ void GerenciadorDeColisao::setJogador(Jogador* jg) {
 void GerenciadorDeColisao::setTileMap(TileMap* tmap) {
 	tilemap = tmap;
 }
-
 
 void GerenciadorDeColisao::setFase(Fase* fs) {
 	fase = fs;

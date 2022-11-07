@@ -54,6 +54,9 @@ void Jogo::mainMenu() {
 	case BUTTON_QUIT:
 		rodando = false;
 		break;
+	case BUTTON_LOAD:
+		loadMenu();
+		break;
 	default:
 		break;
 	}
@@ -74,6 +77,9 @@ void Jogo::pauseMenu() {
 	case BUTTON_RESUME:
 		atualizar();
 		break;
+	case BUTTON_SAVE:
+		saveMenu();
+		break;
 	case BUTTON_QUIT:
 		fase->clear();
 		mainMenu();
@@ -81,7 +87,9 @@ void Jogo::pauseMenu() {
 	default:
 		break;
 	}
-}void Jogo::gameOverMenu() {
+}
+
+void Jogo::gameOverMenu() {
 
 	menu.gameOver.reset();
 	int click = menu.gameOver.update();
@@ -173,6 +181,56 @@ void Jogo::levelMenu() {
 
 }
 
+void Jogo::saveMenu() {
+	menu.save.reset();
+	int click = menu.save.update();
+
+	while (click == NO_BUTTON_CLICKED) {
+		GerenciadorGrafico::renderMenu(menu.save);
+		click = menu.save.update();
+	}
+
+	switch (click) { //apos algum clique
+	case BUTTON_SAVE:
+		fase->save(); //salvar
+		saveMenu();
+		break;
+	case BUTTON_QUIT:
+		fase->clear();
+		mainMenu();
+		break;
+	case BUTTON_BACK:
+		pauseMenu();
+		break;
+	default:
+		break;
+	}
+}
+
+void Jogo::loadMenu() {
+	menu.load.reset();
+	int click = menu.load.update();
+
+	while (click == NO_BUTTON_CLICKED) {
+		GerenciadorGrafico::renderMenu(menu.load);
+		click = menu.load.update();
+	}
+
+	switch (click) { //apos algum clique
+	case BUTTON_START1:
+		fase->inicializar(1); //carregar de arquivo
+		break;
+	case BUTTON_START2:
+		fase->inicializar(2); //carregar de arquivo
+		break;
+	case BUTTON_QUIT:
+		mainMenu();
+		break;
+	default:
+		break;
+	}
+}
+
 void Jogo::atualizar() {
 	Uint32 ticks0 = SDL_GetTicks();
 	Uint32 finalTicks;
@@ -208,5 +266,3 @@ void Jogo::analisaEventos() {
 bool Jogo::executando() {
 	return rodando;
 }
-
-

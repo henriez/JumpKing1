@@ -14,13 +14,16 @@ void MainMenu::init() {
 	SDL_DisplayMode dm;
 	SDL_GetCurrentDisplayMode(0, &dm);
 
-	start.set(0.75 * dm.w, 0.1 * dm.w, 0.13 * dm.w, 0.115*dm.h);
+	start.set(0.75 * dm.w, 0.25 * dm.h, 0.13 * dm.w, 0.115*dm.h);
 	start.setTex("Assets/Buttons/New Game Button.png");
 
-	settings.set(0.75 * dm.w, 0.2 * dm.w, 0.13 * dm.w, 0.115 * dm.h);
+	load.set(0.75 * dm.w, 0.43 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
+	load.setTex("Assets/Buttons/load.png");
+
+	settings.set(0.6 * dm.w, 0.25 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	settings.setTex("Assets/Buttons/Options Button.png");
 
-	leaderboard.set(0.75 * dm.w, 0.3 * dm.w, 0.13 * dm.w, 0.115 * dm.h);
+	leaderboard.set(0.6 * dm.w, 0.43 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	leaderboard.setTex("Assets/Buttons/Button Leaderboard.png");
 
 	quit.set(0.1 * dm.w, 0.8 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
@@ -34,6 +37,7 @@ void MainMenu::reset() {
 	leaderboard.reset();
 	settings.reset();
 	quit.reset();
+	load.reset();
 }
 
 int MainMenu::update() {
@@ -48,7 +52,10 @@ int MainMenu::update() {
 
 	leaderboard.handleEvents();
 	if (leaderboard.click()) return BUTTON_LEADERBOARD;
-	
+
+	load.handleEvents();
+	if (load.click()) return BUTTON_LOAD;
+
 
 	return NO_BUTTON_CLICKED; //nenhum botao foi clicado
 }
@@ -62,4 +69,5 @@ void MainMenu::render() {
 	settings.render();
 	quit.render();
 	leaderboard.render();
+	load.render();
 }

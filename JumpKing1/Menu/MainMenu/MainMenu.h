@@ -21,6 +21,7 @@ private:
 	Button start;
 	Button settings;
 	Button leaderboard;
+	Button load;
 	Button quit;
 
 	SDL_Texture* background;

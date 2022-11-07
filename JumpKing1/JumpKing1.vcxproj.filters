@@ -83,6 +83,12 @@
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Zumbi\Zumbi.cpp">
       <Filter>ECS\Entidade\Personagem\Inimigo\Zumbi</Filter>
     </ClCompile>
+    <ClCompile Include="Menu\SaveMenu\SaveMenu.cpp">
+      <Filter>Menu\SaveMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu\LoadMenu\LoadMenu.cpp">
+      <Filter>Menu\LoadMenu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Jogo">
@@ -192,6 +198,12 @@
     </Filter>
     <Filter Include="ECS\Entidade\Personagem\Inimigo\Zumbi">
       <UniqueIdentifier>{629eb77f-4e2a-473b-9b18-83b7a2388bac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\SaveMenu">
+      <UniqueIdentifier>{42ad2f1f-09f8-422f-8fd6-a505fdc3d8cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\LoadMenu">
+      <UniqueIdentifier>{d0201c1c-d135-444a-827d-657aab791ae5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +321,12 @@
     </ClInclude>
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Zumbi\Zumbi.h">
       <Filter>ECS\Entidade\Personagem\Inimigo\Zumbi</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu\SaveMenu\SaveMenu.h">
+      <Filter>Menu\SaveMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu\LoadMenu\LoadMenu.h">
+      <Filter>Menu\LoadMenu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

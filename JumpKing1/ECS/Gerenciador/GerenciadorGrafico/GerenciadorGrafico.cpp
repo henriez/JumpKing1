@@ -157,3 +157,17 @@ void GerenciadorGrafico::renderMenu(SettingsMenu& settings) {
 	settings.render();
 	SDL_RenderPresent(renderer);
 }
+
+void GerenciadorGrafico::renderMenu(SaveMenu& save) {
+	SDL_RenderClear(renderer);
+	SDL_PollEvent(&Jogo::evento);
+	save.render();
+	SDL_RenderPresent(renderer);
+}
+
+void GerenciadorGrafico::renderMenu(LoadMenu& load) {
+	SDL_RenderClear(renderer);
+	SDL_PollEvent(&Jogo::evento);
+	load.render();
+	SDL_RenderPresent(renderer);
+}

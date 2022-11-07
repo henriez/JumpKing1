@@ -1,11 +1,13 @@
 #include "Fase.h"
 #include "../../ECS/Gerenciador/GerenciadorDeCamera/GerenciadorDeCamera.h"
 #include "../../ECS/Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
+#include <fstream>
 
 Fase::Fase() {
 	mapa = nullptr;
 	player_is_alive = true;
 	jogo = nullptr;
+	id = 0;
 }
 
 Fase::~Fase() {
@@ -15,7 +17,7 @@ Fase::~Fase() {
 }
 
 void Fase::inicializar(const int id) {
-	GerenciadorGrafico::setListaDeEntidades(&listaEntidades);
+	this->id = id;
 	GerenciadorDeColisao::setFase(this);
 	mapa = new Mapa;
 	Jogador* jogador = new Jogador;
@@ -35,16 +37,6 @@ void Fase::inicializar(const int id) {
 		break;
 	}
 	GerenciadorDeCamera::setJogador(jogador);
-
-	// Escolher lugares aleatorios e criar mais inimigos. Ex:
-	/*
-	for (qtd = 0; qtd < qtdMax; qtd++) {
-		Esqueleto* tmp = new Esqueleto;
-		tmp->getComponente<ComponenteTransform>()->posicao.x = lugarX;
-		tmp->getComponente<ComponenteTransform>()->posicao.y = lugarY;
-		listaEntidades.addEntidade(static_cast<Entidade*>(tmp));
-	}
-	*/
 	
 	if (id == 1) {
 		Esqueleto* en1T1 = new Esqueleto;
@@ -120,4 +112,53 @@ void Fase::clear() {
 void Fase::gameOver() {
 	//clear();
 	player_is_alive = false;
+}
+
+void Fase::save() {
+	std::ofstream out;
+	if (id == 1) {
+		out.open("Saves/Fase1/entidades.dat", std::ios::out);
+		if (out) {
+			for (int i = 0; i < listaEntidades.listaEntidades.size(); i++) {
+				out << typeid(*listaEntidades.listaEntidades[i]).name() << " "
+					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->posicao.x << " "
+					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->posicao.y << " "
+					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->velocidade.x << " "
+					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->velocidade.y << std::endl; //retorna apenas Entidade*
+			}
+		} //aqui salva os dados
+		else {
+				std::cout << "Failed saving!\n";
+				return;
+			}
+		out.close();
+		
+		GerenciadorDeColisao::saveProjeteis("Saves/Fase1/projeteis.dat");
+		GerenciadorDeColisao::saveObstaculos("Saves/Fase1/obstaculos.dat");
+	}
+	else if (id == 2) {
+		out.open("Saves/Fase2/entidades.dat", std::ios::out);
+		if (out) {} //aqui salva os dados
+		else {
+			std::cout << "Failed saving!\n";
+			return;
+		}
+		out.close();
+
+		out.open("Saves/Fase2/obstaculos.dat", std::ios::out);
+		if (out) {} //aqui salva os dados
+		else {
+			std::cout << "Failed saving!\n";
+			return;
+		}
+		out.close();
+
+		out.open("Saves/Fase2/projeteis.dat", std::ios::out);
+		if (out) {} //aqui salva os dados
+		else {
+			std::cout << "Failed saving!\n";
+			return;
+		}
+		out.close();
+	}
 }

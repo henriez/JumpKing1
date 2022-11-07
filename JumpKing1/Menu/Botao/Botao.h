@@ -15,8 +15,11 @@
 #define BUTTON_SETTINGS 4
 #define BUTTON_RESUME 5
 #define BUTTON_LEADERBOARD 6
+#define BUTTON_SAVE 7
+#define BUTTON_BACK 8
+#define BUTTON_LOAD 9
 
-#define NO_BUTTON_CLICKED 7
+#define NO_BUTTON_CLICKED 0
 
 class Button {
 private:

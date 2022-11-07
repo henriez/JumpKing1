@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <vector>
 #include <list>
+#include <fstream>
 
 class Jogador;
 class TileMap;
@@ -18,6 +19,9 @@ public:
 	~GerenciadorDeColisao();
 
 	static Jogador* getJogador1();
+
+	static void saveObstaculos(const char* path);
+	static void saveProjeteis(const char* path);
 
 	static void addObstaculo(Obstaculo* obst);
 	static void atualizaObstaculos();
@@ -41,6 +45,6 @@ private:
 	static TileMap* tilemap;
 	static Fase* fase;
 	static std::vector<Obstaculo*> obstaculos;
-	static std::list<Projetil*> projeteis;
+	static std::vector<Projetil*> projeteis;
 };
 
