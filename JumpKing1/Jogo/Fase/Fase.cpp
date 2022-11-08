@@ -2,6 +2,8 @@
 #include "../../ECS/Gerenciador/GerenciadorDeCamera/GerenciadorDeCamera.h"
 #include "../../ECS/Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
 #include <fstream>
+#include <string>
+using namespace std;
 
 Fase::Fase() {
 	mapa = nullptr;
@@ -36,7 +38,6 @@ void Fase::inicializar(const int id) {
 	default:
 		break;
 	}
-	GerenciadorDeCamera::setJogador(jogador);
 	
 	if (id == 1) {
 		Esqueleto* en1T1 = new Esqueleto;
@@ -124,7 +125,8 @@ void Fase::save() {
 					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->posicao.x << " "
 					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->posicao.y << " "
 					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->velocidade.x << " "
-					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->velocidade.y << std::endl; //retorna apenas Entidade*
+					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->velocidade.y << " "
+					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteSaude>()->getHealth() << std::endl;
 			}
 		} //aqui salva os dados
 		else {
@@ -136,29 +138,265 @@ void Fase::save() {
 		GerenciadorDeColisao::saveProjeteis("Saves/Fase1/projeteis.dat");
 		GerenciadorDeColisao::saveObstaculos("Saves/Fase1/obstaculos.dat");
 	}
+
 	else if (id == 2) {
 		out.open("Saves/Fase2/entidades.dat", std::ios::out);
-		if (out) {} //aqui salva os dados
+		if (out) {
+			for (int i = 0; i < listaEntidades.listaEntidades.size(); i++) {
+				out << typeid(*listaEntidades.listaEntidades[i]).name() << " "
+					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->posicao.x << " "
+					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->posicao.y << " "
+					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->velocidade.x << " "
+					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->velocidade.y << " "
+					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteSaude>()->getHealth() << std::endl;
+			}
+		}
 		else {
 			std::cout << "Failed saving!\n";
 			return;
 		}
 		out.close();
 
-		out.open("Saves/Fase2/obstaculos.dat", std::ios::out);
-		if (out) {} //aqui salva os dados
-		else {
-			std::cout << "Failed saving!\n";
-			return;
-		}
-		out.close();
-
-		out.open("Saves/Fase2/projeteis.dat", std::ios::out);
-		if (out) {} //aqui salva os dados
-		else {
-			std::cout << "Failed saving!\n";
-			return;
-		}
-		out.close();
+		GerenciadorDeColisao::saveProjeteis("Saves/Fase2/projeteis.dat");
+		GerenciadorDeColisao::saveObstaculos("Saves/Fase2/obstaculos.dat");
 	}
+}
+
+void Fase::load(const int id) {
+	string esqueleto = "Esqueleto";
+	string zumbi = "Zumbi";
+	string chefe = "Chefe";
+	string jogador = "Jogador";
+	string lava = "Lava";
+	string espinhos = "Espinhos";
+	string projetil = "Projetil";
+	std::ifstream in;
+
+	GerenciadorDeColisao::setFase(this);
+	mapa = new Mapa;
+	player_is_alive = true;
+	mapa->reload(id);
+
+	this->id = id;
+
+	if (id == 1) {
+		in.open("Saves/Fase1/entidades.dat", std::ios::in);
+		if (in) {
+			string classe, nomeClasse;
+			int saude;
+			float x, y, vx, vy;
+
+			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy >> saude) {
+				if (nomeClasse == jogador) {
+					Jogador* jog = new Jogador;
+					jog->getComponente<ComponenteTransform>()->posicao.x = x;
+					jog->getComponente<ComponenteTransform>()->posicao.y = y;
+					jog->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					jog->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					jog->getComponente<ComponenteSaude>()->init(saude);
+					listaEntidades.addEntidade(static_cast<Entidade*>(jog));
+
+					GerenciadorDeCamera::setJogador(jog);
+					GerenciadorDeColisao::setJogador(jog);
+				}
+				else if (nomeClasse == esqueleto) {
+					Esqueleto* esq = new Esqueleto;
+					esq->getComponente<ComponenteTransform>()->posicao.x = x;
+					esq->getComponente<ComponenteTransform>()->posicao.y = y;
+					esq->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					esq->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					esq->getComponente<ComponenteSaude>()->init(saude);
+					listaEntidades.addEntidade(static_cast<Entidade*>(esq));
+				}
+				else if (nomeClasse == zumbi) {
+					Zumbi* zum = new Zumbi;
+					zum->getComponente<ComponenteTransform>()->posicao.x = x;
+					zum->getComponente<ComponenteTransform>()->posicao.y = y;
+					zum->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					zum->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					zum->getComponente<ComponenteSaude>()->init(saude);
+					listaEntidades.addEntidade(static_cast<Entidade*>(zum));
+				}
+				else if (nomeClasse == chefe) {
+					Chefe* che = new Chefe;
+					che->getComponente<ComponenteTransform>()->posicao.x = x;
+					che->getComponente<ComponenteTransform>()->posicao.y = y;
+					che->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					che->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					che->getComponente<ComponenteSaude>()->init(saude);
+					listaEntidades.addEntidade(static_cast<Entidade*>(che));
+				}
+			}
+
+		}
+		else {
+			jogo->mainMenu();
+			std::cerr << " Arquivo nao pode ser aberto " << endl;
+			return;
+		}
+		
+		in.close();
+
+		in.open("Saves/Fase1/obstaculos.dat", std::ios::in);
+		if (in) {
+			string classe, nomeClasse;
+			int x, y, w, h;
+
+			while (in >> classe >> nomeClasse >> x >> y >> w >> h) {
+				if (nomeClasse == espinhos) {
+					Espinhos* esp = new Espinhos;
+					esp->getComponente<ComponenteColisao>()->set(x, y, w, h);
+					GerenciadorDeColisao::addObstaculo(esp);
+
+				}
+				else if (nomeClasse == lava) {
+					Lava* lav = new Lava;
+					lav->getComponente<ComponenteColisao>()->set(x, y, w, h);
+					GerenciadorDeColisao::addObstaculo(lav);
+				}
+			}
+
+		}
+		else {
+			jogo->mainMenu();
+			std::cerr << " Arquivo nao pode ser aberto " << endl;
+			return;
+		}
+		
+		in.close();
+
+		in.open("Saves/Fase1/projeteis.dat", std::ios::in);
+		if (in) {
+			string classe, nomeClasse;
+			float x, y, vx, vy;
+
+			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy) {
+				Projetil* pro = new Projetil;
+				pro->getComponente<ComponenteTransform>()->posicao.x = x;
+				pro->getComponente<ComponenteTransform>()->posicao.y = y;
+				pro->getComponente<ComponenteTransform>()->velocidade.x = vx;
+				pro->getComponente<ComponenteTransform>()->velocidade.y = vy;
+				GerenciadorDeColisao::addProjetil(pro);
+			}
+
+		}
+		else {
+			jogo->mainMenu();
+			std::cerr << " Arquivo nao pode ser aberto " << endl;
+			return;
+		}
+
+		in.close();
+	}
+
+	else if (id == 2) {
+		in.open("Saves/Fase2/entidades.dat", std::ios::in);
+		if (in) {
+			string classe, nomeClasse;
+			int saude;
+			float x, y, vx, vy;
+
+			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy >> saude) {
+				if (nomeClasse == jogador) {
+					Jogador* jog = new Jogador;
+					jog->getComponente<ComponenteTransform>()->posicao.x = x;
+					jog->getComponente<ComponenteTransform>()->posicao.y = y;
+					jog->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					jog->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					jog->getComponente<ComponenteSaude>()->init(saude);
+					listaEntidades.addEntidade(static_cast<Entidade*>(jog));
+
+					GerenciadorDeCamera::setJogador(jog);
+					GerenciadorDeColisao::setJogador(jog);
+				}
+				else if (nomeClasse == esqueleto) {
+					Esqueleto* esq = new Esqueleto;
+					esq->getComponente<ComponenteTransform>()->posicao.x = x;
+					esq->getComponente<ComponenteTransform>()->posicao.y = y;
+					esq->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					esq->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					esq->getComponente<ComponenteSaude>()->init(saude);
+					listaEntidades.addEntidade(static_cast<Entidade*>(esq));
+				}
+				else if (nomeClasse == zumbi) {
+					Zumbi* zum = new Zumbi;
+					zum->getComponente<ComponenteTransform>()->posicao.x = x;
+					zum->getComponente<ComponenteTransform>()->posicao.y = y;
+					zum->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					zum->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					zum->getComponente<ComponenteSaude>()->init(saude);
+					listaEntidades.addEntidade(static_cast<Entidade*>(zum));
+				}
+				else if (nomeClasse == chefe) {
+					Chefe* che = new Chefe;
+					che->getComponente<ComponenteTransform>()->posicao.x = x;
+					che->getComponente<ComponenteTransform>()->posicao.y = y;
+					che->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					che->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					che->getComponente<ComponenteSaude>()->init(saude);
+					listaEntidades.addEntidade(static_cast<Entidade*>(che));
+				}
+			}
+
+		}
+		else {
+			jogo->mainMenu();
+			std::cerr << " Arquivo nao pode ser aberto " << endl;
+			return;
+		}
+
+		in.close();
+
+		in.open("Saves/Fase2/obstaculos.dat", std::ios::in);
+		if (in) {
+			string classe, nomeClasse;
+			int x, y, w, h;
+
+			while (in >> classe >> nomeClasse >> x >> y >> w >> h) {
+				if (nomeClasse == espinhos) {
+					Espinhos* esp = new Espinhos;
+					esp->getComponente<ComponenteColisao>()->set(x, y, w, h);
+					GerenciadorDeColisao::addObstaculo(esp);
+
+				}
+				else if (nomeClasse == lava) {
+					Lava* lav = new Lava;
+					lav->getComponente<ComponenteColisao>()->set(x, y, w, h);
+					GerenciadorDeColisao::addObstaculo(lav);
+				}
+			}
+
+		}
+		else {
+			jogo->mainMenu();
+			std::cerr << " Arquivo nao pode ser aberto " << endl;
+			return;
+		}
+
+		in.close();
+
+		in.open("Saves/Fase2/projeteis.dat", std::ios::in);
+		if (in) {
+			string classe, nomeClasse;
+			float x, y, vx, vy;
+
+			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy) {
+				Projetil* pro = new Projetil;
+				pro->getComponente<ComponenteTransform>()->posicao.x = x;
+				pro->getComponente<ComponenteTransform>()->posicao.y = y;
+				pro->getComponente<ComponenteTransform>()->velocidade.x = vx;
+				pro->getComponente<ComponenteTransform>()->velocidade.y = vy;
+				GerenciadorDeColisao::addProjetil(pro);
+			}
+
+		}
+		else {
+			jogo->mainMenu();
+			std::cerr << " Arquivo nao pode ser aberto " << endl;
+			return;
+		}
+
+		in.close();
+	}
+	
 }

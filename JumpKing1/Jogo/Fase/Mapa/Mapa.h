@@ -13,6 +13,7 @@ public:
 	Mapa();
 	~Mapa();
 	void inicializar(int id);
+	void reload(int id);
 
 	void atualizar();
 	void render();

@@ -11,6 +11,7 @@ public:
 	~Fase();
 
 	void inicializar(const int id);
+	void load(const int id);
 	void setJogo(Jogo* jg);
 	void atualizar();
 	void render();

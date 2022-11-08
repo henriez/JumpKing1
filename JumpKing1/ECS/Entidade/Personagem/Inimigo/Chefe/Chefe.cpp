@@ -2,6 +2,7 @@
 
 Chefe::Chefe() {
 	addComponente<ComponenteTransform>();
+	addComponente<ComponenteSaude>();
 }
 
 Chefe::~Chefe() {}

@@ -2,6 +2,7 @@
 
 Zumbi::Zumbi() {
 	addComponente<ComponenteTransform>();
+	addComponente<ComponenteSaude>();
 }
 
 Zumbi::~Zumbi() {}

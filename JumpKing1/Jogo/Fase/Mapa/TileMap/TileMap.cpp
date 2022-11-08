@@ -116,6 +116,34 @@ void TileMap::carregaPosicoesValidas(const char* posicoes_lava, const char* posi
 	}
 
 	mapFile.close();
+
+	Lava* lava = nullptr;
+	Espinhos* espinhos = nullptr;
+	SDL_Point random_pos = { 0,0 };
+
+	//geracao aleatoria
+	if (this->posicoes_espinhos.size() > 2) {
+		int nEspinhos = rand() % (this->posicoes_espinhos.size() / 2) + 3;
+
+		for (int i = 0; i < nEspinhos; i++) {
+			random_pos = this->posicoes_espinhos[rand() % this->posicoes_espinhos.size()]; //posicao aleatoria do vetor retorna uma posicao valida definida
+			espinhos = new Espinhos;
+			espinhos->getComponente<ComponenteColisao>()->set(random_pos.x, random_pos.y + 16, 32, 16);
+			GerenciadorDeColisao::addObstaculo(static_cast<Obstaculo*>(espinhos));
+			//adiciona espinhos ao manager
+		}
+	}
+
+	if (this->posicoes_lava.size() > 2) {
+		int nLavas = rand() % (this->posicoes_lava.size() / 2) + 3;
+		for (int i = 0; i < nLavas; i++) {
+			random_pos = this->posicoes_lava[rand() % this->posicoes_lava.size()]; //posicao aleatoria do vetor retorna uma posicao valida definida
+			lava = new Lava;
+			lava->getComponente<ComponenteColisao>()->set(random_pos.x, random_pos.y, 32, 32);
+			GerenciadorDeColisao::addObstaculo(static_cast<Obstaculo*>(lava));
+			//adiciona lava ao manager
+		}
+	}
 }
 
 void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_colisao, int tilesW, int tilesH) {
@@ -123,10 +151,6 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 
 	int algarismos[3];
 	algarismos[0] = algarismos[1] = algarismos[2] = 0;
-
-	Lava* lava = nullptr;
-	Espinhos* espinhos = nullptr;
-	SDL_Point random_pos = { 0,0 };
 
 	nTiles.x = tilesW;
 	nTiles.y = tilesH;
@@ -219,30 +243,6 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 	}
 	mapFile.close();
 
-
-	//geracao aleatoria
-	if (posicoes_espinhos.size() > 2) {
-		int nEspinhos = rand() % (posicoes_espinhos.size() / 2) + 3;
-
-		for (int i = 0; i < nEspinhos; i++) {
-			random_pos = posicoes_espinhos[rand() % posicoes_espinhos.size()]; //posicao aleatoria do vetor retorna uma posicao valida definida
-			espinhos = new Espinhos;
-			espinhos->getComponente<ComponenteColisao>()->set(random_pos.x, random_pos.y + 16, 32, 16);
-			GerenciadorDeColisao::addObstaculo(static_cast<Obstaculo*>(espinhos));
-			//adiciona espinhos ao manager
-		}
-	}
-	
-	if (posicoes_lava.size() > 2) {
-		int nLavas = rand() % (posicoes_lava.size() / 2) + 3;
-		for (int i = 0; i < nLavas; i++) {
-			random_pos = posicoes_lava[rand() % posicoes_lava.size()]; //posicao aleatoria do vetor retorna uma posicao valida definida
-			lava = new Lava;
-			lava->getComponente<ComponenteColisao>()->set(random_pos.x, random_pos.y, 32, 32);
-			GerenciadorDeColisao::addObstaculo(static_cast<Obstaculo*>(lava));
-			//adiciona lava ao manager
-		}
-	}
 
 	mapFile.open(cam_colisao);
 	for (int i = 0; i < nTiles.y; i++) {

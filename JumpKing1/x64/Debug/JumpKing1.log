@@ -1,38 +1,6 @@
-﻿  GerenciadorDeColisao.cpp
+﻿  Fase.cpp
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Componentes\SubComponentes\ComponenteSaude.h(14,22): warning C4244: '=': conversão de 'unsigned int' para 'float', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Componentes\SubComponentes\ComponenteSaude.h(32,10): warning C4244: 'return': conversão de 'const float' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Componentes\SubComponentes\ComponenteSaude.h(36,10): warning C4244: 'return': conversão de 'const float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(132,34): warning C4305: '+=': truncamento de 'double' para 'float'
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(137,27): warning C4244: '+=': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(140,43): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(143,43): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(148,27): warning C4244: '+=': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(152,43): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(155,43): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(165,27): warning C4244: '+=': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(169,39): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(170,36): warning C4305: '=': truncamento de 'double' para 'float'
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(177,27): warning C4244: '+=': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(180,39): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(184,39): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(197,27): warning C4244: '+=': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(201,39): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(202,36): warning C4305: '=': truncamento de 'double' para 'float'
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(209,27): warning C4244: '+=': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(212,39): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(216,39): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(243,34): warning C4305: '+=': truncamento de 'double' para 'float'
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(257,27): warning C4244: '+=': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(261,43): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(266,27): warning C4244: '+=': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(269,43): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(272,43): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(329,26): warning C4244: '+=': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(333,38): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(336,38): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(340,26): warning C4244: '+=': conversão de 'float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(343,38): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(346,38): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(358,49): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp(366,49): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Fase.cpp(50,66): warning C4305: '=': truncamento de 'double' para 'float'
   JumpKing1.vcxproj -> C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\x64\Debug\JumpKing1.exe

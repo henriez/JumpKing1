@@ -218,10 +218,10 @@ void Jogo::loadMenu() {
 
 	switch (click) { //apos algum clique
 	case BUTTON_START1:
-		fase->inicializar(1); //carregar de arquivo
+		fase->load(1); //carregar de arquivo
 		break;
 	case BUTTON_START2:
-		fase->inicializar(2); //carregar de arquivo
+		fase->load(2); //carregar de arquivo
 		break;
 	case BUTTON_QUIT:
 		mainMenu();

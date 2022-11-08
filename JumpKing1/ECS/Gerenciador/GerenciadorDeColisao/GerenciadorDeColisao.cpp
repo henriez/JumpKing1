@@ -47,10 +47,8 @@ void GerenciadorDeColisao::saveProjeteis(const char* path) {
 			out << typeid(*projeteis[i]).name() << " "
 				<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().x << " "
 				<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().y << " "
-				<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().w << " "
 				<< projeteis[i]->getComponente<ComponenteTransform>()->velocidade.x << " "
-				<< projeteis[i]->getComponente<ComponenteTransform>()->velocidade.y << " "
-				<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().h << std::endl;
+				<< projeteis[i]->getComponente<ComponenteTransform>()->velocidade.y << std::endl;
 		}
 	}
 	else {
