@@ -1,6 +1,5 @@
 #include "ListaDeEntidades.h"
 
-
 ListaDeEntidades::ListaDeEntidades() {}
 
 ListaDeEntidades::~ListaDeEntidades() {
@@ -19,14 +18,15 @@ void ListaDeEntidades::addEntidade(Entidade* en) {
 
 void ListaDeEntidades::render() {
 	for (auto& e : listaEntidades)
-		e->render();
+		if (e != nullptr)
+			e->render();
 }
 
 void ListaDeEntidades::clear() {
 	for (auto& e : listaEntidades)
-		if (e != NULL) {
+		if (e != nullptr) {
 			delete e;
-			e = NULL;
+			e = nullptr;
 		}
 	listaEntidades.clear();
 }

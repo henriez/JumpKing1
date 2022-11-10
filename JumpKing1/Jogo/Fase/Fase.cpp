@@ -96,8 +96,16 @@ void Fase::atualizar() {
 		GerenciadorDeCamera::Atualiza();
 		GerenciadorDeColisao::atualizaProjeteis();
 		GerenciadorDeColisao::atualizaObstaculos();
+		//GerenciadorDeColisao::atualizaInimigos();
 		GerenciadorDeColisao::colisao_jogador1();
 		event_manager->atualizar();
+
+		if (GerenciadorDeColisao::getJogador1()->isAttacking()) {
+			GerenciadorDeColisao::ataqueJ1();
+		}
+		if (GerenciadorDeColisao::getJogador2()->isAttacking()) {
+			GerenciadorDeColisao::ataqueJ2();
+		}
 	}
 	else {
 		clear();
@@ -169,25 +177,10 @@ void Fase::save()  {
 		}
 		out.close();
 
-		out.open("Saves/Fase1/entidades.dat", std::ios::out);
-		if (out) {
-			for (int i = 0; i < listaEntidades.listaEntidades.size(); i++) {
-				out << typeid(*listaEntidades.listaEntidades[i]).name() << " "
-					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->posicao.x << " "
-					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->posicao.y << " "
-					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->velocidade.x << " "
-					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->velocidade.y << " "
-					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteSaude>()->getHealth() << std::endl;
-			}
-		} //aqui salva os dados
-		else {
-				std::cout << "Failed saving!\n";
-				return;
-			}
-		out.close();
 		
 		GerenciadorDeColisao::saveProjeteis("Saves/Fase1/projeteis.dat");
 		GerenciadorDeColisao::saveObstaculos("Saves/Fase1/obstaculos.dat");
+		GerenciadorDeColisao::saveInimigos("Saves/Fase1/inimigos.dat");
 	}
 
 	else if (id == 2) {
@@ -213,25 +206,9 @@ void Fase::save()  {
 		out.close();
 
 
-		out.open("Saves/Fase2/entidades.dat", std::ios::out);
-		if (out) {
-			for (int i = 0; i < listaEntidades.listaEntidades.size(); i++) {
-				out << typeid(*listaEntidades.listaEntidades[i]).name() << " "
-					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->posicao.x << " "
-					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->posicao.y << " "
-					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->velocidade.x << " "
-					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteTransform>()->velocidade.y << " "
-					<< listaEntidades.listaEntidades[i]->getComponente<ComponenteSaude>()->getHealth() << std::endl;
-			}
-		}
-		else {
-			std::cout << "Failed saving!\n";
-			return;
-		}
-		out.close();
-
 		GerenciadorDeColisao::saveProjeteis("Saves/Fase2/projeteis.dat");
 		GerenciadorDeColisao::saveObstaculos("Saves/Fase2/obstaculos.dat");
+		GerenciadorDeColisao::saveInimigos("Saves/Fase2/inimigos.dat");
 	}
 }
 
@@ -289,49 +266,6 @@ void Fase::load(const int id) {
 		}
 		in.close();
 
-		in.open("Saves/Fase1/entidades.dat", std::ios::in);
-		if (in) {
-			string classe, nomeClasse;
-			int saude;
-			float x, y, vx, vy;
-
-			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy >> saude) {
-				if (nomeClasse == jogador) continue;
-				else if (nomeClasse == esqueleto) {
-					Esqueleto* esq = new Esqueleto(x, y);
-					esq->getComponente<ComponenteTransform>()->velocidade.x = vx;
-					esq->getComponente<ComponenteTransform>()->velocidade.y = vy;
-					esq->getComponente<ComponenteSaude>()->init(saude);
-					listaEntidades.addEntidade(static_cast<Entidade*>(esq));
-				}
-				else if (nomeClasse == zumbi) {
-					Zumbi* zum = new Zumbi;
-					zum->getComponente<ComponenteTransform>()->posicao.x = x;
-					zum->getComponente<ComponenteTransform>()->posicao.y = y;
-					zum->getComponente<ComponenteTransform>()->velocidade.x = vx;
-					zum->getComponente<ComponenteTransform>()->velocidade.y = vy;
-					zum->getComponente<ComponenteSaude>()->init(saude);
-					listaEntidades.addEntidade(static_cast<Entidade*>(zum));
-				}
-				else if (nomeClasse == chefe) {
-					Chefe* che = new Chefe;
-					che->getComponente<ComponenteTransform>()->posicao.x = x;
-					che->getComponente<ComponenteTransform>()->posicao.y = y;
-					che->getComponente<ComponenteTransform>()->velocidade.x = vx;
-					che->getComponente<ComponenteTransform>()->velocidade.y = vy;
-					che->getComponente<ComponenteSaude>()->init(saude);
-					listaEntidades.addEntidade(static_cast<Entidade*>(che));
-				}
-			}
-
-		}
-		else {
-			jogo->mainMenu();
-			std::cerr << " Arquivo nao pode ser aberto " << endl;
-			return;
-		}
-		
-		in.close();
 
 		in.open("Saves/Fase1/obstaculos.dat", std::ios::in);
 		if (in) {
@@ -383,6 +317,43 @@ void Fase::load(const int id) {
 		}
 
 		in.close();
+
+		in.open("Saves/Fase1/inimigos.dat", std::ios::in);
+		if (in) {
+			string classe, nomeClasse;
+			float x, y, vx, vy;
+
+			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy) {
+				if (nomeClasse == esqueleto) {
+					Esqueleto* inimigo = new Esqueleto;
+					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
+					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					GerenciadorDeColisao::addInimigo(inimigo);
+					listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
+				}
+				else if (nomeClasse == zumbi) {
+					Zumbi* inimigo = new Zumbi;
+					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
+					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					GerenciadorDeColisao::addInimigo(inimigo);
+					listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
+				}
+				else if (nomeClasse == chefe) {
+					Chefe* inimigo = new Chefe;
+					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
+					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					GerenciadorDeColisao::addInimigo(inimigo);
+					listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
+				}
+			}
+		}
+		in.close();
 	}
 
 	else if (id == 2) {
@@ -421,50 +392,6 @@ void Fase::load(const int id) {
 		return;
 	}
 		
-		in.close();
-
-		in.open("Saves/Fase2/entidades.dat", std::ios::in);
-		if (in) {
-			string classe, nomeClasse;
-			int saude;
-			float x, y, vx, vy;
-
-			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy >> saude) {
-				if (nomeClasse == jogador) continue;
-				else if (nomeClasse == esqueleto) {
-					Esqueleto* esq = new Esqueleto(x, y);
-					esq->getComponente<ComponenteTransform>()->velocidade.x = vx;
-					esq->getComponente<ComponenteTransform>()->velocidade.y = vy;
-					esq->getComponente<ComponenteSaude>()->init(saude);
-					listaEntidades.addEntidade(static_cast<Entidade*>(esq));
-				}
-				else if (nomeClasse == zumbi) {
-					Zumbi* zum = new Zumbi;
-					zum->getComponente<ComponenteTransform>()->posicao.x = x;
-					zum->getComponente<ComponenteTransform>()->posicao.y = y;
-					zum->getComponente<ComponenteTransform>()->velocidade.x = vx;
-					zum->getComponente<ComponenteTransform>()->velocidade.y = vy;
-					zum->getComponente<ComponenteSaude>()->init(saude);
-					listaEntidades.addEntidade(static_cast<Entidade*>(zum));
-				}
-				else if (nomeClasse == chefe) {
-					Chefe* che = new Chefe;
-					che->getComponente<ComponenteTransform>()->posicao.x = x;
-					che->getComponente<ComponenteTransform>()->posicao.y = y;
-					che->getComponente<ComponenteTransform>()->velocidade.x = vx;
-					che->getComponente<ComponenteTransform>()->velocidade.y = vy;
-					che->getComponente<ComponenteSaude>()->init(saude);
-					listaEntidades.addEntidade(static_cast<Entidade*>(che));
-				}
-			}
-
-		}
-		else {
-			jogo->mainMenu();
-			std::cerr << " Arquivo nao pode ser aberto " << endl;
-			return;
-		}
-
 		in.close();
 
 		in.open("Saves/Fase2/obstaculos.dat", std::ios::in);
@@ -516,6 +443,43 @@ void Fase::load(const int id) {
 			return;
 		}
 
+		in.close();
+
+		in.open("Saves/Fase2/inimigos.dat", std::ios::in);
+		if (in) {
+			string classe, nomeClasse;
+			float x, y, vx, vy;
+
+			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy) {
+				if (nomeClasse == esqueleto) {
+					Esqueleto* inimigo = new Esqueleto;
+					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
+					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					GerenciadorDeColisao::addInimigo(inimigo);
+					listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
+				}
+				else if (nomeClasse == zumbi) {
+					Zumbi* inimigo = new Zumbi;
+					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
+					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					GerenciadorDeColisao::addInimigo(inimigo);
+					listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
+				}
+				else if (nomeClasse == chefe) {
+					Chefe* inimigo = new Chefe;
+					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
+					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
+					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
+					GerenciadorDeColisao::addInimigo(inimigo);
+					listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
+				}
+			}
+		}
 		in.close();
 	}
 	

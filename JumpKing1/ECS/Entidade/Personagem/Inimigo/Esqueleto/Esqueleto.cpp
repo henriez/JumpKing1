@@ -22,7 +22,7 @@ Esqueleto::Esqueleto(float x, float y) {
 	haveTarget = false;
 
 	addComponente<ComponenteColisao>();
-	addComponente<ComponenteSaude>();
+	getComponente<ComponenteSaude>()->init(1);
 	addComponente<ComponenteTransform>();
 	addComponente<ComponenteSprite>();
 	getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/Enemies/Skeleton.png");
@@ -40,6 +40,10 @@ Esqueleto::Esqueleto(float x, float y) {
 Esqueleto::~Esqueleto() {}
 
 void Esqueleto::atualizar() {
+	if (!vulnerable) {
+		if (SDL_GetTicks() - vulnerable_timer > 1000) //dano a cada 1 segundo
+			vulnerable = true;
+	}
 	ComponenteTransform* transform = getComponente<ComponenteTransform>();
 
 	transform->posicao.x += transform->velocidade.x * speed;
@@ -80,34 +84,36 @@ void Esqueleto::atualizar() {
 }
 
 void Esqueleto::render() {
-	if (getComponente<ComponenteTransform>()->velocidade.x < 0) { flip = true; }
-	else if (getComponente<ComponenteTransform>()->velocidade.x > 0) { flip = false; }
+	if (isAlive()) {
+		if (getComponente<ComponenteTransform>()->velocidade.x < 0) { flip = true; }
+		else if (getComponente<ComponenteTransform>()->velocidade.x > 0) { flip = false; }
 
-	SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
-	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
-	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
+		SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
+		posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
+		posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
 
-	// TODO:
-	// Dar prioridade a animações de tomar dano e morrer
-	// Bug ao usar SDL_GetTicks(), animação começa de ponto aleatório
-	// Executar animação até o fim, podendo ser cancelada por outra animção
+		// TODO:
+		// Dar prioridade a animações de tomar dano e morrer
+		// Bug ao usar SDL_GetTicks(), animação começa de ponto aleatório
+		// Executar animação até o fim, podendo ser cancelada por outra animção
 
-	unsigned char frames = 1;
-	switch (state) {
-	case ATTACKING:
-		sprite.y = 0;
-		frames = 13;
-		fSpeed = 150;
-		break;
-	case WALKING:
-		sprite.y = 64 * WALKING;
-		frames = 12;
-		fSpeed = 90;
-		break;
-	default:
-		break;
+		unsigned char frames = 1;
+		switch (state) {
+		case ATTACKING:
+			sprite.y = 0;
+			frames = 13;
+			fSpeed = 150;
+			break;
+		case WALKING:
+			sprite.y = 64 * WALKING;
+			frames = 12;
+			fSpeed = 90;
+			break;
+		default:
+			break;
+		}
+		sprite.x = 64 * static_cast<int>((SDL_GetTicks() / fSpeed) % frames);
+		getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
+		//GerenciadorGrafico::renderInimigoHitbox(posRect);
 	}
-	sprite.x = 64 * static_cast<int>((SDL_GetTicks() / fSpeed) % frames);
-	getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
-	//GerenciadorGrafico::renderInimigoHitbox(posRect);
 }

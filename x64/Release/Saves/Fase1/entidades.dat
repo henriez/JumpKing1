@@ -1,0 +1,8 @@
+class Jogador 1024 896 0 0.1 1
+class Jogador 904 896 0 0.1 1
+class Esqueleto 104 1016 -1 0.05 0
+class Esqueleto 429 1016 1 0.05 0
+class Esqueleto 1179 1016 -1 0.05 0
+class Esqueleto 1243 1016 1 0.05 0
+class Zumbi 0 0 0 0 0
+class Chefe 0 0 0 0 0

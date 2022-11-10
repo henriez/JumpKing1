@@ -10,12 +10,12 @@ public:
 	void setGround(const bool inGround);
 	bool inGround() const;
 	void atualizar();
+	void atacar();
 	void render();
 	void shoot();
-	void damage();
-	bool isAlive();
 
 	const int getSpeed() const { return speed; }
+	bool isAttacking() const { return attacking; }
 private:
 	void inicializar();
 	friend class GerenciadorDeCamera;
@@ -24,4 +24,6 @@ private:
 	const int maxSpeed;
 	bool onGround;
 	bool flip;
+	bool attacking;
+	Uint32 timer;
 };

@@ -9,6 +9,7 @@ class TileMap;
 class Obstaculo;
 class Projetil;
 class Esqueleto;
+class Inimigo;
 class Fase;
 class Jogo;
 class Inimigo;
@@ -21,9 +22,15 @@ public:
 
 	static Jogador* getJogador1();
 	static Jogador* getJogador2();
+	static void ataqueJ1();
+	static void ataqueJ2();
 
 	static void saveObstaculos(const char* path);
 	static void saveProjeteis(const char* path);
+	static void saveInimigos(const char* path);
+
+	static void addInimigo(Inimigo* in);
+	static void atualizaInimigos();
 
 	static void addObstaculo(Obstaculo* obst);
 	static void atualizaObstaculos();
@@ -51,5 +58,6 @@ private:
 	static Fase* fase;
 	static std::vector<Obstaculo*> obstaculos;
 	static std::vector<Projetil*> projeteis;
+	static std::vector<Inimigo*> inimigos;
 };
 

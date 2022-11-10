@@ -14,6 +14,7 @@ Jogador* GerenciadorDeColisao::jogador2 = nullptr;
 Fase* GerenciadorDeColisao::fase = nullptr;
 std::vector<Obstaculo*> GerenciadorDeColisao::obstaculos;
 std::vector<Projetil*> GerenciadorDeColisao::projeteis;
+std::vector<Inimigo*> GerenciadorDeColisao::inimigos;
 
 GerenciadorDeColisao::GerenciadorDeColisao() {
 	tilemap = nullptr;
@@ -59,6 +60,26 @@ void GerenciadorDeColisao::saveProjeteis(const char* path) {
 	out.close();
 }
 
+void GerenciadorDeColisao::saveInimigos(const char* path) {
+	std::ofstream out(path, std::ios::out);
+	if (out) {
+		for (int i = 0; i < inimigos.size(); i++) {
+			if (inimigos[i]->isAlive()){
+				out << typeid(*inimigos[i]).name() << " "
+				<< inimigos[i]->getComponente<ComponenteTransform>()->posicao.x << " "
+				<< inimigos[i]->getComponente<ComponenteTransform>()->posicao.y << " "
+				<< inimigos[i]->getComponente<ComponenteTransform>()->velocidade.x << " "
+				<< inimigos[i]->getComponente<ComponenteTransform>()->velocidade.y << std::endl;
+			}
+		}
+	}
+	else {
+		std::cout << "Failed saving!\n";
+		return;
+	}
+	out.close();
+}
+
 void GerenciadorDeColisao::setJogador(Jogador* jg) {
 	jogador1 = jg;
 }
@@ -73,6 +94,19 @@ void GerenciadorDeColisao::setTileMap(TileMap* tmap) {
 
 void GerenciadorDeColisao::setFase(Fase* fs) {
 	fase = fs;
+}
+
+void GerenciadorDeColisao::addInimigo(Inimigo* in) {
+	inimigos.push_back(in);
+}
+
+void GerenciadorDeColisao::atualizaInimigos() {
+	for (auto& i : inimigos) {
+		if (i->isAlive()) {
+			//delete i;
+			i = nullptr;
+		}
+	}
 }
 
 void GerenciadorDeColisao::addObstaculo(Obstaculo* obst) {
@@ -122,6 +156,10 @@ void GerenciadorDeColisao::clear() {
 	for (auto& p : projeteis)
 		delete p;
 	projeteis.clear();
+
+	//for (auto& i : inimigos)
+		//delete i;
+	inimigos.clear();
 }
 
 void GerenciadorDeColisao::iniciaInimigo(Inimigo* in) {
@@ -185,8 +223,6 @@ void GerenciadorDeColisao::iniciaInimigo(Inimigo* in) {
 void GerenciadorDeColisao::colisao_jogador1() {
 	SDL_Rect initialhitbox = jogador1->getComponente<ComponenteColisao>()->getColisor();
 	SDL_Rect hitbox = initialhitbox;
-
-
 
 	ComponenteTransform* transform = jogador1->getComponente<ComponenteTransform>();
 	ComponenteTransform* transform2 = jogador2->getComponente<ComponenteTransform>();
@@ -321,6 +357,22 @@ void GerenciadorDeColisao::colisao_jogador1() {
 
 	}
 
+	for (auto& i : inimigos) {
+		if (i->isAlive()) {
+			velocity.x = transform->velocidade.x - i->getComponente<ComponenteTransform>()->velocidade.x;
+			velocity.y = transform->velocidade.y - i->getComponente<ComponenteTransform>()->velocidade.y; //velocidade do jogador em relação ao inimigo
+			hitbox = initialhitbox;
+			SDL_Rect colisor = i->getComponente<ComponenteColisao>()->getColisor();
+			if (AABB(colisor, hitbox)) {
+				transform->velocidade.y = -1.4;
+				if (velocity.x >= 0) transform->velocidade.x = -1;
+				else if (velocity.x < 0) transform->velocidade.x = 1;
+				jogador1->damage();
+				break;
+			}
+		}
+	}
+
 	if (!jogador1->isAlive()) { //morreu -> encerra fase
 		fase->gameOver();
 	}
@@ -426,6 +478,37 @@ void GerenciadorDeColisao::colisao_jogador1() {
 
 	}
 
+	for (auto& i : inimigos) {
+		if (i->isAlive()) {
+			hitbox = initialhitbox;
+			hitbox.y += velocity.y * jogador1->getSpeed();
+			SDL_Rect colisor = i->getComponente<ComponenteColisao>()->getColisor();
+			if (AABB(colisor, hitbox)) {
+				if (velocity.y > 0) { //colidiu por cima
+					transform->posicao.y = colisor.y - hitbox.h;
+					transform->velocidade.y = -1.4;
+				}
+				jogador2->damage();
+				break;
+			}
+
+			hitbox = initialhitbox;
+			hitbox.x += velocity.x * jogador1->getSpeed();
+			if (AABB(colisor, hitbox)) {
+				if (velocity.x > 0) { //colidiu pela esquerda
+					transform->posicao.x = colisor.x - hitbox.w;
+					transform->velocidade.x = -1;
+				}
+				else if (velocity.x < 0) { //colidiu pela direita
+					transform->posicao.x = colisor.x + colisor.w;
+					transform->velocidade.x = 1;
+				}
+				jogador2->damage();
+				break;
+			}
+		}
+	}
+
 
 	if (!jogador2->isAlive()) { //morreu -> encerra fase
 		fase->gameOver();
@@ -471,5 +554,55 @@ Jogador* GerenciadorDeColisao::getJogador1(){
 
 Jogador* GerenciadorDeColisao::getJogador2(){
 	return jogador2;
+}
+
+void GerenciadorDeColisao::ataqueJ1() {
+	SDL_Rect hitbox = { 0,0,64,32 };
+	ComponenteTransform* transform = jogador1->getComponente<ComponenteTransform>();
+	if (transform->velocidade.x < 0) { //virado para a esquerda
+		hitbox.x = transform->posicao.x - 2*Mapa::tamanhoTile();
+		hitbox.y = transform->posicao.y;
+	}
+	else {
+		hitbox.x = transform->posicao.x + Mapa::tamanhoTile();
+		hitbox.y = transform->posicao.y;
+	}
+
+	SDL_Rect colisor;
+	for (auto& i : inimigos) {
+		if (i != nullptr) {
+			if (i->isAlive()) {
+				colisor = i->getComponente<ComponenteColisao>()->getColisor();
+				if (AABB(hitbox, colisor)) {
+					i->damage();
+				}
+			}
+		}
+	}
+}
+
+void GerenciadorDeColisao::ataqueJ2() {
+	SDL_Rect hitbox = { 0,0,64,32 };
+	ComponenteTransform* transform = jogador2->getComponente<ComponenteTransform>();
+	if (transform->velocidade.x < 0) { //virado para a esquerda
+		hitbox.x = transform->posicao.x - 2 * Mapa::tamanhoTile();
+		hitbox.y = transform->posicao.y;
+	}
+	else {
+		hitbox.x = transform->posicao.x + Mapa::tamanhoTile();
+		hitbox.y = transform->posicao.y;
+	}
+
+	SDL_Rect colisor;
+	for (auto& i : inimigos) {
+		if (i != nullptr) {
+			if (i->isAlive()) {
+				colisor = i->getComponente<ComponenteColisao>()->getColisor();
+				if (AABB(hitbox, colisor)) {
+					i->damage();
+				}
+			}
+		}
+	}
 }
 

@@ -6,16 +6,15 @@
 
 Jogador::Jogador() : speed(8), maxSpeed(4) {
 	inicializar();
-	//controladorEventos.setJogador1(this);
 	onGround = false;
 	flip = false;
+	attacking = false;
 }
 
 Jogador::~Jogador() {}
 
 void Jogador::inicializar(){
 	addComponente<ComponenteColisao>();
-	addComponente<ComponenteSaude>();
 	addComponente<ComponenteSprite>();
 	addComponente<ComponenteTransform>();
 
@@ -30,7 +29,14 @@ void Jogador::inicializar(){
 }
 
 void Jogador::atualizar() {
-
+	if (!vulnerable) {
+		if (SDL_GetTicks() - vulnerable_timer > 1000) //dano a cada 1 segundo
+			vulnerable = true;
+	}
+	if (attacking) {
+		if (SDL_GetTicks() - timer > 500) //0.5 segundo de duração de ataque
+			attacking = false;
+	}
 	if (getComponente<ComponenteTransform>()->velocidade.x < 0 ) { flip = true; }
 	else if ((getComponente<ComponenteTransform>()->velocidade.x > 0)) { flip = false; }
 	ComponenteTransform* transform = getComponente<ComponenteTransform>();
@@ -44,6 +50,11 @@ void Jogador::atualizar() {
 
 	
 	//controladorEventos.atualizar();
+}
+
+void Jogador::atacar() {
+	attacking = true;
+	timer = SDL_GetTicks();
 }
 
 void Jogador::setGround(const bool inGround) {
@@ -63,9 +74,29 @@ void Jogador::render() {
 	SDL_Rect fonte = { 0,0,32,32 }; //muda caso jogador seja animado
 	getComponente<ComponenteSprite>()->render(posRect, fonte, flip);
 
-	//coloca CORACOES na tela
-	int maxSaude = getComponente<ComponenteSaude>()->getMaxHealth();
-	
+	if (attacking) {
+		SDL_Rect fonte = { 32,0,32,32 };
+		SDL_Rect destino = { 0,0,32,32 };
+		if (flip) { //virado para a esquerda
+			destino.x = getComponente<ComponenteTransform>()->posicao.x - Mapa::tamanhoTile() -GerenciadorDeCamera::camera.x;
+			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
+			GerenciadorGrafico::renderHitbox(fonte, destino);
+
+			destino.x = getComponente<ComponenteTransform>()->posicao.x - 2*Mapa::tamanhoTile() - GerenciadorDeCamera::camera.x;
+			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
+			GerenciadorGrafico::renderHitbox(fonte, destino);
+
+		}
+		else {
+			destino.x = getComponente<ComponenteTransform>()->posicao.x + Mapa::tamanhoTile() - GerenciadorDeCamera::camera.x;
+			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
+			GerenciadorGrafico::renderHitbox(fonte, destino);
+
+			destino.x = getComponente<ComponenteTransform>()->posicao.x + 2*Mapa::tamanhoTile() - GerenciadorDeCamera::camera.x;
+			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
+			GerenciadorGrafico::renderHitbox(fonte, destino);
+		}
+	}
 }
 
 void Jogador::shoot() {
@@ -76,14 +107,4 @@ void Jogador::shoot() {
 	else { proj->getComponente<ComponenteTransform>()->velocidade.x = 3; }
 	
 	GerenciadorDeColisao::addProjetil(proj);
-}
-
-void Jogador::damage() {
-	getComponente<ComponenteSaude>()->damage();
-}
-
-bool Jogador::isAlive() {
-	if (getComponente<ComponenteSaude>()->atualiza() == DEAD)
-		return false;
-	return true;
 }
