@@ -66,19 +66,25 @@ void Fase::inicializar(const int id) {
 	listaEntidades.addEntidade(static_cast<Entidade*>(zumbi));
 	listaEntidades.addEntidade(static_cast<Entidade*>(boss));
 
+	// Hitboxes devem inicializar antes para que inimigos consigam ser inicalizados em suas plataformas
 	mapa->inicializar(id);
+
 	if (id == 1) {
 		Esqueleto* en1T1 = new Esqueleto(456, 6240);
 		listaEntidades.addEntidade(static_cast<Entidade*>(en1T1));
+		GerenciadorDeColisao::addInimigo(en1T1);
 
 		Esqueleto* en2T1 = new Esqueleto(160, 5632.8);
 		listaEntidades.addEntidade(static_cast<Entidade*>(en2T1));
+		GerenciadorDeColisao::addInimigo(en2T1);
 
 		Esqueleto* en3T1 = new Esqueleto(1064, 5358);
 		listaEntidades.addEntidade(static_cast<Entidade*>(en3T1));
+		GerenciadorDeColisao::addInimigo(en3T1);
 
 		Esqueleto* en4T1 = new Esqueleto(1500, 5984);
 		listaEntidades.addEntidade(static_cast<Entidade*>(en4T1));
+		GerenciadorDeColisao::addInimigo(en4T1);
 
 	}
 }
@@ -325,9 +331,7 @@ void Fase::load(const int id) {
 
 			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy) {
 				if (nomeClasse == esqueleto) {
-					Esqueleto* inimigo = new Esqueleto;
-					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
-					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+					Esqueleto* inimigo = new Esqueleto(x, y);
 					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
 					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
 					GerenciadorDeColisao::addInimigo(inimigo);
@@ -452,9 +456,7 @@ void Fase::load(const int id) {
 
 			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy) {
 				if (nomeClasse == esqueleto) {
-					Esqueleto* inimigo = new Esqueleto;
-					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
-					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+					Esqueleto* inimigo = new Esqueleto(x, y);
 					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
 					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
 					GerenciadorDeColisao::addInimigo(inimigo);

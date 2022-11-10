@@ -13,7 +13,7 @@
 #define HIT 4
 
 Esqueleto::Esqueleto(float x, float y) {
-	sprite = { 0, 64 * WALKING, 65, 49 }; // w = 42
+	sprite = { 0, 64 * WALKING, 64, 49 }; // w = 42 h = 49
 	flip = false;
 	speed = 1;
 	fSpeed = 90;
