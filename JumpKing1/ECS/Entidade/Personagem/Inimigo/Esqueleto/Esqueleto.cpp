@@ -12,10 +12,14 @@
 #define IDLE 3
 #define HIT 4
 
-Esqueleto::Esqueleto() : speed(1), maxSpeed(4), fSpeed(90) {
-	sprite = { 0, 64 * WALKING, 42, 49 };
+Esqueleto::Esqueleto(float x, float y) {
+	sprite = { 0, 64 * WALKING, 65, 49 }; // w = 42
 	flip = false;
-	onGround = false;
+	speed = 1;
+	fSpeed = 90;
+	state = WALKING;
+	distance = 0;
+	haveTarget = false;
 
 	addComponente<ComponenteColisao>();
 	addComponente<ComponenteSaude>();
@@ -26,42 +30,84 @@ Esqueleto::Esqueleto() : speed(1), maxSpeed(4), fSpeed(90) {
 	ComponenteTransform* transform = getComponente<ComponenteTransform>();
 	transform->velocidade.x = 2 * (rand() & 0x01) - 1;
 	transform->velocidade.y = 0;
-	transform->posicao.x = 0;
-	transform->posicao.y = 0;
+	transform->posicao.x = x;
+	transform->posicao.y = y;
 
 	getComponente<ComponenteColisao>()->set(transform->posicao.x, transform->posicao.y, sprite.w * SCALE, (sprite.h - 1) * SCALE);
-	if (transform->velocidade.x == -1) { flip = true; }
+	GerenciadorDeColisao::iniciaInimigo(this);
 }
 
 Esqueleto::~Esqueleto() {}
 
-void Esqueleto::setGround(const bool inGround) {
-	onGround = inGround;
-}
-
-bool Esqueleto::inGround() const {
-	return onGround;
-}
-
 void Esqueleto::atualizar() {
 	ComponenteTransform* transform = getComponente<ComponenteTransform>();
-	getComponente<ComponenteColisao>()->setPos(transform->posicao.x, transform->posicao.y);
 
 	transform->posicao.x += transform->velocidade.x * speed;
-	transform->posicao.y += transform->velocidade.y * speed;
-	if (transform->velocidade.y < -maxSpeed) transform->velocidade.y = -maxSpeed;
-	else if (transform->velocidade.y > maxSpeed) transform->velocidade.y = maxSpeed;
-	GerenciadorDeColisao::colisao_inimigo1(this);
-	// if (collide || end platform) { side = false; switch direction;}
+	getComponente<ComponenteColisao>()->setPos(transform->posicao.x, transform->posicao.y);
+	GerenciadorDeColisao::colisao_esqueleto(this);
+	
+
+	// TODO: Mudar hitboxes para encaixar na animacao
+	if (haveTarget) {
+		if (abs(distance) > Mapa::tamanhoTile()) {
+			setState(WALKING);
+			transform->velocidade.x = 1;
+			if ((distance < 0 && transform->velocidade.x > 0) || distance > 0 && transform->velocidade.x < 0) {
+				transform->velocidade.x = transform->velocidade.x * -1;
+			}
+		}
+		else {
+			// Ataca
+			setState(ATTACKING);
+			transform->velocidade.x = 0;
+		}
+	}
+	else {
+		setState(WALKING);
+		if (!transform->velocidade.x) {
+			if (flip) { transform->velocidade.x = -1; }
+			else { transform->velocidade.x = 1; }
+		}
+	}
+
+	SDL_Rect hitbox = getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect plat = getPlatform();
+	if ((transform->posicao.x < plat.x && transform->velocidade.x < 0) ||
+		(transform->posicao.x + hitbox.w > plat.x + plat.w && transform->velocidade.x > 0)) {
+		transform->velocidade.x = transform->velocidade.x * -1;
+	}
 
 }
 
 void Esqueleto::render() {
 	if (getComponente<ComponenteTransform>()->velocidade.x < 0) { flip = true; }
-	else { flip = false; }
+	else if (getComponente<ComponenteTransform>()->velocidade.x > 0) { flip = false; }
+
 	SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
 	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
 	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
-	sprite.x = 64 * static_cast<int>((SDL_GetTicks() / fSpeed) % 12);
+
+	// TODO:
+	// Dar prioridade a animações de tomar dano e morrer
+	// Bug ao usar SDL_GetTicks(), animação começa de ponto aleatório
+	// Executar animação até o fim, podendo ser cancelada por outra animção
+
+	unsigned char frames = 1;
+	switch (state) {
+	case ATTACKING:
+		sprite.y = 0;
+		frames = 13;
+		fSpeed = 150;
+		break;
+	case WALKING:
+		sprite.y = 64 * WALKING;
+		frames = 12;
+		fSpeed = 90;
+		break;
+	default:
+		break;
+	}
+	sprite.x = 64 * static_cast<int>((SDL_GetTicks() / fSpeed) % frames);
 	getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
+	//GerenciadorGrafico::renderInimigoHitbox(posRect);
 }

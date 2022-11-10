@@ -119,6 +119,64 @@ void GerenciadorDeColisao::clear() {
 	projeteis.clear();
 }
 
+void GerenciadorDeColisao::iniciaInimigo(Inimigo* in) {
+	SDL_Rect initPos = in->getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect result = { 0, 0, Mapa::tamanhoTile(), Mapa::tamanhoTile() };
+	SDL_Rect platform = result;
+	platform.x = static_cast<int>(initPos.x / result.w) * result.w;
+	platform.y = static_cast<int>(initPos.y / result.h) * result.h;
+	bool notFound = true;
+
+	std::vector<Tile*>::iterator iter = tilemap->hitbox_plataformas.begin();
+
+	// Encontra altura
+	while (notFound) {
+		for (auto& t : tilemap->hitbox_plataformas) {
+			if (AABB(platform, t->getPos())) { notFound = false; platform = t->getPos(); break; }
+		}
+		platform.y += platform.h;
+	}
+	platform.y -= platform.h;
+	result.y = platform.y;
+	in->getComponente<ComponenteTransform>()->posicao.y = result.y - initPos.h;
+
+	// Encontra ponta esquerda
+	notFound = true;
+	while (notFound) {
+		notFound = false;
+		// auto& t : tilemap->hitbox_plataformas
+		for (auto& t : tilemap->hitbox_plataformas) {
+			if (AABB({ platform.x - platform.w, platform.y, platform.w, platform.h }, t->getPos())) {
+				notFound = true;
+				platform.x -= platform.w;
+			}
+			else if (AABB({ platform.x - platform.w, platform.y - result.h, platform.w, platform.h }, t->getPos())) {
+				notFound = true;
+				platform.x -= platform.w;
+			}
+		}
+	}
+	result.x = platform.x;
+
+	// Encontra ponta direita
+	platform.x = static_cast<int>(initPos.x / result.w) * result.w;
+	platform.y = result.y;
+	platform.w = platform.h = result.h;
+	notFound = true;
+	while (notFound) {
+		notFound = false;
+		for (auto& t : tilemap->hitbox_plataformas) {
+			if (AABB({ platform.x + platform.w, platform.y, platform.w, platform.h }, t->getPos())) {
+				notFound = true;
+				platform.x += platform.w;
+			}
+		}
+	}
+	result.w = platform.x + platform.w - result.x;
+
+	in->setPlatform(result);
+}
+
 void GerenciadorDeColisao::colisao_jogador1() {
 	SDL_Rect initialhitbox = jogador1->getComponente<ComponenteColisao>()->getColisor();
 	SDL_Rect hitbox = initialhitbox;
@@ -221,149 +279,31 @@ void GerenciadorDeColisao::colisao_jogador1() {
 
 	}
 
-
 	if (!jogador1->isAlive()) { //morreu -> encerra fase
 		fase->gameOver();
 	}
 }
 
-void GerenciadorDeColisao::colisao_inimigo1(Esqueleto* in1) {
-	SDL_Rect initialhitbox = in1->getComponente<ComponenteColisao>()->getColisor();
-	SDL_Rect hitbox = initialhitbox;
-	SDL_Rect platHitbox = initialhitbox;
-	bool noPlatform = true;
 
+
+void GerenciadorDeColisao::colisao_esqueleto(Esqueleto* in1) {
+	SDL_Rect hitbox = in1->getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect platform = in1->getPlatform();
 	ComponenteTransform* transform = in1->getComponente<ComponenteTransform>();
+	SDL_Rect target = jogador1->getComponente<ComponenteColisao>()->getColisor();
 
-	Vector2D velocity = transform->velocidade;
-
-	if (!in1->inGround())
-		transform->velocidade.y += 0.05; // simula gravidade 
-
-	if (transform->velocidade.x == -1) {
-		platHitbox.x -= platHitbox.w;
-		platHitbox.y += platHitbox.h;
-	}
-	else {
-		platHitbox.x += platHitbox.w;
-		platHitbox.y += platHitbox.h;
-	}
-
-	for (auto& t : tilemap->hitbox_plataformas) {
-		if (t->isOnScreen()) {
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * in1->getSpeed();
-			if (AABB(t->getPos(), hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					in1->setGround(true);
-					transform->posicao.y = t->getPos().y - hitbox.h;
-				}
-				transform->velocidade.y = 0;
-			}
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * in1->getSpeed();
-			if (AABB(t->getPos(), hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = t->getPos().x - hitbox.w;
-				}
-				else if (velocity.x < 0) //colidiu pela direita
-					transform->posicao.x = t->getPos().x + hitbox.w;
-				transform->velocidade.x = transform->velocidade.x * -1;
-			}
-			if (AABB(t->getPos(), platHitbox)) { noPlatform = false; }
+	platform.y -= 3 * Mapa::tamanhoTile();
+	platform.h += 2 * Mapa::tamanhoTile();
+	if (AABB(platform, target)) {
+		in1->setTarget(true);
+		if (target.x > hitbox.x) {
+			in1->setDistance(target.x - (hitbox.x + static_cast<int>(hitbox.w / 2)));
+		}
+		else {
+			in1->setDistance(target.x - static_cast<int>(target.w / 2) - hitbox.x);
 		}
 	}
-
-	// Faz com que inimigos batam na camera pois plataformas fora da camera nao sao reconhecidas
-	if (noPlatform && in1->inGround()) { transform->velocidade.x = transform->velocidade.x * -1; }
-
-	//hitboxes espinhos nao existem mais
-	//trocar por loop pelos obstaculos
-
-	/*SDL_Rect hitbox_espinho = {0,0,0,0};
-	
-	for (auto& t : tilemap->hitbox_espinhos) {
-		//if (t->isOnScreen()) {
-			//hitbox na parte inferior do tile
-			hitbox_espinho.x = t->getPos().x;
-			hitbox_espinho.y = t->getPos().y + Mapa::tamanhoTile() / 2;
-			hitbox_espinho.w = t->getPos().w;
-			hitbox_espinho.h = t->getPos().h - Mapa::tamanhoTile() / 2;
-
-			//mesma checagem usada para as plataformas
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * in1->getSpeed();
-			if (AABB(hitbox_espinho, hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					in1->setGround(true);
-					transform->posicao.y = hitbox_espinho.y - hitbox.h;
-				}
-				else if (velocity.y < 0) //colidiu por baixo // em teoria, pela montagem da fase, nunca deve acontecer
-					transform->posicao.y = hitbox_espinho.y + hitbox_espinho.h;
-				transform->velocidade.y = 0;
-			}
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * in1->getSpeed();
-			if (AABB(hitbox_espinho, hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = t->getPos().x - hitbox.w;
-				}
-				else if (velocity.x < 0) //colidiu pela direita
-					transform->posicao.x = t->getPos().x + hitbox.w;
-				transform->velocidade.x = transform->velocidade.x * -1;
-			}
-		//}
-	}
-	*/
-
-
-	for (auto& o : obstaculos) {
-		//if (t->isOnScreen()) {
-			//hitbox na parte inferior do tile
-		SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
-
-		//mesma checagem usada para as plataformas
-		hitbox = initialhitbox;
-		hitbox.y += velocity.y * in1->getSpeed();
-		if (AABB(colisor, hitbox)) {
-			if (velocity.y > 0) { //colidiu por cima
-				in1->setGround(true);
-				transform->posicao.y = colisor.y - hitbox.h;
-			}
-			else if (velocity.y < 0) //colidiu por baixo // em teoria, pela montagem da fase, nunca deve acontecer
-				transform->posicao.y = colisor.y + colisor.h;
-			transform->velocidade.y = 0;
-		}
-		hitbox = initialhitbox;
-		hitbox.x += velocity.x * in1->getSpeed();
-		if (AABB(colisor, hitbox)) {
-			if (velocity.x > 0) { //colidiu pela esquerda
-				transform->posicao.x = colisor.x - hitbox.w;
-			}
-			else if (velocity.x < 0) //colidiu pela direita
-				transform->posicao.x = colisor.x + hitbox.w;
-			transform->velocidade.x = transform->velocidade.x * -1;
-		}
-		//}
-	}
-
-	// Checa bordas do mapa em X
-	if (transform->posicao.x < 0 && transform->velocidade.x < 0) {
-		transform->posicao.x = 0;
-		transform->velocidade.x = transform->velocidade.x * -1;
-	}
-	else if (transform->posicao.x + in1->getComponente<ComponenteColisao>()->getColisor().w > Mapa::getDimensoes().x && transform->velocidade.x > 0) {
-		transform->posicao.x = Mapa::getDimensoes().x - in1->getComponente<ComponenteColisao>()->getColisor().w;
-		transform->velocidade.x = transform->velocidade.x * -1;
-	}
-
-	// Checa bordas do mapa em Y
-	if (transform->posicao.y < 0 && transform->velocidade.y < 0)
-		transform->posicao.y = transform->velocidade.y = 0;
-	else if (transform->posicao.y + in1->getComponente<ComponenteColisao>()->getColisor().h > Mapa::getDimensoes().y && transform->velocidade.y > 0) {
-		transform->posicao.y = Mapa::getDimensoes().y - in1->getComponente<ComponenteColisao>()->getColisor().h;
-		transform->velocidade.y = 0;
-	}
+	else { in1->setTarget(false); }
 }
 
 bool GerenciadorDeColisao::AABB(SDL_Rect A, SDL_Rect B) {

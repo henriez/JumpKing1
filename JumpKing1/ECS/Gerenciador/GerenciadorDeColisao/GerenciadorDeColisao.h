@@ -11,6 +11,7 @@ class Projetil;
 class Esqueleto;
 class Fase;
 class Jogo;
+class Inimigo;
 
 class GerenciadorDeColisao
 {
@@ -29,6 +30,7 @@ public:
 	static void addProjetil(Projetil* proj);
 	static void atualizaProjeteis();
 	static void renderProjeteis();
+	static void iniciaInimigo(Inimigo* in);
 	static void clear();
 
 	static void setJogador(Jogador* jg);
@@ -36,7 +38,7 @@ public:
 	static void setTileMap(TileMap* tmap);
 
 	static void colisao_jogador1();
-	static void colisao_inimigo1(Esqueleto* in1);
+	static void colisao_esqueleto(Esqueleto* in1);
 
 	static bool AABB(SDL_Rect A, SDL_Rect B);
 private:

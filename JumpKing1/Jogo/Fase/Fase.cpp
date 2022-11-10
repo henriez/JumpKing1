@@ -39,28 +39,7 @@ void Fase::inicializar(const int id) {
 		break;
 	}
 	
-	if (id == 1) {
-		Esqueleto* en1T1 = new Esqueleto;
-		en1T1->getComponente<ComponenteTransform>()->posicao.x = 456;
-		en1T1->getComponente<ComponenteTransform>()->posicao.y = 6240;
-		listaEntidades.addEntidade(static_cast<Entidade*>(en1T1));
-
-		Esqueleto* en2T1 = new Esqueleto;
-		en2T1->getComponente<ComponenteTransform>()->posicao.x = 160;
-		en2T1->getComponente<ComponenteTransform>()->posicao.y = 5632.8;
-		listaEntidades.addEntidade(static_cast<Entidade*>(en2T1));
-
-		Esqueleto* en3T1 = new Esqueleto;
-		en3T1->getComponente<ComponenteTransform>()->posicao.x = 1064;
-		en3T1->getComponente<ComponenteTransform>()->posicao.y = 5358;
-		listaEntidades.addEntidade(static_cast<Entidade*>(en3T1));
-
-		Esqueleto* en4T1 = new Esqueleto;
-		en4T1->getComponente<ComponenteTransform>()->posicao.x = 1500;
-		en4T1->getComponente<ComponenteTransform>()->posicao.y = 5984;
-		listaEntidades.addEntidade(static_cast<Entidade*>(en4T1));
-
-	}
+	
 
 	Zumbi* zumbi = new Zumbi;
 	Chefe* boss = new Chefe;
@@ -71,6 +50,20 @@ void Fase::inicializar(const int id) {
 	listaEntidades.addEntidade(static_cast<Entidade*>(boss));
 
 	mapa->inicializar(id);
+	if (id == 1) {
+		Esqueleto* en1T1 = new Esqueleto(456, 6240);
+		listaEntidades.addEntidade(static_cast<Entidade*>(en1T1));
+
+		Esqueleto* en2T1 = new Esqueleto(160, 5632.8);
+		listaEntidades.addEntidade(static_cast<Entidade*>(en2T1));
+
+		Esqueleto* en3T1 = new Esqueleto(1064, 5358);
+		listaEntidades.addEntidade(static_cast<Entidade*>(en3T1));
+
+		Esqueleto* en4T1 = new Esqueleto(1500, 5984);
+		listaEntidades.addEntidade(static_cast<Entidade*>(en4T1));
+
+	}
 }
 
 void Fase::setJogo(Jogo* jg) {
@@ -200,9 +193,7 @@ void Fase::load(const int id) {
 					GerenciadorDeColisao::setJogador(jog);
 				}
 				else if (nomeClasse == esqueleto) {
-					Esqueleto* esq = new Esqueleto;
-					esq->getComponente<ComponenteTransform>()->posicao.x = x;
-					esq->getComponente<ComponenteTransform>()->posicao.y = y;
+					Esqueleto* esq = new Esqueleto(x, y);
 					esq->getComponente<ComponenteTransform>()->velocidade.x = vx;
 					esq->getComponente<ComponenteTransform>()->velocidade.y = vy;
 					esq->getComponente<ComponenteSaude>()->init(saude);
@@ -310,9 +301,7 @@ void Fase::load(const int id) {
 					GerenciadorDeColisao::setJogador(jog);
 				}
 				else if (nomeClasse == esqueleto) {
-					Esqueleto* esq = new Esqueleto;
-					esq->getComponente<ComponenteTransform>()->posicao.x = x;
-					esq->getComponente<ComponenteTransform>()->posicao.y = y;
+					Esqueleto* esq = new Esqueleto(x, y);
 					esq->getComponente<ComponenteTransform>()->velocidade.x = vx;
 					esq->getComponente<ComponenteTransform>()->velocidade.y = vy;
 					esq->getComponente<ComponenteSaude>()->init(saude);

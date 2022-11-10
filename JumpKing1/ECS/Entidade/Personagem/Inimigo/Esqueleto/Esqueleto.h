@@ -4,21 +4,22 @@
 
 class Esqueleto : public Inimigo {
 public:
-	Esqueleto();
+	Esqueleto(float x, float y);
 	~Esqueleto();
 
-	void setGround(const bool inGround);
-	bool inGround() const;
 	const int getSpeed() const { return speed; }
-	void changeSide() { flip = (flip) ? false : true; }
+	void setState(unsigned char val) { state = val; }
+	void setTarget(bool val) { haveTarget = val; }
+	void setDistance(float val) { distance = val; }
 
 	void atualizar();
 	void render();
 private:
 	SDL_Rect sprite;
+	unsigned char state;
+	unsigned int fSpeed;
 	bool flip;
-	const int speed;
-	const int maxSpeed;
-	const int fSpeed;
-	bool onGround;
+	bool haveTarget;
+	int speed;
+	float distance;
 };
