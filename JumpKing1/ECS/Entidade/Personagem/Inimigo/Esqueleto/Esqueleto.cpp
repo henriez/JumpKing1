@@ -18,7 +18,7 @@ Esqueleto::Esqueleto() : speed(1), maxSpeed(4), fSpeed(90) {
 	onGround = false;
 
 	addComponente<ComponenteColisao>();
-	addComponente<ComponenteSaude>();
+	getComponente<ComponenteSaude>()->init(1);
 	addComponente<ComponenteTransform>();
 	addComponente<ComponenteSprite>();
 	getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/Enemies/Skeleton.png");
@@ -44,6 +44,10 @@ bool Esqueleto::inGround() const {
 }
 
 void Esqueleto::atualizar() {
+	if (!vulnerable) {
+		if (SDL_GetTicks() - vulnerable_timer > 1000) //dano a cada 1 segundo
+			vulnerable = true;
+	}
 	ComponenteTransform* transform = getComponente<ComponenteTransform>();
 	getComponente<ComponenteColisao>()->setPos(transform->posicao.x, transform->posicao.y);
 
@@ -57,11 +61,13 @@ void Esqueleto::atualizar() {
 }
 
 void Esqueleto::render() {
-	if (getComponente<ComponenteTransform>()->velocidade.x < 0) { flip = true; }
-	else { flip = false; }
-	SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
-	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
-	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
-	sprite.x = 64 * static_cast<int>((SDL_GetTicks() / fSpeed) % 12);
-	getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
+	if (isAlive()) {
+		if (getComponente<ComponenteTransform>()->velocidade.x < 0) { flip = true; }
+		else { flip = false; }
+		SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
+		posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
+		posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
+		sprite.x = 64 * static_cast<int>((SDL_GetTicks() / fSpeed) % 12);
+		getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
+	}
 }

@@ -64,6 +64,9 @@ void GerenciadorDeEventos::atualizar() {
 				transform->velocidade.y = -2;
 				jogador->setGround(false);
 			break;
+		case SDLK_LSHIFT:
+			jogador->atacar();
+			break;
 		default:
 			break;
 		}
@@ -95,6 +98,9 @@ void GerenciadorDeEventos::atualizar() {
 			//if (jogador2->inGround())
 			transform->velocidade.y = -2;
 			jogador2->setGround(false);
+			break;
+		case SDLK_SPACE:
+			jogador2->atacar();
 			break;
 		default:
 			break;
