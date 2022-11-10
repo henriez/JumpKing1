@@ -6,3 +6,9 @@
 *.idb
 *.pdb
 *.exe
+*.obj
+*.recipe
+*.ilk
+*.log
+*.tlog
+*.lastbuildstate
