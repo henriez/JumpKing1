@@ -26,9 +26,6 @@
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.cpp">
       <Filter>ECS\Entidade\Personagem\Inimigo\Chefe</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Entidade\Personagem\Jogador\ControladorDeEventos.cpp">
-      <Filter>ECS\Entidade\Personagem\Jogador</Filter>
-    </ClCompile>
     <ClCompile Include="ECS\Entidade\Personagem\Jogador\Jogador.cpp">
       <Filter>ECS\Entidade\Personagem\Jogador</Filter>
     </ClCompile>
@@ -88,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="Menu\LoadMenu\LoadMenu.cpp">
       <Filter>Menu\LoadMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="ECS\Gerenciador\GerenciadorDeEventos\GerenciadorDeEventos.cpp">
+      <Filter>ECS\Gerenciador\GerenciadorDeEventos</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +205,9 @@
     <Filter Include="Menu\LoadMenu">
       <UniqueIdentifier>{d0201c1c-d135-444a-827d-657aab791ae5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ECS\Gerenciador\GerenciadorDeEventos">
+      <UniqueIdentifier>{d2e6f2e7-aa51-409d-bec3-9b92abf56b5a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Jogo\Jogo.h">
@@ -257,9 +260,6 @@
     </ClInclude>
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.h">
       <Filter>ECS\Entidade\Personagem\Inimigo\Chefe</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\Entidade\Personagem\Jogador\ControladorDeEventos.h">
-      <Filter>ECS\Entidade\Personagem\Jogador</Filter>
     </ClInclude>
     <ClInclude Include="ECS\Entidade\Personagem\Jogador\Jogador.h">
       <Filter>ECS\Entidade\Personagem\Jogador</Filter>
@@ -327,6 +327,9 @@
     </ClInclude>
     <ClInclude Include="Menu\LoadMenu\LoadMenu.h">
       <Filter>Menu\LoadMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Gerenciador\GerenciadorDeEventos\GerenciadorDeEventos.h">
+      <Filter>ECS\Gerenciador\GerenciadorDeEventos</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

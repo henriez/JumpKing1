@@ -6,7 +6,7 @@
 
 Jogador::Jogador() : speed(8), maxSpeed(4) {
 	inicializar();
-	controladorEventos.setTransform(this);
+	//controladorEventos.setJogador1(this);
 	onGround = false;
 	flip = false;
 }
@@ -19,7 +19,6 @@ void Jogador::inicializar(){
 	addComponente<ComponenteSprite>();
 	addComponente<ComponenteTransform>();
 
-	getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/HenriqueIsFallingx32.png");
 	ComponenteTransform* transform = getComponente<ComponenteTransform>();
 	transform->velocidade.x = 0;
 	transform->velocidade.y = 0;
@@ -44,7 +43,7 @@ void Jogador::atualizar() {
 	else if (transform->velocidade.y > maxSpeed) transform->velocidade.y = maxSpeed; //velocidade terminal para queda
 
 	
-	controladorEventos.atualizar();
+	//controladorEventos.atualizar();
 }
 
 void Jogador::setGround(const bool inGround) {
@@ -66,15 +65,7 @@ void Jogador::render() {
 
 	//coloca CORACOES na tela
 	int maxSaude = getComponente<ComponenteSaude>()->getMaxHealth();
-	int saude = getComponente<ComponenteSaude>()->getHealth();
-	fonte = { 0,0,40,40 };
-
-	for (int i = 0; i < saude; i++) {
-		posRect.x = (0.03 * i + 0.02) * GerenciadorDeCamera::camera.w;
-		posRect.y = (0.03) * GerenciadorDeCamera::camera.h;
-		posRect.w = posRect.h = 40;
-		GerenciadorGrafico::renderCoracao(fonte, posRect);
-	}
+	
 }
 
 void Jogador::shoot() {

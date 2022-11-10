@@ -2,5 +2,9 @@
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Componentes\SubComponentes\ComponenteSaude.h(14,22): warning C4244: '=': conversão de 'unsigned int' para 'float', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Componentes\SubComponentes\ComponenteSaude.h(32,10): warning C4244: 'return': conversão de 'const float' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Componentes\SubComponentes\ComponenteSaude.h(36,10): warning C4244: 'return': conversão de 'const float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Fase.cpp(50,66): warning C4305: '=': truncamento de 'double' para 'float'
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Fase.cpp(66,66): warning C4305: '=': truncamento de 'double' para 'float'
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Fase.cpp(127,34): warning C4244: '=': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Fase.cpp(128,23): warning C4244: '=': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Fase.cpp(135,67): warning C4244: '=': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Fase.cpp(136,23): warning C4244: '=': conversão de 'double' para 'int', possível perda de dados
   JumpKing1.vcxproj -> C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\x64\Debug\JumpKing1.exe
