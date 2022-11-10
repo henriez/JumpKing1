@@ -151,11 +151,11 @@
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Zumbi\Zumbi.cpp" />
-    <ClCompile Include="ECS\Entidade\Personagem\Jogador\ControladorDeEventos.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Jogador\Jogador.cpp" />
     <ClCompile Include="ECS\Entidade\Projetil\Projetil.cpp" />
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeCamera\GerenciadorDeCamera.cpp" />
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp" />
+    <ClCompile Include="ECS\Gerenciador\GerenciadorDeEventos\GerenciadorDeEventos.cpp" />
     <ClCompile Include="ECS\Gerenciador\GerenciadorGrafico\GerenciadorGrafico.cpp" />
     <ClCompile Include="Jogo\Fase\Boss_Room\Boss_Room.cpp" />
     <ClCompile Include="Jogo\Fase\Fase.cpp" />
@@ -192,12 +192,12 @@
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Inimigo.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Zumbi\Zumbi.h" />
-    <ClInclude Include="ECS\Entidade\Personagem\Jogador\ControladorDeEventos.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Jogador\Jogador.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Personagem.h" />
     <ClInclude Include="ECS\Entidade\Projetil\Projetil.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeCamera\GerenciadorDeCamera.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.h" />
+    <ClInclude Include="ECS\Gerenciador\GerenciadorDeEventos\GerenciadorDeEventos.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorGrafico\GerenciadorGrafico.h" />
     <ClInclude Include="Ente.h" />
     <ClInclude Include="Jogo\Fase\Boss_Room\Boss_Room.h" />

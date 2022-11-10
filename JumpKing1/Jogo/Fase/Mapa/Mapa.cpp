@@ -87,6 +87,12 @@ void Mapa::atualizar() {
 			onBossRoom = true;
 			boss_room.inicializar(id);
 		}
+		hitbox = GerenciadorDeColisao::getJogador2()->getComponente<ComponenteColisao>()->getColisor();
+		if (GerenciadorDeColisao::AABB(fim, hitbox)) {
+			clear();
+			onBossRoom = true;
+			boss_room.inicializar(id);
+		}
 	}
 	else
 		boss_room.atualizar();

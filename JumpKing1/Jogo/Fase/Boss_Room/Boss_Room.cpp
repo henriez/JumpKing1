@@ -45,6 +45,8 @@ void Boss_Room::inicializar(int id) {
 	
 	GerenciadorDeColisao::getJogador1()->getComponente<ComponenteTransform>()->posicao.x = 32 * 32;
 	GerenciadorDeColisao::getJogador1()->getComponente<ComponenteTransform>()->posicao.y = 28 * 32;
+	GerenciadorDeColisao::getJogador2()->getComponente<ComponenteTransform>()->posicao.x = 33 * 32;
+	GerenciadorDeColisao::getJogador2()->getComponente<ComponenteTransform>()->posicao.y = 28 * 32;
 
 }
 

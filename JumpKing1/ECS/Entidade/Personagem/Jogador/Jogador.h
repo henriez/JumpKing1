@@ -1,9 +1,9 @@
 #pragma once
 #include "../Personagem.h"
-#include "ControladorDeEventos.h"
 
 class Jogador : public Personagem {
 public:
+
 	Jogador();
 	~Jogador();
 
@@ -18,7 +18,6 @@ public:
 	const int getSpeed() const { return speed; }
 private:
 	void inicializar();
-	ControladorDeEventos controladorEventos;
 	friend class GerenciadorDeCamera;
 
 	const int speed;

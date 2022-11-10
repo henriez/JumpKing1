@@ -5,6 +5,8 @@
 #include "../../ECS/Entidade/ListaDeEntidades/ListaDeEntidades.h"
 #include "../Jogo.h"
 
+class GerenciadorDeEventos;
+
 class Fase : public Ente{
 public:
 	Fase();
@@ -20,6 +22,7 @@ public:
 	void save();
 private:
 	ListaDeEntidades listaEntidades;
+	GerenciadorDeEventos* event_manager;
 	Mapa* mapa;
 	bool player_is_alive;
 	Jogo* jogo;

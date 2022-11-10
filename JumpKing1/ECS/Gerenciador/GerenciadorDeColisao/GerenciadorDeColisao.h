@@ -19,6 +19,7 @@ public:
 	~GerenciadorDeColisao();
 
 	static Jogador* getJogador1();
+	static Jogador* getJogador2();
 
 	static void saveObstaculos(const char* path);
 	static void saveProjeteis(const char* path);
@@ -32,6 +33,7 @@ public:
 	static void clear();
 
 	static void setJogador(Jogador* jg);
+	static void setJogador2(Jogador* jg);
 	static void setFase(Fase* fs);
 	static void setTileMap(TileMap* tmap);
 
@@ -42,6 +44,7 @@ public:
 private:
 
 	static Jogador* jogador1;
+	static Jogador* jogador2;
 	static TileMap* tilemap;
 	static Fase* fase;
 	static std::vector<Obstaculo*> obstaculos;

@@ -8,6 +8,7 @@ class GerenciadorDeCamera
 {
 private:
 	static Jogador* jogador;
+	static Jogador* jogador2;
 public:
 	GerenciadorDeCamera();
 	~GerenciadorDeCamera();
@@ -16,5 +17,6 @@ public:
 	static void AtualizaJogador();
 
 	static void setJogador(Jogador* jg);
+	static void setJogador2(Jogador* jg);
 	static SDL_Rect camera;
 };
