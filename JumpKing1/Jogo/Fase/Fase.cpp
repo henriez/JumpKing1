@@ -25,6 +25,7 @@ void Fase::inicializar(const int id) {
 	GerenciadorDeColisao::setFase(this);
 
 	mapa = new Mapa;
+	mapa->inicializar(id);
 
 	Jogador* jogador = new Jogador;
 	jogador->getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/HenriqueIsFallingx32.png");
@@ -55,7 +56,32 @@ void Fase::inicializar(const int id) {
 		break;
 	}
 	
-	
+	if (id == 1) {
+		Esqueleto* en1T1 = new Esqueleto;
+		en1T1->getComponente<ComponenteTransform>()->posicao.x = 456;
+		en1T1->getComponente<ComponenteTransform>()->posicao.y = 6240;
+		listaEntidades.addEntidade(static_cast<Entidade*>(en1T1));
+		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en1T1));
+
+		Esqueleto* en2T1 = new Esqueleto;
+		en2T1->getComponente<ComponenteTransform>()->posicao.x = 160;
+		en2T1->getComponente<ComponenteTransform>()->posicao.y = 5632.8;
+		listaEntidades.addEntidade(static_cast<Entidade*>(en2T1));
+		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en2T1));
+
+		Esqueleto* en3T1 = new Esqueleto;
+		en3T1->getComponente<ComponenteTransform>()->posicao.x = 1064;
+		en3T1->getComponente<ComponenteTransform>()->posicao.y = 5358;
+		listaEntidades.addEntidade(static_cast<Entidade*>(en3T1));
+		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en3T1));
+
+		Esqueleto* en4T1 = new Esqueleto;
+		en4T1->getComponente<ComponenteTransform>()->posicao.x = 1500;
+		en4T1->getComponente<ComponenteTransform>()->posicao.y = 5984;
+		listaEntidades.addEntidade(static_cast<Entidade*>(en4T1));
+		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en4T1));
+
+	}
 
 	Zumbi* zumbi = new Zumbi;
 	Chefe* boss = new Chefe;
@@ -65,28 +91,6 @@ void Fase::inicializar(const int id) {
 	listaEntidades.addEntidade(static_cast<Entidade*>(jogador2));
 	listaEntidades.addEntidade(static_cast<Entidade*>(zumbi));
 	listaEntidades.addEntidade(static_cast<Entidade*>(boss));
-
-	// Hitboxes devem inicializar antes para que inimigos consigam ser inicalizados em suas plataformas
-	mapa->inicializar(id);
-
-	if (id == 1) {
-		Esqueleto* en1T1 = new Esqueleto(456, 6240);
-		listaEntidades.addEntidade(static_cast<Entidade*>(en1T1));
-		GerenciadorDeColisao::addInimigo(en1T1);
-
-		Esqueleto* en2T1 = new Esqueleto(160, 5632.8);
-		listaEntidades.addEntidade(static_cast<Entidade*>(en2T1));
-		GerenciadorDeColisao::addInimigo(en2T1);
-
-		Esqueleto* en3T1 = new Esqueleto(1064, 5358);
-		listaEntidades.addEntidade(static_cast<Entidade*>(en3T1));
-		GerenciadorDeColisao::addInimigo(en3T1);
-
-		Esqueleto* en4T1 = new Esqueleto(1500, 5984);
-		listaEntidades.addEntidade(static_cast<Entidade*>(en4T1));
-		GerenciadorDeColisao::addInimigo(en4T1);
-
-	}
 }
 
 void Fase::setJogo(Jogo* jg) {
@@ -166,6 +170,8 @@ void Fase::save()  {
 		if (out) {
 			Jogador* jog1 = GerenciadorDeColisao::getJogador1();
 			Jogador* jog2 = GerenciadorDeColisao::getJogador2();
+			if (mapa->isOnBossRoom()) out << 1 << std::endl;
+			else out << 0 << std::endl;
 			out << "1 " << jog1->getComponente<ComponenteTransform>()->posicao.x << " "
 				<< jog1->getComponente<ComponenteTransform>()->posicao.y << " "
 				<< jog1->getComponente<ComponenteTransform>()->velocidade.x << " "
@@ -194,6 +200,8 @@ void Fase::save()  {
 		if (out) {
 			Jogador* jog1 = GerenciadorDeColisao::getJogador1();
 			Jogador* jog2 = GerenciadorDeColisao::getJogador2();
+			if (mapa->isOnBossRoom()) out << 1 << std::endl;
+			else out << 0 << std::endl;
 			out << "1 " << jog1->getComponente<ComponenteTransform>()->posicao.x << " "
 				<< jog1->getComponente<ComponenteTransform>()->posicao.y << " "
 				<< jog1->getComponente<ComponenteTransform>()->velocidade.x << " "
@@ -232,7 +240,6 @@ void Fase::load(const int id) {
 	GerenciadorDeColisao::setFase(this);
 	mapa = new Mapa;
 	player_is_alive = true;
-	mapa->reload(id);
 
 	this->id = id;
 
@@ -242,6 +249,9 @@ void Fase::load(const int id) {
 			int saude, id;
 			float x, y, vx, vy;
 
+			in >> id; //se esta na boss room
+			if (id) mapa->setBossRoom(true);
+			mapa->reload(this->id);
 			while (in >> id >> x >> y >> vx >> vy >> saude) {
 				Jogador* jog = new Jogador;
 				jog->getComponente<ComponenteTransform>()->posicao.x = x;
@@ -331,7 +341,9 @@ void Fase::load(const int id) {
 
 			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy) {
 				if (nomeClasse == esqueleto) {
-					Esqueleto* inimigo = new Esqueleto(x, y);
+					Esqueleto* inimigo = new Esqueleto;
+					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
+					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
 					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
 					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
 					GerenciadorDeColisao::addInimigo(inimigo);
@@ -367,6 +379,9 @@ void Fase::load(const int id) {
 		int saude, id;
 		float x, y, vx, vy;
 
+		in >> id; //se esta na boss room
+		if (id) mapa->setBossRoom(true);
+		mapa->reload(this->id);
 		while (in >> id >> x >> y >> vx >> vy >> saude) {
 			Jogador* jog = new Jogador;
 			jog->getComponente<ComponenteTransform>()->posicao.x = x;
@@ -456,7 +471,9 @@ void Fase::load(const int id) {
 
 			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy) {
 				if (nomeClasse == esqueleto) {
-					Esqueleto* inimigo = new Esqueleto(x, y);
+					Esqueleto* inimigo = new Esqueleto;
+					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
+					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
 					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
 					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
 					GerenciadorDeColisao::addInimigo(inimigo);
@@ -484,5 +501,5 @@ void Fase::load(const int id) {
 		}
 		in.close();
 	}
-	
+
 }

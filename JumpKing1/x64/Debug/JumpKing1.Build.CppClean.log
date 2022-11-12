@@ -1,40 +1,49 @@
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\vc143.pdb
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\vc143.idb
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\tilemap.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\mapa.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\fase.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\boss_room.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\gerenciadorgrafico.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\gerenciadordecolisao.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\gerenciadordecamera.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\projetil.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\jogador.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\controladordeeventos.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\jogador2.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\controladordeeventos2.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\inimigotipo3.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\inimigotipo2.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\inimigotipo1.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\chefe.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\tile.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\espinhos.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\listadeentidades.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\vector2d.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\settingsmenu.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\pausemenu.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\mainmenu.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\levelmenu.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\leaderboardmenu.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\botao.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\main.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\jogo.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\hud.obj
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\x64\debug\jumpking1.exe
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\jumpking1.ilk
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\x64\debug\jumpking1.pdb
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\jumpking1.tlog\cl.command.1.tlog
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\jumpking1.tlog\cl.read.1.tlog
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\jumpking1.tlog\cl.write.1.tlog
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\jumpking1.tlog\link.command.1.tlog
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\jumpking1.tlog\link.read.1.tlog
-c:\users\rafael\desktop\codigos\jogo tec prog\jumpking1\jumpking1\x64\debug\jumpking1.tlog\link.write.1.tlog
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\vc143.pdb
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\vc143.idb
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\hud.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\tilemap.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\mapa.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\fase.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\gerenciadorgrafico.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\gerenciadordecolisao.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\gerenciadordecamera.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\projetil.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\jogador.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\controladordeeventos.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\jogador2.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\controladordeeventos2.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\inimigotipo3.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\inimigotipo2.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\inimigotipo1.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\chefe.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\tile.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\espinhos.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\listadeentidades.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\vector2d.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\settingsmenu.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\pausemenu.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\mainmenu.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\levelmenu.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\leaderboardmenu.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\botao.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\main.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\jogo.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\boss_room.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\gameovermenu.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\zumbi.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\esqueleto.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\lava.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\savemenu.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\loadmenu.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\gerenciadordeeventos.obj
+c:\users\hapme\onedrive\documentos\dev\jumpking1\x64\debug\jumpking1.exe
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\jumpking1.ilk
+c:\users\hapme\onedrive\documentos\dev\jumpking1\x64\debug\jumpking1.pdb
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\pausemenu.obj.enc
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\tilemap.obj.enc
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\jumpking1.tlog\cl.command.1.tlog
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\jumpking1.tlog\cl.read.1.tlog
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\jumpking1.tlog\cl.write.1.tlog
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\jumpking1.tlog\link.command.1.tlog
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\jumpking1.tlog\link.read.1.tlog
+c:\users\hapme\onedrive\documentos\dev\jumpking1\jumpking1\x64\debug\jumpking1.tlog\link.write.1.tlog

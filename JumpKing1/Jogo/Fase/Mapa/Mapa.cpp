@@ -64,17 +64,19 @@ void Mapa::reload(int id) {
 	case 1:
 		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa1/mapa1background.png");
 		fim = { 0,64,32,96 };
-		tileMap.inicializa(mapa1_camada1, mapa1_camada2, mapa1_camada_colisao, 80, 200);
+		if (!onBossRoom) tileMap.inicializa(mapa1_camada1, mapa1_camada2, mapa1_camada_colisao, 80, 200);
+		else boss_room.reload(id);
 		break;
 	case 2:
 		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa2/mapa2.png");
 		fim = { 0,96,32,288 };
-		tileMap.inicializa(mapa2_camada1, mapa2_camada2, mapa2_camada_colisao, 65, 250);
+		if (!onBossRoom) tileMap.inicializa(mapa2_camada1, mapa2_camada2, mapa2_camada_colisao, 65, 250);
+		else boss_room.reload(id);
+		break;
 	default:
 		break;
 	}
 
-	nTiles = tileMap.getNTiles();
 	GerenciadorDeCamera::init();
 }
 

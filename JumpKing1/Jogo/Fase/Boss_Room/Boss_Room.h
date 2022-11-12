@@ -10,6 +10,7 @@ public:
 	Boss_Room();
 	~Boss_Room();
 	void inicializar(int id);
+	void reload(int id);
 
 	void atualizar();
 	void render();

@@ -20,6 +20,9 @@ public:
 	static int tamanhoTile();
 	static SDL_Point getDimensoes();
 	static void setDimMapa(int w, int h);
+
+	void setBossRoom(const bool inBossRoom) { onBossRoom = inBossRoom; }
+	bool isOnBossRoom() const { return onBossRoom; }
 	
 	void clear();
 

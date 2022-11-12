@@ -50,6 +50,21 @@ void Boss_Room::inicializar(int id) {
 
 }
 
+void Boss_Room::reload(int id) {
+		switch (id) {
+		case 1:
+			backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa1/Boss_Room/boss_room.png");
+			tileMap.inicializa(boss1_camada1, boss1_camada2, boss1_camada_colisao, 60, 34);
+			break;
+		case 2:
+			backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa2/Boss_Room/boss_room2.png");
+			tileMap.inicializa(boss2_camada1, boss2_camada2, boss2_camada_colisao, 60, 40);
+			break;
+		default:
+			break;
+		}	
+}
+
 void Boss_Room::atualizar() {
 	GerenciadorDeCamera::Atualiza();
 	tileMap.atualiza();
@@ -67,6 +82,7 @@ int Boss_Room::tamanhoTile() {
 }
 
 SDL_Point Boss_Room::getDimensoes() {
+
 	SDL_Point temp = nTiles;
 	temp.x *= tamanhoDoTile;
 	temp.y *= tamanhoDoTile;
