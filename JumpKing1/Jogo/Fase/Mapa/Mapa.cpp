@@ -26,6 +26,7 @@ Mapa::Mapa() {
 	fim = { 0,0,0,0 };
 	onBossRoom = false;
 	id = 0;
+	graphics = GerenciadorGrafico::getInstance();
 }
 
 Mapa::~Mapa() {
@@ -39,13 +40,13 @@ void Mapa::inicializar(int id) {
 
 	switch (id) {
 	case 1:
-		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa1/mapa1background.png");
+		backgroundTex = graphics->LoadTexture("Assets/TileMap/Mapa1/mapa1background.png");
 		fim = { 0,64,32,96 };
 		tileMap.carregaPosicoesValidas(mapa1_posicoes_lava, mapa1_posicoes_espinhos);
 		tileMap.inicializa(mapa1_camada1, mapa1_camada2, mapa1_camada_colisao, 80, 200); 
 		break;
 	case 2:
-		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa2/mapa2.png");
+		backgroundTex = graphics->LoadTexture("Assets/TileMap/Mapa2/mapa2.png");
 		fim = { 0,96,32,288 };
 		tileMap.carregaPosicoesValidas(mapa2_posicoes_lava, mapa2_posicoes_espinhos);
 		tileMap.inicializa(mapa2_camada1, mapa2_camada2, mapa2_camada_colisao, 65, 250);
@@ -62,13 +63,13 @@ void Mapa::reload(int id) {
 
 	switch (id) {
 	case 1:
-		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa1/mapa1background.png");
+		backgroundTex = graphics->LoadTexture("Assets/TileMap/Mapa1/mapa1background.png");
 		fim = { 0,64,32,96 };
 		if (!onBossRoom) tileMap.inicializa(mapa1_camada1, mapa1_camada2, mapa1_camada_colisao, 80, 200);
 		else boss_room.reload(id);
 		break;
 	case 2:
-		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa2/mapa2.png");
+		backgroundTex = graphics->LoadTexture("Assets/TileMap/Mapa2/mapa2.png");
 		fim = { 0,96,32,288 };
 		if (!onBossRoom) tileMap.inicializa(mapa2_camada1, mapa2_camada2, mapa2_camada_colisao, 65, 250);
 		else boss_room.reload(id);
@@ -106,7 +107,7 @@ void Mapa::render() {
 		boss_room.render();
 	else {
 		SDL_Rect destino = { 0, 0, GerenciadorDeCamera::camera.w, GerenciadorDeCamera::camera.h };
-		GerenciadorGrafico::render(backgroundTex, GerenciadorDeCamera::camera, destino);
+		graphics->render(backgroundTex, GerenciadorDeCamera::camera, destino);
 
 		tileMap.render();
 	}

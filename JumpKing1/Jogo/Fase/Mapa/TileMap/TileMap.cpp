@@ -12,12 +12,11 @@ const int largura = 11; //dados tileset
 const int altura = 12;
 const int tamanhoTile = 32;
 
-
 TileMap::TileMap() {
 	nTiles.x = 80;
 	nTiles.y = 200;
 	GerenciadorDeColisao::setTileMap(this);
-	GerenciadorGrafico::init_tileMap(); 
+	graphics = GerenciadorGrafico::getInstance(); 
 }
 
 TileMap::~TileMap() {

@@ -4,7 +4,7 @@
 #include "../../../../Jogo/Jogo.h"
 #include "../../../../Jogo/Fase/Mapa/Mapa.h"
 
-Jogador::Jogador() : speed(8), maxSpeed(4) {
+Jogador::Jogador() : speed(8), maxSpeed(4), points(200000) {
 	inicializar();
 	onGround = false;
 	flip = false;
@@ -48,6 +48,8 @@ void Jogador::atualizar() {
 	if (transform->velocidade.y < -maxSpeed) transform->velocidade.y = -maxSpeed;
 	else if (transform->velocidade.y > maxSpeed) transform->velocidade.y = maxSpeed; //velocidade terminal para queda
 
+	points--;
+
 	
 	//controladorEventos.atualizar();
 }
@@ -80,21 +82,21 @@ void Jogador::render() {
 		if (flip) { //virado para a esquerda
 			destino.x = getComponente<ComponenteTransform>()->posicao.x - Mapa::tamanhoTile() -GerenciadorDeCamera::camera.x;
 			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
-			GerenciadorGrafico::renderHitbox(fonte, destino);
+			graphics->renderHitbox(fonte, destino);
 
 			destino.x = getComponente<ComponenteTransform>()->posicao.x - 2*Mapa::tamanhoTile() - GerenciadorDeCamera::camera.x;
 			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
-			GerenciadorGrafico::renderHitbox(fonte, destino);
+			graphics->renderHitbox(fonte, destino);
 
 		}
 		else {
 			destino.x = getComponente<ComponenteTransform>()->posicao.x + Mapa::tamanhoTile() - GerenciadorDeCamera::camera.x;
 			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
-			GerenciadorGrafico::renderHitbox(fonte, destino);
+			graphics->renderHitbox(fonte, destino);
 
 			destino.x = getComponente<ComponenteTransform>()->posicao.x + 2*Mapa::tamanhoTile() - GerenciadorDeCamera::camera.x;
 			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
-			GerenciadorGrafico::renderHitbox(fonte, destino);
+			graphics->renderHitbox(fonte, destino);
 		}
 	}
 }

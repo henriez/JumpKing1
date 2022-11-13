@@ -1,9 +1,10 @@
 #pragma once
 
+#include "../MenuEnte.h"
 #include "../Botao/Botao.h"
 #include <SDL_image.h>
 
-class GameOverMenu
+class GameOverMenu : public MenuEnte
 {
 public:
 	GameOverMenu();
@@ -19,6 +20,5 @@ public:
 
 private:
 	Button quit;
-	SDL_Texture* background;
 };
 

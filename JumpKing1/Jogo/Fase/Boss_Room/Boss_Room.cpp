@@ -23,6 +23,7 @@ const char* boss2_camada_colisao = "Assets/TileMap/Mapa2/Boss_Room/boss_room_Cam
 Boss_Room::Boss_Room() {
 	backgroundTex = nullptr;
 	tamanhoDoTile = 32;
+	graphics = GerenciadorGrafico::getInstance();
 }
 
 Boss_Room::~Boss_Room() {
@@ -32,11 +33,11 @@ Boss_Room::~Boss_Room() {
 void Boss_Room::inicializar(int id) {
 	switch (id) {
 	case 1:
-		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa1/Boss_Room/boss_room.png");
+		backgroundTex = graphics->LoadTexture("Assets/TileMap/Mapa1/Boss_Room/boss_room.png");
 		tileMap.inicializa(boss1_camada1, boss1_camada2, boss1_camada_colisao, 60, 34);
 		break;
 	case 2:
-		backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa2/Boss_Room/boss_room2.png");
+		backgroundTex = graphics->LoadTexture("Assets/TileMap/Mapa2/Boss_Room/boss_room2.png");
 		tileMap.inicializa(boss2_camada1, boss2_camada2, boss2_camada_colisao, 60, 40);
 		break;
 	default:
@@ -53,11 +54,11 @@ void Boss_Room::inicializar(int id) {
 void Boss_Room::reload(int id) {
 		switch (id) {
 		case 1:
-			backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa1/Boss_Room/boss_room.png");
+			backgroundTex = graphics->LoadTexture("Assets/TileMap/Mapa1/Boss_Room/boss_room.png");
 			tileMap.inicializa(boss1_camada1, boss1_camada2, boss1_camada_colisao, 60, 34);
 			break;
 		case 2:
-			backgroundTex = GerenciadorGrafico::LoadTexture("Assets/TileMap/Mapa2/Boss_Room/boss_room2.png");
+			backgroundTex = graphics->LoadTexture("Assets/TileMap/Mapa2/Boss_Room/boss_room2.png");
 			tileMap.inicializa(boss2_camada1, boss2_camada2, boss2_camada_colisao, 60, 40);
 			break;
 		default:
@@ -72,7 +73,7 @@ void Boss_Room::atualizar() {
 
 void Boss_Room::render() {;
 	SDL_Rect destino = { 0, 0, GerenciadorDeCamera::camera.w, GerenciadorDeCamera::camera.h };
-	GerenciadorGrafico::render(backgroundTex, GerenciadorDeCamera::camera, destino);
+	graphics->render(backgroundTex, GerenciadorDeCamera::camera, destino);
 
 	tileMap.render();
 }

@@ -23,7 +23,7 @@ void PauseMenu::init() {
 	save.set(0.35 * dm.w, 0.45 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	save.setTex("Assets/Buttons/Save.png");
 
-	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");
+	background = graphics->LoadTexture("Assets/Buttons/menu.png");
 }
 
 void PauseMenu::reset() {
@@ -48,8 +48,8 @@ int PauseMenu::update() {
 
 void PauseMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
-	SDL_Rect destino = { 0,0,GerenciadorGrafico::getDimensoesJanela().x,GerenciadorGrafico::getDimensoesJanela().y };
-	GerenciadorGrafico::render(background, fonte, destino);
+	SDL_Rect destino = { 0,0,graphics->getDimensoesJanela().x,graphics->getDimensoesJanela().y };
+	graphics->render(background, fonte, destino);
 	resume.render();
 	quit.render();
 	save.render();

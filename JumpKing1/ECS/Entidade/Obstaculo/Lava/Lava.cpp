@@ -18,7 +18,7 @@ void Lava::render() {
 	SDL_Rect dest = { 0,0,32,64 };
 	dest.x = destino.x - GerenciadorDeCamera::camera.x;
 	dest.y = destino.y - GerenciadorDeCamera::camera.y;
-	GerenciadorGrafico::renderLava(fonte, dest);
+	graphics->renderLava(fonte, dest);
 
 }
 
@@ -27,7 +27,7 @@ void Lava::renderHitbox() {
 
 	tempDest.x = destino.x - GerenciadorDeCamera::camera.x;
 	tempDest.y = destino.y - GerenciadorDeCamera::camera.y;
-	GerenciadorGrafico::renderHitbox(fonte, tempDest);
+	graphics->renderHitbox(fonte, tempDest);
 }
 
 

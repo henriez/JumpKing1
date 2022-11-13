@@ -23,7 +23,7 @@ void SaveMenu::init() {
 	save.set(0.75 * dm.w, 0.25 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	save.setTex("Assets/Buttons/Save.png");
 
-	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");
+	background = graphics->LoadTexture("Assets/Buttons/menu.png");
 }
 
 void SaveMenu::reset() {
@@ -47,8 +47,8 @@ int SaveMenu::update() {
 
 void SaveMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
-	SDL_Rect destino = { 0,0,GerenciadorGrafico::getDimensoesJanela().x,GerenciadorGrafico::getDimensoesJanela().y };
-	GerenciadorGrafico::render(background, fonte, destino);
+	SDL_Rect destino = { 0,0,graphics->getDimensoesJanela().x,graphics->getDimensoesJanela().y };
+	graphics->render(background, fonte, destino);
 	save.render();
 	back.render();
 	quit.render();

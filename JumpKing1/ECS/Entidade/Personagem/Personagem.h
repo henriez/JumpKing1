@@ -6,6 +6,7 @@ public:
 	Personagem() {
 		addComponente<ComponenteSaude>();
 		vulnerable = true;
+		vulnerable_timer = 0;
 	}
 	virtual ~Personagem() {}
 

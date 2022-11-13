@@ -10,7 +10,7 @@
 #include "SaveMenu/SaveMenu.h"
 #include "LoadMenu/LoadMenu.h"
 
-class Menu : public Ente{
+class Menu{
 public:
 	Menu() {}
 	~Menu() {}

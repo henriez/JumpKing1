@@ -36,4 +36,5 @@ private:
 	Menu menu;
 
 	Fase* fase;
+	GerenciadorGrafico* graphics;
 };

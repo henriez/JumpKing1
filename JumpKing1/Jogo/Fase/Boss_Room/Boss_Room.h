@@ -24,4 +24,5 @@ private:
 	static SDL_Point nTiles;
 	static int tamanhoDoTile;
 	TileMap tileMap;
+	GerenciadorGrafico* graphics;
 };

@@ -18,7 +18,7 @@ void Espinhos::render() {
 	SDL_Rect dest = {0,0,32,32};
 	dest.x = destino.x - GerenciadorDeCamera::camera.x;
 	dest.y = destino.y - GerenciadorDeCamera::camera.y;
-	GerenciadorGrafico::renderEspinho(fonte, dest);
+	graphics->renderEspinho(fonte, dest);
 }
 
 void Espinhos::renderHitbox() {
@@ -26,7 +26,7 @@ void Espinhos::renderHitbox() {
 
 	tempDest.x = destino.x - GerenciadorDeCamera::camera.x;
 	tempDest.y = destino.y - GerenciadorDeCamera::camera.y;
-	GerenciadorGrafico::renderHitbox(fonte, tempDest);
+	graphics->renderHitbox(fonte, tempDest);
 }
 
 void Espinhos::setPosition(int x, int y, int srcX, int srcY) {

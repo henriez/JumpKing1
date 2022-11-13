@@ -8,6 +8,7 @@ Button::Button() {
 	white.r = white.g = white.b = 255;
 	isClicked = isHovering = false;
 	texture = nullptr;
+	graphics = GerenciadorGrafico::getInstance();
 }
 
 void Button::set(int xpos, int ypos, int width, int height) {
@@ -19,7 +20,7 @@ void Button::set(int xpos, int ypos, int width, int height) {
 }
 
 void Button::setTex(const char* path) {
-	texture = GerenciadorGrafico::LoadTexture(path);
+	texture = graphics->LoadTexture(path);
 	if (!texture) std::cout << "button failed loading! Error:" << IMG_GetError();
 }
 
@@ -51,7 +52,7 @@ void Button::render() {
 	SDL_QueryTexture(texture, NULL, NULL, &textureSize.x, &textureSize.y);
 	fonte.w = textureSize.x;
 	fonte.h = textureSize.y;
-	GerenciadorGrafico::render(texture, fonte, pos);
+	graphics->render(texture, fonte, pos);
 }
 
 SDL_Point Button::getMousePos() {

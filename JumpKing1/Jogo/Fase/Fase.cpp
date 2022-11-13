@@ -6,6 +6,7 @@
 #include <string>
 using namespace std;
 
+
 Fase::Fase() {
 	mapa = nullptr;
 	player_is_alive = true;
@@ -138,7 +139,7 @@ void Fase::render() {
 			posRect.x = (0.03 * i + 0.02) * GerenciadorDeCamera::camera.w;
 			posRect.y = (0.03) * GerenciadorDeCamera::camera.h;
 			posRect.w = posRect.h = 40;
-			GerenciadorGrafico::renderCoracao(fonte, posRect);
+			graphics->renderCoracao(fonte, posRect);
 		}
 
 		saude = GerenciadorDeColisao::getJogador2()->getComponente<ComponenteSaude>()->getHealth();
@@ -146,8 +147,12 @@ void Fase::render() {
 			posRect.x = (-0.03 * i + 0.97) * GerenciadorDeCamera::camera.w - 40;
 			posRect.y = (0.03) * GerenciadorDeCamera::camera.h;
 			posRect.w = posRect.h = 40;
-			GerenciadorGrafico::renderCoracao(fonte, posRect);
+			graphics->renderCoracao(fonte, posRect);
 		}
+
+		int pontuacao = GerenciadorDeColisao::getJogador1()->getPontuacao() + GerenciadorDeColisao::getJogador2()->getPontuacao();
+		//int pontuacao = 34500;
+		graphics->renderPontuacao(pontuacao);
 	}
 }
 
@@ -176,12 +181,14 @@ void Fase::save()  {
 				<< jog1->getComponente<ComponenteTransform>()->posicao.y << " "
 				<< jog1->getComponente<ComponenteTransform>()->velocidade.x << " "
 				<< jog1->getComponente<ComponenteTransform>()->velocidade.y << " "
-				<< jog1->getComponente<ComponenteSaude>()->getHealth() << std::endl
+				<< jog1->getComponente<ComponenteSaude>()->getHealth() << " "
+				<< jog1->getPontuacao() << std::endl
 				<< "2 " << jog2->getComponente<ComponenteTransform>()->posicao.x << " "
 				<< jog2->getComponente<ComponenteTransform>()->posicao.y << " "
 				<< jog2->getComponente<ComponenteTransform>()->velocidade.x << " "
 				<< jog2->getComponente<ComponenteTransform>()->velocidade.y << " "
-				<< jog2->getComponente<ComponenteSaude>()->getHealth() << std::endl;
+				<< jog2->getComponente<ComponenteSaude>()->getHealth() << " "
+				<< jog2->getPontuacao() << std::endl;
 		}//aqui salva os dados
 		else {
 			std::cout << "Failed saving!\n";
@@ -206,12 +213,14 @@ void Fase::save()  {
 				<< jog1->getComponente<ComponenteTransform>()->posicao.y << " "
 				<< jog1->getComponente<ComponenteTransform>()->velocidade.x << " "
 				<< jog1->getComponente<ComponenteTransform>()->velocidade.y << " "
-				<< jog1->getComponente<ComponenteSaude>()->getHealth() << std::endl
+				<< jog1->getComponente<ComponenteSaude>()->getHealth() << " "
+				<< jog1->getPontuacao() << std::endl
 				<< "2 " << jog2->getComponente<ComponenteTransform>()->posicao.x << " "
 				<< jog2->getComponente<ComponenteTransform>()->posicao.y << " "
 				<< jog2->getComponente<ComponenteTransform>()->velocidade.x << " "
 				<< jog2->getComponente<ComponenteTransform>()->velocidade.y << " "
-				<< jog2->getComponente<ComponenteSaude>()->getHealth() << std::endl;
+				<< jog2->getComponente<ComponenteSaude>()->getHealth() << " "
+				<< jog2->getPontuacao() << std::endl;
 		}//aqui salva os dados
 		else {
 			std::cout << "Failed saving!\n";
@@ -246,19 +255,20 @@ void Fase::load(const int id) {
 	if (id == 1) {
 		in.open("Saves/Fase1/jogadores.dat", std::ios::in);
 		if (in) {
-			int saude, id;
+			int saude, id, pontuacao;
 			float x, y, vx, vy;
 
 			in >> id; //se esta na boss room
 			if (id) mapa->setBossRoom(true);
 			mapa->reload(this->id);
-			while (in >> id >> x >> y >> vx >> vy >> saude) {
+			while (in >> id >> x >> y >> vx >> vy >> saude >> pontuacao) {
 				Jogador* jog = new Jogador;
 				jog->getComponente<ComponenteTransform>()->posicao.x = x;
 				jog->getComponente<ComponenteTransform>()->posicao.y = y;
 				jog->getComponente<ComponenteTransform>()->velocidade.x = vx;
 				jog->getComponente<ComponenteTransform>()->velocidade.y = vy;
 				jog->getComponente<ComponenteSaude>()->init(saude);
+				jog->setPontuacao(pontuacao);
 				listaEntidades.addEntidade(static_cast<Entidade*>(jog));
 				
 				if (id == 1) {
@@ -376,19 +386,20 @@ void Fase::load(const int id) {
 
 		in.open("Saves/Fase2/jogadores.dat", std::ios::in);
 		if (in) {
-		int saude, id;
+		int saude, id, pontuacao;
 		float x, y, vx, vy;
 
 		in >> id; //se esta na boss room
 		if (id) mapa->setBossRoom(true);
 		mapa->reload(this->id);
-		while (in >> id >> x >> y >> vx >> vy >> saude) {
+		while (in >> id >> x >> y >> vx >> vy >> saude >> pontuacao) {
 			Jogador* jog = new Jogador;
 			jog->getComponente<ComponenteTransform>()->posicao.x = x;
 			jog->getComponente<ComponenteTransform>()->posicao.y = y;
 			jog->getComponente<ComponenteTransform>()->velocidade.x = vx;
 			jog->getComponente<ComponenteTransform>()->velocidade.y = vy;
 			jog->getComponente<ComponenteSaude>()->init(saude);
+			jog->setPontuacao(pontuacao);
 			listaEntidades.addEntidade(static_cast<Entidade*>(jog));
 
 			if (id == 1) {

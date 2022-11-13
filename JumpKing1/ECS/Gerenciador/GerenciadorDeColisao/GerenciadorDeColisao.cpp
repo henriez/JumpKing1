@@ -517,8 +517,6 @@ void GerenciadorDeColisao::colisao_jogador1() {
 	
 }
 
-
-
 void GerenciadorDeColisao::colisao_esqueleto(Esqueleto* in1) {
 	SDL_Rect hitbox = in1->getComponente<ComponenteColisao>()->getColisor();
 	SDL_Rect platform = in1->getPlatform();
@@ -575,6 +573,9 @@ void GerenciadorDeColisao::ataqueJ1() {
 				colisor = i->getComponente<ComponenteColisao>()->getColisor();
 				if (AABB(hitbox, colisor)) {
 					i->damage();
+					//jogador1->hit(1000);
+					if (!i->isAlive())//se matou o inimigo
+						jogador1->hit(10000);
 				}
 			}
 		}
@@ -600,6 +601,9 @@ void GerenciadorDeColisao::ataqueJ2() {
 				colisor = i->getComponente<ComponenteColisao>()->getColisor();
 				if (AABB(hitbox, colisor)) {
 					i->damage();
+					//jogador2->hit(1000);
+					if (!i->isAlive())//se matou o inimigo
+						jogador2->hit(10000);
 				}
 			}
 		}

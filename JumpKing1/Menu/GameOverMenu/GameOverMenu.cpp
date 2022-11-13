@@ -18,7 +18,7 @@ void GameOverMenu::init() {
 	quit.setTex("Assets/Buttons/Exit Button.png");
 
 
-	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/gameover.png");
+	background = graphics->LoadTexture("Assets/Buttons/gameover.png");
 }
 
 void GameOverMenu::reset() {
@@ -34,7 +34,7 @@ int GameOverMenu::update() {
 
 void GameOverMenu::render() {
 	SDL_Rect fonte = { 0,0,300,168 }; //dimensao da textura
-	SDL_Rect destino = { 0,0,GerenciadorGrafico::getDimensoesJanela().x,GerenciadorGrafico::getDimensoesJanela().y };
-	GerenciadorGrafico::render(background, fonte, destino);
+	SDL_Rect destino = { 0,0,graphics->getDimensoesJanela().x,graphics->getDimensoesJanela().y };
+	graphics->render(background, fonte, destino);
 	quit.render();
 }

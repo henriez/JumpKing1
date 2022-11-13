@@ -18,7 +18,7 @@ void Tile::render() {
 
 	tempDest.x = destino.x - GerenciadorDeCamera::camera.x;
 	tempDest.y = destino.y - GerenciadorDeCamera::camera.y;
-	GerenciadorGrafico::renderTile(fonte, tempDest);
+	graphics->renderTile(fonte, tempDest);
 }
 
 void Tile::renderHitbox() {
@@ -26,7 +26,7 @@ void Tile::renderHitbox() {
 
 	tempDest.x = destino.x - GerenciadorDeCamera::camera.x;
 	tempDest.y = destino.y - GerenciadorDeCamera::camera.y;
-	GerenciadorGrafico::renderHitbox(fonte, tempDest);
+	graphics->renderHitbox(fonte, tempDest);
 }
 
 void Tile::setPosition(int x, int y, int srcX, int srcY) {

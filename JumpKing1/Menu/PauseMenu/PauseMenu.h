@@ -1,9 +1,10 @@
 #pragma once
 
+#include "../MenuEnte.h"
 #include "../Botao/Botao.h"
 #include <SDL_image.h>
 
-class PauseMenu
+class PauseMenu : public MenuEnte
 {
 public:
 	PauseMenu();
@@ -21,6 +22,5 @@ private:
 	Button resume;
 	Button quit;
 	Button save;
-	SDL_Texture* background;
 };
 

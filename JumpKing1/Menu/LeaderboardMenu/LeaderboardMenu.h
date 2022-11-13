@@ -1,9 +1,10 @@
 #pragma once
 
+#include "../MenuEnte.h"
 #include "../Botao/Botao.h"
 #include <SDL.h>
 
-class LeaderboardMenu
+class LeaderboardMenu : public MenuEnte
 {
 public:
 	LeaderboardMenu();
@@ -19,6 +20,5 @@ public:
 
 private:
 	Button quit;
-	SDL_Texture* background;
 };
 

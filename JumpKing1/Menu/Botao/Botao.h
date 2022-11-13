@@ -22,14 +22,6 @@
 #define NO_BUTTON_CLICKED 0
 
 class Button {
-private:
-	SDL_Rect pos;
-	SDL_Texture* texture;
-
-	bool isHovering;
-	bool isClicked;
-
-	SDL_Point getMousePos();
 public:
 
 	Button();
@@ -44,5 +36,14 @@ public:
 	void render();
 	
 	bool click();
+private:
+	GerenciadorGrafico* graphics;
+	SDL_Rect pos;
+	SDL_Texture* texture;
+
+	bool isHovering;
+	bool isClicked;
+
+	SDL_Point getMousePos();
 };
 

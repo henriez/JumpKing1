@@ -1,42 +1,56 @@
 #include "GerenciadorGrafico.h"
-#include <SDL_image.h>
 #include <iostream>
 
 #include "../../Entidade/ListaDeEntidades/ListaDeEntidades.h"
 
-#include "../../../Menu/LeaderboardMenu/LeaderboardMenu.h"
-#include "../../../Menu/LevelMenu/LevelMenu.h"
-#include "../../../Menu/MainMenu/MainMenu.h"
-#include "../../../Menu/PauseMenu/PauseMenu.h"
-#include "../../../Menu/GameOverMenu/GameOverMenu.h"
-#include "../../../Menu/SettingsMenu/SettingsMenu.h"
+#include "../../../Menu/Menu.h"
+
+#include "../GerenciadorDeCamera/GerenciadorDeCamera.h"
 
 #include "../../../Jogo/Jogo.h"
 #include "../../../Jogo/Fase/Fase.h"
 #include "../../../ECS/Componentes/Vector2D/Vector2D.h"
 
-SDL_Texture* GerenciadorGrafico::tileset = nullptr;
-SDL_Texture* GerenciadorGrafico::tilesetHitbox = nullptr;
-SDL_Texture* GerenciadorGrafico::lava = nullptr;
-SDL_Texture* GerenciadorGrafico::espinhos = nullptr;
-SDL_Texture* GerenciadorGrafico::coracao = nullptr;
-SDL_Renderer* GerenciadorGrafico::renderer = nullptr;
-SDL_Window* GerenciadorGrafico::window = nullptr;
-SDL_Point GerenciadorGrafico::dimensoesJanela;
-ListaDeEntidades* GerenciadorGrafico::entidades = nullptr;
+GerenciadorGrafico* GerenciadorGrafico::manager = nullptr;
 
 GerenciadorGrafico::GerenciadorGrafico() {
+	tileset = nullptr;
+	tilesetHitbox = nullptr;
+	lava = nullptr;
+	espinhos = nullptr;
+	coracao = nullptr;
+	renderer = nullptr;
+	window = nullptr;
+	font = nullptr;
+	dimensoesJanela = { 0,0 };
 }
 
 GerenciadorGrafico::~GerenciadorGrafico() {
 	SDL_DestroyTexture(tileset);
 	SDL_DestroyTexture(tilesetHitbox);
+	SDL_DestroyTexture(lava);
+	SDL_DestroyTexture(espinhos);
+	SDL_DestroyTexture(coracao);
+	TTF_Quit();
+}
+
+GerenciadorGrafico* GerenciadorGrafico::getInstance() {
+	if (manager == nullptr)
+		manager = new GerenciadorGrafico;
+	return manager;
+}
+
+void GerenciadorGrafico::deleteInstance() {
+	delete manager;
+	manager = nullptr;
 }
 
 void GerenciadorGrafico::init(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia) {
 	SDL_DisplayMode dm;
 	dm.w = largJanela;
 	dm.h = alturaJanela;
+
+	TTF_Init();
 
 	if (telaCheia) {
 		SDL_GetCurrentDisplayMode(0, &dm);
@@ -51,18 +65,13 @@ void GerenciadorGrafico::init(const char* nomeJanela, int largJanela, int altura
 
 	dimensoesJanela.x = (float)dm.w;
 	dimensoesJanela.y = (float)dm.h;
-}
 
-void GerenciadorGrafico::init_tileMap() {
+	font = TTF_OpenFont("Assets/fonts/Roboto-Medium.ttf", 200);
 	tilesetHitbox = IMG_LoadTexture(renderer, "Assets/TileMap/hitboxes colisao.png");
 	tileset = IMG_LoadTexture(renderer, "Assets/TileMap/Tiles.png");
 	lava = IMG_LoadTexture(renderer, "Assets/TileMap/lava.png");
 	espinhos = IMG_LoadTexture(renderer, "Assets/TileMap/espinhos.png");
 	coracao = IMG_LoadTexture(renderer, "Assets/coracao.png");
-}
-
-void GerenciadorGrafico::setListaDeEntidades(ListaDeEntidades* lista) {
-	entidades = lista;
 }
 
 SDL_Texture* GerenciadorGrafico::LoadTexture(const char* fileName){
@@ -110,6 +119,42 @@ void GerenciadorGrafico::renderEspinho(SDL_Rect fonte, SDL_Rect destino) {
 
 void GerenciadorGrafico::renderCoracao(SDL_Rect fonte, SDL_Rect destino) {
 	SDL_RenderCopy(renderer, coracao, &fonte, &destino);
+}
+
+void GerenciadorGrafico::renderPontuacao(int pontuacao) {
+	std::string ss = std::to_string(pontuacao);
+	SDL_Surface* temp = TTF_RenderText_Solid(font, ss.c_str(), { 255,255,255 });
+	SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, temp);
+	SDL_Rect camera = GerenciadorDeCamera::camera;
+
+	SDL_Rect textRect = { 0,0.03* camera.h,0,0.05*camera.h };
+	if (pontuacao < 10) { // 1 digito
+		textRect.x = 0.49 * camera.w;
+		textRect.w = 0.02 * camera.w;
+	}
+	else if (pontuacao < 100){ //2 digitos
+		textRect.x = 0.48 * camera.w;
+		textRect.w = 0.04 * camera.w;
+	}
+	else if (pontuacao < 1000) { //2 digitos
+		textRect.x = 0.47 * camera.w;
+		textRect.w = 0.06 * camera.w;
+	}
+	else if (pontuacao < 10000) { //4 digitos
+		textRect.x = 0.46 * camera.w;
+		textRect.w = 0.08 * camera.w;
+	}
+	else if (pontuacao < 100000) { //5 digitos
+		textRect.x = 0.45 * camera.w;
+		textRect.w = 0.1 * camera.w;
+	}
+	else{ //6+ digitos
+		textRect.x = 0.44 * camera.w;
+		textRect.w = 0.12 * camera.w;
+	}
+	SDL_FreeSurface(temp);
+
+	SDL_RenderCopy(renderer, tex, NULL, &textRect);
 }
 
 void GerenciadorGrafico::renderLava(SDL_Rect fonte, SDL_Rect destino) {

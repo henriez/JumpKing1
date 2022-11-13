@@ -15,16 +15,16 @@ public:
 	}
 
 	void setCaminhoArquivo(const char* caminhoArquivo) {
-		textura = GerenciadorGrafico::LoadTexture(caminhoArquivo);
+		textura = graphics->LoadTexture(caminhoArquivo);
 	}
 
 	void render(SDL_Rect pos) {
 		SDL_Rect fonte = { 0, 0, tamanhoTile, tamanhoTile };
-		GerenciadorGrafico::render(textura, fonte, pos);
+		graphics->render(textura, fonte, pos);
 	}
 
 	void render(SDL_Rect pos, SDL_Rect fonte, bool flip = false) {
-		GerenciadorGrafico::render(textura, fonte, pos, flip);
+		graphics->render(textura, fonte, pos, flip);
 	}
 	
 private:

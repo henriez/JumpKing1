@@ -11,6 +11,7 @@ SDL_Event Jogo::evento;
 Jogo::Jogo(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia) {
 	rodando = true;
 	fase = new Fase;
+	graphics = GerenciadorGrafico::getInstance();
 	inicializar(nomeJanela, largJanela, alturaJanela, telaCheia);
 }
 
@@ -23,7 +24,7 @@ Jogo::~Jogo() {
 void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia) {
 	SDL_Init(SDL_INIT_EVERYTHING);
 
-	GerenciadorGrafico::init(nomeJanela, largJanela, alturaJanela, telaCheia);
+	graphics->init(nomeJanela, largJanela, alturaJanela, telaCheia);
 	fase->setJogo(this);
 
 	menu.init();
@@ -37,7 +38,7 @@ void Jogo::mainMenu() {
 	int click = menu.start.update();
 	
 	while (click == NO_BUTTON_CLICKED) {
-		GerenciadorGrafico::renderMenu(menu.start);
+		graphics->renderMenu(menu.start);
 		click = menu.start.update();
 	}
 
@@ -69,7 +70,7 @@ void Jogo::pauseMenu() {
 	int click = menu.pause.update();
 
 	while (click == NO_BUTTON_CLICKED) {
-		GerenciadorGrafico::renderMenu(menu.pause);
+		graphics->renderMenu(menu.pause);
 		click = menu.pause.update();
 	}
 
@@ -95,7 +96,7 @@ void Jogo::gameOverMenu() {
 	int click = menu.gameOver.update();
 
 	while (click == NO_BUTTON_CLICKED) {
-		GerenciadorGrafico::renderMenu(menu.gameOver);
+		graphics->renderMenu(menu.gameOver);
 		click = menu.gameOver.update();
 	}
 
@@ -117,7 +118,7 @@ void Jogo::settingsMenu() {
 	int click = menu.settings.update();
 
 	while (click == NO_BUTTON_CLICKED) {
-		GerenciadorGrafico::renderMenu(menu.settings);
+		graphics->renderMenu(menu.settings);
 		click = menu.settings.update();
 	}	
 	
@@ -139,7 +140,7 @@ void Jogo::leaderboardMenu() {
 	int click = menu.leaderboard.update();
 
 	while (click == NO_BUTTON_CLICKED) {
-		GerenciadorGrafico::renderMenu(menu.leaderboard);
+		graphics->renderMenu(menu.leaderboard);
 		click = menu.leaderboard.update();
 	}
 
@@ -159,7 +160,7 @@ void Jogo::levelMenu() {
 	int click = menu.level.update();
 
 	while (click == NO_BUTTON_CLICKED) {
-		GerenciadorGrafico::renderMenu(menu.level);
+		graphics->renderMenu(menu.level);
 		click = menu.level.update();
 	}
 
@@ -186,7 +187,7 @@ void Jogo::saveMenu() {
 	int click = menu.save.update();
 
 	while (click == NO_BUTTON_CLICKED) {
-		GerenciadorGrafico::renderMenu(menu.save);
+		graphics->renderMenu(menu.save);
 		click = menu.save.update();
 	}
 
@@ -212,7 +213,7 @@ void Jogo::loadMenu() {
 	int click = menu.load.update();
 
 	while (click == NO_BUTTON_CLICKED) {
-		GerenciadorGrafico::renderMenu(menu.load);
+		graphics->renderMenu(menu.load);
 		click = menu.load.update();
 	}
 
@@ -248,7 +249,7 @@ void Jogo::atualizar() {
 }
 
 void Jogo::render() {
-	GerenciadorGrafico::renderFase(fase);
+	graphics->renderFase(fase);
 }
 
 void Jogo::analisaEventos() {

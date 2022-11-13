@@ -35,4 +35,5 @@ private:
 	bool onBossRoom;
 	SDL_Rect fim; //retangulo que indica fim da fase (entrada da sala do boss)
 	int id; //relativo à fase
+	GerenciadorGrafico* graphics;
 };

@@ -213,6 +213,7 @@
     <ClInclude Include="Menu\LoadMenu\LoadMenu.h" />
     <ClInclude Include="Menu\MainMenu\MainMenu.h" />
     <ClInclude Include="Menu\Menu.h" />
+    <ClInclude Include="Menu\MenuEnte.h" />
     <ClInclude Include="Menu\PauseMenu\PauseMenu.h" />
     <ClInclude Include="Menu\SaveMenu\SaveMenu.h" />
     <ClInclude Include="Menu\SettingsMenu\SettingsMenu.h" />

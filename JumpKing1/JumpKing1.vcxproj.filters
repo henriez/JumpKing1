@@ -331,5 +331,8 @@
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeEventos\GerenciadorDeEventos.h">
       <Filter>ECS\Gerenciador\GerenciadorDeEventos</Filter>
     </ClInclude>
+    <ClInclude Include="Menu\MenuEnte.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -16,7 +16,7 @@ void SettingsMenu::init() {
 	quit.set(0.1 * dm.w, 0.8*dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	quit.setTex("Assets/Buttons/Back Button.png");;
 
-	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");
+	background = graphics->LoadTexture("Assets/Buttons/menu.png");
 }
 
 void SettingsMenu::reset() {
@@ -32,7 +32,7 @@ int SettingsMenu::update() {
 
 void SettingsMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
-	SDL_Rect destino = { 0,0,GerenciadorGrafico::getDimensoesJanela().x,GerenciadorGrafico::getDimensoesJanela().y };
-	GerenciadorGrafico::render(background, fonte, destino);
+	SDL_Rect destino = { 0,0,graphics->getDimensoesJanela().x,graphics->getDimensoesJanela().y };
+	graphics->render(background, fonte, destino);
 	quit.render();
 }

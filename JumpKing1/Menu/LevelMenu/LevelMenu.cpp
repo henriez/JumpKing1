@@ -23,7 +23,7 @@ void LevelMenu::init() {
 	level2.set(0.75 * dm.w, 0.43 * dm.h, 0.13 * dm.w, 0.115 * dm.h);
 	level2.setTex("Assets/Buttons/Level 2.png");
 
-	background = GerenciadorGrafico::LoadTexture("Assets/Buttons/menu.png");
+	background = graphics->LoadTexture("Assets/Buttons/menu.png");
 }
 
 void LevelMenu::reset() {
@@ -47,8 +47,8 @@ int LevelMenu::update() {
 
 void LevelMenu::render() {
 	SDL_Rect fonte = { 0,0,1280,720 };
-	SDL_Rect destino = { 0,0,GerenciadorGrafico::getDimensoesJanela().x,GerenciadorGrafico::getDimensoesJanela().y };
-	GerenciadorGrafico::render(background, fonte, destino);
+	SDL_Rect destino = { 0,0,graphics->getDimensoesJanela().x,graphics->getDimensoesJanela().y };
+	graphics->render(background, fonte, destino);
 	level1.render();
 	level2.render();
 	back.render();

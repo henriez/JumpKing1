@@ -24,7 +24,7 @@ private:
 	std::vector<Tile*> camada2;
 	std::vector<Tile*> hitbox_plataformas;
 
-
+	GerenciadorGrafico* graphics;
 	SDL_Point nTiles;
 
 	std::vector<SDL_Point> posicoes_lava;

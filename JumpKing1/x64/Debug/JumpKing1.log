@@ -1,10 +1,16 @@
-﻿  Fase.cpp
+﻿  Esqueleto.cpp
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Componentes\SubComponentes\ComponenteSaude.h(14,22): warning C4244: '=': conversão de 'unsigned int' para 'float', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Componentes\SubComponentes\ComponenteSaude.h(32,10): warning C4244: 'return': conversão de 'const float' para 'int', possível perda de dados
 C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Componentes\SubComponentes\ComponenteSaude.h(36,10): warning C4244: 'return': conversão de 'const float' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Fase.cpp(68,66): warning C4305: '=': truncamento de 'double' para 'float'
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Fase.cpp(138,34): warning C4244: '=': conversão de 'double' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Fase.cpp(139,23): warning C4244: '=': conversão de 'double' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Fase.cpp(146,67): warning C4244: '=': conversão de 'double' para 'int', possível perda de dados
-C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\Jogo\Fase\Fase.cpp(147,23): warning C4244: '=': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp(31,48): warning C4244: '=': conversão de 'int' para 'float', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp(36,119): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp(36,95): warning C4244: 'argumento': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp(36,82): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp(36,60): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp(50,85): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp(50,63): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp(91,39): warning C4838: a conversão de 'double' em 'int' requer uma conversão de restrição
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp(91,39): warning C4244: 'inicializando': conversão de 'double' para 'int', possível perda de dados
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp(91,57): warning C4838: a conversão de 'double' em 'int' requer uma conversão de restrição
+C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\JumpKing1\ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp(91,57): warning C4244: 'inicializando': conversão de 'double' para 'int', possível perda de dados
   JumpKing1.vcxproj -> C:\Users\hapme\OneDrive\Documentos\Dev\JumpKing1\x64\Debug\JumpKing1.exe
