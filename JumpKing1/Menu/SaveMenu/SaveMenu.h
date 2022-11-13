@@ -4,8 +4,8 @@
 #include "../Botao/Botao.h"
 #include <SDL_image.h>
 
-class SaveMenu : public MenuEnte
-{
+class SaveMenu : public MenuEnte{
+
 public:
 	SaveMenu();
 	~SaveMenu();
