@@ -13,7 +13,7 @@
 #define HIT 4
 
 Esqueleto::Esqueleto(float x, float y) {
-	sprite = { 0, 64 * WALKING, 64, 49 }; // w = 42 h = 49
+	sprite = { 4, 64 * WALKING + 16, 39, 33 }; // w = 42 h = 49
 	flip = false;
 	speed = 1;
 	fSpeed = 90;
@@ -35,6 +35,7 @@ Esqueleto::Esqueleto(float x, float y) {
 
 	getComponente<ComponenteColisao>()->set(transform->posicao.x, transform->posicao.y, sprite.w * SCALE, (sprite.h - 1) * SCALE);
 	GerenciadorDeColisao::iniciaInimigo(this);
+	std::cout << getPlatform().x << " " << getPlatform().y << " " << getPlatform().w << " " << getPlatform().h << std::endl;
 }
 
 Esqueleto::~Esqueleto() {}
@@ -76,8 +77,8 @@ void Esqueleto::atualizar() {
 
 	SDL_Rect hitbox = getComponente<ComponenteColisao>()->getColisor();
 	SDL_Rect plat = getPlatform();
-	if ((transform->posicao.x < plat.x && transform->velocidade.x < 0) ||
-		(transform->posicao.x + hitbox.w > plat.x + plat.w && transform->velocidade.x > 0)) {
+	if ((transform->posicao.x <= plat.x && transform->velocidade.x < 0) ||
+		(transform->posicao.x + hitbox.w >= plat.x + plat.w && transform->velocidade.x > 0)) {
 		transform->velocidade.x = transform->velocidade.x * -1;
 	}
 
@@ -88,9 +89,6 @@ void Esqueleto::render() {
 		if (getComponente<ComponenteTransform>()->velocidade.x < 0) { flip = true; }
 		else if (getComponente<ComponenteTransform>()->velocidade.x > 0) { flip = false; }
 
-		SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
-		posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
-		posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
 
 		// TODO:
 		// Dar prioridade a animações de tomar dano e morrer
@@ -105,15 +103,20 @@ void Esqueleto::render() {
 			fSpeed = 150;
 			break;
 		case WALKING:
-			sprite.y = 64 * WALKING;
+			sprite.y = 64 * WALKING + 16;
+			sprite.w = 39;
+			sprite.h = 33;
 			frames = 12;
 			fSpeed = 90;
 			break;
 		default:
 			break;
 		}
+		SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
+		posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
+		posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
 		sprite.x = 64 * static_cast<int>((SDL_GetTicks() / fSpeed) % frames);
 		getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
-		//GerenciadorGrafico::renderInimigoHitbox(posRect);
+		graphics->renderInimigoHitbox(posRect);
 	}
 }

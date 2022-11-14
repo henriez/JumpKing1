@@ -58,30 +58,29 @@ void Fase::inicializar(const int id) {
 	}
 	
 	if (id == 1) {
-		Esqueleto* en1T1 = new Esqueleto;
-		en1T1->getComponente<ComponenteTransform>()->posicao.x = 456;
-		en1T1->getComponente<ComponenteTransform>()->posicao.y = 6240;
+		Esqueleto* en1T1 = new Esqueleto(456, 6240);
 		listaEntidades.addEntidade(static_cast<Entidade*>(en1T1));
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en1T1));
 
-		Esqueleto* en2T1 = new Esqueleto;
-		en2T1->getComponente<ComponenteTransform>()->posicao.x = 160;
-		en2T1->getComponente<ComponenteTransform>()->posicao.y = 5632.8;
+		Esqueleto* en2T1 = new Esqueleto(160, 5632.8);
 		listaEntidades.addEntidade(static_cast<Entidade*>(en2T1));
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en2T1));
 
-		Esqueleto* en3T1 = new Esqueleto;
-		en3T1->getComponente<ComponenteTransform>()->posicao.x = 1064;
-		en3T1->getComponente<ComponenteTransform>()->posicao.y = 5358;
+		Esqueleto* en3T1 = new Esqueleto(1064, 5358);
 		listaEntidades.addEntidade(static_cast<Entidade*>(en3T1));
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en3T1));
 
-		Esqueleto* en4T1 = new Esqueleto;
-		en4T1->getComponente<ComponenteTransform>()->posicao.x = 1500;
-		en4T1->getComponente<ComponenteTransform>()->posicao.y = 5984;
+		Esqueleto* en4T1 = new Esqueleto(1500, 5984);
 		listaEntidades.addEntidade(static_cast<Entidade*>(en4T1));
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en4T1));
 
+		Esqueleto* en5T1 = new Esqueleto(2368, 5248);
+		listaEntidades.addEntidade(static_cast<Entidade*>(en5T1));
+		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en5T1));
+
+		Esqueleto* en6T1 = new Esqueleto(2368, 3648);
+		listaEntidades.addEntidade(static_cast<Entidade*>(en6T1));
+		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en6T1));
 	}
 
 	Zumbi* zumbi = new Zumbi;
@@ -351,9 +350,7 @@ void Fase::load(const int id) {
 
 			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy) {
 				if (nomeClasse == esqueleto) {
-					Esqueleto* inimigo = new Esqueleto;
-					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
-					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+					Esqueleto* inimigo = new Esqueleto(x, y);
 					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
 					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
 					GerenciadorDeColisao::addInimigo(inimigo);
@@ -482,9 +479,7 @@ void Fase::load(const int id) {
 
 			while (in >> classe >> nomeClasse >> x >> y >> vx >> vy) {
 				if (nomeClasse == esqueleto) {
-					Esqueleto* inimigo = new Esqueleto;
-					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
-					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+					Esqueleto* inimigo = new Esqueleto(x, y);
 					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
 					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
 					GerenciadorDeColisao::addInimigo(inimigo);

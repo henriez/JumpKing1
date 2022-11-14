@@ -4,7 +4,7 @@
 
 class Esqueleto : public Inimigo {
 public:
-	Esqueleto(float x = 0, float y = 0);
+	Esqueleto(float x, float y);
 	~Esqueleto();
 
 	const int getSpeed() const { return speed; }
