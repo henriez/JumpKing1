@@ -152,9 +152,11 @@ void GerenciadorGrafico::renderPontuacao(int pontuacao) {
 		textRect.x = 0.44 * camera.w;
 		textRect.w = 0.12 * camera.w;
 	}
-	SDL_FreeSurface(temp);
-
+	
 	SDL_RenderCopy(renderer, tex, NULL, &textRect);
+	
+	SDL_FreeSurface(temp);
+	SDL_DestroyTexture(tex);
 }
 
 void GerenciadorGrafico::renderLava(SDL_Rect fonte, SDL_Rect destino) {
