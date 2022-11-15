@@ -77,7 +77,7 @@ void Jogo::pauseMenu() {
 		atualizar();
 		break;
 	case BUTTON_SAVE:
-		fase->save(); //salvar
+		fase->save(); // get points
 		pauseMenu();
 		break;
 	case BUTTON_QUIT:
@@ -102,6 +102,10 @@ void Jogo::gameOverMenu() {
 	case BUTTON_QUIT:
 		fase->clear();
 		mainMenu();
+		break;
+	case BUTTON_SAVE:
+		fase->saveRank(); //salvar
+		gameOverMenu();
 		break;
 	default:
 		break;
@@ -132,17 +136,24 @@ void Jogo::settingsMenu() {
 
 void Jogo::leaderboardMenu() {
 
-	// fazer o menu de leaderboard
 	menu.leaderboard.reset();
 	int click = menu.leaderboard.update();
 
-	while (click == NO_BUTTON_CLICKED)
+	while (click == NO_BUTTON_CLICKED) {
 		click = menu.leaderboard.update();
+		//graphics->present();
+	}
 	
 
 	switch (click) { //apos algum clique
 	case BUTTON_QUIT:
 		mainMenu();
+		break;
+	case BUTTON_START1:
+		showRanking(1);
+		break;
+	case BUTTON_START2:
+		showRanking(2);
 		break;
 	default:
 		break;
@@ -234,4 +245,64 @@ void Jogo::analisaEventos() {
 
 bool Jogo::executando() {
 	return rodando;
+}
+
+void Jogo::showRanking(int id) {
+
+	// carrega a textura com os textos
+	std::ifstream in;
+
+	if (id == 1) in.open("Saves/Fase1/ranking.dat");
+	else if (id == 2) in.open("Saves/Fase2/ranking.dat");
+
+	std::string nome1, nome2, line, finalString = "";
+	int pontuacao;
+
+	while (in >> nome1 >> nome2 >> pontuacao) {
+		line = std::to_string(pontuacao) + ": " + nome1 + " & " + nome2;
+		finalString.append(line);
+	}
+	in.close();
+
+	//renderiza tabelas
+	SDL_DisplayMode dm;
+	SDL_GetCurrentDisplayMode(0, &dm);
+
+	SDL_Rect ranking = { 0.49 * dm.w, 0.15 * dm.h, 0.4 * dm.w, 0.5 * dm.h };
+	SDL_Color grey = { 192,192,192,255 };
+	SDL_Color black = { 0,0,0,255 };
+	graphics->renderRect(ranking, grey, black);
+
+	
+	SDL_Texture* textTex = graphics->TextTexture(finalString);
+	SDL_Rect textRect = { 0,0,0,0 };
+	SDL_QueryTexture(textTex, NULL, NULL, &textRect.w, &textRect.h);
+	graphics->render(textTex, textRect, ranking);
+
+
+	menu.leaderboard.reset();
+	int click = menu.leaderboard.updateRanking(textTex, ranking);
+
+	graphics->present();
+
+	while (click == NO_BUTTON_CLICKED)
+		click = menu.leaderboard.updateRanking(textTex, ranking);
+
+	switch (click) { //apos algum clique
+	case BUTTON_QUIT:
+		leaderboardMenu();
+		break;
+	case BUTTON_START1:
+		if(id != 1)
+			showRanking(1);
+		break;
+	case BUTTON_START2:
+		if (id != 2)
+			showRanking(2);
+		break;
+	default:
+		break;
+	}
+
+	SDL_DestroyTexture(textTex);
 }

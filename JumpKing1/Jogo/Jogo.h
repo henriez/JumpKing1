@@ -26,6 +26,8 @@ public:
 	void levelMenu();
 	void loadMenu();
 
+	void showRanking(int id);
+
 	static SDL_Event evento;
 
 private:

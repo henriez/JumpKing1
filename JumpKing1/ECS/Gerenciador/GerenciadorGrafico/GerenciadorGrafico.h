@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <string>
 
 class Fase;
 
@@ -18,6 +19,7 @@ public:
 	void present() { SDL_RenderPresent(renderer); }
 
 	SDL_Texture* LoadTexture(const char* fileName);
+	SDL_Texture* TextTexture(std::string str);
 	SDL_Point getDimensoesJanela();
 
 	void render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino, bool flip = false);
@@ -28,9 +30,11 @@ public:
 	void renderHitbox(SDL_Rect fonte, SDL_Rect destino);
 	void renderEspinho(SDL_Rect fonte, SDL_Rect destino);
 	void renderLava(SDL_Rect fonte, SDL_Rect destino);
+	void renderRect(SDL_Rect rect, SDL_Color fill, SDL_Color outline);
 
 	void renderCoracao(SDL_Rect fonte, SDL_Rect destino);
 	void renderPontuacao(int pontuacao);
+	void renderText(std::string text, SDL_Point position);
 private:
 	GerenciadorGrafico();
 	static GerenciadorGrafico* manager;
