@@ -41,6 +41,11 @@ void MainMenu::reset() {
 }
 
 int MainMenu::update() {
+	graphics->clear();
+	SDL_PollEvent(&Jogo::evento);
+	render();
+	graphics->present();
+
 	start.handleEvents();
 	if (start.click()) return BUTTON_START1;
 

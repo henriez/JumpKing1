@@ -181,19 +181,36 @@ void Fase::gameOver() {
 	player_is_alive = false;
 }
 
-void Fase::save()  {
-	std::ofstream out;
-
+void Fase::saveRank() {
 	//salva nomes dos jogadores -> sera coletado ao final da fase
 	TextBox name1;
 	name1.setFontToHeight("Assets/fonts/acme.ttf");
 	name1.run("Player 1", 300, 200);
-	std::cout << name1.getInput() << std::endl;
 
 	TextBox name2;
 	name2.setFontToHeight("Assets/fonts/acme.ttf");
 	name2.run("Player 2", 300, 200);
-	std::cout << name2.getInput() << std::endl;
+
+	std::ofstream out;
+
+	if (id == 1) {
+		Jogador* jog1 = GerenciadorDeColisao::getJogador1();
+		Jogador* jog2 = GerenciadorDeColisao::getJogador2();
+		out.open("Saves/Fase1/ranking.dat", std::ios::app);
+		out << name1.getInput() << " " << name2.getInput() << " " << jog1->getPontuacao() + jog2->getPontuacao() << std::endl;
+		out.close();
+	}
+	else if (id == 2) {
+		Jogador* jog1 = GerenciadorDeColisao::getJogador1();
+		Jogador* jog2 = GerenciadorDeColisao::getJogador2();
+		out.open("Saves/Fase2/ranking.dat", std::ios::app);
+		out << name1.getInput() << " " << name2.getInput() << " " << jog1->getPontuacao() + jog2->getPontuacao() << std::endl;
+		out.close();
+	}
+}
+
+void Fase::save()  {
+	std::ofstream out;
 
 	//salva entidades em seus respectivos arquivos
 

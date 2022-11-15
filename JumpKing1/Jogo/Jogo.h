@@ -24,8 +24,9 @@ public:
 	void settingsMenu();
 	void leaderboardMenu();
 	void levelMenu();
-	void saveMenu();
 	void loadMenu();
+
+	void showRanking(int id);
 
 	static SDL_Event evento;
 

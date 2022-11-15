@@ -20,6 +20,7 @@ public:
 	void clear();
 	void gameOver();
 	void save();
+	void saveRank();
 private:
 	ListaDeEntidades listaEntidades;
 	GerenciadorDeEventos* event_manager;

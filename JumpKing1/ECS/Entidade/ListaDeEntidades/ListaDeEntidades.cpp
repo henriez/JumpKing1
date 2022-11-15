@@ -6,27 +6,26 @@ ListaDeEntidades::~ListaDeEntidades() {
 	clear();
 }
 
-void ListaDeEntidades::atualizar() {
-	for (auto& e : listaEntidades)
-		if (e != nullptr)
-			e->atualizar();
-}
-
 void ListaDeEntidades::addEntidade(Entidade* en) {
-	listaEntidades.push_back(en);
-}
-
-void ListaDeEntidades::render() {
-	for (auto& e : listaEntidades)
-		if (e != nullptr)
-			e->render();
+	listaEntidades.add(en);
 }
 
 void ListaDeEntidades::clear() {
-	for (auto& e : listaEntidades)
-		if (e != nullptr) {
-			delete e;
-			e = nullptr;
-		}
 	listaEntidades.clear();
+}
+
+void ListaDeEntidades::atualizar() {
+	Entidade* aux = listaEntidades.begin();
+	while (aux) {
+		aux->atualizar();
+		aux = listaEntidades.next();
+	}
+}
+
+void ListaDeEntidades::render() {
+	Entidade* aux = listaEntidades.begin();
+	while (aux) {
+		aux->render();
+		aux = listaEntidades.next();
+	}
 }

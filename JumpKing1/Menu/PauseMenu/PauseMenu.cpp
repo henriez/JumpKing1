@@ -33,6 +33,11 @@ void PauseMenu::reset() {
 }
 
 int PauseMenu::update() {
+	graphics->clear();
+	SDL_PollEvent(&Jogo::evento);
+	render();
+	graphics->present();
+
 	resume.handleEvents();
 	if (resume.click()) return BUTTON_RESUME;
 

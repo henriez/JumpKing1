@@ -20,5 +20,6 @@ public:
 
 private:
 	Button quit;
+	Button save;
 };
 

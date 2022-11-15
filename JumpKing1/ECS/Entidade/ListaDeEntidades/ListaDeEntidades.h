@@ -7,18 +7,19 @@
 #include "../Personagem/Inimigo/Zumbi/Zumbi.h"
 #include "../Personagem/Inimigo/Chefe/Chefe.h"
 #include "../Projetil/Projetil.h"
+#include "../../Lista/Lista.h"
 
 class ListaDeEntidades {
 public:
 	ListaDeEntidades();
 	~ListaDeEntidades();
-	//int size() { return listaEntidades.size(); }
-	void atualizar();
-	void addEntidade(Entidade* en);
-	void render();
-	void clear();
-//private:
-	std::vector<Entidade*> listaEntidades;
 
+	void addEntidade(Entidade* en);
+	void clear();
+
+	void atualizar();
+	void render();
+private:
+	Lista<Entidade*> listaEntidades;
 
 };
