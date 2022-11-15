@@ -4,6 +4,7 @@
 #include "../../ECS/Gerenciador/GerenciadorDeEventos/GerenciadorDeEventos.h"
 #include <fstream>
 #include <string>
+#include "../TextBox/Textbox.h"
 using namespace std;
 
 
@@ -182,6 +183,20 @@ void Fase::gameOver() {
 
 void Fase::save()  {
 	std::ofstream out;
+
+	//salva nomes dos jogadores -> sera coletado ao final da fase
+	TextBox name1;
+	name1.setFontToHeight("Assets/fonts/acme.ttf");
+	name1.run("Player 1", 300, 200);
+	std::cout << name1.getInput() << std::endl;
+
+	TextBox name2;
+	name2.setFontToHeight("Assets/fonts/acme.ttf");
+	name2.run("Player 2", 300, 200);
+	std::cout << name2.getInput() << std::endl;
+
+	//salva entidades em seus respectivos arquivos
+
 	if (id == 1) {
 		out.open("Saves/Fase1/jogadores.dat", std::ios::out);
 		if (out) {

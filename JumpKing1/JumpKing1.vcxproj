@@ -161,8 +161,8 @@
     <ClCompile Include="Jogo\Fase\Fase.cpp" />
     <ClCompile Include="Jogo\Fase\Mapa\Mapa.cpp" />
     <ClCompile Include="Jogo\Fase\Mapa\TileMap\TileMap.cpp" />
-    <ClCompile Include="Jogo\HUD\HUD.cpp" />
     <ClCompile Include="Jogo\Jogo.cpp" />
+    <ClCompile Include="Jogo\TextBox\Textbox.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu\Botao\Botao.cpp" />
     <ClCompile Include="Menu\GameOverMenu\GameOverMenu.cpp" />
@@ -204,8 +204,8 @@
     <ClInclude Include="Jogo\Fase\Fase.h" />
     <ClInclude Include="Jogo\Fase\Mapa\Mapa.h" />
     <ClInclude Include="Jogo\Fase\Mapa\TileMap\TileMap.h" />
-    <ClInclude Include="Jogo\HUD\HUD.h" />
     <ClInclude Include="Jogo\Jogo.h" />
+    <ClInclude Include="Jogo\TextBox\Textbox.h" />
     <ClInclude Include="Menu\Botao\Botao.h" />
     <ClInclude Include="Menu\GameOverMenu\GameOverMenu.h" />
     <ClInclude Include="Menu\LeaderboardMenu\LeaderboardMenu.h" />

@@ -5,9 +5,6 @@
     <ClCompile Include="Jogo\Jogo.cpp">
       <Filter>Jogo</Filter>
     </ClCompile>
-    <ClCompile Include="Jogo\HUD\HUD.cpp">
-      <Filter>Jogo\HUD</Filter>
-    </ClCompile>
     <ClCompile Include="Jogo\Fase\Fase.cpp">
       <Filter>Jogo\Fase</Filter>
     </ClCompile>
@@ -89,13 +86,13 @@
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeEventos\GerenciadorDeEventos.cpp">
       <Filter>ECS\Gerenciador\GerenciadorDeEventos</Filter>
     </ClCompile>
+    <ClCompile Include="Jogo\TextBox\Textbox.cpp">
+      <Filter>Jogo\TextBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Jogo">
       <UniqueIdentifier>{8df8b5b4-f164-4cd1-a611-1a73ea7d0ea6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Jogo\HUD">
-      <UniqueIdentifier>{c43691ab-01e2-497b-babe-43be62043893}</UniqueIdentifier>
     </Filter>
     <Filter Include="Jogo\Fase">
       <UniqueIdentifier>{fdfd6c84-7ccc-441c-bdf4-7f82d7857f23}</UniqueIdentifier>
@@ -208,13 +205,13 @@
     <Filter Include="ECS\Gerenciador\GerenciadorDeEventos">
       <UniqueIdentifier>{d2e6f2e7-aa51-409d-bec3-9b92abf56b5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Jogo\TextBox">
+      <UniqueIdentifier>{965e78cc-f293-4be1-9f24-b63f37398a72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Jogo\Jogo.h">
       <Filter>Jogo</Filter>
-    </ClInclude>
-    <ClInclude Include="Jogo\HUD\HUD.h">
-      <Filter>Jogo\HUD</Filter>
     </ClInclude>
     <ClInclude Include="Jogo\Fase\Fase.h">
       <Filter>Jogo\Fase</Filter>
@@ -333,6 +330,9 @@
     </ClInclude>
     <ClInclude Include="Menu\MenuEnte.h">
       <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Jogo\TextBox\Textbox.h">
+      <Filter>Jogo\TextBox</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
