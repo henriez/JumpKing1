@@ -81,6 +81,19 @@ void Fase::inicializar(const int id) {
 		Esqueleto* en6T1 = new Esqueleto(2368, 3648);
 		listaEntidades.addEntidade(static_cast<Entidade*>(en6T1));
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en6T1));
+
+		Esqueleto* en7T1 = new Esqueleto(944, 4512);
+		listaEntidades.addEntidade(static_cast<Entidade*>(en7T1));
+		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en7T1));
+
+		Esqueleto* en8T1 = new Esqueleto(120, 4512);
+		listaEntidades.addEntidade(static_cast<Entidade*>(en8T1));
+		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en8T1));
+	}
+	if (id == 2) {
+		Esqueleto* en1T1 = new Esqueleto(1672, 5504);
+		listaEntidades.addEntidade(static_cast<Entidade*>(en1T1));
+		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en1T1));
 	}
 
 	Zumbi* zumbi = new Zumbi;

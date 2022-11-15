@@ -117,6 +117,6 @@ void Esqueleto::render() {
 		posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
 		sprite.x = 64 * static_cast<int>((SDL_GetTicks() / fSpeed) % frames);
 		getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
-		graphics->renderInimigoHitbox(posRect);
+		//graphics->renderInimigoHitbox(posRect);
 	}
 }

@@ -186,7 +186,8 @@ void GerenciadorDeColisao::iniciaInimigo(Inimigo* in) {
 	while (notFound) {
 		notFound = false;
 		for (auto& t : tilemap->hitbox_plataformas) {
-			if (AABB({ platform.x - platform.w, platform.y - platform.h, platform.w, platform.h }, t->getPos())) {
+			if (AABB({ platform.x - platform.w, platform.y - result.h, platform.w, platform.h }, t->getPos())) {
+				notFound = false;
 				break;
 			}
 			if (AABB({ platform.x - platform.w, platform.y, platform.w, platform.h }, t->getPos())) {
@@ -202,13 +203,15 @@ void GerenciadorDeColisao::iniciaInimigo(Inimigo* in) {
 	platform.w = platform.h = result.h;
 	notFound = true;
 	while ((result.x < platform.x - platform.w) && notFound) {
-		for (auto& o : obstaculos) {
-			if (AABB({ platform.x - platform.w, platform.y - result.h, platform.w, platform.h }, o->getComponente<ComponenteColisao>()->getColisor())) {
+		for (auto& t : tilemap->hitbox_plataformas) {
+			if (AABB({ platform.x - platform.w, platform.y - result.h, platform.w, platform.h }, t->getPos())) {
 				notFound = false;
 				result.x = platform.x;
 				break;
 			}
-			else if (AABB({ platform.x - platform.w, platform.y, platform.w, platform.h }, o->getComponente<ComponenteColisao>()->getColisor())) {
+		}
+		for (auto& o : obstaculos) {
+			if (AABB({ platform.x - platform.w, platform.y - result.h, platform.w, platform.h * 2 }, o->getComponente<ComponenteColisao>()->getColisor())) {
 				notFound = false;
 				result.x = platform.x;
 				break;
@@ -226,6 +229,7 @@ void GerenciadorDeColisao::iniciaInimigo(Inimigo* in) {
 		notFound = false;
 		for (auto& t : tilemap->hitbox_plataformas) {
 			if (AABB({ platform.x + platform.w, platform.y - result.h, platform.w, platform.h }, t->getPos())) {
+				notFound = false;
 				break;
 			}
 			if (AABB({ platform.x + platform.w, platform.y, platform.w, platform.h }, t->getPos())) {
@@ -241,13 +245,15 @@ void GerenciadorDeColisao::iniciaInimigo(Inimigo* in) {
 	platform.w = platform.h = result.h;
 	notFound = true;
 	while ((result.x + result.w > platform.x + platform.w) && notFound) {
-		for (auto& o : obstaculos) {
-			if (AABB({ platform.x + platform.w, platform.y - result.h, platform.w, platform.h }, o->getComponente<ComponenteColisao>()->getColisor())) {
+		for (auto& t : tilemap->hitbox_plataformas) {
+			if (AABB({ platform.x + platform.w, platform.y - result.h, platform.w, platform.h }, t->getPos())) {
 				notFound = false;
 				result.w = platform.x + platform.w - result.x;
 				break;
 			}
-			else if (AABB({ platform.x + platform.w, platform.y, platform.w, platform.h }, o->getComponente<ComponenteColisao>()->getColisor())) {
+		}
+		for (auto& o : obstaculos) {
+			if (AABB({ platform.x + platform.w, platform.y - result.h, platform.w, platform.h * 2 }, o->getComponente<ComponenteColisao>()->getColisor())) {
 				notFound = false;
 				result.w = platform.x + platform.w - result.x;
 				break;
