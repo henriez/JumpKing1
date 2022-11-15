@@ -1,15 +1,10 @@
 #include "GerenciadorGrafico.h"
 #include <iostream>
 
-#include "../../Entidade/ListaDeEntidades/ListaDeEntidades.h"
-
-#include "../../../Menu/Menu.h"
-
 #include "../GerenciadorDeCamera/GerenciadorDeCamera.h"
 
 #include "../../../Jogo/Jogo.h"
 #include "../../../Jogo/Fase/Fase.h"
-#include "../../../ECS/Componentes/Vector2D/Vector2D.h"
 
 GerenciadorGrafico* GerenciadorGrafico::manager = nullptr;
 
@@ -86,10 +81,6 @@ SDL_Point GerenciadorGrafico::getDimensoesJanela() {
 	return dimensoesJanela;
 }
 
-/*void GerenciadorGrafico::render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino) {
-	SDL_RenderCopy(renderer, tex, &fonte, &destino);
-}*/
-
 void GerenciadorGrafico::render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino, bool flip) {
 	if (flip)
 		SDL_RenderCopyEx(renderer, tex, &fonte, &destino, 0, NULL, SDL_FLIP_HORIZONTAL);
@@ -161,60 +152,4 @@ void GerenciadorGrafico::renderPontuacao(int pontuacao) {
 
 void GerenciadorGrafico::renderLava(SDL_Rect fonte, SDL_Rect destino) {
 	SDL_RenderCopy(renderer, lava, &fonte, &destino);
-}
-
-void GerenciadorGrafico::renderMenu(LeaderboardMenu& leaderboard) {
-	SDL_RenderClear(renderer);
-	SDL_PollEvent(&Jogo::evento);
-	leaderboard.render();
-	SDL_RenderPresent(renderer);
-}
-
-void GerenciadorGrafico::renderMenu(LevelMenu& level) {
-	SDL_RenderClear(renderer);
-	SDL_PollEvent(&Jogo::evento);
-	level.render();
-	SDL_RenderPresent(renderer);
-}
-
-void GerenciadorGrafico::renderMenu(MainMenu& start) {
-	SDL_RenderClear(renderer);
-	SDL_PollEvent(&Jogo::evento);
-	start.render();
-	SDL_RenderPresent(renderer);
-}
-
-void GerenciadorGrafico::renderMenu(PauseMenu& pause) {
-	SDL_RenderClear(renderer);
-	SDL_PollEvent(&Jogo::evento);
-	pause.render();
-	SDL_RenderPresent(renderer);
-}
-
-void GerenciadorGrafico::renderMenu(GameOverMenu& gameover) {
-	SDL_RenderClear(renderer);
-	SDL_PollEvent(&Jogo::evento);
-	gameover.render();
-	SDL_RenderPresent(renderer);
-}
-
-void GerenciadorGrafico::renderMenu(SettingsMenu& settings) {
-	SDL_RenderClear(renderer);
-	SDL_PollEvent(&Jogo::evento);
-	settings.render();
-	SDL_RenderPresent(renderer);
-}
-
-void GerenciadorGrafico::renderMenu(SaveMenu& save) {
-	SDL_RenderClear(renderer);
-	SDL_PollEvent(&Jogo::evento);
-	save.render();
-	SDL_RenderPresent(renderer);
-}
-
-void GerenciadorGrafico::renderMenu(LoadMenu& load) {
-	SDL_RenderClear(renderer);
-	SDL_PollEvent(&Jogo::evento);
-	load.render();
-	SDL_RenderPresent(renderer);
 }

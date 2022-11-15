@@ -29,8 +29,8 @@ public:
 	void setBoxOutlineColor(SDL_Color outline);
 	void setTextColor(SDL_Color text);
 	void setPosition(int x, int y, int w, int h);
-	bool setFontToHeight(std::string fontPath); //set font according to the height of Rect
-	bool setFont(std::string fontPath, int fontSize); //set font manually
+	void setFontToHeight(std::string fontPath); //set font according to the height of Rect
+	void setFont(std::string fontPath, int fontSize); //set font manually
 
 	void run(std::string message, int windowW = 640, int windowH = 480);
 

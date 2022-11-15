@@ -37,10 +37,9 @@ void Jogo::mainMenu() {
 	menu.start.reset();
 	int click = menu.start.update();
 	
-	while (click == NO_BUTTON_CLICKED) {
-		graphics->renderMenu(menu.start);
+	while (click == NO_BUTTON_CLICKED)
 		click = menu.start.update();
-	}
+	
 
 	switch (click) { //apos algum clique
 	case BUTTON_START1:
@@ -69,17 +68,17 @@ void Jogo::pauseMenu() {
 	menu.pause.reset();
 	int click = menu.pause.update();
 
-	while (click == NO_BUTTON_CLICKED) {
-		graphics->renderMenu(menu.pause);
+	while (click == NO_BUTTON_CLICKED) 
 		click = menu.pause.update();
-	}
+	
 
 	switch (click) { //apos algum clique
 	case BUTTON_RESUME:
 		atualizar();
 		break;
 	case BUTTON_SAVE:
-		saveMenu();
+		fase->save(); //salvar
+		pauseMenu();
 		break;
 	case BUTTON_QUIT:
 		fase->clear();
@@ -95,10 +94,9 @@ void Jogo::gameOverMenu() {
 	menu.gameOver.reset();
 	int click = menu.gameOver.update();
 
-	while (click == NO_BUTTON_CLICKED) {
-		graphics->renderMenu(menu.gameOver);
+	while (click == NO_BUTTON_CLICKED)
 		click = menu.gameOver.update();
-	}
+
 
 	switch (click) { //apos algum clique
 	case BUTTON_QUIT:
@@ -117,10 +115,9 @@ void Jogo::settingsMenu() {
 	menu.settings.reset();
 	int click = menu.settings.update();
 
-	while (click == NO_BUTTON_CLICKED) {
-		graphics->renderMenu(menu.settings);
+	while (click == NO_BUTTON_CLICKED) 
 		click = menu.settings.update();
-	}	
+	
 	
 	switch (click) { //apos algum clique
 	case BUTTON_QUIT:
@@ -139,10 +136,9 @@ void Jogo::leaderboardMenu() {
 	menu.leaderboard.reset();
 	int click = menu.leaderboard.update();
 
-	while (click == NO_BUTTON_CLICKED) {
-		graphics->renderMenu(menu.leaderboard);
+	while (click == NO_BUTTON_CLICKED)
 		click = menu.leaderboard.update();
-	}
+	
 
 	switch (click) { //apos algum clique
 	case BUTTON_QUIT:
@@ -159,10 +155,9 @@ void Jogo::levelMenu() {
 	menu.level.reset();
 	int click = menu.level.update();
 
-	while (click == NO_BUTTON_CLICKED) {
-		graphics->renderMenu(menu.level);
+	while (click == NO_BUTTON_CLICKED)
 		click = menu.level.update();
-	}
+	
 
 	switch (click) { //apos algum clique
 	case BUTTON_START1:
@@ -182,40 +177,13 @@ void Jogo::levelMenu() {
 
 }
 
-void Jogo::saveMenu() {
-	menu.save.reset();
-	int click = menu.save.update();
-
-	while (click == NO_BUTTON_CLICKED) {
-		graphics->renderMenu(menu.save);
-		click = menu.save.update();
-	}
-
-	switch (click) { //apos algum clique
-	case BUTTON_SAVE:
-		fase->save(); //salvar
-		saveMenu();
-		break;
-	case BUTTON_QUIT:
-		fase->clear();
-		mainMenu();
-		break;
-	case BUTTON_BACK:
-		pauseMenu();
-		break;
-	default:
-		break;
-	}
-}
-
 void Jogo::loadMenu() {
 	menu.load.reset();
 	int click = menu.load.update();
 
-	while (click == NO_BUTTON_CLICKED) {
-		graphics->renderMenu(menu.load);
+	while (click == NO_BUTTON_CLICKED)
 		click = menu.load.update();
-	}
+	
 
 	switch (click) { //apos algum clique
 	case BUTTON_START1:

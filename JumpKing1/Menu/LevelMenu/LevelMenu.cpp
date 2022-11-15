@@ -33,6 +33,11 @@ void LevelMenu::reset() {
 }
 
 int LevelMenu::update() {
+	graphics->clear();
+	SDL_PollEvent(&Jogo::evento);
+	render();
+	graphics->present();
+
 	level1.handleEvents();
 	if (level1.click()) return BUTTON_START1;	
 	

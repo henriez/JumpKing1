@@ -26,6 +26,11 @@ void GameOverMenu::reset() {
 }
 
 int GameOverMenu::update() {
+	graphics->clear();
+	SDL_PollEvent(&Jogo::evento);
+	render();
+	graphics->present();
+
 	quit.handleEvents();
 	if (quit.click()) return BUTTON_QUIT;
 

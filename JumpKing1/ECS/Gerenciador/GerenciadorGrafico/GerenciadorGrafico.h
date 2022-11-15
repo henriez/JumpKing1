@@ -3,16 +3,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
-class LeaderboardMenu;
-class LevelMenu;
-class MainMenu;
-class PauseMenu;
-class GameOverMenu;
-class SettingsMenu;
-class SaveMenu;
-class LoadMenu;
 class Fase;
-class ListaDeEntidades;
 
 class GerenciadorGrafico
 {
@@ -21,13 +12,15 @@ public:
 
 	static GerenciadorGrafico* getInstance();
 	static void deleteInstance();
+
 	void init(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia);
+	void clear() { SDL_RenderClear(renderer); }
+	void present() { SDL_RenderPresent(renderer); }
 
 	SDL_Texture* LoadTexture(const char* fileName);
-	//static void render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino);
-	void render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino, bool flip = false);
-
 	SDL_Point getDimensoesJanela();
+
+	void render(SDL_Texture* tex, SDL_Rect fonte, SDL_Rect destino, bool flip = false);
 
 	void renderFase(Fase* fase);
 
@@ -38,15 +31,6 @@ public:
 
 	void renderCoracao(SDL_Rect fonte, SDL_Rect destino);
 	void renderPontuacao(int pontuacao);
-
-	void renderMenu(LeaderboardMenu& leaderboard);
-	void renderMenu(LevelMenu& level);
-	void renderMenu(MainMenu& start);
-	void renderMenu(PauseMenu& pause);
-	void renderMenu(GameOverMenu& gameover);
-	void renderMenu(SettingsMenu& settings);
-	void renderMenu(SaveMenu& save);
-	void renderMenu(LoadMenu& load);
 private:
 	GerenciadorGrafico();
 	static GerenciadorGrafico* manager;

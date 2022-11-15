@@ -171,7 +171,6 @@
     <ClCompile Include="Menu\LoadMenu\LoadMenu.cpp" />
     <ClCompile Include="Menu\MainMenu\MainMenu.cpp" />
     <ClCompile Include="Menu\PauseMenu\PauseMenu.cpp" />
-    <ClCompile Include="Menu\SaveMenu\SaveMenu.cpp" />
     <ClCompile Include="Menu\SettingsMenu\SettingsMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +198,7 @@
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeEventos\GerenciadorDeEventos.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorGrafico\GerenciadorGrafico.h" />
+    <ClInclude Include="ECS\Lista\Lista.h" />
     <ClInclude Include="Ente.h" />
     <ClInclude Include="Jogo\Fase\Boss_Room\Boss_Room.h" />
     <ClInclude Include="Jogo\Fase\Fase.h" />
@@ -215,7 +215,6 @@
     <ClInclude Include="Menu\Menu.h" />
     <ClInclude Include="Menu\MenuEnte.h" />
     <ClInclude Include="Menu\PauseMenu\PauseMenu.h" />
-    <ClInclude Include="Menu\SaveMenu\SaveMenu.h" />
     <ClInclude Include="Menu\SettingsMenu\SettingsMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

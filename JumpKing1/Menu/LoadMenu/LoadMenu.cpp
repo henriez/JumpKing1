@@ -33,6 +33,11 @@ void LoadMenu::reset() {
 }
 
 int LoadMenu::update() {
+	graphics->clear();
+	SDL_PollEvent(&Jogo::evento);
+	render();
+	graphics->present();
+
 	save1.handleEvents();
 	if (save1.click()) return BUTTON_START1;	
 	

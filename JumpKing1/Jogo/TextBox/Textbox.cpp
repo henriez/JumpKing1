@@ -67,7 +67,7 @@ void TextBox::setPosition(int x, int y, int w, int h) {
 	position = { x,y,w,h };
 }
 
-bool TextBox::setFontToHeight(std::string fontPath) {
+void TextBox::setFontToHeight(std::string fontPath) {
 	int fontSize = 1;
 	bool done = false;
 	int fails = 0;
@@ -76,7 +76,7 @@ bool TextBox::setFontToHeight(std::string fontPath) {
 		font = TTF_OpenFont(fontPath.c_str(), fontSize);
 		if (fails == 10) {
 			std::cout << "Failed 10 times in a row" << std::endl;
-			return false;
+			return;
 		}
 		if (font == NULL) {
 			fails++;
@@ -91,17 +91,14 @@ bool TextBox::setFontToHeight(std::string fontPath) {
 		}
 	}
 	font = TTF_OpenFont(fontPath.c_str(), fontSize);
-	return true;
 }
 
-bool TextBox::setFont(std::string fontPath, int fontSize) {//given a font file and a size it opens it,if it fails it prints error and returns false
+void TextBox::setFont(std::string fontPath, int fontSize) {//given a font file and a size it opens it,if it fails it prints error and returns false
 	const char* tmp_FontPath = fontPath.c_str();
 	font = TTF_OpenFont(tmp_FontPath, fontSize);
-	if (font == NULL) {
+	if (!font)
 		std::cout << "SetFontFailed:" << TTF_GetError() << std::endl;
-		return false;
-	}
-	return true;
+
 }
 
 void TextBox::clearBox() {//prints a clear box to the renderer
