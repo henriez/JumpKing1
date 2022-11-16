@@ -15,6 +15,7 @@ public:
 	void shoot();
 
 	const int getSpeed() const { return speed; }
+	bool facingLeft() { return flip; }
 	bool isAttacking() const { return attacking; }
 	void setPontuacao(int pontuacao) { points = pontuacao; }
 	int getPontuacao() const { return points; }

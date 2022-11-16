@@ -13,16 +13,15 @@
 #define HIT 4
 
 Esqueleto::Esqueleto(float x, float y) {
-	sprite = { 4, 64 * WALKING + 16, 39, 33 }; // w = 42 h = 49
+	sprite = { 0, 64 * WALKING, 64, 64 }; // w = 42 h = 49
 	flip = false;
 	speed = 1;
-	fSpeed = 90;
 	state = WALKING;
 	distance = 0;
 	haveTarget = false;
 
 	addComponente<ComponenteColisao>();
-	getComponente<ComponenteSaude>()->init(1);
+	getComponente<ComponenteSaude>()->init(3);
 	addComponente<ComponenteTransform>();
 	addComponente<ComponenteSprite>();
 	getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/Enemies/Skeleton.png");
@@ -33,90 +32,114 @@ Esqueleto::Esqueleto(float x, float y) {
 	transform->posicao.x = x;
 	transform->posicao.y = y;
 
-	getComponente<ComponenteColisao>()->set(transform->posicao.x, transform->posicao.y, sprite.w * SCALE, (sprite.h - 1) * SCALE);
+	getComponente<ComponenteColisao>()->set(transform->posicao.x, transform->posicao.y, 21 * SCALE, 31 * SCALE);
 	GerenciadorDeColisao::iniciaInimigo(this);
-	std::cout << getPlatform().x << " " << getPlatform().y << " " << getPlatform().w << " " << getPlatform().h << std::endl;
 }
 
 Esqueleto::~Esqueleto() {}
 
 void Esqueleto::atualizar() {
-	if (!vulnerable) {
-		if (SDL_GetTicks() - vulnerable_timer > 1000) //dano a cada 1 segundo
-			vulnerable = true;
-	}
-	ComponenteTransform* transform = getComponente<ComponenteTransform>();
+	if (isAlive()) {
+		ComponenteTransform* transform = getComponente<ComponenteTransform>();
+		transform->posicao.x += transform->velocidade.x * speed;
+		getComponente<ComponenteColisao>()->setPos(transform->posicao.x, transform->posicao.y);
+		GerenciadorDeColisao::colisao_esqueleto(this);
 
-	transform->posicao.x += transform->velocidade.x * speed;
-	getComponente<ComponenteColisao>()->setPos(transform->posicao.x, transform->posicao.y);
-	GerenciadorDeColisao::colisao_esqueleto(this);
-	
+		if (!vulnerable) {
+			transform->velocidade.x = 0;
+			setState(HIT);
+			if (SDL_GetTicks() - vulnerable_timer > 1000) { //dano a cada 1 segundo
+				vulnerable = true;
+			}
+		}
 
-	// TODO: Mudar hitboxes para encaixar na animacao
-	if (haveTarget) {
-		if (abs(distance) > Mapa::tamanhoTile()) {
-			setState(WALKING);
-			transform->velocidade.x = 1;
-			if ((distance < 0 && transform->velocidade.x > 0) || distance > 0 && transform->velocidade.x < 0) {
+		if (state == WALKING) {
+			if (haveTarget) {
+				if (abs(distance) > Mapa::tamanhoTile()) {
+					setState(WALKING);
+					transform->velocidade.x = 1;
+					if ((distance < 0 && transform->velocidade.x > 0) || distance > 0 && transform->velocidade.x < 0) {
+						transform->velocidade.x = transform->velocidade.x * -1;
+					}
+				}
+				else {
+					// Ataca
+					setState(ATTACKING);
+					transform->velocidade.x = 0;
+				}
+			}
+			else {
+				setState(WALKING);
+				if (!transform->velocidade.x) {
+					if (flip) { transform->velocidade.x = -1; }
+					else { transform->velocidade.x = 1; }
+				}
+			}
+
+			SDL_Rect hitbox = getComponente<ComponenteColisao>()->getColisor();
+			SDL_Rect plat = getPlatform();
+			if ((transform->posicao.x <= plat.x && transform->velocidade.x < 0) ||
+				(transform->posicao.x + hitbox.w >= plat.x + plat.w && transform->velocidade.x > 0)) {
 				transform->velocidade.x = transform->velocidade.x * -1;
 			}
 		}
-		else {
-			// Ataca
-			setState(ATTACKING);
-			transform->velocidade.x = 0;
-		}
 	}
-	else {
-		setState(WALKING);
-		if (!transform->velocidade.x) {
-			if (flip) { transform->velocidade.x = -1; }
-			else { transform->velocidade.x = 1; }
-		}
-	}
-
-	SDL_Rect hitbox = getComponente<ComponenteColisao>()->getColisor();
-	SDL_Rect plat = getPlatform();
-	if ((transform->posicao.x <= plat.x && transform->velocidade.x < 0) ||
-		(transform->posicao.x + hitbox.w >= plat.x + plat.w && transform->velocidade.x > 0)) {
-		transform->velocidade.x = transform->velocidade.x * -1;
-	}
-
 }
 
 void Esqueleto::render() {
+	int frames;
+	unsigned int fSpeed;
+	static int frameNumber = 0;
+
+	if (getComponente<ComponenteTransform>()->velocidade.x < 0) { flip = true; }
+	else if (getComponente<ComponenteTransform>()->velocidade.x > 0) { flip = false; }
+	SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
+	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x - (19 * SCALE);
+	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y - (17 * SCALE);
+	if (flip) { posRect.x -= 4 * SCALE; }
+
 	if (isAlive()) {
-		if (getComponente<ComponenteTransform>()->velocidade.x < 0) { flip = true; }
-		else if (getComponente<ComponenteTransform>()->velocidade.x > 0) { flip = false; }
+		sprite.y = 64 * state;
+		frames = 12;
+		fSpeed = 90;
 
-
-		// TODO:
-		// Dar prioridade a animações de tomar dano e morrer
-		// Bug ao usar SDL_GetTicks(), animação começa de ponto aleatório
-		// Executar animação até o fim, podendo ser cancelada por outra animção
-
-		unsigned char frames = 1;
-		switch (state) {
-		case ATTACKING:
-			sprite.y = 0;
+		if (state == ATTACKING) {
 			frames = 13;
-			fSpeed = 150;
-			break;
-		case WALKING:
-			sprite.y = 64 * WALKING + 16;
-			sprite.w = 39;
-			sprite.h = 33;
-			frames = 12;
-			fSpeed = 90;
-			break;
-		default:
-			break;
+			fSpeed = 10;
+			int frameVal = static_cast<int>((frameNumber / fSpeed) % frames);
+			sprite.x = 64 * frameVal;
+			frameNumber++;
+			if (frameVal == 4 || frameVal == 8) { GerenciadorDeColisao::ataqueEsqueleto(this); }
+			if (frameNumber >= frames * static_cast<int>(fSpeed)) { setState(WALKING); frameNumber = 0; }
 		}
-		SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
-		posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
-		posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
-		sprite.x = 64 * static_cast<int>((SDL_GetTicks() / fSpeed) % frames);
+		else if (state == HIT) {
+			frames = 3;
+			fSpeed = 25;
+			int frameVal = static_cast<int>((frameNumber / fSpeed) % frames);
+			sprite.x = 64 * frameVal;
+			frameNumber++;
+			if ((frameNumber > frames * fSpeed) && vulnerable == true) { setState(WALKING); frameNumber = 0; }
+		}
+		else {
+			sprite.x = 64 * static_cast<int>((SDL_GetTicks() / fSpeed) % frames);
+		}
+
 		getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
-		//graphics->renderInimigoHitbox(posRect);
+		SDL_Rect tst = getComponente<ComponenteColisao>()->getColisor();
+		tst.x -= GerenciadorDeCamera::camera.x;
+		tst.y -= GerenciadorDeCamera::camera.y;
+		//graphics->renderInimigoHitbox(tst);
+	}
+	else {
+		if (state != DYING) {
+			sprite.y = 64 * DYING;
+			frames = 13;
+			fSpeed = 9;
+			int frameVal = static_cast<int>((frameNumber / fSpeed) % frames);
+			sprite.x = 64 * frameVal;
+			frameNumber++;
+			if (frameNumber >= frames * fSpeed) { setState(DYING); }
+			getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
+		}
 	}
 }

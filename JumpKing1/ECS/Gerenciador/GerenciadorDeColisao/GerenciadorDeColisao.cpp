@@ -566,20 +566,25 @@ void GerenciadorDeColisao::colisao_esqueleto(Esqueleto* in1) {
 	SDL_Rect hitbox = in1->getComponente<ComponenteColisao>()->getColisor();
 	SDL_Rect platform = in1->getPlatform();
 	ComponenteTransform* transform = in1->getComponente<ComponenteTransform>();
-	SDL_Rect target = jogador1->getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect target1 = jogador1->getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect target2 = jogador2->getComponente<ComponenteColisao>()->getColisor();
 
 	platform.y -= 3 * Mapa::tamanhoTile();
 	platform.h += 2 * Mapa::tamanhoTile();
-	if (AABB(platform, target)) {
+
+	float dist1 = Mapa::getDimensoes().x;
+	float dist2 = Mapa::getDimensoes().x;
+	in1->setTarget(false);
+	if (AABB(platform, target1)) {
 		in1->setTarget(true);
-		if (target.x > hitbox.x) {
-			in1->setDistance(target.x - (hitbox.x + static_cast<int>(hitbox.w / 2)));
-		}
-		else {
-			in1->setDistance(target.x - static_cast<int>(target.w / 2) - hitbox.x);
-		}
+		dist1 = (target1.x > hitbox.x) ? target1.x - (hitbox.x + static_cast<int>(hitbox.w / 2)) : target1.x + static_cast<int>(hitbox.w / 2) - hitbox.x;
 	}
-	else { in1->setTarget(false); }
+	if (AABB(platform, target2)) {
+		in1->setTarget(true);
+		dist2 = (target2.x > hitbox.x) ? target2.x - (hitbox.x + static_cast<int>(hitbox.w / 2)) : target2.x + static_cast<int>(hitbox.w / 2) - hitbox.x;
+	}
+	if (abs(dist2) < abs(dist1)) { in1->setDistance(dist2); }
+	else { in1->setDistance(dist1); }
 }
 
 bool GerenciadorDeColisao::AABB(SDL_Rect A, SDL_Rect B) {
@@ -602,7 +607,7 @@ Jogador* GerenciadorDeColisao::getJogador2(){
 void GerenciadorDeColisao::ataqueJ1() {
 	SDL_Rect hitbox = { 0,0,64,32 };
 	ComponenteTransform* transform = jogador1->getComponente<ComponenteTransform>();
-	if (transform->velocidade.x < 0) { //virado para a esquerda
+	if (jogador1->facingLeft()) { //virado para a esquerda
 		hitbox.x = transform->posicao.x - 2*Mapa::tamanhoTile();
 		hitbox.y = transform->posicao.y;
 	}
@@ -630,7 +635,7 @@ void GerenciadorDeColisao::ataqueJ1() {
 void GerenciadorDeColisao::ataqueJ2() {
 	SDL_Rect hitbox = { 0,0,64,32 };
 	ComponenteTransform* transform = jogador2->getComponente<ComponenteTransform>();
-	if (transform->velocidade.x < 0) { //virado para a esquerda
+	if (jogador2->facingLeft()) { //virado para a esquerda
 		hitbox.x = transform->posicao.x - 2 * Mapa::tamanhoTile();
 		hitbox.y = transform->posicao.y;
 	}
@@ -655,3 +660,17 @@ void GerenciadorDeColisao::ataqueJ2() {
 	}
 }
 
+void GerenciadorDeColisao::ataqueEsqueleto(Esqueleto* in1) {
+	SDL_Rect pos = in1->getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect hitbox = { 0, pos.y - pos.h, 32, 64 };
+	hitbox.x = (in1->facingLeft()) ? pos.x - pos.w : pos.x + pos.w;
+
+	if (AABB(hitbox, jogador1->getComponente<ComponenteColisao>()->getColisor())) {
+		jogador1->damage();
+		jogador1->getComponente<ComponenteTransform>()->velocidade.y = -0.5;
+	}
+	if (AABB(hitbox, jogador2->getComponente<ComponenteColisao>()->getColisor())) {
+		jogador2->damage();
+		jogador2->getComponente<ComponenteTransform>()->velocidade.y = -0.5;
+	}
+}

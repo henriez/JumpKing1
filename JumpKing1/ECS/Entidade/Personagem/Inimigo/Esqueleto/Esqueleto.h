@@ -8,6 +8,8 @@ public:
 	~Esqueleto();
 
 	const int getSpeed() const { return speed; }
+	const float getDistance() const { return distance; }
+	const bool facingLeft() const { return flip; }
 	void setState(unsigned char val) { state = val; }
 	void setTarget(bool val) { haveTarget = val; }
 	void setDistance(float val) { distance = val; }
@@ -17,7 +19,6 @@ public:
 private:
 	SDL_Rect sprite;
 	unsigned char state;
-	unsigned int fSpeed;
 	bool flip;
 	bool haveTarget;
 	int speed;
