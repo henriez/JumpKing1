@@ -23,7 +23,6 @@ public:
 	void damage() {
 		if (saude > 0) {
 			saude--;
-			std::cout << "health now is: " << saude << std::endl;
 		}
 
 	}

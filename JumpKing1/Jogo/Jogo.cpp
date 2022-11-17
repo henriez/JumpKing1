@@ -3,6 +3,7 @@
 #include "Fase/Fase.h"
 #include "../ECS/Gerenciador/GerenciadorGrafico/GerenciadorGrafico.h"
 #include "../ECS/Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
+using namespace std;
 
 #define FPS 60
 
@@ -249,22 +250,34 @@ bool Jogo::executando() {
 
 void Jogo::showRanking(int id) {
 
-	// carrega a textura com os textos
-	std::ifstream in;
+	// le o arquivo de ranking
+	ifstream in;
 
-	if (id == 1) in.open("Saves/Fase1/ranking.dat");
-	else if (id == 2) in.open("Saves/Fase2/ranking.dat");
+	if (id == 1) in.open("Saves/Fase1/ranking.dat", ios::in);
+	else if (id == 2) in.open("Saves/Fase2/ranking.dat", ios::in);
 
-	std::string nome1, nome2, line, finalString = "";
+	string nome1, nome2, line;
+	map<int, string> rankings;
 	int pontuacao;
 
 	while (in >> nome1 >> nome2 >> pontuacao) {
-		line = std::to_string(pontuacao) + ": " + nome1 + " & " + nome2;
-		finalString.append(line);
+		line = to_string(pontuacao) + ": " + nome1 + " & " + nome2;
+		rankings.insert(pair<int, string>( pontuacao, line ));
 	}
 	in.close();
 
-	//renderiza tabelas
+	//Percorre o map com as pontuacoes em ordem decrescente
+	map<int, string>::reverse_iterator it;
+	for (it = rankings.rbegin(); it != rankings.rend(); it++)
+		cout << it->second << endl;
+
+	//Renderiza o menu leaderboard normalmente
+	graphics->clear();
+	SDL_PollEvent(&Jogo::evento);
+	menu.leaderboard.render();
+
+
+	//Retangulo de fundo da tabela
 	SDL_DisplayMode dm;
 	SDL_GetCurrentDisplayMode(0, &dm);
 
@@ -273,36 +286,42 @@ void Jogo::showRanking(int id) {
 	SDL_Color black = { 0,0,0,255 };
 	graphics->renderRect(ranking, grey, black);
 
+	graphics->present();
+
+	//Renderiza os textos na ordem
 	
-	SDL_Texture* textTex = graphics->TextTexture(finalString);
-	SDL_Rect textRect = { 0,0,0,0 };
-	SDL_QueryTexture(textTex, NULL, NULL, &textRect.w, &textRect.h);
-	graphics->render(textTex, textRect, ranking);
+	int i = 0;
+	SDL_Point position = { ranking.x + 10, ranking.y + 10};
+	
+	for (it = rankings.rbegin(); it != rankings.rend() && i < 8; it++, i++) {
+		graphics->renderText(it->second, position);
+		position.y += 50;
+	}
+	 
+	graphics->present();
 
-
+	//Tratamento padrao do menu
 	menu.leaderboard.reset();
-	int click = menu.leaderboard.updateRanking(textTex, ranking);
+	int click = menu.leaderboard.updateRanking();
 
 	graphics->present();
 
 	while (click == NO_BUTTON_CLICKED)
-		click = menu.leaderboard.updateRanking(textTex, ranking);
+		click = menu.leaderboard.updateRanking();
+
+	rankings.clear();
 
 	switch (click) { //apos algum clique
 	case BUTTON_QUIT:
 		leaderboardMenu();
 		break;
 	case BUTTON_START1:
-		if(id != 1)
-			showRanking(1);
+		showRanking(1);
 		break;
 	case BUTTON_START2:
-		if (id != 2)
-			showRanking(2);
+		showRanking(2);
 		break;
 	default:
 		break;
 	}
-
-	SDL_DestroyTexture(textTex);
 }

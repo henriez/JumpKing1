@@ -50,29 +50,19 @@ int LeaderboardMenu::update() {
 	return NO_BUTTON_CLICKED; //nenhum botao foi clicado
 }
 
-int LeaderboardMenu::updateRanking(SDL_Texture* textTex, SDL_Rect ranking) {
-	graphics->clear();
-	SDL_PollEvent(&Jogo::evento);
-	render();
+int LeaderboardMenu::updateRanking() {
 
-	SDL_Color grey = { 192,192,192,255 };
-	SDL_Color black = { 0,0,0,255 };
-	graphics->renderRect(ranking, grey, black);
+	while (SDL_PollEvent(&Jogo::evento)) {
 
-	SDL_Rect textRect = { 0,0,0,0 };
-	SDL_QueryTexture(textTex, NULL, NULL, &textRect.w, &textRect.h);
-	graphics->render(textTex, textRect, ranking);
+		level1.handleEvents();
+		if (level1.click()) return BUTTON_START1;
 
-	graphics->present();
+		level2.handleEvents();
+		if (level2.click()) return BUTTON_START2;
 
-	level1.handleEvents();
-	if (level1.click()) return BUTTON_START1;
-
-	level2.handleEvents();
-	if (level2.click()) return BUTTON_START2;
-
-	quit.handleEvents();
-	if (quit.click()) return BUTTON_QUIT;
+		quit.handleEvents();
+		if (quit.click()) return BUTTON_QUIT;
+	}
 
 	return NO_BUTTON_CLICKED; //nenhum botao foi clicado
 }

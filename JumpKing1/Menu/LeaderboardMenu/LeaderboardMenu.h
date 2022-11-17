@@ -4,6 +4,8 @@
 #include "../Botao/Botao.h"
 #include <SDL.h>
 
+#include <map>
+
 class LeaderboardMenu : public MenuEnte
 {
 public:
@@ -15,7 +17,7 @@ public:
 	void reset();
 
 	int update();
-	int updateRanking(SDL_Texture* textTex, SDL_Rect ranking);
+	int updateRanking();
 	void render();
 
 private:
