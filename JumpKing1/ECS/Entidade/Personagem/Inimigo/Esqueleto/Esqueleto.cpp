@@ -123,9 +123,9 @@ void Esqueleto::render() {
 		}
 
 		getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
-		SDL_Rect tst = getComponente<ComponenteColisao>()->getColisor();
-		tst.x -= GerenciadorDeCamera::camera.x;
-		tst.y -= GerenciadorDeCamera::camera.y;
+		//SDL_Rect tst = getComponente<ComponenteColisao>()->getColisor();
+		//tst.x -= GerenciadorDeCamera::camera.x;
+		//tst.y -= GerenciadorDeCamera::camera.y;
 		//graphics->renderInimigoHitbox(tst);
 	}
 	else {

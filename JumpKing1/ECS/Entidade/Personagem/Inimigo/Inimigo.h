@@ -16,7 +16,7 @@ public:
 	void setTarget(bool val) { target = val; }
 	bool haveTarget() { return target; }
 
-private:
+protected:
 	SDL_Rect platform;
 	float distance;
 	bool target;

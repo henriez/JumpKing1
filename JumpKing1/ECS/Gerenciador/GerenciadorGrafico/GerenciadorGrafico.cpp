@@ -185,7 +185,3 @@ void GerenciadorGrafico::renderRect(SDL_Rect rect, SDL_Color fill, SDL_Color out
 	SDL_RenderDrawRect(renderer, &rect);
 
 }
-
-void GerenciadorGrafico::renderInimigoHitbox(SDL_Rect destino) {
-	SDL_RenderFillRect(renderer, &destino);
-}
