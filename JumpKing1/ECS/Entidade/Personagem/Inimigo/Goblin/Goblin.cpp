@@ -1,19 +1,19 @@
 #include <cstdlib>
-#include "Esqueleto.h"
+#include "Goblin.h"
 #include "../../Jogo/Fase/Mapa/Mapa.h"
 #include "../../Jogo/Fase/Mapa/TileMap/TileMap.h"
 #include "../../ECS/Gerenciador/GerenciadorDeCamera/GerenciadorDeCamera.h"
 #include "../../ECS/Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
 
-#define SCALE 1.5
+#define SCALE 1.3
 #define ATTACKING 0
 #define DYING 1
 #define WALKING 2
 #define IDLE 3
 #define HIT 4
 
-Esqueleto::Esqueleto(float x, float y) {
-	sprite = { 0, 64 * WALKING, 64, 64 }; // w = 42 h = 49
+Goblin::Goblin(float x, float y) {
+	sprite = { 0, 150 * WALKING, 150, 150 }; // w = 42 h = 49
 	flip = false;
 	speed = 1;
 	state = WALKING;
@@ -22,7 +22,7 @@ Esqueleto::Esqueleto(float x, float y) {
 	getComponente<ComponenteSaude>()->init(3);
 	addComponente<ComponenteTransform>();
 	addComponente<ComponenteSprite>();
-	getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/Enemies/Skeleton.png");
+	getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/Enemies/Goblin.png");
 
 	ComponenteTransform* transform = getComponente<ComponenteTransform>();
 	transform->velocidade.x = 2 * (rand() & 0x01) - 1;
@@ -30,13 +30,13 @@ Esqueleto::Esqueleto(float x, float y) {
 	transform->posicao.x = x;
 	transform->posicao.y = y;
 
-	getComponente<ComponenteColisao>()->set(transform->posicao.x, transform->posicao.y, 21 * SCALE, 31 * SCALE);
+	getComponente<ComponenteColisao>()->set(transform->posicao.x, transform->posicao.y, 24 * SCALE, 35 * SCALE);
 	GerenciadorDeColisao::iniciaInimigo(this);
 }
 
-Esqueleto::~Esqueleto() {}
+Goblin::~Goblin() {}
 
-void Esqueleto::atualizar() {
+void Goblin::atualizar() {
 	if (isAlive()) {
 		ComponenteTransform* transform = getComponente<ComponenteTransform>();
 		transform->posicao.x += transform->velocidade.x * speed;
@@ -84,7 +84,7 @@ void Esqueleto::atualizar() {
 	}
 }
 
-void Esqueleto::render() {
+void Goblin::render() {
 	int frames;
 	unsigned int fSpeed;
 	static int frameNumber = 0;
@@ -92,34 +92,34 @@ void Esqueleto::render() {
 	if (getComponente<ComponenteTransform>()->velocidade.x < 0) { flip = true; }
 	else if (getComponente<ComponenteTransform>()->velocidade.x > 0) { flip = false; }
 	SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
-	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x - (19 * SCALE);
-	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y - (17 * SCALE);
-	if (flip) { posRect.x -= 4 * SCALE; }
+	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x - (66 * SCALE);
+	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y - (64 * SCALE);
+	//if (flip) { posRect.x -= 4 * SCALE; }
 
 	if (isAlive()) {
-		sprite.y = 64 * state;
-		frames = 12;
-		fSpeed = 90;
+		sprite.y = 150 * state;
+		frames = 8;
+		fSpeed = 120;
 
 		if (state == ATTACKING) {
-			frames = 13;
+			frames = 8;
 			fSpeed = 10;
 			int frameVal = static_cast<int>((frameNumber / fSpeed) % frames);
-			sprite.x = 64 * frameVal;
+			sprite.x = 150 * frameVal;
 			frameNumber++;
-			if (frameVal == 4 || frameVal == 8) { GerenciadorDeColisao::ataqueEsqueleto(this); }
+			if (frameVal == 7) { GerenciadorDeColisao::ataqueGoblin(this); }
 			if (frameNumber >= frames * static_cast<int>(fSpeed)) { setState(WALKING); frameNumber = 0; }
 		}
 		else if (state == HIT) {
-			frames = 3;
-			fSpeed = 25;
+			frames = 4;
+			fSpeed = 15;
 			int frameVal = static_cast<int>((frameNumber / fSpeed) % frames);
-			sprite.x = 64 * frameVal;
+			sprite.x = 150 * frameVal;
 			frameNumber++;
 			if ((frameNumber > frames * fSpeed) && vulnerable == true) { setState(WALKING); frameNumber = 0; }
 		}
 		else {
-			sprite.x = 64 * static_cast<int>((SDL_GetTicks() / fSpeed) % frames);
+			sprite.x = 150 * static_cast<int>((SDL_GetTicks() / fSpeed) % frames);
 		}
 
 		getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
@@ -129,12 +129,12 @@ void Esqueleto::render() {
 		//graphics->renderInimigoHitbox(tst);
 	}
 	else {
-		if (state != DYING) {
-			sprite.y = 64 * DYING;
-			frames = 13;
-			fSpeed = 9;
+		if (state != DYING && state != IDLE) {
+			sprite.y = 150 * DYING;
+			frames = 4;
+			fSpeed = 10;
 			int frameVal = static_cast<int>((frameNumber / fSpeed) % frames);
-			sprite.x = 64 * frameVal;
+			sprite.x = 150 * frameVal;
 			frameNumber++;
 			if (frameNumber >= frames * fSpeed) { setState(DYING); }
 			getComponente<ComponenteSprite>()->render(posRect, sprite, flip);

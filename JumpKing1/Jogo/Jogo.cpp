@@ -17,7 +17,6 @@ Jogo::Jogo(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCh
 }
 
 Jogo::~Jogo() {
-	//fase->clear();
 	SDL_Quit();
 	delete fase;
 }
@@ -262,7 +261,7 @@ void Jogo::showRanking(int id) {
 
 	while (in >> nome1 >> nome2 >> pontuacao) {
 		line = to_string(pontuacao) + ": " + nome1 + " & " + nome2;
-		rankings.insert(pair<int, string>( pontuacao, line ));
+		rankings.insert(pair<int, string>(pontuacao, line));
 	}
 	in.close();
 
@@ -285,17 +284,17 @@ void Jogo::showRanking(int id) {
 	graphics->present();
 
 	//Renderiza os textos na ordem
-	
+
 	int i = 0;
-	SDL_Point position = { ranking.x + 10, ranking.y + 10};
-	
+	SDL_Point position = { ranking.x + 10, ranking.y + 10 };
+
 	//Percorre o map com as pontuacoes em ordem decrescente
 	map<int, string>::reverse_iterator it;
 	for (it = rankings.rbegin(); it != rankings.rend() && i < 8; it++, i++) {
 		graphics->renderText(it->second, position);
 		position.y += 50;
 	}
-	 
+
 	graphics->present();
 
 	//Tratamento padrao do menu

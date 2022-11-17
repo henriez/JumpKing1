@@ -4,7 +4,7 @@
 
 #include "../Personagem/Jogador/Jogador.h"
 #include "../Personagem/Inimigo/Esqueleto/Esqueleto.h"
-#include "../Personagem/Inimigo/Zumbi/Zumbi.h"
+#include "../Personagem/Inimigo/Goblin/Goblin.h"
 #include "../Personagem/Inimigo/Chefe/Chefe.h"
 #include "../Projetil/Projetil.h"
 #include "../../Lista/Lista.h"

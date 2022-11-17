@@ -52,17 +52,19 @@ int LeaderboardMenu::update() {
 
 int LeaderboardMenu::updateRanking() {
 
-	while (SDL_PollEvent(&Jogo::evento)) {
+	reset();
 
-		level1.handleEvents();
-		if (level1.click()) return BUTTON_START1;
+	SDL_PollEvent(&Jogo::evento);
 
-		level2.handleEvents();
-		if (level2.click()) return BUTTON_START2;
+	level1.handleEvents();
+	if (level1.click()) return BUTTON_START1;
 
-		quit.handleEvents();
-		if (quit.click()) return BUTTON_QUIT;
-	}
+	level2.handleEvents();
+	if (level2.click()) return BUTTON_START2;
+
+	quit.handleEvents();
+	if (quit.click()) return BUTTON_QUIT;
+	
 
 	return NO_BUTTON_CLICKED; //nenhum botao foi clicado
 }

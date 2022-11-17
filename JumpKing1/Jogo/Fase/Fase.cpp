@@ -41,6 +41,7 @@ void Fase::inicializar(const int id) {
 	event_manager->setJogador2(jogador2);
 	GerenciadorDeCamera::setJogador2(jogador2);
 	GerenciadorDeColisao::setJogador2(jogador2);
+
 	switch (id) {
 	case 1:
 		jogador->getComponente<ComponenteTransform>()->posicao.x = 100;
@@ -59,12 +60,9 @@ void Fase::inicializar(const int id) {
 	}
 	
 	criaEsqueletos();
-//	criaZumbis();
-	
+	criaGoblins();
 
-	Zumbi* zumbi = new Zumbi;
 	Chefe* boss = new Chefe;
-
 
 	listaEntidades.addEntidade(static_cast<Entidade*>(jogador));
 	listaEntidades.addEntidade(static_cast<Entidade*>(jogador2));
@@ -179,16 +177,18 @@ void Fase::criaEsqueletos() {
 	}
 }
 
-void Fase::criaZumbis() {
-	Zumbi* zmb = nullptr;
+void Fase::criaGoblins() {
+	Goblin* gbl = nullptr;
 	std::vector<SDL_Point> posicoes;
 	std::fstream file;
 	SDL_Point pos = {0,0};
 	char c;
 	int a1, a2, a3, a4, i, nPosicoes;
 
-	if (id == 1) {
-		file.open("Assets/TileMap/Mapa1/mapa1_posicoes_goblins.csv");
+	if (id == 1) file.open("Assets/TileMap/Mapa1/mapa1_posicoes_goblins.csv");
+	else if (id == 2) file.open("Assets/TileMap/Mapa2/mapa2_posicoes_goblins.csv");
+
+
 		file.get(c);
 		a1 = atoi(&c);
 		file.get(c);
@@ -210,8 +210,9 @@ void Fase::criaZumbis() {
 			a3 = atoi(&c);
 			file.get(c);
 			a4 = atoi(&c);
-			file.ignore();
 			pos.x = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+
+			file.ignore();
 
 			file.get(c);
 			a1 = atoi(&c);
@@ -223,53 +224,12 @@ void Fase::criaZumbis() {
 			a4 = atoi(&c);
 			file.ignore();
 			pos.y = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+
 			posicoes.push_back(pos);
 		}
 
 		file.close();
-	}
-
-	else if (id == 2) {
-		file.open("Assets/TileMap/Mapa2/mapa2_posicoes_goblins.csv");
-		file.get(c);
-		a1 = atoi(&c);
-		file.get(c);
-		a2 = atoi(&c);
-		file.get(c);
-		a3 = atoi(&c);
-		file.ignore();
-		//quantidade de posicoes
-
-		nPosicoes = a1 * 100 + a2 * 10 + a3;
-
-		for (int i = 0; i < nPosicoes; i++) {
-
-			file.get(c);
-			a1 = atoi(&c);
-			file.get(c);
-			a2 = atoi(&c);
-			file.get(c);
-			a3 = atoi(&c);
-			file.get(c);
-			a4 = atoi(&c);
-			file.ignore();
-			pos.x = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
-
-			file.get(c);
-			a1 = atoi(&c);
-			file.get(c);
-			a2 = atoi(&c);
-			file.get(c);
-			a3 = atoi(&c);
-			file.get(c);
-			a4 = atoi(&c);
-			file.ignore();
-			pos.y = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
-			posicoes.push_back(pos);
-		}
-
-		file.close();
-	}
+	
 
 	std::vector<SDL_Point>::iterator it;
 
@@ -277,9 +237,9 @@ void Fase::criaZumbis() {
 
 	for (i = 0; i < nZumbis; i++) {
 		pos = posicoes[rand() % posicoes.size()];
-		zmb = new Zumbi(pos.x, pos.y);
-		listaEntidades.addEntidade(static_cast<Entidade*>(zmb));
-		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(zmb));
+		gbl = new Goblin(pos.x, pos.y);
+		listaEntidades.addEntidade(static_cast<Entidade*>(gbl));
+		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(gbl));
 	}
 }
 
@@ -453,7 +413,7 @@ void Fase::save()  {
 
 void Fase::load(const int id) {
 	string esqueleto = "Esqueleto";
-	string zumbi = "Zumbi";
+	string goblin = "Goblin";
 	string chefe = "Chefe";
 	string jogador = "Jogador";
 	string lava = "Lava";
@@ -573,10 +533,8 @@ void Fase::load(const int id) {
 					GerenciadorDeColisao::addInimigo(inimigo);
 					listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
 				}
-				else if (nomeClasse == zumbi) {
-					Zumbi* inimigo = new Zumbi;
-					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
-					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+				else if (nomeClasse == goblin) {
+					Goblin* inimigo = new Goblin(x, y);
 					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
 					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
 					GerenciadorDeColisao::addInimigo(inimigo);
@@ -702,10 +660,8 @@ void Fase::load(const int id) {
 					GerenciadorDeColisao::addInimigo(inimigo);
 					listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
 				}
-				else if (nomeClasse == zumbi) {
-					Zumbi* inimigo = new Zumbi;
-					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
-					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+				else if (nomeClasse == goblin) {
+					Goblin* inimigo = new Goblin(x, y);
 					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
 					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
 					GerenciadorDeColisao::addInimigo(inimigo);

@@ -104,7 +104,6 @@ void GerenciadorDeColisao::addInimigo(Inimigo* in) {
 void GerenciadorDeColisao::atualizaInimigos() {
 	for (auto& i : inimigos) {
 		if (i->isAlive()) {
-			//delete i;
 			i = nullptr;
 		}
 	}
@@ -563,32 +562,7 @@ void GerenciadorDeColisao::colisao_jogador1() {
 	
 }
 
-void GerenciadorDeColisao::colisao_esqueleto(Esqueleto* in1) {
-	SDL_Rect hitbox = in1->getComponente<ComponenteColisao>()->getColisor();
-	SDL_Rect platform = in1->getPlatform();
-	ComponenteTransform* transform = in1->getComponente<ComponenteTransform>();
-	SDL_Rect target1 = jogador1->getComponente<ComponenteColisao>()->getColisor();
-	SDL_Rect target2 = jogador2->getComponente<ComponenteColisao>()->getColisor();
-
-	platform.y -= 3 * Mapa::tamanhoTile();
-	platform.h += 2 * Mapa::tamanhoTile();
-
-	float dist1 = Mapa::getDimensoes().x;
-	float dist2 = Mapa::getDimensoes().x;
-	in1->setTarget(false);
-	if (AABB(platform, target1)) {
-		in1->setTarget(true);
-		dist1 = (target1.x > hitbox.x) ? target1.x - (hitbox.x + static_cast<int>(hitbox.w / 2)) : target1.x + static_cast<int>(hitbox.w / 2) - hitbox.x;
-	}
-	if (AABB(platform, target2)) {
-		in1->setTarget(true);
-		dist2 = (target2.x > hitbox.x) ? target2.x - (hitbox.x + static_cast<int>(hitbox.w / 2)) : target2.x + static_cast<int>(hitbox.w / 2) - hitbox.x;
-	}
-	if (abs(dist2) < abs(dist1)) { in1->setDistance(dist2); }
-	else { in1->setDistance(dist1); }
-}
-
-void GerenciadorDeColisao::colisao_zumbi(Zumbi* in1) {
+void GerenciadorDeColisao::colisao_inimigo(Inimigo* in1) {
 	SDL_Rect hitbox = in1->getComponente<ComponenteColisao>()->getColisor();
 	SDL_Rect platform = in1->getPlatform();
 	ComponenteTransform* transform = in1->getComponente<ComponenteTransform>();
@@ -701,9 +675,11 @@ void GerenciadorDeColisao::ataqueEsqueleto(Esqueleto* in1) {
 	}
 }
 
-void GerenciadorDeColisao::ataqueZumbi(Zumbi* in1) {
+
+void GerenciadorDeColisao::ataqueGoblin(Goblin* in1) {
 	SDL_Rect pos = in1->getComponente<ComponenteColisao>()->getColisor();
-	SDL_Rect hitbox = { 0, pos.y - pos.h, 32, 64 };
+	SDL_Rect hitbox = { 0, in1->getPlatform().y - 32, 32, 32};
+
 	hitbox.x = (in1->facingLeft()) ? pos.x - pos.w : pos.x + pos.w;
 
 	if (AABB(hitbox, jogador1->getComponente<ComponenteColisao>()->getColisor())) {

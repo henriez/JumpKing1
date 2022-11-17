@@ -74,8 +74,8 @@
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp">
       <Filter>ECS\Entidade\Personagem\Inimigo\Esqueleto</Filter>
     </ClCompile>
-    <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Zumbi\Zumbi.cpp">
-      <Filter>ECS\Entidade\Personagem\Inimigo\Zumbi</Filter>
+    <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Goblin\Goblin.cpp">
+      <Filter>ECS\Entidade\Personagem\Inimigo\Goblin</Filter>
     </ClCompile>
     <ClCompile Include="Menu\LoadMenu\LoadMenu.cpp">
       <Filter>Menu\LoadMenu</Filter>
@@ -190,9 +190,6 @@
     <Filter Include="ECS\Entidade\Personagem\Inimigo\Esqueleto">
       <UniqueIdentifier>{af30e54a-f985-4bd9-8859-50eec13105df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ECS\Entidade\Personagem\Inimigo\Zumbi">
-      <UniqueIdentifier>{629eb77f-4e2a-473b-9b18-83b7a2388bac}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Menu\LoadMenu">
       <UniqueIdentifier>{d0201c1c-d135-444a-827d-657aab791ae5}</UniqueIdentifier>
     </Filter>
@@ -204,6 +201,9 @@
     </Filter>
     <Filter Include="ECS\Lista">
       <UniqueIdentifier>{9243f502-14a1-464e-86c3-b2782baaec9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Entidade\Personagem\Inimigo\Goblin">
+      <UniqueIdentifier>{629eb77f-4e2a-473b-9b18-83b7a2388bac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -313,8 +313,8 @@
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.h">
       <Filter>ECS\Entidade\Personagem\Inimigo\Esqueleto</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Zumbi\Zumbi.h">
-      <Filter>ECS\Entidade\Personagem\Inimigo\Zumbi</Filter>
+    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Goblin\Goblin.h">
+      <Filter>ECS\Entidade\Personagem\Inimigo\Goblin</Filter>
     </ClInclude>
     <ClInclude Include="Menu\LoadMenu\LoadMenu.h">
       <Filter>Menu\LoadMenu</Filter>

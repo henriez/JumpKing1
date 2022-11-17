@@ -16,7 +16,7 @@ public:
 	void load(const int id);
 	void setJogo(Jogo* jg);
 	void criaEsqueletos();
-	void criaZumbis();
+	void criaGoblins();
 	void atualizar();
 	void render();
 	void clear();

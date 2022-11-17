@@ -35,6 +35,8 @@ public:
 	void renderCoracao(SDL_Rect fonte, SDL_Rect destino);
 	void renderPontuacao(int pontuacao);
 	void renderText(std::string text, SDL_Point position);
+
+	void renderInimigoHitbox(SDL_Rect destino);
 private:
 	GerenciadorGrafico();
 	static GerenciadorGrafico* manager;
