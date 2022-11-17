@@ -562,7 +562,7 @@ void GerenciadorDeColisao::colisao_jogador1() {
 	
 }
 
-void GerenciadorDeColisao::colisao_esqueleto(Esqueleto* in1) {
+void GerenciadorDeColisao::colisao_inimigo(Inimigo* in1) {
 	SDL_Rect hitbox = in1->getComponente<ComponenteColisao>()->getColisor();
 	SDL_Rect platform = in1->getPlatform();
 	ComponenteTransform* transform = in1->getComponente<ComponenteTransform>();
@@ -663,6 +663,21 @@ void GerenciadorDeColisao::ataqueJ2() {
 void GerenciadorDeColisao::ataqueEsqueleto(Esqueleto* in1) {
 	SDL_Rect pos = in1->getComponente<ComponenteColisao>()->getColisor();
 	SDL_Rect hitbox = { 0, pos.y - pos.h, 32, 64 };
+	hitbox.x = (in1->facingLeft()) ? pos.x - pos.w : pos.x + pos.w;
+
+	if (AABB(hitbox, jogador1->getComponente<ComponenteColisao>()->getColisor())) {
+		jogador1->damage();
+		jogador1->getComponente<ComponenteTransform>()->velocidade.y = -0.5;
+	}
+	if (AABB(hitbox, jogador2->getComponente<ComponenteColisao>()->getColisor())) {
+		jogador2->damage();
+		jogador2->getComponente<ComponenteTransform>()->velocidade.y = -0.5;
+	}
+}
+
+void GerenciadorDeColisao::ataqueGoblin(Goblin* in1) {
+	SDL_Rect pos = in1->getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect hitbox = { 0, in1->getPlatform().y - 32, 32, 32};
 	hitbox.x = (in1->facingLeft()) ? pos.x - pos.w : pos.x + pos.w;
 
 	if (AABB(hitbox, jogador1->getComponente<ComponenteColisao>()->getColisor())) {

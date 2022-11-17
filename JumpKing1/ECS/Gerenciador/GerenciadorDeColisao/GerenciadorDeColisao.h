@@ -9,6 +9,7 @@ class TileMap;
 class Obstaculo;
 class Projetil;
 class Esqueleto;
+class Goblin;
 class Inimigo;
 class Fase;
 class Jogo;
@@ -47,8 +48,9 @@ public:
 	static void setTileMap(TileMap* tmap);
 
 	static void colisao_jogador1();
-	static void colisao_esqueleto(Esqueleto* in1);
+	static void colisao_inimigo(Inimigo* in1);
 	static void ataqueEsqueleto(Esqueleto* in1);
+	static void ataqueGoblin(Goblin* in1);
 
 	static bool AABB(SDL_Rect A, SDL_Rect B);
 private:

@@ -63,7 +63,7 @@ void Fase::inicializar(const int id) {
 		listaEntidades.addEntidade(static_cast<Entidade*>(en1T1));
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en1T1));
 
-		Esqueleto* en2T1 = new Esqueleto(160, 5632.8);
+		Goblin* en2T1 = new Goblin(160, 5632.8);
 		listaEntidades.addEntidade(static_cast<Entidade*>(en2T1));
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en2T1));
 
@@ -71,7 +71,7 @@ void Fase::inicializar(const int id) {
 		listaEntidades.addEntidade(static_cast<Entidade*>(en3T1));
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en3T1));
 
-		Esqueleto* en4T1 = new Esqueleto(1500, 5984);
+		Goblin* en4T1 = new Goblin(1500, 5984);
 		listaEntidades.addEntidade(static_cast<Entidade*>(en4T1));
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en4T1));
 
@@ -79,7 +79,7 @@ void Fase::inicializar(const int id) {
 		listaEntidades.addEntidade(static_cast<Entidade*>(en5T1));
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en5T1));
 
-		Esqueleto* en6T1 = new Esqueleto(2368, 3648);
+		Goblin* en6T1 = new Goblin(2368, 3648);
 		listaEntidades.addEntidade(static_cast<Entidade*>(en6T1));
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en6T1));
 
@@ -87,7 +87,7 @@ void Fase::inicializar(const int id) {
 		listaEntidades.addEntidade(static_cast<Entidade*>(en7T1));
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en7T1));
 
-		Esqueleto* en8T1 = new Esqueleto(120, 4512);
+		Goblin* en8T1 = new Goblin(120, 4512);
 		listaEntidades.addEntidade(static_cast<Entidade*>(en8T1));
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en8T1));
 	}
@@ -97,13 +97,10 @@ void Fase::inicializar(const int id) {
 		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en1T1));
 	}
 
-	Zumbi* zumbi = new Zumbi;
 	Chefe* boss = new Chefe;
-
 
 	listaEntidades.addEntidade(static_cast<Entidade*>(jogador));
 	listaEntidades.addEntidade(static_cast<Entidade*>(jogador2));
-	listaEntidades.addEntidade(static_cast<Entidade*>(zumbi));
 	listaEntidades.addEntidade(static_cast<Entidade*>(boss));
 }
 
@@ -281,7 +278,7 @@ void Fase::save()  {
 
 void Fase::load(const int id) {
 	string esqueleto = "Esqueleto";
-	string zumbi = "Zumbi";
+	string goblin = "Goblin";
 	string chefe = "Chefe";
 	string jogador = "Jogador";
 	string lava = "Lava";
@@ -401,10 +398,8 @@ void Fase::load(const int id) {
 					GerenciadorDeColisao::addInimigo(inimigo);
 					listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
 				}
-				else if (nomeClasse == zumbi) {
-					Zumbi* inimigo = new Zumbi;
-					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
-					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+				else if (nomeClasse == goblin) {
+					Goblin* inimigo = new Goblin(x, y);
 					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
 					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
 					GerenciadorDeColisao::addInimigo(inimigo);
@@ -530,10 +525,8 @@ void Fase::load(const int id) {
 					GerenciadorDeColisao::addInimigo(inimigo);
 					listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
 				}
-				else if (nomeClasse == zumbi) {
-					Zumbi* inimigo = new Zumbi;
-					inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
-					inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
+				else if (nomeClasse == goblin) {
+					Goblin* inimigo = new Goblin(x, y);
 					inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
 					inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
 					GerenciadorDeColisao::addInimigo(inimigo);

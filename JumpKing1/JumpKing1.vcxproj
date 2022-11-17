@@ -150,7 +150,7 @@
     <ClCompile Include="ECS\Entidade\Obstaculo\Tile\Tile.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.cpp" />
-    <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Zumbi\Zumbi.cpp" />
+    <ClCompile Include="ECS\Entidade\Personagem\Inimigo\Goblin\Goblin.cpp" />
     <ClCompile Include="ECS\Entidade\Personagem\Jogador\Jogador.cpp" />
     <ClCompile Include="ECS\Entidade\Projetil\Projetil.cpp" />
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeCamera\GerenciadorDeCamera.cpp" />
@@ -190,7 +190,7 @@
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Chefe\Chefe.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Esqueleto\Esqueleto.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Inimigo.h" />
-    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Zumbi\Zumbi.h" />
+    <ClInclude Include="ECS\Entidade\Personagem\Inimigo\Goblin\Goblin.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Jogador\Jogador.h" />
     <ClInclude Include="ECS\Entidade\Personagem\Personagem.h" />
     <ClInclude Include="ECS\Entidade\Projetil\Projetil.h" />

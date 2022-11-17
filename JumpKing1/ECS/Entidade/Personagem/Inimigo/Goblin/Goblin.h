@@ -2,10 +2,10 @@
 
 #include "../Inimigo.h"
 
-class Esqueleto : public Inimigo {
+class Goblin : public Inimigo {
 public:
-	Esqueleto(float x, float y);
-	~Esqueleto();
+	Goblin(float x, float y);
+	~Goblin();
 
 	const int getSpeed() const { return speed; }
 	const bool facingLeft() const { return flip; }
