@@ -9,6 +9,7 @@ class TileMap;
 class Obstaculo;
 class Projetil;
 class Esqueleto;
+class Zumbi;
 class Inimigo;
 class Fase;
 class Jogo;
@@ -48,7 +49,9 @@ public:
 
 	static void colisao_jogador1();
 	static void colisao_esqueleto(Esqueleto* in1);
+	static void colisao_zumbi(Zumbi* in1);
 	static void ataqueEsqueleto(Esqueleto* in1);
+	static void ataqueZumbi(Zumbi* in1);
 
 	static bool AABB(SDL_Rect A, SDL_Rect B);
 private:

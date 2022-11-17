@@ -264,10 +264,10 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 			tile->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
 			if (id == 1)
 				hitbox_plataformas.push_back(tile);
-			//else if (id == 2)
-			//	hitbox_espinhos.push_back(tile);
-			//else if (id == 3)
-			//	hitbox_lavas.push_back(tile);
+			else if (id == 2) {
+				std::cout << j * Mapa::tamanhoTile() << ", " << i * Mapa::tamanhoTile() << std::endl;
+			}
+
 		}
 	}
 	mapFile.close();

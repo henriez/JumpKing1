@@ -58,44 +58,9 @@ void Fase::inicializar(const int id) {
 		break;
 	}
 	
-	if (id == 1) {
-		Esqueleto* en1T1 = new Esqueleto(456, 6240);
-		listaEntidades.addEntidade(static_cast<Entidade*>(en1T1));
-		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en1T1));
-
-		Esqueleto* en2T1 = new Esqueleto(160, 5632.8);
-		listaEntidades.addEntidade(static_cast<Entidade*>(en2T1));
-		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en2T1));
-
-		Esqueleto* en3T1 = new Esqueleto(1064, 5358);
-		listaEntidades.addEntidade(static_cast<Entidade*>(en3T1));
-		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en3T1));
-
-		Esqueleto* en4T1 = new Esqueleto(1500, 5984);
-		listaEntidades.addEntidade(static_cast<Entidade*>(en4T1));
-		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en4T1));
-
-		Esqueleto* en5T1 = new Esqueleto(2368, 5248);
-		listaEntidades.addEntidade(static_cast<Entidade*>(en5T1));
-		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en5T1));
-
-		Esqueleto* en6T1 = new Esqueleto(2368, 3648);
-		listaEntidades.addEntidade(static_cast<Entidade*>(en6T1));
-		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en6T1));
-
-		Esqueleto* en7T1 = new Esqueleto(944, 4512);
-		listaEntidades.addEntidade(static_cast<Entidade*>(en7T1));
-		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en7T1));
-
-		Esqueleto* en8T1 = new Esqueleto(120, 4512);
-		listaEntidades.addEntidade(static_cast<Entidade*>(en8T1));
-		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en8T1));
-	}
-	if (id == 2) {
-		Esqueleto* en1T1 = new Esqueleto(1672, 5504);
-		listaEntidades.addEntidade(static_cast<Entidade*>(en1T1));
-		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(en1T1));
-	}
+	criaEsqueletos();
+//	criaZumbis();
+	
 
 	Zumbi* zumbi = new Zumbi;
 	Chefe* boss = new Chefe;
@@ -103,12 +68,219 @@ void Fase::inicializar(const int id) {
 
 	listaEntidades.addEntidade(static_cast<Entidade*>(jogador));
 	listaEntidades.addEntidade(static_cast<Entidade*>(jogador2));
-	listaEntidades.addEntidade(static_cast<Entidade*>(zumbi));
 	listaEntidades.addEntidade(static_cast<Entidade*>(boss));
 }
 
 void Fase::setJogo(Jogo* jg) {
 	jogo = jg;
+}
+
+void Fase::criaEsqueletos() {
+	Esqueleto* esq = nullptr;
+	std::vector<SDL_Point> posicoes;
+	std::fstream file;
+	SDL_Point pos = {0,0};
+	char c;
+	int a1, a2, a3, a4, i, nPosicoes;
+
+	if (id == 1) {
+		file.open("Assets/TileMap/Mapa1/mapa1_posicoes_esqueletos.csv");
+		file.get(c);
+		a1 = atoi(&c);
+		file.get(c);
+		a2 = atoi(&c);
+		file.get(c);
+		a3 = atoi(&c);
+		file.ignore();
+		//quantidade de posicoes
+
+		nPosicoes = a1 * 100 + a2 * 10 + a3;
+
+		for (int i = 0; i < nPosicoes; i++) {
+
+			file.get(c);
+			a1 = atoi(&c);
+			file.get(c);
+			a2 = atoi(&c);
+			file.get(c);
+			a3 = atoi(&c);
+			file.get(c);
+			a4 = atoi(&c);
+			file.ignore();
+			pos.x = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+
+			file.get(c);
+			a1 = atoi(&c);
+			file.get(c);
+			a2 = atoi(&c);
+			file.get(c);
+			a3 = atoi(&c);
+			file.get(c);
+			a4 = atoi(&c);
+			file.ignore();
+			pos.y = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+			posicoes.push_back(pos);
+		}
+
+		file.close();
+	}
+
+	else if (id == 2) {
+		file.open("Assets/TileMap/Mapa2/mapa2_posicoes_esqueletos.csv");
+		file.get(c);
+		a1 = atoi(&c);
+		file.get(c);
+		a2 = atoi(&c);
+		file.get(c);
+		a3 = atoi(&c);
+		file.ignore();
+		//quantidade de posicoes
+
+		nPosicoes = a1 * 100 + a2 * 10 + a3;
+
+		for (int i = 0; i < nPosicoes; i++) {
+
+			file.get(c);
+			a1 = atoi(&c);
+			file.get(c);
+			a2 = atoi(&c);
+			file.get(c);
+			a3 = atoi(&c);
+			file.get(c);
+			a4 = atoi(&c);
+			file.ignore();
+			pos.x = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+
+			file.get(c);
+			a1 = atoi(&c);
+			file.get(c);
+			a2 = atoi(&c);
+			file.get(c);
+			a3 = atoi(&c);
+			file.get(c);
+			a4 = atoi(&c);
+			file.ignore();
+			pos.y = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+			posicoes.push_back(pos);
+		}
+
+		file.close();
+	}
+
+	std::vector<SDL_Point>::iterator it;
+	
+	int nEsqueletos = rand() % (posicoes.size()-3) + 3;
+
+	for (i = 0; i < nEsqueletos; i++) {
+		pos = posicoes[rand() % posicoes.size()];
+		esq = new Esqueleto(pos.x, pos.y);
+		listaEntidades.addEntidade(static_cast<Entidade*>(esq));
+		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(esq));
+	}
+}
+
+void Fase::criaZumbis() {
+	Zumbi* zmb = nullptr;
+	std::vector<SDL_Point> posicoes;
+	std::fstream file;
+	SDL_Point pos = {0,0};
+	char c;
+	int a1, a2, a3, a4, i, nPosicoes;
+
+	if (id == 1) {
+		file.open("Assets/TileMap/Mapa1/mapa1_posicoes_goblins.csv");
+		file.get(c);
+		a1 = atoi(&c);
+		file.get(c);
+		a2 = atoi(&c);
+		file.get(c);
+		a3 = atoi(&c);
+		file.ignore();
+		//quantidade de posicoes
+
+		nPosicoes = a1 * 100 + a2 * 10 + a3;
+
+		for (int i = 0; i < nPosicoes; i++) {
+
+			file.get(c);
+			a1 = atoi(&c);
+			file.get(c);
+			a2 = atoi(&c);
+			file.get(c);
+			a3 = atoi(&c);
+			file.get(c);
+			a4 = atoi(&c);
+			file.ignore();
+			pos.x = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+
+			file.get(c);
+			a1 = atoi(&c);
+			file.get(c);
+			a2 = atoi(&c);
+			file.get(c);
+			a3 = atoi(&c);
+			file.get(c);
+			a4 = atoi(&c);
+			file.ignore();
+			pos.y = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+			posicoes.push_back(pos);
+		}
+
+		file.close();
+	}
+
+	else if (id == 2) {
+		file.open("Assets/TileMap/Mapa2/mapa2_posicoes_goblins.csv");
+		file.get(c);
+		a1 = atoi(&c);
+		file.get(c);
+		a2 = atoi(&c);
+		file.get(c);
+		a3 = atoi(&c);
+		file.ignore();
+		//quantidade de posicoes
+
+		nPosicoes = a1 * 100 + a2 * 10 + a3;
+
+		for (int i = 0; i < nPosicoes; i++) {
+
+			file.get(c);
+			a1 = atoi(&c);
+			file.get(c);
+			a2 = atoi(&c);
+			file.get(c);
+			a3 = atoi(&c);
+			file.get(c);
+			a4 = atoi(&c);
+			file.ignore();
+			pos.x = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+
+			file.get(c);
+			a1 = atoi(&c);
+			file.get(c);
+			a2 = atoi(&c);
+			file.get(c);
+			a3 = atoi(&c);
+			file.get(c);
+			a4 = atoi(&c);
+			file.ignore();
+			pos.y = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
+			posicoes.push_back(pos);
+		}
+
+		file.close();
+	}
+
+	std::vector<SDL_Point>::iterator it;
+
+	int nZumbis = rand() % (posicoes.size() - 3) + 3;
+
+	for (i = 0; i < nZumbis; i++) {
+		pos = posicoes[rand() % posicoes.size()];
+		zmb = new Zumbi(pos.x, pos.y);
+		listaEntidades.addEntidade(static_cast<Entidade*>(zmb));
+		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(zmb));
+	}
 }
 
 void Fase::atualizar() {

@@ -23,6 +23,7 @@ private:
 	std::vector<Tile*> camada1;
 	std::vector<Tile*> camada2;
 	std::vector<Tile*> hitbox_plataformas;
+	std::vector<Tile*> hitbox_espinhos;
 
 	GerenciadorGrafico* graphics;
 	SDL_Point nTiles;

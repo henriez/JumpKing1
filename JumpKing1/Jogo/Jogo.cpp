@@ -266,10 +266,6 @@ void Jogo::showRanking(int id) {
 	}
 	in.close();
 
-	//Percorre o map com as pontuacoes em ordem decrescente
-	map<int, string>::reverse_iterator it;
-	for (it = rankings.rbegin(); it != rankings.rend(); it++)
-		cout << it->second << endl;
 
 	//Renderiza o menu leaderboard normalmente
 	graphics->clear();
@@ -293,6 +289,8 @@ void Jogo::showRanking(int id) {
 	int i = 0;
 	SDL_Point position = { ranking.x + 10, ranking.y + 10};
 	
+	//Percorre o map com as pontuacoes em ordem decrescente
+	map<int, string>::reverse_iterator it;
 	for (it = rankings.rbegin(); it != rankings.rend() && i < 8; it++, i++) {
 		graphics->renderText(it->second, position);
 		position.y += 50;
