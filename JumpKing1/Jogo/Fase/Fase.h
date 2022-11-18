@@ -10,22 +10,23 @@ class GerenciadorDeEventos;
 class Fase : public Ente{
 public:
 	Fase();
-	~Fase();
+	virtual ~Fase();
 
-	void inicializar(const int id);
-	void load(const int id);
 	void setJogo(Jogo* jg);
-	void criaEsqueletos();
-	void criaGoblins();
-	void atualizar();
 	void render();
 	void clear();
 	void gameOver();
-	void save();
-	void saveRank();
-private:
+
+	virtual void inicializar() = 0;
+	virtual void atualizar() = 0;
+	virtual void save() = 0;
+	virtual void saveRank() = 0;
+	virtual void load() = 0;
+protected:
 	ListaDeEntidades listaEntidades;
 	GerenciadorDeEventos* event_manager;
+	//GerenciadorDeColisao* collision_manager;
+	//GerenciadorDeCamera* camera_manager;
 	Mapa* mapa;
 	bool player_is_alive;
 	Jogo* jogo;

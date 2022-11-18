@@ -1,6 +1,8 @@
 #include "Jogo.h"
 #include <iostream>
 #include "Fase/Fase.h"
+#include "Fase/Fase1/Fase1.h"
+#include "Fase/Fase2/Fase2.h"
 #include "../ECS/Gerenciador/GerenciadorGrafico/GerenciadorGrafico.h"
 #include "../ECS/Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
 using namespace std;
@@ -11,7 +13,7 @@ SDL_Event Jogo::evento;
 
 Jogo::Jogo(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia) {
 	rodando = true;
-	fase = new Fase;
+	fase = nullptr;
 	graphics = GerenciadorGrafico::getInstance();
 	inicializar(nomeJanela, largJanela, alturaJanela, telaCheia);
 }
@@ -26,7 +28,6 @@ void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela,
 	SDL_Init(SDL_INIT_EVERYTHING);
 
 	graphics->init(nomeJanela, largJanela, alturaJanela, telaCheia);
-	fase->setJogo(this);
 
 	menu.init();
 	mainMenu();
@@ -163,6 +164,9 @@ void Jogo::leaderboardMenu() {
 
 void Jogo::levelMenu() {
 
+	Fase1* fase1 = nullptr;
+	Fase2* fase2 = nullptr;
+
 	menu.level.reset();
 	int click = menu.level.update();
 
@@ -172,11 +176,17 @@ void Jogo::levelMenu() {
 
 	switch (click) { //apos algum clique
 	case BUTTON_START1:
-		fase->inicializar(1);
+		fase1 = new Fase1;
+		fase1->setJogo(this);
+		fase1->inicializar();
+		fase = static_cast<Fase*>(fase1);
 		atualizar();
 		break;
 	case BUTTON_START2:
-		fase->inicializar(2);
+		fase2 = new Fase2;
+		fase2->setJogo(this);
+		fase2->inicializar();
+		fase = static_cast<Fase*>(fase2);
 		atualizar();
 		break;
 	case BUTTON_QUIT:
@@ -189,6 +199,9 @@ void Jogo::levelMenu() {
 }
 
 void Jogo::loadMenu() {
+	Fase1* fase1 = nullptr;
+	Fase2* fase2 = nullptr;
+
 	menu.load.reset();
 	int click = menu.load.update();
 
@@ -198,10 +211,16 @@ void Jogo::loadMenu() {
 
 	switch (click) { //apos algum clique
 	case BUTTON_START1:
-		fase->load(1); //carregar de arquivo
+		fase1 = new Fase1;
+		fase1->setJogo(this);
+		fase1->load(); //carregar de arquivo
+		fase = static_cast<Fase*>(fase1);
 		break;
 	case BUTTON_START2:
-		fase->load(2); //carregar de arquivo
+		fase2 = new Fase2;
+		fase2->setJogo(this);
+		fase2->load(); //carregar de arquivo
+		fase = static_cast<Fase*>(fase2);
 		break;
 	case BUTTON_QUIT:
 		mainMenu();

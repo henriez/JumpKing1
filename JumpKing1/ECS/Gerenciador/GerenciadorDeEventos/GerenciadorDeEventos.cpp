@@ -8,11 +8,7 @@ GerenciadorDeEventos::GerenciadorDeEventos() {
 	jogador2 = nullptr;
 }
 
-GerenciadorDeEventos::~GerenciadorDeEventos()	 {
-	if (manager != nullptr) {
-		delete manager;
-	}
-}
+GerenciadorDeEventos::~GerenciadorDeEventos(){}
 
 GerenciadorDeEventos* GerenciadorDeEventos::getInstance() {
 	if (manager == nullptr) {

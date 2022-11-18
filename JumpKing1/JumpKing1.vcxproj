@@ -161,6 +161,8 @@
     <ClCompile Include="Ente.cpp" />
     <ClCompile Include="Jogo\Fase\Boss_Room\Boss_Room.cpp" />
     <ClCompile Include="Jogo\Fase\Fase.cpp" />
+    <ClCompile Include="Jogo\Fase\Fase1\Fase1.cpp" />
+    <ClCompile Include="Jogo\Fase\Fase2\Fase2.cpp" />
     <ClCompile Include="Jogo\Fase\Mapa\Mapa.cpp" />
     <ClCompile Include="Jogo\Fase\Mapa\TileMap\TileMap.cpp" />
     <ClCompile Include="Jogo\Jogo.cpp" />
@@ -205,6 +207,8 @@
     <ClInclude Include="Ente.h" />
     <ClInclude Include="Jogo\Fase\Boss_Room\Boss_Room.h" />
     <ClInclude Include="Jogo\Fase\Fase.h" />
+    <ClInclude Include="Jogo\Fase\Fase1\Fase1.h" />
+    <ClInclude Include="Jogo\Fase\Fase2\Fase2.h" />
     <ClInclude Include="Jogo\Fase\Mapa\Mapa.h" />
     <ClInclude Include="Jogo\Fase\Mapa\TileMap\TileMap.h" />
     <ClInclude Include="Jogo\Jogo.h" />

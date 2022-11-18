@@ -90,6 +90,12 @@
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeSave\GerenciadorDeSave.cpp">
       <Filter>ECS\Gerenciador\GerenciadorDeSave</Filter>
     </ClCompile>
+    <ClCompile Include="Jogo\Fase\Fase1\Fase1.cpp">
+      <Filter>Jogo\Fase\Fase1</Filter>
+    </ClCompile>
+    <ClCompile Include="Jogo\Fase\Fase2\Fase2.cpp">
+      <Filter>Jogo\Fase\Fase2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Jogo">
@@ -211,6 +217,12 @@
     </Filter>
     <Filter Include="ECS\Gerenciador\GerenciadorDeSave">
       <UniqueIdentifier>{8c1da4bd-5007-401d-855c-a00057df9a88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\Fase\Fase1">
+      <UniqueIdentifier>{fcd82f53-9e48-455e-bc3a-b0e1173eb9c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jogo\Fase\Fase2">
+      <UniqueIdentifier>{9d319c09-a94c-42e5-8275-f3e5deafa3d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -340,6 +352,12 @@
     </ClInclude>
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeSave\GerenciadorDeSave.h">
       <Filter>ECS\Gerenciador\GerenciadorDeSave</Filter>
+    </ClInclude>
+    <ClInclude Include="Jogo\Fase\Fase1\Fase1.h">
+      <Filter>Jogo\Fase\Fase1</Filter>
+    </ClInclude>
+    <ClInclude Include="Jogo\Fase\Fase2\Fase2.h">
+      <Filter>Jogo\Fase\Fase2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
