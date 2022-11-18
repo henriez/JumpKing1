@@ -9,10 +9,18 @@
 #include "LevelMenu/LevelMenu.h"
 #include "LoadMenu/LoadMenu.h"
 
-class Menu{
+#define MAIN 1
+#define PAUSE 2
+#define SETTINGS 3
+#define LEADERBOARD 4
+#define LEVEL 5
+#define GAMEOVER 6
+#define LOAD 7
+
+class GerenciadorDeMenu{
 public:
-	Menu() {}
-	~Menu() {}
+	GerenciadorDeMenu() {}
+	~GerenciadorDeMenu() {}
 
 	void init() {
 		start.init();

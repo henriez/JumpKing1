@@ -40,7 +40,7 @@ void Mapa::inicializar(int id) {
 
 	switch (id) {
 	case 1:
-		backgroundTex = graphics->LoadTexture("Assets/TileMap/Mapa1/mapa1background.png");
+		backgroundTex = graphics->LoadTexture("Assets/TileMap/Mapa1/mapa1background.png"); //65mb de textura??????
 		fim = { 0,64,32,96 };
 		tileMap.carregaPosicoesValidas(mapa1_posicoes_lava, mapa1_posicoes_espinhos);
 		tileMap.inicializa(mapa1_camada1, mapa1_camada2, mapa1_camada_colisao, 80, 200); 

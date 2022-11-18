@@ -13,6 +13,7 @@
 #define HIT 4
 
 Esqueleto::Esqueleto(float x, float y) {
+	agressividade = rand() % 2 + 1;
 	sprite = { 0, 64 * WALKING, 64, 64 }; // w = 42 h = 49
 	flip = false;
 	speed = 1;
@@ -123,10 +124,6 @@ void Esqueleto::render() {
 		}
 
 		getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
-		SDL_Rect tst = getComponente<ComponenteColisao>()->getColisor();
-		tst.x -= GerenciadorDeCamera::camera.x;
-		tst.y -= GerenciadorDeCamera::camera.y;
-		//graphics->renderInimigoHitbox(tst);
 	}
 	else {
 		if (state != DYING) {
@@ -140,4 +137,8 @@ void Esqueleto::render() {
 			getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
 		}
 	}
+}
+
+int Esqueleto::attack() {
+	return agressividade;
 }

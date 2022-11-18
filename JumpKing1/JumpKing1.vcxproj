@@ -156,7 +156,9 @@
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeCamera\GerenciadorDeCamera.cpp" />
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.cpp" />
     <ClCompile Include="ECS\Gerenciador\GerenciadorDeEventos\GerenciadorDeEventos.cpp" />
+    <ClCompile Include="ECS\Gerenciador\GerenciadorDeSave\GerenciadorDeSave.cpp" />
     <ClCompile Include="ECS\Gerenciador\GerenciadorGrafico\GerenciadorGrafico.cpp" />
+    <ClCompile Include="Ente.cpp" />
     <ClCompile Include="Jogo\Fase\Boss_Room\Boss_Room.cpp" />
     <ClCompile Include="Jogo\Fase\Fase.cpp" />
     <ClCompile Include="Jogo\Fase\Mapa\Mapa.cpp" />
@@ -197,6 +199,7 @@
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeCamera\GerenciadorDeCamera.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeColisao\GerenciadorDeColisao.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorDeEventos\GerenciadorDeEventos.h" />
+    <ClInclude Include="ECS\Gerenciador\GerenciadorDeSave\GerenciadorDeSave.h" />
     <ClInclude Include="ECS\Gerenciador\GerenciadorGrafico\GerenciadorGrafico.h" />
     <ClInclude Include="ECS\Lista\Lista.h" />
     <ClInclude Include="Ente.h" />

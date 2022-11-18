@@ -13,6 +13,7 @@ public:
 	void atacar();
 	void render();
 	void shoot();
+	void damage(int dmg = 1) override;
 
 	const int getSpeed() const { return speed; }
 	bool facingLeft() { return flip; }

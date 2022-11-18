@@ -1,5 +1,6 @@
 #include "GerenciadorDeColisao.h"
 #include "../GerenciadorDeCamera/GerenciadorDeCamera.h"
+#include "../GerenciadorDeSave/GerenciadorDeSave.h"
 
 #include "../../../Jogo/Fase/Fase.h"
 #include "../../../Jogo/Fase/Mapa/Mapa.h"
@@ -24,63 +25,6 @@ GerenciadorDeColisao::GerenciadorDeColisao() {
 
 GerenciadorDeColisao::~GerenciadorDeColisao() {}
 
-void GerenciadorDeColisao::saveObstaculos(const char* path) {
-	
-	std::ofstream out(path, std::ios::out);
-	if (out) {
-		for (int i = 0; i < obstaculos.size(); i++) {
-			out << typeid(*obstaculos[i]).name() << " "
-				<< obstaculos[i]->getComponente<ComponenteColisao>()->getColisor().x << " "
-				<< obstaculos[i]->getComponente<ComponenteColisao>()->getColisor().y << " "
-				<< obstaculos[i]->getComponente<ComponenteColisao>()->getColisor().w << " "
-				<< obstaculos[i]->getComponente<ComponenteColisao>()->getColisor().h << std::endl;
-		}
-	}
-	else {
-		std::cout << "Failed saving!\n";
-		return;
-	}
-	out.close();
-}
-
-void GerenciadorDeColisao::saveProjeteis(const char* path) {
-	std::ofstream out(path, std::ios::out);
-	if (out) {
-		for (int i = 0; i < projeteis.size(); i++) {
-			out << typeid(*projeteis[i]).name() << " "
-				<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().x << " "
-				<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().y << " "
-				<< projeteis[i]->getComponente<ComponenteTransform>()->velocidade.x << " "
-				<< projeteis[i]->getComponente<ComponenteTransform>()->velocidade.y << std::endl;
-		}
-	}
-	else {
-		std::cout << "Failed saving!\n";
-		return;
-	}
-	out.close();
-}
-
-void GerenciadorDeColisao::saveInimigos(const char* path) {
-	std::ofstream out(path, std::ios::out);
-	if (out) {
-		for (int i = 0; i < inimigos.size(); i++) {
-			if (inimigos[i]->isAlive()){
-				out << typeid(*inimigos[i]).name() << " "
-				<< inimigos[i]->getComponente<ComponenteTransform>()->posicao.x << " "
-				<< inimigos[i]->getComponente<ComponenteTransform>()->posicao.y << " "
-				<< inimigos[i]->getComponente<ComponenteTransform>()->velocidade.x << " "
-				<< inimigos[i]->getComponente<ComponenteTransform>()->velocidade.y << std::endl;
-			}
-		}
-	}
-	else {
-		std::cout << "Failed saving!\n";
-		return;
-	}
-	out.close();
-}
-
 void GerenciadorDeColisao::setJogador(Jogador* jg) {
 	jogador1 = jg;
 }
@@ -99,6 +43,7 @@ void GerenciadorDeColisao::setFase(Fase* fs) {
 
 void GerenciadorDeColisao::addInimigo(Inimigo* in) {
 	inimigos.push_back(in);
+	GerenciadorDeSave::getInstance()->addInimigo(in);
 }
 
 void GerenciadorDeColisao::atualizaInimigos() {
@@ -111,6 +56,7 @@ void GerenciadorDeColisao::atualizaInimigos() {
 
 void GerenciadorDeColisao::addObstaculo(Obstaculo* obst) {
 	obstaculos.push_back(obst);
+	GerenciadorDeSave::getInstance()->addObstaculo(obst);
 }
 
 void GerenciadorDeColisao::atualizaObstaculos() {
@@ -131,6 +77,7 @@ void GerenciadorDeColisao::renderObstaculos() {
 
 void GerenciadorDeColisao::addProjetil(Projetil* proj) {
 	projeteis.push_back(proj);
+	GerenciadorDeSave::getInstance()->addProjetil(proj);
 }
 
 void GerenciadorDeColisao::atualizaProjeteis() {
@@ -157,9 +104,12 @@ void GerenciadorDeColisao::clear() {
 		delete p;
 	projeteis.clear();
 
-	//for (auto& i : inimigos)
-		//delete i;
+	for (auto& i : inimigos)
+		if (i != nullptr)
+			delete i;
 	inimigos.clear();
+
+	GerenciadorDeSave::getInstance()->clear();
 }
 
 void GerenciadorDeColisao::iniciaInimigo(Inimigo* in) {
@@ -675,19 +625,16 @@ void GerenciadorDeColisao::ataqueEsqueleto(Esqueleto* in1) {
 	}
 }
 
-
 void GerenciadorDeColisao::ataqueGoblin(Goblin* in1) {
 	SDL_Rect pos = in1->getComponente<ComponenteColisao>()->getColisor();
 	SDL_Rect hitbox = { 0, in1->getPlatform().y - 32, 32, 32};
 
 	hitbox.x = (in1->facingLeft()) ? pos.x - pos.w : pos.x + pos.w;
 
-	if (AABB(hitbox, jogador1->getComponente<ComponenteColisao>()->getColisor())) {
-		jogador1->damage();
-		jogador1->getComponente<ComponenteTransform>()->velocidade.y = -0.5;
-	}
-	if (AABB(hitbox, jogador2->getComponente<ComponenteColisao>()->getColisor())) {
-		jogador2->damage();
-		jogador2->getComponente<ComponenteTransform>()->velocidade.y = -0.5;
-	}
+	if (AABB(hitbox, jogador1->getComponente<ComponenteColisao>()->getColisor())) 
+		jogador1->damage(in1->attack());
+	
+	if (AABB(hitbox, jogador2->getComponente<ComponenteColisao>()->getColisor())) 
+		jogador2->damage(in1->attack());
+	
 }

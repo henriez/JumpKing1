@@ -9,4 +9,5 @@ public:
 
 	void atualizar();
 	void render();
+	int attack();
 };

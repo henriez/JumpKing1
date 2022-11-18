@@ -127,7 +127,11 @@ void Lista<TL>::clear(){
 
 	while (aux){
 		last = last->getPrev();
-		delete aux;
+		if (aux->getInfo() != nullptr) {
+			aux->setInfo(nullptr);
+			delete aux;
+		}
+
 		aux = last;
 	}
 	last = nullptr;

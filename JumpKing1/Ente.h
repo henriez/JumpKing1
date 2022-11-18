@@ -3,13 +3,14 @@
 
 class Ente {
 public:
-	Ente() {
-		graphics = GerenciadorGrafico::getInstance();
-	}
+	Ente();
 	virtual ~Ente() {}
 
 	virtual void atualizar() = 0;
 	virtual void render() = 0;
+
+	//static setGraphics();
 protected:
-	GerenciadorGrafico* graphics;
+	//static GerenciadorGrafico* graphics;
+	static GerenciadorGrafico* graphics;
 };

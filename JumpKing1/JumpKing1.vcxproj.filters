@@ -86,6 +86,10 @@
     <ClCompile Include="Jogo\TextBox\Textbox.cpp">
       <Filter>Jogo\TextBox</Filter>
     </ClCompile>
+    <ClCompile Include="Ente.cpp" />
+    <ClCompile Include="ECS\Gerenciador\GerenciadorDeSave\GerenciadorDeSave.cpp">
+      <Filter>ECS\Gerenciador\GerenciadorDeSave</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Jogo">
@@ -204,6 +208,9 @@
     </Filter>
     <Filter Include="ECS\Entidade\Personagem\Inimigo\Goblin">
       <UniqueIdentifier>{629eb77f-4e2a-473b-9b18-83b7a2388bac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Gerenciador\GerenciadorDeSave">
+      <UniqueIdentifier>{8c1da4bd-5007-401d-855c-a00057df9a88}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -330,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="ECS\Lista\Lista.h">
       <Filter>ECS\Lista</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Gerenciador\GerenciadorDeSave\GerenciadorDeSave.h">
+      <Filter>ECS\Gerenciador\GerenciadorDeSave</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -20,9 +20,9 @@ public:
 		return ALIVE;
 	}
 	
-	void damage() {
+	void damage(int dmg) {
 		if (saude > 0) {
-			saude--;
+			saude -= dmg;
 		}
 
 	}

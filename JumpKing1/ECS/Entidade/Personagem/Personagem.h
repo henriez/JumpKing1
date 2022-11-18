@@ -12,10 +12,10 @@ public:
 
 	virtual void atualizar() = 0;
 	virtual void render() = 0;
-	void damage() {
+	virtual void damage(int dmg = 1) {
 		if (vulnerable) {
 			vulnerable_timer = SDL_GetTicks();
-			getComponente<ComponenteSaude>()->damage();
+			getComponente<ComponenteSaude>()->damage(dmg);
 			vulnerable = false;
 		}
 	}

@@ -19,6 +19,7 @@ Jogo::Jogo(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCh
 Jogo::~Jogo() {
 	SDL_Quit();
 	delete fase;
+	GerenciadorGrafico::deleteInstance();
 }
 
 void Jogo::inicializar(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia) {
@@ -125,7 +126,6 @@ void Jogo::settingsMenu() {
 	
 	switch (click) { //apos algum clique
 	case BUTTON_QUIT:
-		SDL_Delay(100);
 		mainMenu();
 		break;
 	default:

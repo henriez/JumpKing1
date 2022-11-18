@@ -2,6 +2,7 @@
 #include "../../ECS/Gerenciador/GerenciadorDeCamera/GerenciadorDeCamera.h"
 #include "../../ECS/Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
 #include "../../ECS/Gerenciador/GerenciadorDeEventos/GerenciadorDeEventos.h"
+#include "../../ECS/Gerenciador/GerenciadorDeSave/GerenciadorDeSave.h"
 #include <fstream>
 #include <string>
 #include "../TextBox/Textbox.h"
@@ -372,10 +373,6 @@ void Fase::save()  {
 		}
 		out.close();
 
-		
-		GerenciadorDeColisao::saveProjeteis("Saves/Fase1/projeteis.dat");
-		GerenciadorDeColisao::saveObstaculos("Saves/Fase1/obstaculos.dat");
-		GerenciadorDeColisao::saveInimigos("Saves/Fase1/inimigos.dat");
 	}
 
 	else if (id == 2) {
@@ -404,11 +401,8 @@ void Fase::save()  {
 		}
 		out.close();
 
-
-		GerenciadorDeColisao::saveProjeteis("Saves/Fase2/projeteis.dat");
-		GerenciadorDeColisao::saveObstaculos("Saves/Fase2/obstaculos.dat");
-		GerenciadorDeColisao::saveInimigos("Saves/Fase2/inimigos.dat");
 	}
+	GerenciadorDeSave::getInstance()->save(id);
 }
 
 void Fase::load(const int id) {

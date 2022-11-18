@@ -26,10 +26,6 @@ public:
 	static void ataqueJ1();
 	static void ataqueJ2();
 
-	static void saveObstaculos(const char* path);
-	static void saveProjeteis(const char* path);
-	static void saveInimigos(const char* path);
-
 	static void addInimigo(Inimigo* in);
 	static void atualizaInimigos();
 

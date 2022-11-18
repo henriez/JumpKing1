@@ -8,6 +8,7 @@ public:
 
 	virtual void atualizar() = 0;
 	virtual void render() = 0;
+	virtual int attack() = 0;
 
 	void setPlatform(SDL_Rect plat) { platform = plat; }
 	SDL_Rect getPlatform() { return platform; }
@@ -16,8 +17,12 @@ public:
 	void setTarget(bool val) { target = val; }
 	bool haveTarget() { return target; }
 
-private:
+protected:
 	SDL_Rect platform;
 	float distance;
 	bool target;
+	SDL_Rect sprite;
+	unsigned char state;
+	bool flip;
+	int speed;
 };

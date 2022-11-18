@@ -34,7 +34,7 @@ private:
 	void inicializar(const char* nomeJanela, int largJanela, int alturaJanela, bool telaCheia);
 	bool rodando;
 	
-	Menu menu;
+	GerenciadorDeMenu menu;
 
 	Fase* fase;
 	GerenciadorGrafico* graphics;

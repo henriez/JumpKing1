@@ -10,3 +10,7 @@ Chefe::~Chefe() {}
 void Chefe::atualizar() {}
 
 void Chefe::render() {}
+
+int Chefe::attack() {
+	return 0;
+}

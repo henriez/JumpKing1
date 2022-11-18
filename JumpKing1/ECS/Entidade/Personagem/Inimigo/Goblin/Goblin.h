@@ -13,9 +13,7 @@ public:
 
 	void atualizar();
 	void render();
+	int attack();
 private:
-	SDL_Rect sprite;
-	unsigned char state;
-	bool flip;
-	int speed;
+	bool raivoso;
 };

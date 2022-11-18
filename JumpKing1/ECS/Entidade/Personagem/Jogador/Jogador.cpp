@@ -110,3 +110,12 @@ void Jogador::shoot() {
 	
 	GerenciadorDeColisao::addProjetil(proj);
 }
+
+void Jogador::damage(int dmg) {
+	if (vulnerable) {
+		vulnerable_timer = SDL_GetTicks();
+		getComponente<ComponenteSaude>()->damage(dmg);
+		vulnerable = false;
+		getComponente<ComponenteTransform>()->velocidade.y = -0.5;
+	}
+}

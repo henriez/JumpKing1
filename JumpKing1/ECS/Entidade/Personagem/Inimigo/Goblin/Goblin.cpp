@@ -13,6 +13,7 @@
 #define HIT 4
 
 Goblin::Goblin(float x, float y) {
+	raivoso = (rand() % 2) ? true : false;
 	sprite = { 0, 150 * WALKING, 150, 150 }; // w = 42 h = 49
 	flip = false;
 	speed = 1;
@@ -123,10 +124,6 @@ void Goblin::render() {
 		}
 
 		getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
-		SDL_Rect tst = getComponente<ComponenteColisao>()->getColisor();
-		tst.x -= GerenciadorDeCamera::camera.x;
-		tst.y -= GerenciadorDeCamera::camera.y;
-		//graphics->renderInimigoHitbox(tst);
 	}
 	else {
 		if (state != DYING && state != IDLE) {
@@ -140,4 +137,9 @@ void Goblin::render() {
 			getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
 		}
 	}
+}
+
+int Goblin::attack() {
+	if (raivoso) return 2;
+	return 1;
 }
