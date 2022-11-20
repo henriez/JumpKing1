@@ -1,5 +1,6 @@
 #include "GerenciadorDeColisao.h"
 #include "../GerenciadorDeCamera/GerenciadorDeCamera.h"
+#include "../GerenciadorDeEventos/GerenciadorDeEventos.h"
 #include "../GerenciadorDeSave/GerenciadorDeSave.h"
 
 #include "../../../Jogo/Fase/Fase.h"
@@ -24,6 +25,22 @@ GerenciadorDeColisao::GerenciadorDeColisao() {
 }
 
 GerenciadorDeColisao::~GerenciadorDeColisao() {}
+
+void GerenciadorDeColisao::colidir() {
+	atualizaProjeteis();
+	atualizaObstaculos();
+	//GerenciadorDeColisao::atualizaInimigos();
+	colisao_jogadores();
+	colisao_projeteis_obstaculos();
+	GerenciadorDeEventos::getInstance()->atualizar();
+
+	if (jogador1->isAttacking()) {
+		ataqueJ1();
+	}
+	if (getJogador2()->isAttacking()) {
+		ataqueJ2();
+	}
+}
 
 void GerenciadorDeColisao::setJogador(Jogador* jg) {
 	jogador1 = jg;
@@ -215,7 +232,7 @@ void GerenciadorDeColisao::iniciaInimigo(Inimigo* in) {
 	in->setPlatform(result);
 }
 
-void GerenciadorDeColisao::colisao_jogador1() {
+void GerenciadorDeColisao::colisao_jogadores() {
 	SDL_Rect initialhitbox = jogador1->getComponente<ComponenteColisao>()->getColisor();
 	SDL_Rect hitbox = initialhitbox;
 
@@ -257,100 +274,29 @@ void GerenciadorDeColisao::colisao_jogador1() {
 		transform2->velocidade.y = 0;
 	}
 
-	if (!jogador1->inGround())
-		transform->velocidade.y += 0.05; // simula gravidade 
-
-	for (auto& t : tilemap->hitbox_plataformas) {
-	//	if (t->isOnScreen()) {
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * jogador1->getSpeed();
-			if (AABB(t->getPos(), hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = t->getPos().x - hitbox.w;
-				}
-				else if (velocity.x < 0) //colidiu pela direita
-					transform->posicao.x = t->getPos().x + hitbox.w;
-				transform->velocidade.x = 0;
-			}
-
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * jogador1->getSpeed();
-			if (AABB(t->getPos(), hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					jogador1->setGround(true);
-					transform->posicao.y = t->getPos().y - hitbox.h;
-				}
-				else if (velocity.y < 0) //colidiu por baixo
-					transform->posicao.y = t->getPos().y + hitbox.h;
-				transform->velocidade.y = 0;
-
-			}
-	//	}
-	}
-
-	for (auto& o : obstaculos) {
-		if (o->isOnScreen()) {
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * jogador1->getSpeed();
-			SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					transform->posicao.y = colisor.y - hitbox.h;
-					transform->velocidade.y = -1.4;
-				}
-				jogador1->damage();
-				break;
-			}
-
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * jogador1->getSpeed();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = colisor.x - hitbox.w;
-					transform->velocidade.x = -1;
-				}
-				else if (velocity.x < 0) { //colidiu pela direita
-					transform->posicao.x = colisor.x + colisor.w;
-					transform->velocidade.x = 1;
-				}
-				jogador1->damage();
-				break;
-			}
-		}
-
-	}
 	
-	for (auto& o : projeteis) {
-		if (o->isOnScreen()) {
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * jogador1->getSpeed();
-			SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					transform->posicao.y = colisor.y - hitbox.h;
-					transform->velocidade.y = -1.4;
-				}
-				jogador1->damage();
-				break;
-			}
+	colisao_jogadores_obstaculos();
+	colisao_jogadores_inimigos();
+	colisao_jogadores_projeteis();
 
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * jogador1->getSpeed();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = colisor.x - hitbox.w;
-					transform->velocidade.x = -1;
-				}
-				else if (velocity.x < 0) { //colidiu pela direita
-					transform->posicao.x = colisor.x + colisor.w;
-					transform->velocidade.x = 1;
-				}
-				jogador1->damage();
-				break;
-			}
-		}
 
+	if (!jogador2->isAlive()) { //morreu -> encerra fase
+		fase->gameOver();
 	}
+	if (!jogador1->isAlive()) { //morreu -> encerra fase
+		fase->gameOver();
+	}
+
+}
+
+void GerenciadorDeColisao::colisao_jogadores_inimigos() {
+	//jogador1
+	SDL_Rect initialhitbox = jogador1->getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect hitbox = initialhitbox;
+
+	ComponenteTransform* transform = jogador1->getComponente<ComponenteTransform>();
+	ComponenteTransform* transform2 = jogador2->getComponente<ComponenteTransform>();
+	Vector2D velocity = transform->velocidade;
 
 	for (auto& i : inimigos) {
 		if (i->isAlive()) {
@@ -367,111 +313,12 @@ void GerenciadorDeColisao::colisao_jogador1() {
 			}
 		}
 	}
-
-	if (!jogador1->isAlive()) { //morreu -> encerra fase
-		fase->gameOver();
-	}
-
+	//jogador2
 	initialhitbox = jogador2->getComponente<ComponenteColisao>()->getColisor();
 	hitbox = initialhitbox;
 
 	transform = jogador2->getComponente<ComponenteTransform>();
 	velocity = transform->velocidade;
-
-	if (!jogador2->inGround())
-		transform->velocidade.y += 0.05; // simula gravidade 
-
-	for (auto& t : tilemap->hitbox_plataformas) {
-		//if (t->isOnScreen()) {
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * jogador1->getSpeed();
-			if (AABB(t->getPos(), hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = t->getPos().x - hitbox.w;
-				}
-				else if (velocity.x < 0) //colidiu pela direita
-					transform->posicao.x = t->getPos().x + hitbox.w;
-				transform->velocidade.x = 0;
-			}
-
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * jogador1->getSpeed();
-			if (AABB(t->getPos(), hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					jogador2->setGround(true);
-					transform->posicao.y = t->getPos().y - hitbox.h;
-				}
-				else if (velocity.y < 0) //colidiu por baixo
-					transform->posicao.y = t->getPos().y + hitbox.h;
-				transform->velocidade.y = 0;
-
-			}
-		//}
-	}
-
-	for (auto& o : obstaculos) {
-		if (o->isOnScreen()) {
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * jogador1->getSpeed();
-			SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					transform->posicao.y = colisor.y - hitbox.h;
-					transform->velocidade.y = -1.4;
-				}
-				jogador2->damage();
-				break;
-			}
-
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * jogador1->getSpeed();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = colisor.x - hitbox.w;
-					transform->velocidade.x = -1;
-				}
-				else if (velocity.x < 0) { //colidiu pela direita
-					transform->posicao.x = colisor.x + colisor.w;
-					transform->velocidade.x = 1;
-				}
-				jogador2->damage();
-				break;
-			}
-		}
-
-	}
-
-	for (auto& o : projeteis) {
-		if (o->isOnScreen()) {
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * jogador1->getSpeed();
-			SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					transform->posicao.y = colisor.y - hitbox.h;
-					transform->velocidade.y = -1.4;
-				}
-				jogador2->damage();
-				break;
-			}
-
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * jogador1->getSpeed();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = colisor.x - hitbox.w;
-					transform->velocidade.x = -1;
-				}
-				else if (velocity.x < 0) { //colidiu pela direita
-					transform->posicao.x = colisor.x + colisor.w;
-					transform->velocidade.x = 1;
-				}
-				jogador2->damage();
-				break;
-			}
-		}
-
-	}
 
 	for (auto& i : inimigos) {
 		if (i->isAlive()) {
@@ -503,16 +350,229 @@ void GerenciadorDeColisao::colisao_jogador1() {
 			}
 		}
 	}
-
-
-	if (!jogador2->isAlive()) { //morreu -> encerra fase
-		fase->gameOver();
-	}
-
-	
 }
 
-void GerenciadorDeColisao::colisao_inimigo(Inimigo* in1) {
+void GerenciadorDeColisao::colisao_jogadores_obstaculos() {
+
+	//jogador1
+	SDL_Rect initialhitbox = jogador1->getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect hitbox = initialhitbox;
+
+	ComponenteTransform* transform = jogador1->getComponente<ComponenteTransform>();
+	ComponenteTransform* transform2 = jogador2->getComponente<ComponenteTransform>();
+	Vector2D velocity = transform->velocidade;
+
+
+	if (!jogador1->inGround())
+		transform->velocidade.y += 0.05; // simula gravidade 
+
+	for (auto& t : tilemap->hitbox_plataformas) {
+		//	if (t->isOnScreen()) {
+		hitbox = initialhitbox;
+		hitbox.x += velocity.x * jogador1->getSpeed();
+		if (AABB(t->getPos(), hitbox)) {
+			if (velocity.x > 0) { //colidiu pela esquerda
+				transform->posicao.x = t->getPos().x - hitbox.w;
+			}
+			else if (velocity.x < 0) //colidiu pela direita
+				transform->posicao.x = t->getPos().x + hitbox.w;
+			transform->velocidade.x = 0;
+		}
+
+		hitbox = initialhitbox;
+		hitbox.y += velocity.y * jogador1->getSpeed();
+		if (AABB(t->getPos(), hitbox)) {
+			if (velocity.y > 0) { //colidiu por cima
+				jogador1->setGround(true);
+				transform->posicao.y = t->getPos().y - hitbox.h;
+			}
+			else if (velocity.y < 0) //colidiu por baixo
+				transform->posicao.y = t->getPos().y + hitbox.h;
+			transform->velocidade.y = 0;
+
+		}
+		//	}
+	}
+	for (auto& o : obstaculos) {
+		if (o->isOnScreen()) {
+			hitbox = initialhitbox;
+			hitbox.y += velocity.y * jogador1->getSpeed();
+			SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
+			if (AABB(colisor, hitbox)) {
+				if (velocity.y > 0) { //colidiu por cima
+					transform->posicao.y = colisor.y - hitbox.h;
+					transform->velocidade.y = -1.4;
+				}
+				jogador1->damage();
+				break;
+			}
+			hitbox = initialhitbox;
+			hitbox.x += velocity.x * jogador1->getSpeed();
+			if (AABB(colisor, hitbox)) {
+				if (velocity.x > 0) { //colidiu pela esquerda
+					transform->posicao.x = colisor.x - hitbox.w;
+					transform->velocidade.x = -1;
+				}
+				else if (velocity.x < 0) { //colidiu pela direita
+					transform->posicao.x = colisor.x + colisor.w;
+					transform->velocidade.x = 1;
+				}
+				jogador1->damage();
+			}
+		}
+	}
+
+	//jogador2
+	initialhitbox = jogador2->getComponente<ComponenteColisao>()->getColisor();
+	hitbox = initialhitbox;
+
+	transform = jogador2->getComponente<ComponenteTransform>();
+	velocity = transform->velocidade;
+
+	if (!jogador2->inGround())
+		transform->velocidade.y += 0.05; // simula gravidade 
+
+	for (auto& t : tilemap->hitbox_plataformas) {
+		//if (t->isOnScreen()) {
+		hitbox = initialhitbox;
+		hitbox.x += velocity.x * jogador1->getSpeed();
+		if (AABB(t->getPos(), hitbox)) {
+			if (velocity.x > 0) { //colidiu pela esquerda
+				transform->posicao.x = t->getPos().x - hitbox.w;
+			}
+			else if (velocity.x < 0) //colidiu pela direita
+				transform->posicao.x = t->getPos().x + hitbox.w;
+			transform->velocidade.x = 0;
+		}
+		hitbox = initialhitbox;
+		hitbox.y += velocity.y * jogador1->getSpeed();
+		if (AABB(t->getPos(), hitbox)) {
+			if (velocity.y > 0) { //colidiu por cima
+				jogador2->setGround(true);
+				transform->posicao.y = t->getPos().y - hitbox.h;
+			}
+			else if (velocity.y < 0) //colidiu por baixo
+				transform->posicao.y = t->getPos().y + hitbox.h;
+			transform->velocidade.y = 0;
+
+		}
+		//}
+	}
+
+	for (auto& o : obstaculos) {
+		if (o->isOnScreen()) {
+			hitbox = initialhitbox;
+			hitbox.y += velocity.y * jogador2->getSpeed();
+			SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
+			if (AABB(colisor, hitbox)) {
+				if (velocity.y > 0) { //colidiu por cima
+					transform->posicao.y = colisor.y - hitbox.h;
+					transform->velocidade.y = -1.4;
+				}
+				jogador2->damage();
+				break;
+			}
+
+			hitbox = initialhitbox;
+			hitbox.x += velocity.x * jogador2->getSpeed();
+			if (AABB(colisor, hitbox)) {
+				if (velocity.x > 0) { //colidiu pela esquerda
+					transform->posicao.x = colisor.x - hitbox.w;
+					transform->velocidade.x = -1;
+				}
+				else if (velocity.x < 0) { //colidiu pela direita
+					transform->posicao.x = colisor.x + colisor.w;
+					transform->velocidade.x = 1;
+				}
+				jogador2->damage();
+				break;
+			}
+		}
+
+	}
+
+}
+
+void GerenciadorDeColisao::colisao_jogadores_projeteis() {
+	//jogador1
+	SDL_Rect initialhitbox = jogador1->getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect hitbox = initialhitbox;
+
+	ComponenteTransform* transform = jogador1->getComponente<ComponenteTransform>();
+	ComponenteTransform* transform2 = jogador2->getComponente<ComponenteTransform>();
+	Vector2D velocity = transform->velocidade;
+
+	for (auto& o : projeteis) {
+		if (o->isOnScreen()) {
+			hitbox = initialhitbox;
+			hitbox.y += velocity.y * jogador1->getSpeed();
+			SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
+			if (AABB(colisor, hitbox)) {
+				if (velocity.y > 0) { //colidiu por cima
+					transform->posicao.y = colisor.y - hitbox.h;
+					transform->velocidade.y = -1.4;
+				}
+				jogador1->damage();
+				break;
+			}
+
+			hitbox = initialhitbox;
+			hitbox.x += velocity.x * jogador1->getSpeed();
+			if (AABB(colisor, hitbox)) {
+				if (velocity.x > 0) { //colidiu pela esquerda
+					transform->posicao.x = colisor.x - hitbox.w;
+					transform->velocidade.x = -1;
+				}
+				else if (velocity.x < 0) { //colidiu pela direita
+					transform->posicao.x = colisor.x + colisor.w;
+					transform->velocidade.x = 1;
+				}
+				jogador1->damage();
+				break;
+			}
+		}
+
+	}
+	//jogador2
+	initialhitbox = jogador2->getComponente<ComponenteColisao>()->getColisor();
+	hitbox = initialhitbox;
+
+	transform = jogador2->getComponente<ComponenteTransform>();
+	velocity = transform->velocidade;
+
+	for (auto& o : projeteis) {
+		if (o->isOnScreen()) {
+			hitbox = initialhitbox;
+			hitbox.y += velocity.y * jogador1->getSpeed();
+			SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
+			if (AABB(colisor, hitbox)) {
+				if (velocity.y > 0) { //colidiu por cima
+					transform->posicao.y = colisor.y - hitbox.h;
+					transform->velocidade.y = -1.4;
+				}
+				jogador2->damage();
+				break;
+			}
+			hitbox = initialhitbox;
+			hitbox.x += velocity.x * jogador1->getSpeed();
+			if (AABB(colisor, hitbox)) {
+				if (velocity.x > 0) { //colidiu pela esquerda
+					transform->posicao.x = colisor.x - hitbox.w;
+					transform->velocidade.x = -1;
+				}
+				else if (velocity.x < 0) { //colidiu pela direita
+					transform->posicao.x = colisor.x + colisor.w;
+					transform->velocidade.x = 1;
+				}
+				jogador2->damage();
+				break;
+			}
+		}
+
+	}
+}
+
+void GerenciadorDeColisao::colisao_inimigo_obstaculos(Inimigo* in1) {
 	SDL_Rect hitbox = in1->getComponente<ComponenteColisao>()->getColisor();
 	SDL_Rect platform = in1->getPlatform();
 	ComponenteTransform* transform = in1->getComponente<ComponenteTransform>();
@@ -535,6 +595,65 @@ void GerenciadorDeColisao::colisao_inimigo(Inimigo* in1) {
 	}
 	if (abs(dist2) < abs(dist1)) { in1->setDistance(dist2); }
 	else { in1->setDistance(dist1); }
+}
+
+void GerenciadorDeColisao::colisao_inimigo_projeteis(Inimigo* in1) {
+	SDL_Rect hitbox = in1->getComponente<ComponenteColisao>()->getColisor();
+	for (auto& p : projeteis) {
+		if (AABB(hitbox, p->getComponente<ComponenteColisao>()->getColisor()))
+			in1->damage();
+	}
+}
+
+void GerenciadorDeColisao::colisao_projeteis_obstaculos() {
+	SDL_Rect initialhitbox, hitbox;
+	SDL_Rect obstHitbox; 
+	ComponenteTransform* transform = nullptr;
+	Vector2D velocity;
+
+	for (auto& p : projeteis) {
+		if (p->isActive()) {
+			transform = p->getComponente<ComponenteTransform>();
+			initialhitbox = p->getComponente<ComponenteColisao>()->getColisor();
+			hitbox = initialhitbox;
+
+			velocity.x = transform->velocidade.x * p->getSpeed();
+			velocity.y = transform->velocidade.y * p->getSpeed();
+
+			for (auto& t : tilemap->hitbox_plataformas) {
+				if (t->isOnScreen()) {
+					hitbox = initialhitbox;
+					hitbox.y += velocity.y; //futura posicao em y
+					if (AABB(hitbox, t->getPos())) {
+						if (velocity.y > 0) { //colidiu por cima
+							transform->posicao.y = t->getPos().y - hitbox.h;
+						}
+						else if (velocity.y < 0) //colidiu por baixo
+							transform->posicao.y = t->getPos().y + hitbox.h;
+						transform->velocidade.y *= -1;
+						p->collide();
+						break;
+					}
+
+					hitbox = initialhitbox;
+					hitbox.x += velocity.x; //futura posicao em x
+					if (AABB(hitbox, t->getPos())) {
+						if (velocity.x > 0) { //colidiu pela esquerda
+							transform->posicao.x = t->getPos().x - hitbox.w;
+						}
+						else if (velocity.x < 0) //colidiu pela direita
+							transform->posicao.x = t->getPos().x + hitbox.w;
+						transform->velocidade.x *= -1;
+						p->collide();
+					}
+
+				}
+			}
+		}
+		
+	}
+
+
 }
 
 bool GerenciadorDeColisao::AABB(SDL_Rect A, SDL_Rect B) {

@@ -42,7 +42,8 @@ void Esqueleto::atualizar() {
 		ComponenteTransform* transform = getComponente<ComponenteTransform>();
 		transform->posicao.x += transform->velocidade.x * speed;
 		getComponente<ComponenteColisao>()->setPos(transform->posicao.x, transform->posicao.y);
-		GerenciadorDeColisao::colisao_inimigo(this);
+		GerenciadorDeColisao::colisao_inimigo_obstaculos(this);
+		GerenciadorDeColisao::colisao_inimigo_projeteis(this);
 
 		if (!vulnerable) {
 			transform->velocidade.x = 0;

@@ -13,7 +13,12 @@ Fase2::Fase2() {
 	nGoblins = 0;
 }
 
-Fase2::~Fase2() {}
+Fase2::~Fase2() {
+	if (mapa != nullptr) {
+		delete mapa;
+		mapa = nullptr;
+	}
+}
 
 void Fase2::inicializar() {
 	GerenciadorDeColisao::setFase(this);
@@ -117,18 +122,7 @@ void Fase2::atualizar() {
 			mapa->atualizar();
 		}
 		GerenciadorDeCamera::Atualiza();
-		GerenciadorDeColisao::atualizaProjeteis();
-		GerenciadorDeColisao::atualizaObstaculos();
-		//GerenciadorDeColisao::atualizaInimigos();
-		GerenciadorDeColisao::colisao_jogador1();
-		event_manager->atualizar();
-
-		if (GerenciadorDeColisao::getJogador1()->isAttacking()) {
-			GerenciadorDeColisao::ataqueJ1();
-		}
-		if (GerenciadorDeColisao::getJogador2()->isAttacking()) {
-			GerenciadorDeColisao::ataqueJ2();
-		}
+		GerenciadorDeColisao::colidir();
 	}
 	else {
 		clear();

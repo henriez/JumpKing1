@@ -296,7 +296,7 @@ void TileMap::atualiza() {
 
 	GerenciadorDeColisao::atualizaObstaculos();
 
-	GerenciadorDeColisao::colisao_jogador1();
+	GerenciadorDeColisao::colisao_jogadores();
 }
 
 void TileMap::render() {

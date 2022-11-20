@@ -1,7 +1,7 @@
 #include "Ente.h"
 
-GerenciadorGrafico* Ente::graphics = nullptr;
+GerenciadorGrafico* Ente::graphics = GerenciadorGrafico::getInstance();
 
-Ente::Ente() {
-	graphics = GerenciadorGrafico::getInstance();
-}
+Ente::Ente() {}
+
+Ente::~Ente() {}

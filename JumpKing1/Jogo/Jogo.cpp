@@ -102,7 +102,6 @@ void Jogo::gameOverMenu() {
 
 	switch (click) { //apos algum clique
 	case BUTTON_QUIT:
-		fase->clear();
 		mainMenu();
 		break;
 	case BUTTON_SAVE:

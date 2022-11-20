@@ -13,7 +13,7 @@
 class ListaDeComponentes {
 public:
 	ListaDeComponentes() {}
-	~ListaDeComponentes() {}
+	~ListaDeComponentes() { clear(); }
 
 	template<typename T> void addComponente() {
 		T* componente = new (T);
@@ -23,6 +23,12 @@ public:
 	template<typename T> T* getComponente() {
 		T* c = nullptr;
 		return (T*)lista[typeid(c).name()];
+	}
+
+	void clear() {
+		std::map<std::string, Componente*>::iterator it;
+		for (it = lista.begin(); it != lista.end(); it++)
+			delete it->second;
 	}
 private:
 	std::map<std::string, Componente*> lista;

@@ -32,7 +32,6 @@ Mapa::Mapa() {
 Mapa::~Mapa() {
 	clear();
 	SDL_DestroyTexture(backgroundTex);
-
 }
 
 void Mapa::inicializar(int id) {
