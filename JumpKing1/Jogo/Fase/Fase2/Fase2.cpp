@@ -21,7 +21,7 @@ Fase2::~Fase2() {
 }
 
 void Fase2::inicializar() {
-	GerenciadorDeColisao::setFase(this);
+	GerenciadorDeColisao::getInstance()->setFase(this);
 
 	mapa = new Mapa;
 	mapa->inicializar(2, static_cast<Fase*>(this));
@@ -30,14 +30,14 @@ void Fase2::inicializar() {
 	jogador->getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/HenriqueIsFallingx32.png");
 	player_is_alive = true;
 	event_manager->setJogador1(jogador);
-	GerenciadorDeCamera::setJogador(jogador);
-	GerenciadorDeColisao::setJogador(jogador);
+	GerenciadorDeCamera::getInstance()->setJogador(jogador);
+	GerenciadorDeColisao::getInstance()->setJogador(jogador);
 
 	Jogador* jogador2 = new Jogador;
 	jogador2->getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/player2.png");
 	event_manager->setJogador2(jogador2);
-	GerenciadorDeCamera::setJogador2(jogador2);
-	GerenciadorDeColisao::setJogador2(jogador2);
+	GerenciadorDeCamera::getInstance()->setJogador2(jogador2);
+	GerenciadorDeColisao::getInstance()->setJogador2(jogador2);
 
 	jogador->getComponente<ComponenteTransform>()->posicao.x = 400;
 	jogador->getComponente<ComponenteTransform>()->posicao.y = 7648;
@@ -111,15 +111,15 @@ void Fase2::criaGoblins() {
 		pos = posicoes[rand() % posicoes.size()];
 		gbl = new Goblin(pos.x, pos.y);
 		listaEntidades.addEntidade(static_cast<Entidade*>(gbl));
-		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(gbl));
+		GerenciadorDeColisao::getInstance()->addInimigo(static_cast<Inimigo*>(gbl));
 	}
 }
 
 void Fase2::criaMagos() {
-	GerenciadorDeColisao::clear();
+	GerenciadorDeColisao::getInstance()->clear();
 	listaEntidades.clear();
-	listaEntidades.addEntidade(static_cast<Entidade*>(GerenciadorDeColisao::getJogador1()));
-	listaEntidades.addEntidade(static_cast<Entidade*>(GerenciadorDeColisao::getJogador2()));
+	listaEntidades.addEntidade(static_cast<Entidade*>(GerenciadorDeColisao::getInstance()->getJogador1()));
+	listaEntidades.addEntidade(static_cast<Entidade*>(GerenciadorDeColisao::getInstance()->getJogador2()));
 
 
 	std::vector<SDL_Point> posicoes;
@@ -135,7 +135,7 @@ void Fase2::criaMagos() {
 	for (int i = 0; i < nPosicoes; i++) {
 		mago = new Mago(posicoes[i].x, posicoes[i].y);
 		listaEntidades.addEntidade(static_cast<Entidade*>(mago));
-		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(mago));
+		GerenciadorDeColisao::getInstance()->addInimigo(static_cast<Inimigo*>(mago));
 	}
 
 	posicoes.clear();
@@ -147,11 +147,11 @@ void Fase2::atualizar() {
 		if (mapa != nullptr) {
 			mapa->atualizar();
 			if (mapa->isOnBossRoom())
-				if (GerenciadorDeColisao::allEnemiesDead())
+				if (GerenciadorDeColisao::getInstance()->allEnemiesDead())
 					win();
 		}
-		GerenciadorDeCamera::Atualiza();
-		GerenciadorDeColisao::colidir();
+		GerenciadorDeCamera::getInstance()->Atualiza();
+		GerenciadorDeColisao::getInstance()->colidir();
 	}
 	else {
 		clear();
@@ -165,8 +165,8 @@ void Fase2::save() {
 		
 	out.open("Saves/Fase2/jogadores.dat", std::ios::out);
 	if (out) {
-		Jogador* jog1 = GerenciadorDeColisao::getJogador1();
-		Jogador* jog2 = GerenciadorDeColisao::getJogador2();
+		Jogador* jog1 = GerenciadorDeColisao::getInstance()->getJogador1();
+		Jogador* jog2 = GerenciadorDeColisao::getInstance()->getJogador2();
 		if (mapa->isOnBossRoom()) out << 1 << std::endl;
 		else out << 0 << std::endl;
 		out << "1 " << jog1->getComponente<ComponenteTransform>()->posicao.x << " "
@@ -202,8 +202,8 @@ void Fase2::saveRank(){//salva nomes dos jogadores -> sera coletado ao final da 
 
 	std::ofstream out;
 
-	Jogador* jog1 = GerenciadorDeColisao::getJogador1();
-	Jogador* jog2 = GerenciadorDeColisao::getJogador2();
+	Jogador* jog1 = GerenciadorDeColisao::getInstance()->getJogador1();
+	Jogador* jog2 = GerenciadorDeColisao::getInstance()->getJogador2();
 	out.open("Saves/Fase2/ranking.dat", std::ios::app);
 	out << name1.getInput() << " " << name2.getInput() << " " << jog1->getPontuacao() + jog2->getPontuacao() << std::endl;
 	out.close();
@@ -221,7 +221,7 @@ void Fase2::load() {
 	ifstream in;
 	event_manager = GerenciadorDeEventos::getInstance();
 
-	GerenciadorDeColisao::setFase(this);
+	GerenciadorDeColisao::getInstance()->setFase(this);
 	mapa = new Mapa;
 	player_is_alive = true;
 
@@ -244,14 +244,14 @@ void Fase2::load() {
 			jog->setPontuacao(pontuacao);
 			listaEntidades.addEntidade(static_cast<Entidade*>(jog));
 			if (id == 1) {
-				GerenciadorDeCamera::setJogador(jog);
-				GerenciadorDeColisao::setJogador(jog);
+				GerenciadorDeCamera::getInstance()->setJogador(jog);
+				GerenciadorDeColisao::getInstance()->setJogador(jog);
 				jog->getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/HenriqueIsFallingx32.png");
 				event_manager->setJogador1(jog);
 			}
 			else if (id == 2) {
-				GerenciadorDeCamera::setJogador2(jog);
-				GerenciadorDeColisao::setJogador2(jog);
+				GerenciadorDeCamera::getInstance()->setJogador2(jog);
+				GerenciadorDeColisao::getInstance()->setJogador2(jog);
 				jog->getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/player2.png");
 				event_manager->setJogador2(jog);
 			}
@@ -273,12 +273,12 @@ void Fase2::load() {
 				if (nomeClasse == espinhos) {
 					Espinhos* esp = new Espinhos;
 					esp->getComponente<ComponenteColisao>()->set(x, y, w, h);
-					GerenciadorDeColisao::addObstaculo(esp);
+					GerenciadorDeColisao::getInstance()->addObstaculo(esp);
 					}
 				else if (nomeClasse == lava) {
 					Lava* lav = new Lava;
 					lav->getComponente<ComponenteColisao>()->set(x, y, w, h);
-					GerenciadorDeColisao::addObstaculo(lav);
+					GerenciadorDeColisao::getInstance()->addObstaculo(lav);
 				}
 			}
 	}
@@ -299,7 +299,7 @@ void Fase2::load() {
 		pro->getComponente<ComponenteTransform>()->posicao.y = y;
 		pro->getComponente<ComponenteTransform>()->velocidade.x = vx;
 		pro->getComponente<ComponenteTransform>()->velocidade.y = vy;
-		GerenciadorDeColisao::addProjetil(pro);
+		GerenciadorDeColisao::getInstance()->addProjetil(pro);
 		}
 	}
 	else {
@@ -319,14 +319,14 @@ void Fase2::load() {
 				Esqueleto* inimigo = new Esqueleto(x, y);
 				inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
 				inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
-				GerenciadorDeColisao::addInimigo(inimigo);
+				GerenciadorDeColisao::getInstance()->addInimigo(inimigo);
 				listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
 			}
 			else if (nomeClasse == goblin) {
 				Goblin* inimigo = new Goblin(x, y);
 				inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
 				inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
-				GerenciadorDeColisao::addInimigo(inimigo);
+				GerenciadorDeColisao::getInstance()->addInimigo(inimigo);
 				listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
 			}
 			else if (nomeClasse == chefe) {
@@ -335,7 +335,7 @@ void Fase2::load() {
 				inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
 				inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
 				inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
-				GerenciadorDeColisao::addInimigo(inimigo);
+				GerenciadorDeColisao::getInstance()->addInimigo(inimigo);
 				listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
 			}
 		}

@@ -7,16 +7,21 @@ class Fase;
 class GerenciadorDeCamera
 {
 private:
-	static Jogador* jogador;
-	static Jogador* jogador2;
-public:
 	GerenciadorDeCamera();
+	Jogador* jogador;
+	Jogador* jogador2;
+	static GerenciadorDeCamera* manager;
+public:
+	
 	~GerenciadorDeCamera();
-	static void init();
-	static void Atualiza();
-	static void AtualizaJogador();
 
-	static void setJogador(Jogador* jg);
-	static void setJogador2(Jogador* jg);
-	static SDL_Rect camera;
+	static GerenciadorDeCamera* getInstance();
+	static void deleteInstance();
+	void init();
+	void Atualiza();
+	void AtualizaJogador();
+
+	void setJogador(Jogador* jg);
+	void setJogador2(Jogador* jg);
+	SDL_Rect camera;
 };

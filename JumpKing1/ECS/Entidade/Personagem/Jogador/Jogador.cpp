@@ -70,8 +70,8 @@ bool Jogador::inGround() const {
 void Jogador::render() {
 	// Posicao Jogador na tela = Posicao Jogador no Mapa - Posicao Camera no Mapa
 	SDL_Rect posRect = {0,0,Mapa::tamanhoTile(),Mapa::tamanhoTile()};
-	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
-	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
+	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::getInstance()->camera.x;
+	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::getInstance()->camera.y;
 
 	SDL_Rect fonte = { 0,0,32,32 }; //muda caso jogador seja animado
 	getComponente<ComponenteSprite>()->render(posRect, fonte, flip);
@@ -80,22 +80,22 @@ void Jogador::render() {
 		SDL_Rect fonte = { 32,0,32,32 };
 		SDL_Rect destino = { 0,0,32,32 };
 		if (flip) { //virado para a esquerda
-			destino.x = getComponente<ComponenteTransform>()->posicao.x - Mapa::tamanhoTile() -GerenciadorDeCamera::camera.x;
-			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
+			destino.x = getComponente<ComponenteTransform>()->posicao.x - Mapa::tamanhoTile() -GerenciadorDeCamera::getInstance()->camera.x;
+			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::getInstance()->camera.y;
 			graphics->renderHitbox(fonte, destino);
 
-			destino.x = getComponente<ComponenteTransform>()->posicao.x - 2*Mapa::tamanhoTile() - GerenciadorDeCamera::camera.x;
-			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
+			destino.x = getComponente<ComponenteTransform>()->posicao.x - 2*Mapa::tamanhoTile() - GerenciadorDeCamera::getInstance()->camera.x;
+			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::getInstance()->camera.y;
 			graphics->renderHitbox(fonte, destino);
 
 		}
 		else {
-			destino.x = getComponente<ComponenteTransform>()->posicao.x + Mapa::tamanhoTile() - GerenciadorDeCamera::camera.x;
-			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
+			destino.x = getComponente<ComponenteTransform>()->posicao.x + Mapa::tamanhoTile() - GerenciadorDeCamera::getInstance()->camera.x;
+			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::getInstance()->camera.y;
 			graphics->renderHitbox(fonte, destino);
 
-			destino.x = getComponente<ComponenteTransform>()->posicao.x + 2*Mapa::tamanhoTile() - GerenciadorDeCamera::camera.x;
-			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
+			destino.x = getComponente<ComponenteTransform>()->posicao.x + 2*Mapa::tamanhoTile() - GerenciadorDeCamera::getInstance()->camera.x;
+			destino.y = getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::getInstance()->camera.y;
 			graphics->renderHitbox(fonte, destino);
 		}
 	}
@@ -108,7 +108,7 @@ void Jogador::shoot() {
 	if (flip) { proj->getComponente<ComponenteTransform>()->velocidade.x = -3; }
 	else { proj->getComponente<ComponenteTransform>()->velocidade.x = 3; }
 	
-	GerenciadorDeColisao::addProjetil(proj);
+	GerenciadorDeColisao::getInstance()->addProjetil(proj);
 }
 
 void Jogador::damage(int dmg) {

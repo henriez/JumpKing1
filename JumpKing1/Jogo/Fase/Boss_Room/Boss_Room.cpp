@@ -44,10 +44,10 @@ void Boss_Room::inicializar(int id) {
 		break;
 	}
 	
-	GerenciadorDeColisao::getJogador1()->getComponente<ComponenteTransform>()->posicao.x = 32 * 32;
-	GerenciadorDeColisao::getJogador1()->getComponente<ComponenteTransform>()->posicao.y = 28 * 32;
-	GerenciadorDeColisao::getJogador2()->getComponente<ComponenteTransform>()->posicao.x = 33 * 32;
-	GerenciadorDeColisao::getJogador2()->getComponente<ComponenteTransform>()->posicao.y = 28 * 32;
+	GerenciadorDeColisao::getInstance()->getJogador1()->getComponente<ComponenteTransform>()->posicao.x = 32 * 32;
+	GerenciadorDeColisao::getInstance()->getJogador1()->getComponente<ComponenteTransform>()->posicao.y = 28 * 32;
+	GerenciadorDeColisao::getInstance()->getJogador2()->getComponente<ComponenteTransform>()->posicao.x = 33 * 32;
+	GerenciadorDeColisao::getInstance()->getJogador2()->getComponente<ComponenteTransform>()->posicao.y = 28 * 32;
 
 }
 
@@ -67,13 +67,13 @@ void Boss_Room::reload(int id) {
 }
 
 void Boss_Room::atualizar() {
-	GerenciadorDeCamera::Atualiza();
+	GerenciadorDeCamera::getInstance()->Atualiza();
 	tileMap.atualiza();
 }
 
 void Boss_Room::render() {;
-	SDL_Rect destino = { 0, 0, GerenciadorDeCamera::camera.w, GerenciadorDeCamera::camera.h };
-	graphics->render(backgroundTex, GerenciadorDeCamera::camera, destino);
+	SDL_Rect destino = { 0, 0, GerenciadorDeCamera::getInstance()->camera.w, GerenciadorDeCamera::getInstance()->camera.h };
+	graphics->render(backgroundTex, GerenciadorDeCamera::getInstance()->camera, destino);
 
 	tileMap.render();
 }

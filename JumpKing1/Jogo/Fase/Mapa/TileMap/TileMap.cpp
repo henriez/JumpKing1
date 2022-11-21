@@ -15,7 +15,7 @@ const int tamanhoTile = 32;
 TileMap::TileMap() {
 	nTiles.x = 80;
 	nTiles.y = 200;
-	GerenciadorDeColisao::setTileMap(this);
+	GerenciadorDeColisao::getInstance()->setTileMap(this);
 	graphics = GerenciadorGrafico::getInstance(); 
 }
 
@@ -128,7 +128,7 @@ void TileMap::carregaPosicoesValidas(const char* posicoes_lava, const char* posi
 			random_pos = this->posicoes_espinhos[rand() % this->posicoes_espinhos.size()]; //posicao aleatoria do vetor retorna uma posicao valida definida
 			espinhos = new Espinhos;
 			espinhos->getComponente<ComponenteColisao>()->set(random_pos.x, random_pos.y + 16, 32, 16);
-			GerenciadorDeColisao::addObstaculo(static_cast<Obstaculo*>(espinhos));
+			GerenciadorDeColisao::getInstance()->addObstaculo(static_cast<Obstaculo*>(espinhos));
 			//adiciona espinhos ao manager
 		}
 	}
@@ -139,14 +139,14 @@ void TileMap::carregaPosicoesValidas(const char* posicoes_lava, const char* posi
 			random_pos = this->posicoes_lava[rand() % this->posicoes_lava.size()]; //posicao aleatoria do vetor retorna uma posicao valida definida
 			lava = new Lava;
 			lava->getComponente<ComponenteColisao>()->set(random_pos.x, random_pos.y, 32, 32);
-			GerenciadorDeColisao::addObstaculo(static_cast<Obstaculo*>(lava));
+			GerenciadorDeColisao::getInstance()->addObstaculo(static_cast<Obstaculo*>(lava));
 			//adiciona lava ao manager
 		}
 	}
 }
 
 void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_colisao, int tilesW, int tilesH) {
-	GerenciadorDeColisao::setTileMap(this);
+	GerenciadorDeColisao::getInstance()->setTileMap(this);
 
 	int algarismos[3];
 	algarismos[0] = algarismos[1] = algarismos[2] = 0;
@@ -278,25 +278,25 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 void TileMap::atualiza() {
 	for (auto& t : camada1) {
 		t->setScreen(false);
-		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
+		if (GerenciadorDeColisao::getInstance()->AABB(t->getPos(), GerenciadorDeCamera::getInstance()->camera))
 			t->setScreen(true);
 	}
 
 	for (auto& t : camada2) {
 		t->setScreen(false);
-		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
+		if (GerenciadorDeColisao::getInstance()->AABB(t->getPos(), GerenciadorDeCamera::getInstance()->camera))
 			t->setScreen(true);
 	}
 
 	for (auto& t : hitbox_plataformas) {
 		t->setScreen(false);
-		if (GerenciadorDeColisao::AABB(t->getPos(), GerenciadorDeCamera::camera))
+		if (GerenciadorDeColisao::getInstance()->AABB(t->getPos(), GerenciadorDeCamera::getInstance()->camera))
 			t->setScreen(true);
 	}
 
-	GerenciadorDeColisao::atualizaObstaculos();
+	GerenciadorDeColisao::getInstance()->atualizaObstaculos();
 
-	GerenciadorDeColisao::colisao_jogadores();
+	GerenciadorDeColisao::getInstance()->colisao_jogadores();
 }
 
 void TileMap::render() {
@@ -328,7 +328,7 @@ void TileMap::clear() {
 
 	posicoes_espinhos.clear();
 	posicoes_lava.clear();
-	GerenciadorDeColisao::clear();
+	GerenciadorDeColisao::getInstance()->clear();
 }
 
 SDL_Point TileMap::getNTiles() {

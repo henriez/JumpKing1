@@ -32,7 +32,7 @@ Esqueleto::Esqueleto(float x, float y) {
 	transform->posicao.y = y;
 
 	getComponente<ComponenteColisao>()->set(transform->posicao.x, transform->posicao.y, 21 * SCALE, 31 * SCALE);
-	GerenciadorDeColisao::iniciaInimigo(this);
+	GerenciadorDeColisao::getInstance()->iniciaInimigo(this);
 }
 
 Esqueleto::~Esqueleto() {}
@@ -42,7 +42,7 @@ void Esqueleto::atualizar() {
 		ComponenteTransform* transform = getComponente<ComponenteTransform>();
 		transform->posicao.x += transform->velocidade.x * speed;
 		getComponente<ComponenteColisao>()->setPos(transform->posicao.x, transform->posicao.y);
-		GerenciadorDeColisao::colisao_inimigo_obstaculos(this);
+		GerenciadorDeColisao::getInstance()->colisao_inimigo_obstaculos(this);
 
 		if (!vulnerable) {
 			transform->velocidade.x = 0;
@@ -93,8 +93,8 @@ void Esqueleto::render() {
 	if (getComponente<ComponenteTransform>()->velocidade.x < 0) { flip = true; }
 	else if (getComponente<ComponenteTransform>()->velocidade.x > 0) { flip = false; }
 	SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
-	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x - (19 * SCALE);
-	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y - (17 * SCALE);
+	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::getInstance()->camera.x - (19 * SCALE);
+	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::getInstance()->camera.y - (17 * SCALE);
 	if (flip) { posRect.x -= 4 * SCALE; }
 
 	if (isAlive()) {
@@ -108,7 +108,7 @@ void Esqueleto::render() {
 			int frameVal = static_cast<int>((frameNumber / fSpeed) % frames);
 			sprite.x = 64 * frameVal;
 			frameNumber++;
-			if (frameVal == 4 || frameVal == 8) { GerenciadorDeColisao::ataqueEsqueleto(this); }
+			if (frameVal == 4 || frameVal == 8) { GerenciadorDeColisao::getInstance()->ataqueEsqueleto(this); }
 			if (frameNumber >= frames * static_cast<int>(fSpeed)) { setState(WALKING); frameNumber = 0; }
 		}
 		else if (state == HIT) {

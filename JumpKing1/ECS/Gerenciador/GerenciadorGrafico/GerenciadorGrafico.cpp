@@ -131,7 +131,7 @@ void GerenciadorGrafico::renderPontuacao(int pontuacao) {
 	std::string ss = std::to_string(pontuacao);
 	SDL_Surface* temp = TTF_RenderText_Solid(font, ss.c_str(), { 255,255,255 });
 	SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, temp);
-	SDL_Rect camera = GerenciadorDeCamera::camera;
+	SDL_Rect camera = GerenciadorDeCamera::getInstance()->camera;
 
 	SDL_Rect textRect = { 0,0.03* camera.h,0,0.05*camera.h };
 	if (pontuacao < 10) { // 1 digito

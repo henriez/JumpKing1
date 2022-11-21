@@ -11,20 +11,30 @@
 #include "../../Entidade/Personagem/Inimigo/Zumbi/Zumbi.h"
 #include "../../Entidade/Obstaculo/Obstaculo.h"
 
-TileMap* GerenciadorDeColisao::tilemap = nullptr;
-Jogador* GerenciadorDeColisao::jogador1 = nullptr;
-Jogador* GerenciadorDeColisao::jogador2 = nullptr;
-Fase* GerenciadorDeColisao::fase = nullptr;
-std::vector<Obstaculo*> GerenciadorDeColisao::obstaculos;
-std::vector<Projetil*> GerenciadorDeColisao::projeteis;
-std::vector<Inimigo*> GerenciadorDeColisao::inimigos;
+GerenciadorDeColisao* GerenciadorDeColisao::manager = nullptr;
 
 GerenciadorDeColisao::GerenciadorDeColisao() {
 	tilemap = nullptr;
 	jogador1 = nullptr;
+	jogador2 = nullptr;
+	fase = nullptr;
 }
 
 GerenciadorDeColisao::~GerenciadorDeColisao() {}
+
+GerenciadorDeColisao* GerenciadorDeColisao::getInstance() {
+	if (manager == nullptr) {
+		manager = new GerenciadorDeColisao;
+	}
+	return manager;
+}
+
+void GerenciadorDeColisao::deleteInstance() {
+	if (manager != nullptr) {
+		delete manager;
+		manager = nullptr;
+	}
+}
 
 void GerenciadorDeColisao::colidir() {
 	atualizaProjeteis();
@@ -80,7 +90,7 @@ void GerenciadorDeColisao::atualizaObstaculos() {
 
 	for (auto& o : obstaculos) {
 		o->setScreen(false);
-		if (AABB(o->getComponente<ComponenteColisao>()->getColisor(), GerenciadorDeCamera::GerenciadorDeCamera::camera))
+		if (AABB(o->getComponente<ComponenteColisao>()->getColisor(), GerenciadorDeCamera::GerenciadorDeCamera::getInstance()->camera))
 			o->setScreen(true);
 	}
 
@@ -101,7 +111,7 @@ void GerenciadorDeColisao::atualizaProjeteis() {
 	for (auto& p: projeteis) {
 		p->atualizar();
 		p->setScreen(false);
-		if (AABB(p->getComponente<ComponenteColisao>()->getColisor(), GerenciadorDeCamera::GerenciadorDeCamera::camera))
+		if (AABB(p->getComponente<ComponenteColisao>()->getColisor(), GerenciadorDeCamera::GerenciadorDeCamera::getInstance()->camera))
 			p->setScreen(true);
 	}
 }

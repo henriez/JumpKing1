@@ -16,16 +16,16 @@ Tile::~Tile() {}
 void Tile::render() {
 	SDL_Rect tempDest = { 0,0,32,32 };
 
-	tempDest.x = destino.x - GerenciadorDeCamera::camera.x;
-	tempDest.y = destino.y - GerenciadorDeCamera::camera.y;
+	tempDest.x = destino.x - GerenciadorDeCamera::getInstance()->camera.x;
+	tempDest.y = destino.y - GerenciadorDeCamera::getInstance()->camera.y;
 	graphics->renderTile(fonte, tempDest);
 }
 
 void Tile::renderHitbox() {
 	SDL_Rect tempDest = { 0,0,32,32 };
 
-	tempDest.x = destino.x - GerenciadorDeCamera::camera.x;
-	tempDest.y = destino.y - GerenciadorDeCamera::camera.y;
+	tempDest.x = destino.x - GerenciadorDeCamera::getInstance()->camera.x;
+	tempDest.y = destino.y - GerenciadorDeCamera::getInstance()->camera.y;
 	graphics->renderHitbox(fonte, tempDest);
 }
 

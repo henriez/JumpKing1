@@ -16,8 +16,8 @@ void Lava::render() {
 	SDL_Rect destino = { colisor.x, colisor.y - 32,32,64 };//tamanho da textura
 
 	SDL_Rect dest = { 0,0,32,64 };
-	dest.x = destino.x - GerenciadorDeCamera::camera.x;
-	dest.y = destino.y - GerenciadorDeCamera::camera.y;
+	dest.x = destino.x - GerenciadorDeCamera::getInstance()->camera.x;
+	dest.y = destino.y - GerenciadorDeCamera::getInstance()->camera.y;
 	graphics->renderLava(fonte, dest);
 
 }
@@ -25,8 +25,8 @@ void Lava::render() {
 void Lava::renderHitbox() {
 	SDL_Rect tempDest = { 0,0,32,32 };
 
-	tempDest.x = destino.x - GerenciadorDeCamera::camera.x;
-	tempDest.y = destino.y - GerenciadorDeCamera::camera.y;
+	tempDest.x = destino.x - GerenciadorDeCamera::getInstance()->camera.x;
+	tempDest.y = destino.y - GerenciadorDeCamera::getInstance()->camera.y;
 	graphics->renderHitbox(fonte, tempDest);
 }
 

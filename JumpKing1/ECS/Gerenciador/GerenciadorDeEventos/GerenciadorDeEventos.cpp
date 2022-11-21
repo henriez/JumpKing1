@@ -68,6 +68,7 @@ void GerenciadorDeEventos::atualizar() {
 		}
 	}
 
+	//jogador 2
 	transform = jogador2->getComponente<ComponenteTransform>();
 	if (Jogo::evento.type == SDL_KEYUP) {
 		switch (Jogo::evento.key.keysym.sym) {

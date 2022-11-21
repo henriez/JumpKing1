@@ -42,8 +42,8 @@ void Projetil::atualizar() {
 void Projetil::render() {
 	SDL_Rect pos = { getComponente<ComponenteTransform>()->posicao.x, getComponente<ComponenteTransform>()->posicao.y, 0, 0 };
 
-	pos.x -= GerenciadorDeCamera::camera.x;
-	pos.y -= GerenciadorDeCamera::camera.y;
+	pos.x -= GerenciadorDeCamera::getInstance()->camera.x;
+	pos.y -= GerenciadorDeCamera::getInstance()->camera.y;
 	pos.w = sprite.w;
 	pos.h = sprite.h;
 

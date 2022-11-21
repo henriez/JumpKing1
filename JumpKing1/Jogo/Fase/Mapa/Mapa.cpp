@@ -57,7 +57,7 @@ void Mapa::inicializar(int id, Fase* fs){
 	}
 
 	nTiles = tileMap.getNTiles();
-	GerenciadorDeCamera::init();
+	GerenciadorDeCamera::getInstance()->init();
 }
 
 void Mapa::reload(int id, Fase* fs) {
@@ -81,22 +81,22 @@ void Mapa::reload(int id, Fase* fs) {
 		break;
 	}
 
-	GerenciadorDeCamera::init();
+	GerenciadorDeCamera::getInstance()->init();
 }
 
 void Mapa::atualizar() {
 	if (!onBossRoom) {
 		tileMap.atualiza();
-		SDL_Rect hitbox = GerenciadorDeColisao::getJogador1()->getComponente<ComponenteColisao>()->getColisor();
-		if (GerenciadorDeColisao::AABB(fim, hitbox)) {
+		SDL_Rect hitbox = GerenciadorDeColisao::getInstance()->getJogador1()->getComponente<ComponenteColisao>()->getColisor();
+		if (GerenciadorDeColisao::getInstance()->AABB(fim, hitbox)) {
 			clear();
 			onBossRoom = true;
 			boss_room.inicializar(id);
 			fase->criaMagos();
 			return;
 		}
-		hitbox = GerenciadorDeColisao::getJogador2()->getComponente<ComponenteColisao>()->getColisor();
-		if (GerenciadorDeColisao::AABB(fim, hitbox)) {
+		hitbox = GerenciadorDeColisao::getInstance()->getJogador2()->getComponente<ComponenteColisao>()->getColisor();
+		if (GerenciadorDeColisao::getInstance()->AABB(fim, hitbox)) {
 			clear();
 			onBossRoom = true;
 			boss_room.inicializar(id);
@@ -112,8 +112,8 @@ void Mapa::render() {
 	if (onBossRoom)
 		boss_room.render();
 	else {
-		SDL_Rect destino = { 0, 0, GerenciadorDeCamera::camera.w, GerenciadorDeCamera::camera.h };
-		graphics->render(backgroundTex, GerenciadorDeCamera::camera, destino);
+		SDL_Rect destino = { 0, 0, GerenciadorDeCamera::getInstance()->camera.w, GerenciadorDeCamera::getInstance()->camera.h };
+		graphics->render(backgroundTex, GerenciadorDeCamera::getInstance()->camera, destino);
 
 		tileMap.render();
 	}

@@ -18,57 +18,60 @@ class Inimigo;
 class GerenciadorDeColisao
 {
 public:
-	GerenciadorDeColisao();
 	~GerenciadorDeColisao();
 
-	static void colidir();
+	static GerenciadorDeColisao* getInstance();
+	static void deleteInstance();
+	void colidir();
 
-	static void addObstaculo(Obstaculo* obst);
-	static void addProjetil(Projetil* proj);
-	static void addInimigo(Inimigo* in);
+	void addObstaculo(Obstaculo* obst);
+	void addProjetil(Projetil* proj);
+	void addInimigo(Inimigo* in);
 
-	static void iniciaInimigo(Inimigo* in);
+	void iniciaInimigo(Inimigo* in);
 
-	static void atualizaInimigos();
-	static void atualizaObstaculos();
-	static void atualizaProjeteis();
+	void atualizaInimigos();
+	void atualizaObstaculos();
+	void atualizaProjeteis();
 
-	static bool allEnemiesDead();
-
-	static void renderObstaculos();
-	static void renderProjeteis();
+	bool allEnemiesDead();
 	
-	static void clear();
+	void renderObstaculos();
+	void renderProjeteis();
 	
-	static void setFase(Fase* fs);
-	static void setTileMap(TileMap* tmap);
-	static void setJogador(Jogador* jg);
-	static void setJogador2(Jogador* jg);
-	static Jogador* getJogador1();
-	static Jogador* getJogador2();
+	void clear();
+	
+	void setFase(Fase* fs);
+	void setTileMap(TileMap* tmap);
+	void setJogador(Jogador* jg);
+	void setJogador2(Jogador* jg);
+	Jogador* getJogador1();
+	Jogador* getJogador2();
 
-	static void colisao_jogadores();
-	static void colisao_jogadores_obstaculos();
-	static void colisao_jogadores_inimigos();
-	static void colisao_jogadores_projeteis();
-	static void colisao_inimigo_obstaculos(Inimigo* in1);
-	static void colisao_projeteis_obstaculos();
+	void colisao_jogadores();
+	void colisao_jogadores_obstaculos();
+	void colisao_jogadores_inimigos();
+	void colisao_jogadores_projeteis();
+	void colisao_inimigo_obstaculos(Inimigo* in1);
+	void colisao_projeteis_obstaculos();
 
-	static void ataqueInimigo(Inimigo* in1, SDL_Rect hitbox) {}
-	static void ataqueEsqueleto(Esqueleto* in1);
-	static void ataqueGoblin(Goblin* in1);
-	static void ataqueJ1();
-	static void ataqueJ2();
+	void ataqueInimigo(Inimigo* in1, SDL_Rect hitbox) {}
+	void ataqueEsqueleto(Esqueleto* in1);
+	void ataqueGoblin(Goblin* in1);
+	void ataqueJ1();
+	void ataqueJ2();
 
-	static bool AABB(SDL_Rect A, SDL_Rect B);
+	bool AABB(SDL_Rect A, SDL_Rect B);
 private:
+	GerenciadorDeColisao();
+	static GerenciadorDeColisao* manager;
 
-	static Jogador* jogador1;
-	static Jogador* jogador2;
-	static TileMap* tilemap;
-	static Fase* fase;
-	static std::vector<Obstaculo*> obstaculos;
-	static std::vector<Projetil*> projeteis;
-	static std::vector<Inimigo*> inimigos;
+	Jogador* jogador1;
+	Jogador* jogador2;
+	TileMap* tilemap;
+	Fase* fase;
+	std::vector<Obstaculo*> obstaculos;
+	std::vector<Projetil*> projeteis;
+	std::vector<Inimigo*> inimigos;
 };
 

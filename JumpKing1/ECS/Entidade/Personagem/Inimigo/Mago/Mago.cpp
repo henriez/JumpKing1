@@ -33,7 +33,7 @@ Mago::Mago(float x, float y) {
 	transform->posicao.y = y;
 
 	getComponente<ComponenteColisao>()->set(transform->posicao.x + 40, transform->posicao.y, 70, 150);
-	GerenciadorDeColisao::iniciaInimigo(this);
+	GerenciadorDeColisao::getInstance()->iniciaInimigo(this);
 }
 
 Mago::~Mago() {}
@@ -43,7 +43,7 @@ void Mago::atualizar() {
 		ComponenteTransform* transform = getComponente<ComponenteTransform>();
 		transform->posicao.x += transform->velocidade.x * speed;
 		getComponente<ComponenteColisao>()->setPos(transform->posicao.x + 40, transform->posicao.y);
-		GerenciadorDeColisao::colisao_inimigo_obstaculos(this);
+		GerenciadorDeColisao::getInstance()->colisao_inimigo_obstaculos(this);
 
 		if (!vulnerable) {
 			transform->velocidade.x = 0;
@@ -96,8 +96,8 @@ void Mago::render() {
 	if (getComponente<ComponenteTransform>()->velocidade.x < 0) { flip = true; }
 	else if (getComponente<ComponenteTransform>()->velocidade.x > 0) { flip = false; }
 	SDL_Rect posRect = { 0, 0, sprite.w * SCALE, sprite.h * SCALE };
-	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::camera.x;
-	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::camera.y;
+	posRect.x = (int)getComponente<ComponenteTransform>()->posicao.x - GerenciadorDeCamera::getInstance()->camera.x;
+	posRect.y = (int)getComponente<ComponenteTransform>()->posicao.y - GerenciadorDeCamera::getInstance()->camera.y;
 	//if (flip) { posRect.x -= 4 * SCALE; }
 
 	if (isAlive()) {
@@ -149,7 +149,7 @@ void Mago::shoot() {
 	if (flip) { proj->getComponente<ComponenteTransform>()->velocidade.x = -3; }
 	else { proj->getComponente<ComponenteTransform>()->velocidade.x = 3; }
 
-	GerenciadorDeColisao::addProjetil(proj);
+	GerenciadorDeColisao::getInstance()->addProjetil(proj);
 }
 
 int Mago::attack() {

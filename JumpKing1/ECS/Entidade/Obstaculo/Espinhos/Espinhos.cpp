@@ -16,16 +16,16 @@ void Espinhos::render() {
 	SDL_Rect destino = { colisor.x, colisor.y -16,32,32 };//tamanho da textura
 	//REDEFINIR RENDER PARA ESPINHO E LAVA
 	SDL_Rect dest = {0,0,32,32};
-	dest.x = destino.x - GerenciadorDeCamera::camera.x;
-	dest.y = destino.y - GerenciadorDeCamera::camera.y;
+	dest.x = destino.x - GerenciadorDeCamera::getInstance()->camera.x;
+	dest.y = destino.y - GerenciadorDeCamera::getInstance()->camera.y;
 	graphics->renderEspinho(fonte, dest);
 }
 
 void Espinhos::renderHitbox() {
 	SDL_Rect tempDest = { 0,0,32,32 };
 
-	tempDest.x = destino.x - GerenciadorDeCamera::camera.x;
-	tempDest.y = destino.y - GerenciadorDeCamera::camera.y;
+	tempDest.x = destino.x - GerenciadorDeCamera::getInstance()->camera.x;
+	tempDest.y = destino.y - GerenciadorDeCamera::getInstance()->camera.y;
 	graphics->renderHitbox(fonte, tempDest);
 }
 
