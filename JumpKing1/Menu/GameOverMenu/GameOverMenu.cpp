@@ -4,6 +4,7 @@
 
 GameOverMenu::GameOverMenu() {
 	background = nullptr;
+	dead = true;
 }
 
 GameOverMenu::~GameOverMenu() {
@@ -23,6 +24,12 @@ void GameOverMenu::init() {
 	background = graphics->LoadTexture("Assets/Buttons/gameover.png");
 }
 
+void GameOverMenu::won() {
+	if (background) SDL_DestroyTexture(background);
+	background = graphics->LoadTexture("Assets/Buttons/win.png"); //trocar para imagem final
+	dead = false;
+}
+
 void GameOverMenu::reset() {
 	quit.reset();
 	save.reset();
@@ -37,16 +44,20 @@ int GameOverMenu::update() {
 	quit.handleEvents();
 	if (quit.click()) return BUTTON_QUIT;
 	
-	save.handleEvents();
-	if (save.click()) return BUTTON_SAVE;
+	//testar se morreu
+	if (!dead) {
+		save.handleEvents();
+		if (save.click()) return BUTTON_SAVE;
+	}
 
 	return NO_BUTTON_CLICKED; //nenhum botao foi clicado
 }
 
 void GameOverMenu::render() {
 	SDL_Rect fonte = { 0,0,300,168 }; //dimensao da textura
+	SDL_QueryTexture(background, NULL, NULL, &fonte.w, &fonte.h);
 	SDL_Rect destino = { 0,0,graphics->getDimensoesJanela().x,graphics->getDimensoesJanela().y };
 	graphics->render(background, fonte, destino);
 	quit.render();
-	save.render();
+	if (!dead) save.render();
 }

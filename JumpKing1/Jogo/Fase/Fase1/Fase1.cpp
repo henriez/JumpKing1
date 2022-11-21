@@ -9,7 +9,7 @@
 using namespace std;
 
 Fase1::Fase1() {
-	nChefes = 0;
+	nMagos = 0;
 	nEsqueletos = 0;
 }
 
@@ -24,7 +24,7 @@ void Fase1::inicializar() {
 	GerenciadorDeColisao::setFase(this);
 
 	mapa = new Mapa;
-	mapa->inicializar(1);
+	mapa->inicializar(1, static_cast<Fase*>(this));
 
 	Jogador* jogador = new Jogador;
 	jogador->getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/HenriqueIsFallingx32.png");
@@ -45,12 +45,9 @@ void Fase1::inicializar() {
 	jogador2->getComponente<ComponenteTransform>()->posicao.y = 6240;
 
 	criaEsqueletos();
-
-	Chefe* boss = new Chefe;
-
+	
 	listaEntidades.addEntidade(static_cast<Entidade*>(jogador));
 	listaEntidades.addEntidade(static_cast<Entidade*>(jogador2));
-	listaEntidades.addEntidade(static_cast<Entidade*>(boss));
 }
 
 void Fase1::criaEsqueletos() {
@@ -115,11 +112,39 @@ void Fase1::criaEsqueletos() {
 	}
 }
 
+void Fase1::criaMagos() {
+	GerenciadorDeColisao::clear();
+	listaEntidades.clear();
+	listaEntidades.addEntidade(static_cast<Entidade*>(GerenciadorDeColisao::getJogador1()));
+	listaEntidades.addEntidade(static_cast<Entidade*>(GerenciadorDeColisao::getJogador2()));
+
+
+	std::vector<SDL_Point> posicoes;
+	posicoes.push_back({ 960,256 });
+	posicoes.push_back({ 1160, 456 });
+	posicoes.push_back({ 500, 600 });
+	posicoes.push_back({ 550, 300 });
+
+	int nPosicoes = rand() % 2 + 3;
+
+	Mago* mago = nullptr;
+	for (int i = 0; i < nPosicoes; i++) {
+		mago = new Mago(posicoes[i].x, posicoes[i].y);
+		listaEntidades.addEntidade(static_cast<Entidade*>(mago));
+		GerenciadorDeColisao::addInimigo(static_cast<Inimigo*>(mago));
+	}
+
+	posicoes.clear();
+}
+
 void Fase1::atualizar() {
 	if (player_is_alive) {
 		listaEntidades.atualizar();
 		if (mapa != nullptr) {
 			mapa->atualizar();
+			if (mapa->isOnBossRoom())
+				if (GerenciadorDeColisao::allEnemiesDead())
+					win();
 		}
 		GerenciadorDeCamera::Atualiza();
 		GerenciadorDeColisao::colidir();
@@ -184,7 +209,7 @@ void Fase1::saveRank(){//salva nomes dos jogadores -> sera coletado ao final da 
 void Fase1::load() {
 	string esqueleto = "Esqueleto";
 	string goblin = "Goblin";
-	string chefe = "Chefe";
+	string chefe = "Mago";
 	string jogador = "Jogador";
 	string lava = "Lava";
 	string espinhos = "Espinhos";
@@ -204,7 +229,7 @@ void Fase1::load() {
 		float x, y, vx, vy;
 			in >> id; //se esta na boss room
 		if (id) mapa->setBossRoom(true);
-		mapa->reload(1);
+		mapa->reload(1, static_cast<Fase*>(this));
 		while (in >> id >> x >> y >> vx >> vy >> saude >> pontuacao) {
 			Jogador* jog = new Jogador;
 			jog->getComponente<ComponenteTransform>()->posicao.x = x;
@@ -301,7 +326,7 @@ void Fase1::load() {
 				listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
 			}
 			else if (nomeClasse == chefe) {
-				Chefe* inimigo = new Chefe;
+				Mago* inimigo = new Mago;
 				inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
 				inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
 				inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;

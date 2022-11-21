@@ -12,3 +12,7 @@ Vector2D Vector2D::operator*(int i) {
 	v.y = y * i;
 	return v;
 }
+
+bool Vector2D::operator== (Vector2D v) {
+	return (this->x == v.x && this->y == v.y);
+}

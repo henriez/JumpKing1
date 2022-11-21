@@ -11,6 +11,7 @@ public:
 	~GameOverMenu();
 
 	void init();
+	void won();
 
 	void reset();
 
@@ -21,5 +22,6 @@ public:
 private:
 	Button quit;
 	Button save;
+	bool dead;
 };
 

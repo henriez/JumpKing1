@@ -70,9 +70,15 @@ void GerenciadorGrafico::init(const char* nomeJanela, int largJanela, int altura
 }
 
 SDL_Texture* GerenciadorGrafico::LoadTexture(const char* fileName){
-	SDL_Texture* tex = IMG_LoadTexture(renderer, fileName);
-	if (!tex)
+	SDL_Texture* tex = nullptr;
+	try {
+		tex = IMG_LoadTexture(renderer, fileName);
+		if (!tex)
+			throw(nullptr);
+	}
+	catch (SDL_Texture* text) {
 		std::cout << SDL_GetError() << std::endl;
+	}		
 
 	return tex;
 }

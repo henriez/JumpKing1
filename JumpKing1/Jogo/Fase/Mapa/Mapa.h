@@ -6,14 +6,14 @@
 #include "TileMap/TileMap.h"
 #include "../Boss_Room/Boss_Room.h"
 
-class Jogo;
+class Fase;
 
 class Mapa {
 public:
 	Mapa();
 	~Mapa();
-	void inicializar(int id);
-	void reload(int id);
+	void inicializar(int id, Fase* fs);
+	void reload(int id, Fase* fs);
 
 	void atualizar();
 	void render();
@@ -36,4 +36,5 @@ private:
 	SDL_Rect fim; //retangulo que indica fim da fase (entrada da sala do boss)
 	int id; //relativo à fase
 	GerenciadorGrafico* graphics;
+	Fase* fase;
 };

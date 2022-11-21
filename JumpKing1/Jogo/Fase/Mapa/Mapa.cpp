@@ -3,6 +3,7 @@
 #include "../../ECS/Gerenciador/GerenciadorGrafico/GerenciadorGrafico.h"
 #include "../../../ECS/Gerenciador/GerenciadorDeCamera/GerenciadorDeCamera.h"
 #include "../../../ECS/Gerenciador/GerenciadorDeColisao/GerenciadorDeColisao.h"
+#include "../Fase.h"
 #include <iostream>
 
 SDL_Point Mapa::nTiles;
@@ -22,6 +23,7 @@ const char* mapa2_posicoes_espinhos = "Assets/TileMap/Mapa2/mapa2_posicoes_espin
 
 Mapa::Mapa() {
 	backgroundTex = nullptr;
+	fase = nullptr;
 	tamanhoDoTile = 32;
 	fim = { 0,0,0,0 };
 	onBossRoom = false;
@@ -34,8 +36,9 @@ Mapa::~Mapa() {
 	SDL_DestroyTexture(backgroundTex);
 }
 
-void Mapa::inicializar(int id) {
+void Mapa::inicializar(int id, Fase* fs){
 	this->id = id;
+	fase = fs;
 
 	switch (id) {
 	case 1:
@@ -57,8 +60,9 @@ void Mapa::inicializar(int id) {
 	GerenciadorDeCamera::init();
 }
 
-void Mapa::reload(int id) {
+void Mapa::reload(int id, Fase* fs) {
 	this->id = id;
+	fase = fs;
 
 	switch (id) {
 	case 1:
@@ -88,12 +92,15 @@ void Mapa::atualizar() {
 			clear();
 			onBossRoom = true;
 			boss_room.inicializar(id);
+			fase->criaMagos();
+			return;
 		}
 		hitbox = GerenciadorDeColisao::getJogador2()->getComponente<ComponenteColisao>()->getColisor();
 		if (GerenciadorDeColisao::AABB(fim, hitbox)) {
 			clear();
 			onBossRoom = true;
 			boss_room.inicializar(id);
+			fase->criaMagos();
 		}
 	}
 	else

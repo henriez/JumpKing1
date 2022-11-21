@@ -6,7 +6,7 @@ class Fase2 : public Fase
 {
 private:
 	int nGoblins;
-	int nChefes;
+	int nMagos;
 public:
 	Fase2();
 	~Fase2();
@@ -15,7 +15,8 @@ public:
 	void atualizar();
 	
 	void criaGoblins();
-	
+	void criaMagos();
+
 	void save();
 	void saveRank();
 	void load();

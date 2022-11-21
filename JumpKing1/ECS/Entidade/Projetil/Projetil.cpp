@@ -7,7 +7,7 @@ Projetil::Projetil() {
 
 	Vector2D pos = getComponente<ComponenteTransform>()->posicao;
 	addComponente<ComponenteColisao>();
-	getComponente<ComponenteColisao>()->set(pos.x, pos.y, 46, 46);
+	getComponente<ComponenteColisao>()->set(pos.x, pos.y, 20, 20);
 
 	addComponente<ComponenteSprite>();
 	getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/Enemies/Fire Ball/Move.png");
@@ -15,7 +15,7 @@ Projetil::Projetil() {
 	flip = false;
 	active = true;
 	speed = 3;
-	sprite = { 0, 0, 46, 46 }; // w = 42 h = 49
+	sprite = { 0, 0, 46, 46 }; 
 	maxColisoes = 2;
 	
 }
@@ -35,15 +35,17 @@ void Projetil::atualizar() {
 		transform->velocidade.y += 0.03; //gravidade
 
 		Vector2D pos = getComponente<ComponenteTransform>()->posicao;
-		getComponente<ComponenteColisao>()->setPos(pos.x, pos.y);
+		getComponente<ComponenteColisao>()->setPos(pos.x+13, pos.y+13);
 	}
 }
 
 void Projetil::render() {
-	SDL_Rect pos = getComponente<ComponenteColisao>()->getColisor();
+	SDL_Rect pos = { getComponente<ComponenteTransform>()->posicao.x, getComponente<ComponenteTransform>()->posicao.y, 0, 0 };
 
 	pos.x -= GerenciadorDeCamera::camera.x;
 	pos.y -= GerenciadorDeCamera::camera.y;
+	pos.w = sprite.w;
+	pos.h = sprite.h;
 
 	// animated
 

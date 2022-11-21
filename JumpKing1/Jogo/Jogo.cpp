@@ -92,7 +92,10 @@ void Jogo::pauseMenu() {
 }
 
 void Jogo::gameOverMenu() {
-
+	
+	if (fase->beaten()) {
+		menu.gameOver.won();
+	}
 	menu.gameOver.reset();
 	int click = menu.gameOver.update();
 
@@ -106,7 +109,7 @@ void Jogo::gameOverMenu() {
 		break;
 	case BUTTON_SAVE:
 		fase->saveRank(); //salvar
-		gameOverMenu();
+		mainMenu();
 		break;
 	default:
 		break;

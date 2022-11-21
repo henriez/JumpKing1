@@ -33,6 +33,8 @@ public:
 	static void atualizaObstaculos();
 	static void atualizaProjeteis();
 
+	static bool allEnemiesDead();
+
 	static void renderObstaculos();
 	static void renderProjeteis();
 	
@@ -50,7 +52,6 @@ public:
 	static void colisao_jogadores_inimigos();
 	static void colisao_jogadores_projeteis();
 	static void colisao_inimigo_obstaculos(Inimigo* in1);
-	static void colisao_inimigo_projeteis(Inimigo* in1);
 	static void colisao_projeteis_obstaculos();
 
 	static void ataqueInimigo(Inimigo* in1, SDL_Rect hitbox) {}

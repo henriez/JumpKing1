@@ -16,6 +16,9 @@ public:
 	void render();
 	void clear();
 	void gameOver();
+	void win() { won = true; player_is_alive = false; }
+	bool beaten() const { return won; }
+	virtual void criaMagos() = 0;
 
 	virtual void inicializar() = 0;
 	virtual void atualizar() = 0;
@@ -31,4 +34,5 @@ protected:
 	bool player_is_alive;
 	Jogo* jogo;
 	int id;
+	bool won;
 };

@@ -62,7 +62,6 @@ void GerenciadorDeEventos::atualizar() {
 			break;
 		case SDLK_LSHIFT:
 			jogador->atacar();
-			jogador->shoot();
 			break;
 		default:
 			break;

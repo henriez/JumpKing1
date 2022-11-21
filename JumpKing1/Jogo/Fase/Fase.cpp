@@ -16,6 +16,7 @@ Fase::Fase() {
 	id = 0;
 	event_manager = GerenciadorDeEventos::getInstance();
 	//collision_manager = GerenciadorDeColisao
+	won = false;
 }
 
 Fase::~Fase() {

@@ -6,7 +6,7 @@ class Fase1 : public Fase
 {
 private:
 	int nEsqueletos;
-	int nChefes;
+	int nMagos;
 public:
 	Fase1();
 	~Fase1();
@@ -15,7 +15,8 @@ public:
 	void atualizar();
 	
 	void criaEsqueletos();
-	
+	void criaMagos();
+
 	void save();
 	void saveRank();
 	void load();

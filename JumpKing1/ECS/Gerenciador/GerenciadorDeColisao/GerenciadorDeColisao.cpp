@@ -106,6 +106,13 @@ void GerenciadorDeColisao::atualizaProjeteis() {
 	}
 }
 
+bool GerenciadorDeColisao::allEnemiesDead() {
+	for (auto& i : inimigos) {
+		if (i->isAlive()) return false;
+	}
+	return true;
+}
+
 void GerenciadorDeColisao::renderProjeteis() {
 	for (auto& p : projeteis)
 		if (p->isOnScreen())
@@ -502,33 +509,35 @@ void GerenciadorDeColisao::colisao_jogadores_projeteis() {
 	ComponenteTransform* transform2 = jogador2->getComponente<ComponenteTransform>();
 	Vector2D velocity = transform->velocidade;
 
-	for (auto& o : projeteis) {
-		if (o->isOnScreen()) {
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * jogador1->getSpeed();
-			SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					transform->posicao.y = colisor.y - hitbox.h;
-					transform->velocidade.y = -1.4;
+	for (auto& p : projeteis) {
+		if (p->isActive()) {
+			if (p->isOnScreen()) {
+				hitbox = initialhitbox;
+				hitbox.y += velocity.y * jogador1->getSpeed();
+				SDL_Rect colisor = p->getComponente<ComponenteColisao>()->getColisor();
+				if (AABB(colisor, hitbox)) {
+					if (velocity.y > 0) { //colidiu por cima
+						transform->posicao.y = colisor.y - hitbox.h;
+						transform->velocidade.y = -1.4;
+					}
+					jogador1->damage();
+					break;
 				}
-				jogador1->damage();
-				break;
-			}
 
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * jogador1->getSpeed();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = colisor.x - hitbox.w;
-					transform->velocidade.x = -1;
+				hitbox = initialhitbox;
+				hitbox.x += velocity.x * jogador1->getSpeed();
+				if (AABB(colisor, hitbox)) {
+					if (velocity.x > 0) { //colidiu pela esquerda
+						transform->posicao.x = colisor.x - hitbox.w;
+						transform->velocidade.x = -1;
+					}
+					else if (velocity.x < 0) { //colidiu pela direita
+						transform->posicao.x = colisor.x + colisor.w;
+						transform->velocidade.x = 1;
+					}
+					jogador1->damage();
+					break;
 				}
-				else if (velocity.x < 0) { //colidiu pela direita
-					transform->posicao.x = colisor.x + colisor.w;
-					transform->velocidade.x = 1;
-				}
-				jogador1->damage();
-				break;
 			}
 		}
 
@@ -595,14 +604,6 @@ void GerenciadorDeColisao::colisao_inimigo_obstaculos(Inimigo* in1) {
 	}
 	if (abs(dist2) < abs(dist1)) { in1->setDistance(dist2); }
 	else { in1->setDistance(dist1); }
-}
-
-void GerenciadorDeColisao::colisao_inimigo_projeteis(Inimigo* in1) {
-	SDL_Rect hitbox = in1->getComponente<ComponenteColisao>()->getColisor();
-	for (auto& p : projeteis) {
-		if (AABB(hitbox, p->getComponente<ComponenteColisao>()->getColisor()))
-			in1->damage();
-	}
 }
 
 void GerenciadorDeColisao::colisao_projeteis_obstaculos() {
