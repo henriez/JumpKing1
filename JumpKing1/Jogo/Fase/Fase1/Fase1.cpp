@@ -326,7 +326,7 @@ void Fase1::load() {
 				listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
 			}
 			else if (nomeClasse == chefe) {
-				Mago* inimigo = new Mago;
+				Mago* inimigo = new Mago(x, y);
 				inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
 				inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
 				inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;

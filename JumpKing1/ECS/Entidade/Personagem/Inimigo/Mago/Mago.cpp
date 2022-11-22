@@ -12,6 +12,7 @@
 #define WALKING 2
 #define IDLE 3
 #define HIT 4
+#define DEAD 5
 
 Mago::Mago(float x, float y) {
 	sabedoria = rand() % 2 + 1;
@@ -129,15 +130,17 @@ void Mago::render() {
 		getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
 	}
 	else {
-		if (state != DYING && state != IDLE) {
-			setState(DYING);
+		if (state != IDLE) {
+			if (state != DYING) {
+				setState(DYING);
+			}
 			frames = 5;
 			fSpeed = 10;
-			int frameVal = static_cast<int>((frameNumber / fSpeed) % frames);
+			int frameVal = static_cast<int>((frameNumber / fSpeed));
 			sprite.x = 150 * frameVal;
 			frameNumber++;
-			if (frameNumber >= frames * fSpeed) { setState(DYING); }
 			getComponente<ComponenteSprite>()->render(posRect, sprite, flip);
+			if (frameNumber >= frames * fSpeed) { setState(IDLE); }
 		}
 	}
 }

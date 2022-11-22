@@ -123,7 +123,7 @@ void Fase2::criaMagos() {
 	posicoes.push_back({ 1000,200 });
 	posicoes.push_back({ 150, 800 });
 	posicoes.push_back({ 1050, 500 });
-	posicoes.push_back({ 416, 192 });
+	posicoes.push_back({ 416, 224 });
 	posicoes.push_back({ 1600, 400 });
 
 	int nPosicoes = rand() % 3 + 3;
@@ -327,7 +327,7 @@ void Fase2::load() {
 				listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
 			}
 			else if (nomeClasse == chefe) {
-				Mago* inimigo = new Mago;
+				Mago* inimigo = new Mago(x, y);
 				inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
 				inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
 				inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;

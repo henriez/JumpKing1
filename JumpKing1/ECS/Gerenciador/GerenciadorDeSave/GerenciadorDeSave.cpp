@@ -56,11 +56,13 @@ void GerenciadorDeSave::save(int id) {
 
 	if (out) {
 		for (int i = 0; i < projeteis.size(); i++) {
-			out << typeid(*projeteis[i]).name() << " "
-				<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().x << " "
-				<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().y << " "
-				<< projeteis[i]->getComponente<ComponenteTransform>()->velocidade.x << " "
-				<< projeteis[i]->getComponente<ComponenteTransform>()->velocidade.y << std::endl;
+			if (projeteis[i]->isActive()) {
+				out << typeid(*projeteis[i]).name() << " "
+					<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().x << " "
+					<< projeteis[i]->getComponente<ComponenteColisao>()->getColisor().y << " "
+					<< projeteis[i]->getComponente<ComponenteTransform>()->velocidade.x << " "
+					<< projeteis[i]->getComponente<ComponenteTransform>()->velocidade.y << std::endl;
+			}
 		}
 	}
 	else {
