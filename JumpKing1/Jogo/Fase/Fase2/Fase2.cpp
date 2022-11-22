@@ -46,11 +46,8 @@ void Fase2::inicializar() {
 
 	criaGoblins();
 
-	Mago* boss = new Mago;
-
 	listaEntidades.addEntidade(static_cast<Entidade*>(jogador));
 	listaEntidades.addEntidade(static_cast<Entidade*>(jogador2));
-	listaEntidades.addEntidade(static_cast<Entidade*>(boss));
 }
 
 void Fase2::criaGoblins() {

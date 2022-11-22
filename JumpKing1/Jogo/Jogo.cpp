@@ -182,6 +182,7 @@ void Jogo::levelMenu() {
 		fase1->setJogo(this);
 		fase1->inicializar();
 		fase = static_cast<Fase*>(fase1);
+		// fase = Fase1Builder::build()
 		atualizar();
 		break;
 	case BUTTON_START2:
