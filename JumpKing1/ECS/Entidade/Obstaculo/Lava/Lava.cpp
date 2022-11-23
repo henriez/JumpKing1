@@ -7,6 +7,17 @@ Lava::Lava() {
 	fonte = { 0,0,32,64 };
 	destino = { 0,0,32,64 };
 	onScreen = false;
+	temperatura = 0;
+}
+
+Lava::Lava(int x, int y, int w, int h, int temp) {
+	addComponente<ComponenteColisao>();
+	getComponente<ComponenteColisao>()->set(x, y, w, h);
+	temperatura = temp;
+
+	fonte = { 0,0,32,64 };
+	destino = { 0,0,32,64 };
+	onScreen = false;
 }
 
 Lava::~Lava() {}
@@ -30,13 +41,6 @@ void Lava::renderHitbox() {
 	graphics->renderHitbox(fonte, tempDest);
 }
 
-
-void Lava::setPosition(int x, int y, int srcX, int srcY) {
-	destino.x = x;
-	destino.y = y;
-	fonte.x = srcX;
-	fonte.y = srcY;
-}
 
 SDL_Rect Lava::getPos() const {
 	return destino;

@@ -9,6 +9,8 @@ public:
 	void renderHitbox();
 
 	void atualizar();
+	void salvar(int faseID) { // são estáticos, não é necessário salvar
+	}
 
 	void setPosition(int x, int y, int srcX, int srcY);
 	SDL_Rect getPos() const;

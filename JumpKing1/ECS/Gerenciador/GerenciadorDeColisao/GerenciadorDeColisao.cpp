@@ -70,7 +70,6 @@ void GerenciadorDeColisao::setFase(Fase* fs) {
 
 void GerenciadorDeColisao::addInimigo(Inimigo* in) {
 	inimigos.push_back(in);
-	GerenciadorDeSave::getInstance()->addInimigo(in);
 }
 
 void GerenciadorDeColisao::atualizaInimigos() {
@@ -83,7 +82,6 @@ void GerenciadorDeColisao::atualizaInimigos() {
 
 void GerenciadorDeColisao::addObstaculo(Obstaculo* obst) {
 	obstaculos.push_back(obst);
-	GerenciadorDeSave::getInstance()->addObstaculo(obst);
 }
 
 void GerenciadorDeColisao::atualizaObstaculos() {
@@ -96,20 +94,13 @@ void GerenciadorDeColisao::atualizaObstaculos() {
 
 }
 
-void GerenciadorDeColisao::renderObstaculos() {
-	for (auto& o : obstaculos)
-		if (o->isOnScreen())
-			o->render();
-}
-
 void GerenciadorDeColisao::addProjetil(Projetil* proj) {
 	projeteis.push_back(proj);
-	GerenciadorDeSave::getInstance()->addProjetil(proj);
+	fase->addEntidade(static_cast<Entidade*>(proj));
 }
 
 void GerenciadorDeColisao::atualizaProjeteis() {
 	for (auto& p: projeteis) {
-		p->atualizar();
 		p->setScreen(false);
 		if (AABB(p->getComponente<ComponenteColisao>()->getColisor(), GerenciadorDeCamera::GerenciadorDeCamera::getInstance()->camera))
 			p->setScreen(true);
@@ -121,12 +112,6 @@ bool GerenciadorDeColisao::allEnemiesDead() {
 		if (i->isAlive()) return false;
 	}
 	return true;
-}
-
-void GerenciadorDeColisao::renderProjeteis() {
-	for (auto& p : projeteis)
-		if (p->isOnScreen())
-			p->render();
 }
 
 void GerenciadorDeColisao::clear() {
@@ -142,8 +127,6 @@ void GerenciadorDeColisao::clear() {
 		if (i != nullptr)
 			delete i;
 	inimigos.clear();
-
-	GerenciadorDeSave::getInstance()->clear();
 }
 
 void GerenciadorDeColisao::iniciaInimigo(Inimigo* in) {

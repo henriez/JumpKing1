@@ -13,11 +13,29 @@ Projetil::Projetil() {
 	getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/Enemies/Fire Ball/Move.png");
 	onScreen = false;
 	flip = false;
-	active = true;
 	speed = 3;
 	sprite = { 0, 0, 46, 46 }; 
 	maxColisoes = 2;
 	
+}
+
+Projetil::Projetil(float x, float y, float vx, float vy) {
+	addComponente<ComponenteTransform>();
+
+	getComponente<ComponenteTransform>()->posicao.x = x;
+	getComponente<ComponenteTransform>()->posicao.y = y;
+	getComponente<ComponenteTransform>()->velocidade.x = vx;
+	getComponente<ComponenteTransform>()->velocidade.y = vy;
+	addComponente<ComponenteColisao>();
+	getComponente<ComponenteColisao>()->set(x, y, 20, 20);
+
+	addComponente<ComponenteSprite>();
+	getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/Enemies/Fire Ball/Move.png");
+	onScreen = false;
+	flip = false;
+	speed = 3;
+	sprite = { 0, 0, 46, 46 };
+	maxColisoes = 2;
 }
 
 Projetil::~Projetil() {}

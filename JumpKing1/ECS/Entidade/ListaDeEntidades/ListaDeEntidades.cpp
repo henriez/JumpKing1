@@ -29,3 +29,15 @@ void ListaDeEntidades::render() {
 		aux = listaEntidades.next();
 	}
 }
+
+void ListaDeEntidades::salvar(int faseID) {
+	Entidade* aux = listaEntidades.begin();
+	ofstream out;
+
+	while (aux) {
+		if (aux->isActive())
+			aux->salvar(faseID);
+		
+		aux = listaEntidades.next();
+	}
+}

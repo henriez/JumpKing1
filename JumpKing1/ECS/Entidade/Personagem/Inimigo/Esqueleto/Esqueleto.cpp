@@ -12,8 +12,10 @@
 #define IDLE 3
 #define HIT 4
 
-Esqueleto::Esqueleto(float x, float y) {
-	agressividade = rand() % 2 + 1;
+Esqueleto::Esqueleto(float x, float y, int agress) {
+	agressividade = 0;
+	if (!agress) agressividade = rand() % 2 + 1;
+	else agressividade = agress;
 	sprite = { 0, 64 * WALKING, 64, 64 }; // w = 42 h = 49
 	flip = false;
 	speed = 1;
@@ -83,6 +85,7 @@ void Esqueleto::atualizar() {
 			}
 		}
 	}
+	else active = false;
 }
 
 void Esqueleto::render() {

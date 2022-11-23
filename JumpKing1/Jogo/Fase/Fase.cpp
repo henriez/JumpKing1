@@ -33,8 +33,6 @@ void Fase::setJogo(Jogo* jg) {
 
 void Fase::render() {
 	if (mapa) mapa->render();
-	GerenciadorDeColisao::getInstance()->renderObstaculos();
-	GerenciadorDeColisao::getInstance()->renderProjeteis();
 	listaEntidades.render();
 
 	if (player_is_alive) {

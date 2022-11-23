@@ -19,6 +19,9 @@ public:
 	void win() { won = true; player_is_alive = false; }
 	bool beaten() const { return won; }
 	virtual void criaMagos() = 0;
+	void addEntidade(Entidade* en) {
+		listaEntidades.addEntidade(en);
+	}
 
 	virtual void inicializar() = 0;
 	virtual void atualizar() = 0;

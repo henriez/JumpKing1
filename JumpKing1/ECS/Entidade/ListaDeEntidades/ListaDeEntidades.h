@@ -19,6 +19,7 @@ public:
 
 	void atualizar();
 	void render();
+	void salvar(int faseID);
 private:
 	Lista<Entidade*> listaEntidades;
 

@@ -12,6 +12,7 @@ public:
 	virtual ~Obstaculo() {}
 
 	virtual void render() = 0;
+	virtual void salvar(int faseID) = 0;
 
 	bool isOnScreen() const { return onScreen; }
 	void setScreen(const bool inScreen) { onScreen = inScreen; }

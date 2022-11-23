@@ -7,6 +7,17 @@ Espinhos::Espinhos() {
 	fonte = { 0,0,32,32 };
 	destino = { 0,0,32,32 };
 	onScreen = false;
+	tamanho = 0;
+}
+
+Espinhos::Espinhos(int x, int y, int w, int h, int tam) {
+	addComponente<ComponenteColisao>();
+	getComponente<ComponenteColisao>()->set(x, y, w, h);
+	tamanho = tam;
+
+	fonte = { 0,0,32,32 };
+	destino = { 0,0,32,32 };
+	onScreen = false;
 }
 
 Espinhos::~Espinhos() {}

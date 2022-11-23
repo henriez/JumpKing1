@@ -14,8 +14,9 @@
 #define HIT 4
 #define DEAD 5
 
-Mago::Mago(float x, float y) {
-	sabedoria = rand() % 2 + 1;
+Mago::Mago(float x, float y, int sab) {
+	if (!sab) sabedoria = rand() % 2 + 1;
+	else sabedoria = sab;
 	sprite = { 0, 0, 150, 150 }; 
 	flip = false;
 	speed = 1;
@@ -87,6 +88,7 @@ void Mago::atualizar() {
 			}
 		}
 	}
+	else active = false;
 }
 
 void Mago::render() {

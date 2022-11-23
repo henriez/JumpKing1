@@ -36,9 +36,6 @@ public:
 
 	bool allEnemiesDead();
 	
-	void renderObstaculos();
-	void renderProjeteis();
-	
 	void clear();
 	
 	void setFase(Fase* fs);

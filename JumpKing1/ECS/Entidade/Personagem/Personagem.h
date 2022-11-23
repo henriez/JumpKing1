@@ -24,6 +24,7 @@ public:
 			return false;
 		return true;
 	}
+	virtual void salvar(int faseID) = 0;
 
 protected:
 	bool vulnerable;

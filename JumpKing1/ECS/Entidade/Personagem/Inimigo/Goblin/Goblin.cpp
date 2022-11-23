@@ -12,8 +12,12 @@
 #define IDLE 3
 #define HIT 4
 
-Goblin::Goblin(float x, float y) {
-	raivoso = (rand() % 2) ? true : false;
+Goblin::Goblin(float x, float y, int raiva) {
+	raivoso = false;
+	if (raiva == -1)
+		raivoso = (rand() % 2) ? true : false;
+	else raivoso = (raiva) ? true : false;
+
 	sprite = { 0, 150 * WALKING, 150, 150 }; // w = 42 h = 49
 	flip = false;
 	speed = 1;
@@ -83,6 +87,7 @@ void Goblin::atualizar() {
 			}
 		}
 	}
+	else active = false;
 }
 
 void Goblin::render() {

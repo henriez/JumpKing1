@@ -16,6 +16,7 @@ public:
 	void reload(int id, Fase* fs);
 
 	void atualizar();
+	void criaObstaculos(int id);
 	void render();
 	static int tamanhoTile();
 	static SDL_Point getDimensoes();

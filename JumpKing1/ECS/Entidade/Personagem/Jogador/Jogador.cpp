@@ -9,6 +9,33 @@ Jogador::Jogador() : speed(8), maxSpeed(4), points(200000) {
 	onGround = false;
 	flip = false;
 	attacking = false;
+	id = 1;
+}
+
+Jogador::Jogador(float x, float y, int points, int hp, int id) : speed(8), maxSpeed(4){
+	timer = 0;
+	this->points = points;
+	onGround = false;
+	flip = false;
+	attacking = false;
+
+	this->id = id;
+
+	addComponente<ComponenteColisao>();
+	addComponente<ComponenteSprite>();
+	addComponente<ComponenteTransform>();
+
+	ComponenteTransform* transform = getComponente<ComponenteTransform>();
+	transform->velocidade.x = 0;
+	transform->velocidade.y = 0;
+	transform->posicao.x = x;
+	transform->posicao.y = y; //inicializa na fase->inicializar(id)
+
+	getComponente<ComponenteColisao>()->set(transform->posicao.x, transform->posicao.y, 32, 32);
+	getComponente<ComponenteSaude>()->init(hp);
+
+	if (id == 1) getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/HenriqueIsFallingx32.png");
+	else if (id == 2) getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/player2.png");
 }
 
 Jogador::~Jogador() {}

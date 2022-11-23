@@ -35,6 +35,7 @@ void Fase1::inicializar() {
 
 	Jogador* jogador2 = new Jogador;
 	jogador2->getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/player2.png");
+	jogador2->setID(2);
 	event_manager->setJogador2(jogador2);
 	GerenciadorDeCamera::getInstance()->setJogador2(jogador2);
 	GerenciadorDeColisao::getInstance()->setJogador2(jogador2);
@@ -156,35 +157,22 @@ void Fase1::atualizar() {
 }
 
 void Fase1::save() {
-	std::ofstream out;
+	ofstream out;
 
-		
-	out.open("Saves/Fase1/jogadores.dat", std::ios::out);
-	if (out) {
-		Jogador* jog1 = GerenciadorDeColisao::getInstance()->getJogador1();
-		Jogador* jog2 = GerenciadorDeColisao::getInstance()->getJogador2();
-		if (mapa->isOnBossRoom()) out << 1 << std::endl;
-		else out << 0 << std::endl;
-		out << "1 " << jog1->getComponente<ComponenteTransform>()->posicao.x << " "
-			<< jog1->getComponente<ComponenteTransform>()->posicao.y << " "
-			<< jog1->getComponente<ComponenteTransform>()->velocidade.x << " "
-			<< jog1->getComponente<ComponenteTransform>()->velocidade.y << " "
-			<< jog1->getComponente<ComponenteSaude>()->getHealth() << " "
-			<< jog1->getPontuacao() << std::endl
-			<< "2 " << jog2->getComponente<ComponenteTransform>()->posicao.x << " "
-			<< jog2->getComponente<ComponenteTransform>()->posicao.y << " "
-			<< jog2->getComponente<ComponenteTransform>()->velocidade.x << " "
-			<< jog2->getComponente<ComponenteTransform>()->velocidade.y << " "
-			<< jog2->getComponente<ComponenteSaude>()->getHealth() << " "
-			<< jog2->getPontuacao() << std::endl;
-	}//aqui salva os dados
-	else {
-		std::cout << "Failed saving!\n";
-		return;
-	}
-	out.close();
+	// limpa arquivos
+	out.open("Saves/Fase1/espinhos.dat", ofstream::out | ofstream::trunc); out.close();
+	out.open("Saves/Fase1/esqueletos.dat", ofstream::out | ofstream::trunc); out.close();
+	out.open("Saves/Fase1/jogadores.dat", ofstream::out | ofstream::trunc); out.close();
+	out.open("Saves/Fase1/lavas.dat", ofstream::out | ofstream::trunc); out.close();
+	out.open("Saves/Fase1/magos.dat", ofstream::out | ofstream::trunc); out.close();
+	out.open("Saves/Fase1/projeteis.dat", ofstream::out | ofstream::trunc); out.close();
+	out.open("Saves/Fase1/map.dat", ofstream::out | ofstream::trunc); out.close();
 
-	GerenciadorDeSave::getInstance()->save(1);
+	out.open("Saves/Fase1/map.dat");
+	if (mapa->isOnBossRoom()) out << 1 << std::endl;
+	else out << 0 << std::endl;
+
+	listaEntidades.salvar(1);
 }
 
 void Fase1::saveRank(){//salva nomes dos jogadores -> sera coletado ao final da fase
@@ -207,140 +195,85 @@ void Fase1::saveRank(){//salva nomes dos jogadores -> sera coletado ao final da 
 }
 
 void Fase1::load() {
-	string esqueleto = "Esqueleto";
-	string goblin = "Goblin";
-	string chefe = "Mago";
-	string jogador = "Jogador";
-	string lava = "Lava";
-	string espinhos = "Espinhos";
-	string projetil = "Projetil";
+
 	ifstream in;
+
 	event_manager = GerenciadorDeEventos::getInstance();
 
 	GerenciadorDeColisao::getInstance()->setFase(this);
 	mapa = new Mapa;
 	player_is_alive = true;
 
-	this->id = id;
+	int boss;
+	in.open("Saves/Fase1/map.dat", ios::in);
+	while (in >> boss) {}
+	in.close();
+	if (boss) mapa->setBossRoom(true);
+	mapa->reload(1, static_cast<Fase*>(this));
+
+	int x, y, w, h, tam, temp, raiva, sab, hp, index, points;
+	float px, py, vx, vy;
+
+
+	in.open("Saves/Fase1/espinhos.dat", ios::in);
+	while (in >> x >> y >> w >> h >> tam) {
+		Espinhos* esp = new Espinhos(x, y, w, h, tam);
+		GerenciadorDeColisao::getInstance()->addObstaculo(esp);
+		listaEntidades.addEntidade(static_cast<Entidade*>(esp));
+	}
+	in.close();
+
+	in.open("Saves/Fase1/esqueletos.dat", ios::in);
+	while (in >> px >> py >> vx >> vy >> raiva) {
+		Esqueleto* esq = new Esqueleto(px, py, raiva);
+		esq->getComponente<ComponenteTransform>()->velocidade.x = vx;
+		esq->getComponente<ComponenteTransform>()->velocidade.y = vy;
+		GerenciadorDeColisao::getInstance()->addInimigo(esq);
+		listaEntidades.addEntidade(static_cast<Entidade*>(esq));
+	}
+	in.close();
 
 	in.open("Saves/Fase1/jogadores.dat", ios::in);
-	if (in) {
-		int saude, id, pontuacao;
-		float x, y, vx, vy;
-			in >> id; //se esta na boss room
-		if (id) mapa->setBossRoom(true);
-		mapa->reload(1, static_cast<Fase*>(this));
-		while (in >> id >> x >> y >> vx >> vy >> saude >> pontuacao) {
-			Jogador* jog = new Jogador;
-			jog->getComponente<ComponenteTransform>()->posicao.x = x;
-			jog->getComponente<ComponenteTransform>()->posicao.y = y;
-			jog->getComponente<ComponenteTransform>()->velocidade.x = vx;
-			jog->getComponente<ComponenteTransform>()->velocidade.y = vy;
-			jog->getComponente<ComponenteSaude>()->init(saude);
-			jog->setPontuacao(pontuacao);
-			listaEntidades.addEntidade(static_cast<Entidade*>(jog));
-			if (id == 1) {
-				GerenciadorDeCamera::getInstance()->setJogador(jog);
-				GerenciadorDeColisao::getInstance()->setJogador(jog);
-				jog->getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/HenriqueIsFallingx32.png");
-				event_manager->setJogador1(jog);
-			}
-			else if (id == 2) {
-				GerenciadorDeCamera::getInstance()->setJogador2(jog);
-				GerenciadorDeColisao::getInstance()->setJogador2(jog);
-				jog->getComponente<ComponenteSprite>()->setCaminhoArquivo("Assets/player2.png");
-				event_manager->setJogador2(jog);
-			}
+	while (in >> px >> py >> points >> hp >> index) {
+		Jogador* jog = new Jogador(px, py, points, hp, index);
+		listaEntidades.addEntidade(static_cast<Entidade*>(jog));
+
+		if (index == 1) {
+			event_manager->setJogador1(jog);
+			GerenciadorDeCamera::getInstance()->setJogador(jog);
+			GerenciadorDeColisao::getInstance()->setJogador(jog);
+		}
+		else if (index == 2) {
+			event_manager->setJogador2(jog);
+			GerenciadorDeCamera::getInstance()->setJogador2(jog);
+			GerenciadorDeColisao::getInstance()->setJogador2(jog);
 		}
 	}
-	else {
-		jogo->mainMenu();
-		std::cerr << " Arquivo nao pode ser aberto " << endl;
-		return;
+	in.close();
+
+	in.open("Saves/Fase1/lavas.dat", ios::in);
+	while (in >> x >> y >> w >> h >> temp) {
+		Lava* lav = new Lava(x, y, w, h, temp);
+		GerenciadorDeColisao::getInstance()->addObstaculo(lav);
+		listaEntidades.addEntidade(static_cast<Entidade*>(lav));
 	}
 	in.close();
 
-
-	in.open("Saves/Fase1/obstaculos.dat", std::ios::in);
-	if (in) {
-		string classe, nomeClasse;
-		int x, y, w, h;
-			while (in >> classe >> nomeClasse >> x >> y >> w >> h) {
-				if (nomeClasse == espinhos) {
-					Espinhos* esp = new Espinhos;
-					esp->getComponente<ComponenteColisao>()->set(x, y, w, h);
-					GerenciadorDeColisao::getInstance()->addObstaculo(esp);
-					}
-				else if (nomeClasse == lava) {
-					Lava* lav = new Lava;
-					lav->getComponente<ComponenteColisao>()->set(x, y, w, h);
-					GerenciadorDeColisao::getInstance()->addObstaculo(lav);
-				}
-			}
-	}
-	else {
-		jogo->mainMenu();
-		std::cerr << " Arquivo nao pode ser aberto " << endl;
-		return;
+	in.open("Saves/Fase1/magos.dat", ios::in);
+	while (in >> px >> py >> vx >> vy >> sab) {
+		Mago* mag = new Mago(px, py, sab);
+		mag->getComponente<ComponenteTransform>()->velocidade.x = vx;
+		mag->getComponente<ComponenteTransform>()->velocidade.y = vy;
+		GerenciadorDeColisao::getInstance()->addInimigo(mag);
+		listaEntidades.addEntidade(static_cast<Entidade*>(mag));
 	}
 	in.close();
 
-	in.open("Saves/Fase1/projeteis.dat", std::ios::in);
-	if (in) {
-		string classe, nomeClasse;
-		float x, y, vx, vy;
-		while (in >> classe >> nomeClasse >> x >> y >> vx >> vy) {
-		Projetil* pro = new Projetil;
-		pro->getComponente<ComponenteTransform>()->posicao.x = x;
-		pro->getComponente<ComponenteTransform>()->posicao.y = y;
-		pro->getComponente<ComponenteTransform>()->velocidade.x = vx;
-		pro->getComponente<ComponenteTransform>()->velocidade.y = vy;
+	in.open("Saves/Fase1/projeteis.dat", ios::in);
+	while (in >> vx >> vy >> px >> py) {
+		Projetil* pro = new Projetil(px, py, vx, vy);
 		GerenciadorDeColisao::getInstance()->addProjetil(pro);
-		}
-	}
-	else {
-		jogo->mainMenu();
-		std::cerr << " Arquivo nao pode ser aberto " << endl;
-		return;
+		listaEntidades.addEntidade(static_cast<Entidade*>(pro));
 	}
 	in.close();
-
-	in.open("Saves/Fase1/inimigos.dat", std::ios::in);
-	if (in) {
-		string classe, nomeClasse;
-		float x, y, vx, vy;
-
-		while (in >> classe >> nomeClasse >> x >> y >> vx >> vy) {
-			if (nomeClasse == esqueleto) {
-				Esqueleto* inimigo = new Esqueleto(x, y);
-				inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
-				inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
-				GerenciadorDeColisao::getInstance()->addInimigo(inimigo);
-				listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
-			}
-			else if (nomeClasse == goblin) {
-				Goblin* inimigo = new Goblin(x, y);
-				inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
-				inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
-				GerenciadorDeColisao::getInstance()->addInimigo(inimigo);
-				listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
-			}
-			else if (nomeClasse == chefe) {
-				Mago* inimigo = new Mago(x, y);
-				inimigo->getComponente<ComponenteTransform>()->posicao.x = x;
-				inimigo->getComponente<ComponenteTransform>()->posicao.y = y;
-				inimigo->getComponente<ComponenteTransform>()->velocidade.x = vx;
-				inimigo->getComponente<ComponenteTransform>()->velocidade.y = vy;
-				GerenciadorDeColisao::getInstance()->addInimigo(inimigo);
-				listaEntidades.addEntidade(static_cast<Entidade*>(inimigo));
-			}
-		}
-
-		in.close();
-	}
-	else {
-		jogo->mainMenu();
-		std::cerr << " Arquivo nao pode ser aberto " << endl;
-		return;
-	}
 }

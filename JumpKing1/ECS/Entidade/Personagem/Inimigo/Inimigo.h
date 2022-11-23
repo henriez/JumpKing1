@@ -17,6 +17,8 @@ public:
 	void setTarget(bool val) { target = val; }
 	bool haveTarget() { return target; }
 
+	virtual void salvar(int faseID) = 0;
+
 protected:
 	SDL_Rect platform;
 	float distance;
