@@ -28,6 +28,8 @@ public:
 		file.close();
 	}
 
+	void impedir(Jogador* jogador);
+
 	SDL_Rect getPos() const;
 
 private:

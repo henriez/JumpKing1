@@ -47,3 +47,41 @@ SDL_Rect Lava::getPos() const {
 }
 
 void Lava::atualizar() {}
+
+void Lava::impedir(Jogador* jogador) {
+	if (isOnScreen()) {
+		SDL_Rect initialhitbox = jogador->getComponente<ComponenteColisao>()->getColisor();
+		SDL_Rect hitbox = initialhitbox;
+
+		ComponenteTransform* transform = jogador->getComponente<ComponenteTransform>();
+		Vector2D velocity = transform->velocidade;
+
+		hitbox = initialhitbox;
+		hitbox.x += velocity.x * jogador->getSpeed();
+		SDL_Rect colisor = getComponente<ComponenteColisao>()->getColisor();
+
+		if (GerenciadorDeColisao::getInstance()->AABB(colisor, hitbox)) {
+			if (velocity.y > 0) { //colidiu por cima
+				transform->posicao.y = colisor.y - hitbox.h;
+				transform->velocidade.y = -1.4;
+			}
+			jogador->damage(temperatura);
+			return;
+		}
+		hitbox = initialhitbox;
+		hitbox.x += velocity.x * jogador->getSpeed();
+		if (GerenciadorDeColisao::getInstance()->AABB(colisor, hitbox)) {
+			if (velocity.x > 0) { //colidiu pela esquerda
+				transform->posicao.x = colisor.x - hitbox.w;
+				transform->velocidade.x = -1;
+			}
+			else if (velocity.x < 0) { //colidiu pela direita
+				transform->posicao.x = colisor.x + colisor.w;
+				transform->velocidade.x = 1;
+			}
+			jogador->damage(temperatura);
+		}
+
+
+	}
+}

@@ -262,10 +262,10 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 
 			Tile* tile = new Tile;
 			tile->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
-			if (id == 1)
+			if (id == 1) {
 				hitbox_plataformas.push_back(tile);
-			else if (id == 2) {
-				std::cout << j * Mapa::tamanhoTile() << ", " << i * Mapa::tamanhoTile() << std::endl;
+				//GerenciadorDeColisao::getInstance()->addObstaculo(tile);
+				//tile->setColide(true);
 			}
 
 		}

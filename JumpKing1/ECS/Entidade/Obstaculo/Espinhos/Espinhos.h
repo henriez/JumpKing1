@@ -21,12 +21,14 @@ public:
 
 		std::string str = std::to_string(pos.x) + " " + std::to_string(pos.y) + " "
 			+ std::to_string(pos.w) + " " + std::to_string(pos.h) + " "
-			+ std::to_string(tamanho) + "\n";
+			+ std::to_string(corte) + "\n";
 
 		file << str;
 
 		file.close();
 	}
+
+	void impedir(Jogador* jogador);
 
 	SDL_Rect getPos() const;
 
@@ -34,6 +36,6 @@ public:
 private:
 	SDL_Rect fonte;
 	SDL_Rect destino;
-	int tamanho;
+	int corte;
 };
 

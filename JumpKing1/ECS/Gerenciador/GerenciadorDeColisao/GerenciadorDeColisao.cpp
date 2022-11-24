@@ -393,35 +393,7 @@ void GerenciadorDeColisao::colisao_jogadores_obstaculos() {
 		}
 		//	}
 	}
-	for (auto& o : obstaculos) {
-		if (o->isOnScreen()) {
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * jogador1->getSpeed();
-			SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					transform->posicao.y = colisor.y - hitbox.h;
-					transform->velocidade.y = -1.4;
-				}
-				jogador1->damage();
-				break;
-			}
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * jogador1->getSpeed();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = colisor.x - hitbox.w;
-					transform->velocidade.x = -1;
-				}
-				else if (velocity.x < 0) { //colidiu pela direita
-					transform->posicao.x = colisor.x + colisor.w;
-					transform->velocidade.x = 1;
-				}
-				jogador1->damage();
-			}
-		}
-	}
-
+	
 	//jogador2
 	initialhitbox = jogador2->getComponente<ComponenteColisao>()->getColisor();
 	hitbox = initialhitbox;
@@ -459,36 +431,10 @@ void GerenciadorDeColisao::colisao_jogadores_obstaculos() {
 		//}
 	}
 
+
 	for (auto& o : obstaculos) {
-		if (o->isOnScreen()) {
-			hitbox = initialhitbox;
-			hitbox.y += velocity.y * jogador2->getSpeed();
-			SDL_Rect colisor = o->getComponente<ComponenteColisao>()->getColisor();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.y > 0) { //colidiu por cima
-					transform->posicao.y = colisor.y - hitbox.h;
-					transform->velocidade.y = -1.4;
-				}
-				jogador2->damage();
-				break;
-			}
-
-			hitbox = initialhitbox;
-			hitbox.x += velocity.x * jogador2->getSpeed();
-			if (AABB(colisor, hitbox)) {
-				if (velocity.x > 0) { //colidiu pela esquerda
-					transform->posicao.x = colisor.x - hitbox.w;
-					transform->velocidade.x = -1;
-				}
-				else if (velocity.x < 0) { //colidiu pela direita
-					transform->posicao.x = colisor.x + colisor.w;
-					transform->velocidade.x = 1;
-				}
-				jogador2->damage();
-				break;
-			}
-		}
-
+		o->impedir(getJogador1());
+		o->impedir(getJogador2());
 	}
 
 }
