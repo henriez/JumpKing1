@@ -142,6 +142,7 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 			srcY = 0;
 			srcX = id * tamanhoTile;
 
+
 			if (id) {
 				Tile* tile = new Tile;
 				tile->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
@@ -151,6 +152,8 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 					//GerenciadorDeColisao::getInstance()->addObstaculo(tile);
 
 				}
+
+
 			}
 
 		}

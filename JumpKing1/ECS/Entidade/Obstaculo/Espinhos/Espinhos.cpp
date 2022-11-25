@@ -63,7 +63,7 @@ void Espinhos::impedir(Jogador* jogador) {
 		Vector2D velocity = transform->velocidade;
 
 		hitbox = initialhitbox;
-		hitbox.y += velocity.y * jogador->getSpeed();
+		hitbox.y += velocity.y * jogador->getSpeed() + 1;
 		SDL_Rect colisor = getComponente<ComponenteColisao>()->getColisor();
 
 		if (GerenciadorDeColisao::getInstance()->AABB(colisor, hitbox)) {
