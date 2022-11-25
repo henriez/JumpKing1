@@ -11,7 +11,6 @@ public:
 	TileMap();
 	~TileMap();
 
-	void carregaPosicoesValidas(const char* posicoes_lava, const char* posicoes_espinhos);
 	void inicializa(const char* cam1, const char* cam2, const char* cam_colisao, int tilesW, int tilesH);
 	void atualiza();
 	void render();

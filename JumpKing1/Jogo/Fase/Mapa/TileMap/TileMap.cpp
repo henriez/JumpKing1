@@ -23,128 +23,6 @@ TileMap::~TileMap() {
 	clear();
 }
 
-void TileMap::carregaPosicoesValidas(const char* posicoes_lava, const char* posicoes_espinhos) {
-	char c;
-	int a1, a2, a3, a4, nPosicoes;
-	SDL_Point pos = { 0,0 };
-
-	std::fstream mapFile;
-
-	/* ============================================= */
-	/* Posicoes validas para lavas */
-
-	mapFile.open(posicoes_lava);
-
-	mapFile.get(c);
-	a1 = atoi(&c);
-	mapFile.get(c);
-	a2 = atoi(&c);
-	mapFile.get(c);
-	a3 = atoi(&c);
-	mapFile.ignore();
-
-	nPosicoes = a1 * 100 + a2 * 10 + a3;
-
-	for (int i = 0; i < nPosicoes; i++) {
-
-		mapFile.get(c);
-		a1 = atoi(&c);
-		mapFile.get(c);
-		a2 = atoi(&c);
-		mapFile.get(c);
-		a3 = atoi(&c);
-		mapFile.get(c);
-		a4 = atoi(&c);
-		mapFile.ignore();
-		pos.x = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
-
-		mapFile.get(c);
-		a1 = atoi(&c);
-		mapFile.get(c);
-		a2 = atoi(&c);
-		mapFile.get(c);
-		a3 = atoi(&c);
-		mapFile.get(c);
-		a4 = atoi(&c);
-		mapFile.ignore();
-		pos.y = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
-		this->posicoes_lava.push_back(pos);
-	}
-
-	mapFile.close();
-
-	/* ============================================= */
-	/* Posicoes validas para espinhos */
-
-	mapFile.open(posicoes_espinhos);
-
-	mapFile.get(c);
-	a1 = atoi(&c);
-	mapFile.get(c);
-	a2 = atoi(&c);
-	mapFile.get(c);
-	a3 = atoi(&c);
-	mapFile.ignore();
-
-	nPosicoes = a1 * 100 + a2 * 10 + a3;
-
-	for (int i = 0; i < nPosicoes; i++) {
-
-		mapFile.get(c);
-		a1 = atoi(&c);
-		mapFile.get(c);
-		a2 = atoi(&c);
-		mapFile.get(c);
-		a3 = atoi(&c);
-		mapFile.get(c);
-		a4 = atoi(&c);
-		mapFile.ignore();
-		pos.x = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
-
-		mapFile.get(c);
-		a1 = atoi(&c);
-		mapFile.get(c);
-		a2 = atoi(&c);
-		mapFile.get(c);
-		a3 = atoi(&c);
-		mapFile.get(c);
-		a4 = atoi(&c);
-		mapFile.ignore();
-		pos.y = a1 * 1000 + a2 * 100 + a3 * 10 + a4;
-		this->posicoes_espinhos.push_back(pos);
-	}
-
-	mapFile.close();
-
-	Lava* lava = nullptr;
-	Espinhos* espinhos = nullptr;
-	SDL_Point random_pos = { 0,0 };
-
-	//geracao aleatoria
-	if (this->posicoes_espinhos.size() > 2) {
-		int nEspinhos = rand() % (this->posicoes_espinhos.size() / 2) + 3;
-
-		for (int i = 0; i < nEspinhos; i++) {
-			random_pos = this->posicoes_espinhos[rand() % this->posicoes_espinhos.size()]; //posicao aleatoria do vetor retorna uma posicao valida definida
-			espinhos = new Espinhos;
-			espinhos->getComponente<ComponenteColisao>()->set(random_pos.x, random_pos.y + 16, 32, 16);
-			GerenciadorDeColisao::getInstance()->addObstaculo(static_cast<Obstaculo*>(espinhos));
-			//adiciona espinhos ao manager
-		}
-	}
-
-	if (this->posicoes_lava.size() > 2) {
-		int nLavas = rand() % (this->posicoes_lava.size() / 2) + 3;
-		for (int i = 0; i < nLavas; i++) {
-			random_pos = this->posicoes_lava[rand() % this->posicoes_lava.size()]; //posicao aleatoria do vetor retorna uma posicao valida definida
-			lava = new Lava;
-			lava->getComponente<ComponenteColisao>()->set(random_pos.x, random_pos.y, 32, 32);
-			GerenciadorDeColisao::getInstance()->addObstaculo(static_cast<Obstaculo*>(lava));
-			//adiciona lava ao manager
-		}
-	}
-}
-
 void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_colisao, int tilesW, int tilesH) {
 	GerenciadorDeColisao::getInstance()->setTileMap(this);
 
@@ -194,9 +72,11 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 			srcY = (id / largura) * tamanhoTile;
 			srcX = (id % largura) * tamanhoTile;
 
-			Tile* tile = new Tile;
-			tile->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
-			camada1.push_back(tile);
+			if (id) {
+				Tile* tile = new Tile;
+				tile->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
+				camada1.push_back(tile);
+			}
 		}
 	}
 	mapFile.close();
@@ -235,9 +115,11 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 			srcY = (id / largura) * tamanhoTile;
 			srcX = (id % largura) * tamanhoTile;
 
-			Tile* tile = new Tile;
-			tile->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
-			camada2.push_back(tile);
+			if (id) {
+				Tile* tile = new Tile;
+				tile->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
+				camada2.push_back(tile);
+			}
 		}
 	}
 	mapFile.close();
@@ -260,12 +142,15 @@ void TileMap::inicializa(const char* cam1, const char* cam2, const char* cam_col
 			srcY = 0;
 			srcX = id * tamanhoTile;
 
-			Tile* tile = new Tile;
-			tile->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
-			if (id == 1)
-				hitbox_plataformas.push_back(tile);
-			else if (id == 2) {
-				std::cout << j * Mapa::tamanhoTile() << ", " << i * Mapa::tamanhoTile() << std::endl;
+			if (id) {
+				Tile* tile = new Tile;
+				tile->setPosition(j * tamanhoTile, i * tamanhoTile, srcX, srcY);
+				if (id == 1) {
+					hitbox_plataformas.push_back(tile);
+					tile->setColide(true);
+					//GerenciadorDeColisao::getInstance()->addObstaculo(tile);
+
+				}
 			}
 
 		}

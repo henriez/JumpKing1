@@ -52,9 +52,7 @@ public:
 	void colisao_inimigo_obstaculos(Inimigo* in1);
 	void colisao_projeteis_obstaculos();
 
-	void ataqueInimigo(Inimigo* in1, SDL_Rect hitbox) {}
-	void ataqueEsqueleto(Esqueleto* in1);
-	void ataqueGoblin(Goblin* in1);
+	void ataqueInimigo(Inimigo* in, SDL_Rect hitbox);
 	void ataqueJ1();
 	void ataqueJ2();
 

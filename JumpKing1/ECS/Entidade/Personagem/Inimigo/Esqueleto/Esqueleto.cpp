@@ -111,7 +111,13 @@ void Esqueleto::render() {
 			int frameVal = static_cast<int>((frameNumber / fSpeed) % frames);
 			sprite.x = 64 * frameVal;
 			frameNumber++;
-			if (frameVal == 4 || frameVal == 8) { GerenciadorDeColisao::getInstance()->ataqueEsqueleto(this); }
+			if (frameVal == 4 || frameVal == 8) { 
+				//GerenciadorDeColisao::getInstance()->ataqueEsqueleto(this); 
+				SDL_Rect pos = getComponente<ComponenteColisao>()->getColisor();
+				SDL_Rect hitbox = { 0, pos.y - pos.h, 32, 64 };
+				hitbox.x = (facingLeft()) ? pos.x - pos.w : pos.x + pos.w;
+				GerenciadorDeColisao::getInstance()->ataqueInimigo(this, hitbox);
+			}
 			if (frameNumber >= frames * static_cast<int>(fSpeed)) { setState(WALKING); frameNumber = 0; }
 		}
 		else if (state == HIT) {

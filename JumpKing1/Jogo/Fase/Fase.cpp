@@ -25,6 +25,8 @@ Fase::~Fase() {
 		mapa = nullptr;
 	}
 	GerenciadorDeEventos::deleteInstance();
+	GerenciadorDeColisao::deleteInstance();
+	GerenciadorDeCamera::deleteInstance();
 }
 
 void Fase::setJogo(Jogo* jg) {

@@ -113,7 +113,13 @@ void Goblin::render() {
 			int frameVal = static_cast<int>((frameNumber / fSpeed) % frames);
 			sprite.x = 150 * frameVal;
 			frameNumber++;
-			if (frameVal == 7) { GerenciadorDeColisao::getInstance()->ataqueGoblin(this); }
+			if (frameVal == 7) { 
+				//GerenciadorDeColisao::getInstance()->ataqueGoblin(this); 
+				SDL_Rect pos = getComponente<ComponenteColisao>()->getColisor();
+				SDL_Rect hitbox = { 0, getPlatform().y - 32, 32, 32 };
+				hitbox.x = (facingLeft()) ? pos.x - pos.w : pos.x + pos.w;
+				GerenciadorDeColisao::getInstance()->ataqueInimigo(this, hitbox);
+			}
 			if (frameNumber >= frames * static_cast<int>(fSpeed)) { setState(WALKING); frameNumber = 0; }
 		}
 		else if (state == HIT) {
